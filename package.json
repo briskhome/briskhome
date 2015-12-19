@@ -1,0 +1,25 @@
+{
+  "name": "briskhome",
+  "version": "0.1.0",
+  "description": "",
+  "main": "briskhome.js",
+  "scripts": {
+    "test": "mocha briskhome.test.js"
+  },
+  "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "private": true,
+  "devDependencies": {
+    "chai": "^3.4.1"
+  },
+  "dependencies": {
+    "briskhome-sysmon": "file:///Users/heuels/Desktop/Briskhome/briskhome-sysmon",
+    "bristol": "^0.3.3",
+    "moment": "^2.10.6",
+    "mongoose": "^4.2.8",
+    "node-nut": "^0.1.0"
+  }
+}
