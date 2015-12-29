@@ -2,36 +2,32 @@
  * Briskhome - private house monitoring and automation service.
  *
  * @author Egor Zaitsev <ezaitsev@briskhome.com>
- * @version 0.1.0
+ * @version 0.1.1
  */
 
 'use strict';
 
-var log = require('bristol');
-var moment = require('moment');
+// TODO Each internal module should accept an object with several unified
+//      utils, such as log (currently global), database and eventEmitter.
+
+global.db = require('./lib/db');
+global.log = require('./lib/log');
+
+// Temporarily commented out:
+// global.emitter = require('briskhome-events');
+
+var certificate = require('./lib/pki');
+var cert = certificate.create();
+
 var sysmon = require('briskhome-sysmon');
 
-/* Logger library configuration */
-
-const LOG_DIR = './';
-const LOG_FILE = 'briskhome.log';
-
-log.addTarget('console')
-  .withFormatter('human');
-log.addTarget('file', {file: LOG_DIR + LOG_FILE})
-  .withFormatter('syslog');
-log.info('Logger library loaded, logging to ' + LOG_DIR + LOG_FILE);
-
-/* Database library configuration */
-
-var mongoose = require('mongoose');
-var db = mongoose.connection;
-
-mongoose.connect('mongodb://10.29.0.10/test');
-
-db.on('error', function(err) {
-  log.error('Unable to connect to MongoDB.', err);
+// System monitor configuration
+sysmon.start({
+  delay: 600,
 });
-db.once('open', function() {
-  log.info('Connected to MongoDB instance at 10.29.0.10');
+sysmon.on('start', function(event) {
+  log.info(event, 'briskhome-sysmon started');
+});
+sysmon.on('event', function(event) {
+  log.info(event);
 });
