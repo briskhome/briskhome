@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /**
  * Briskhome - private house monitoring and automation service.
  *
@@ -7,27 +9,67 @@
 
 'use strict';
 
-// TODO Each internal module should accept an object with several unified
-//      utils, such as log (currently global), database and eventEmitter.
+/* Core modules. */
+const path = require('path');
 
-global.db = require('./lib/db');
-global.log = require('./lib/log');
+/* Briskhome modules. */
+const architect = require('architect');
+const optimist = require('optimist');
 
-// Temporarily commented out:
-// global.emitter = require('briskhome-events');
+/* Other dependencies. */
 
-var certificate = require('./lib/pki');
-var cert = certificate.create();
-
-var sysmon = require('briskhome-sysmon');
-
-// System monitor configuration
-sysmon.start({
-  delay: 600,
+// TODO The following constant is a candidate for renaming.
+const modules = architect.loadConfig(path.join(__dirname, "./lib/index.js"));
+architect.createApp(modules, function(err, app) {
+  if (err) {
+    throw err;
+  }
+  console.log('Architect app created successfully.');
 });
-sysmon.on('start', function(event) {
-  log.info(event, 'briskhome-sysmon started');
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // //
+//
+// const CONFIG_FILE = '/opt/briskhome/briskhome.conf';
+// const CONFIG_DATA = {
+//   comments: [';', '#'],
+//   path: true,
+//   sections: true,
+//   separators: '=',
+//   strict: true
+// };
+//
+// const configurator = require('properties');
+// configurator.parse(CONFIG_FILE, CONFIG_DATA, function (err, conf) {
+//   if (err) { console.error(err.name, err.message); throw err; }
+//   global.config = conf;
+//   global.log    = require('./lib/log');
+//   global.db     = require('./lib/db');
+// });
+//
+//
+// // Temporarily commented out:
+// // global.emitter = require('briskhome-events');
+//
+// // var certificate = require('./lib/pki');
+// // var cert = certificate.create();
+// // console.log(cert);
+//
+//
+//
+
+/**
+ * Error and exception handling, pre-restart clean-up.
+ */
+process.on('uncaughtException', function(err) {
+  console.error('An uncaught exception occured during the execution of Briskhome.');
+  console.log(err.stack);
+  process.exit(1);
 });
-sysmon.on('event', function(event) {
-  log.info(event);
+
+process.on('SIGINT', function() {
+  log.info('The application will now quit (SIGINT).');
+  // db.connection.close(function() {
+  //   // log.info('Database connection closed. Will now exit.');
+  // });
+  process.exit(0);
 });

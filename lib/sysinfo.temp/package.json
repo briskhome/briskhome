@@ -1,0 +1,11 @@
+{
+  "name": "@briskhome/core.sysinfo",
+  "version": "0.4.0",
+  "main": "index.js",
+  "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
+  "private": true,
+  "plugin": {
+    "consumes": ["log"],
+    "provides": ["sysinfo"]
+  }
+}

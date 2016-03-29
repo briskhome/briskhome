@@ -1,0 +1,22 @@
+# The format of this file is documented in the dhcpd.leases(5) manual page.
+# This lease file was written by isc-dhcp-4.3.1
+
+lease 10.29.0.13 {
+  starts 0 2015/11/15 17:34:57;
+  ends 0 2015/11/15 18:34:57;
+  tstp 0 2015/11/15 18:34:57;
+  cltt 0 2015/11/15 17:35:32;
+  binding state free;
+  hardware ethernet 00:1c:42:ac:da:bf;
+  uid "\001\000\034B\254\332\277";
+  set vendor-class-identifier = "MSFT 5.0";
+}
+lease 10.29.0.12 {
+  starts 2 2015/11/17 13:25:51;
+  ends 2 2015/11/17 13:26:51;
+  tstp 2 2015/11/17 13:26:51;
+  cltt 2 2015/11/17 13:25:51;
+  binding state free;
+  hardware ethernet 00:1c:42:00:00:08;
+  uid "\001\000\034B\000\000\010";
+}

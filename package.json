@@ -1,10 +1,10 @@
 {
-  "name": "briskhome-core",
+  "name": "@briskhome/core",
   "version": "0.1.1",
   "description": "",
   "main": "briskhome.js",
   "scripts": {
-    "test": "mocha briskhome-core.spec.js"
+    "test": "mocha briskhome.spec.js"
   },
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "license": "MIT",
@@ -16,13 +16,15 @@
     "chai": "^3.4.1"
   },
   "dependencies": {
-    "briskhome-events": "file:///Users/heuels/Desktop/Briskhome/briskhome-events",
-    "briskhome-sysmon": "file:///Users/heuels/Desktop/Briskhome/briskhome-sysmon",
+    "architect": "^0.1.11",
     "bristol": "^0.3.3",
+    "config-node": "^1.2.2",
     "forge": "^2.3.0",
-    "moment": "^2.10.6",
+    "ini": "^1.3.4",
     "mongoose": "^4.2.8",
     "node-forge": "^0.6.38",
-    "node-nut": "^0.1.0"
+    "node-nut": "^0.1.0",
+    "optimist": "^0.6.1",
+    "properties": "^1.2.1"
   }
 }

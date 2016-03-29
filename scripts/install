@@ -1,0 +1,14 @@
+[Unit]
+Description=Briskhome
+
+[Service]
+ExecStart=/opt/briskhome/briskhome.js
+Restart=always
+User=briskhome
+Group=briskhome
+Environment=PATH=/usr/bin:/usr/local/bin:/opt/briskhome
+Environment=NODE_ENV=development
+WorkingDirectory=/opt/briskhome
+
+[Install]
+WantedBy=multi-user.target
