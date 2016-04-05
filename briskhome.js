@@ -4,7 +4,7 @@
  * Briskhome - private house monitoring and automation service.
  *
  * @author Egor Zaitsev <ezaitsev@briskhome.com>
- * @version 0.1.1
+ * @version 0.1.2
  */
 
 'use strict';
@@ -24,7 +24,7 @@ architect.createApp(modules, function(err, app) {
   if (err) {
     throw err;
   }
-  console.log('Architect app created successfully.');
+  console.log(app);
 });
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // //
@@ -67,7 +67,7 @@ process.on('uncaughtException', function(err) {
 });
 
 process.on('SIGINT', function() {
-  log.info('The application will now quit (SIGINT).');
+  console.log(' <-- The application will now quit (SIGINT).');
   // db.connection.close(function() {
   //   // log.info('Database connection closed. Will now exit.');
   // });

@@ -1,11 +1,11 @@
 {
-  "name": "@briskhome/core.log",
-  "version": "0.1.0",
+  "name": "@briskhome/core.bus",
+  "version": "0.1.2",
   "main": "index.js",
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": [],
-    "provides": ["log"]
+    "consumes": ["log", "config"],
+    "provides": ["bus"]
   }
 }

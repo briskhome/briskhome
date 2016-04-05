@@ -1,11 +1,11 @@
 {
-  "name": "@briskhome/core.config",
-  "version": "0.1.0",
+  "name": "@briskhome/core.pki",
+  "version": "0.1.2",
   "main": "index.js",
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": ["log"],
-    "provides": ["config"]
+    "consumes": ["log", "config"],
+    "provides": ["pki"]
   }
 }
