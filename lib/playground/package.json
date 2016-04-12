@@ -1,11 +1,11 @@
 {
   "name": "@briskhome/core.playground",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "index.js",
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": ["log", "bus", "sysinfo", "config", "irrigation", "api"],
+    "consumes": ["log", "bus", "sysinfo", "config", "irrigation", "api", "sms", "onewire"],
     "provides": []
   }
 }

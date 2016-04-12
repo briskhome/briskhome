@@ -1,11 +1,11 @@
 {
-  "name": "@briskhome/core.pki",
+  "name": "@briskhome/core.sms",
   "version": "0.1.3",
   "main": "index.js",
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": ["log", "config"],
-    "provides": ["pki"]
+    "consumes": ["config", "log"],
+    "provides": ["sms"]
   }
 }
