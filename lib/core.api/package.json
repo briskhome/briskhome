@@ -5,7 +5,7 @@
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": ["log", "config", "db", "irrigation"],
+    "consumes": ["log", "config", "db", "bus"],
     "provides": ["api"]
   }
 }

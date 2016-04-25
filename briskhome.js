@@ -25,7 +25,7 @@ architect.createApp(modules, function (err, app) {
     throw err;
   }
 
-  // app.services.log.info('Приложение запущено и готово к работе');
+  app.services.log.info('Инициализация системных модулей завершена');
 });
 
 /**
@@ -33,7 +33,7 @@ architect.createApp(modules, function (err, app) {
  */
 process.on('uncaughtException', function (err) {
   console.error('При работе приложения произошло необработанное исключение');
-  console.error(err);
+  throw(err);
   process.exit(1);
 });
 

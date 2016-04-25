@@ -1,11 +1,11 @@
 {
-  "name": "@briskhome/core.playground",
+  "name": "@briskhome/core.mqtt",
   "version": "0.1.3",
   "main": "index.js",
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": ["log", "bus", "config", "db", "irrigation"],
-    "provides": []
+    "consumes": ["log", "config", "db", "bus"],
+    "provides": ["mqtt"]
   }
 }

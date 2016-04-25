@@ -1,11 +1,11 @@
 {
-  "name": "@briskhome/irrigation",
+  "name": "briskhome-irrigation",
   "version": "0.1.3",
-  "main": "index.js",
+  "main": "irrigation.js",
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": ["log", "db", "config"],
+    "consumes": ["log", "db", "config", "bus"],
     "provides": ["irrigation"]
   }
 }
