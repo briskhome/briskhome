@@ -1,6 +1,6 @@
 # **BRISK**HOME:** ** irrigation
 
-![Briskhome](https://img.shields.io/badge/briskhome-v0.1.4-yellow.svg) ![Версия](https://img.shields.io/badge/version-v0.1.4-brightgreen.svg)
+![Briskhome](https://img.shields.io/badge/briskhome-v0.1.4-yellow.svg) ![Версия](https://img.shields.io/badge/version-v0.1.5-brightgreen.svg)
 
 ### Описание
 Модуль `briskhome-irrigation` добавляет в систему поддержку управления поливом с помощью подключенного контроллера. В качестве контроллера полива может выступать любое устройство, способное управлять электромагнитными клапанами, считывать показатели с подключенных датчиков и передавать информацию по локальной сети.

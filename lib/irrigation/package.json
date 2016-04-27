@@ -1,6 +1,6 @@
 {
   "name": "briskhome-irrigation",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "main": "irrigation.js",
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
