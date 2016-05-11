@@ -28,6 +28,10 @@ architect.createApp(modules, function (err, app) {
   app.services.log.info('Инициализация системных модулей завершена');
 });
 
+architect.on('error', function (err) {
+  console.error(err);
+});
+
 /**
  * Error and exception handling, pre-restart clean-up.
  */
