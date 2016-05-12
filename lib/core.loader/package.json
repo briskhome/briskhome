@@ -1,11 +1,11 @@
 {
-  "name": "@briskhome/core.config",
-  "version": "0.1.3",
+  "name": "@briskhome/core.loader",
+  "version": "0.2.1",
   "main": "index.js",
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": ["loader"],
-    "provides": ["config"]
+    "consumes": [],
+    "provides": ["loader"]
   }
 }
