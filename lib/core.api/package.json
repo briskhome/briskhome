@@ -1,11 +1,11 @@
 {
   "name": "@briskhome/core.api",
-  "version": "0.1.3",
+  "version": "0.3.0",
   "main": "index.js",
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": ["log", "config", "db", "bus"],
+    "consumes": ["log", "config", "db", "bus", "loader"],
     "provides": ["api"]
   }
 }

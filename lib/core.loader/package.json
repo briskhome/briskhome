@@ -1,6 +1,6 @@
 {
   "name": "@briskhome/core.loader",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "main": "index.js",
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,

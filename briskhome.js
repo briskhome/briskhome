@@ -4,7 +4,7 @@
  * Briskhome - private house monitoring and automation service.
  *
  * @author Egor Zaitsev <ezaitsev@briskhome.com>
- * @version 0.1.2
+ * @version 0.3.0
  */
 
 'use strict';
