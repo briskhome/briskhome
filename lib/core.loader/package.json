@@ -1,11 +1,11 @@
 {
-  "name": "@briskhome/onewire",
+  "name": "@briskhome/core.loader",
   "version": "0.3.0",
   "main": "index.js",
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": ["log", "config", "db"],
-    "provides": ["onewire"]
+    "consumes": [],
+    "provides": ["loader"]
   }
 }

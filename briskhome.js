@@ -4,7 +4,7 @@
  * Briskhome - private house monitoring and automation service.
  *
  * @author Egor Zaitsev <ezaitsev@briskhome.com>
- * @version 0.1.2
+ * @version 0.3.0
  */
 
 'use strict';
@@ -25,27 +25,35 @@ architect.createApp(modules, function (err, app) {
     throw err;
   }
 
-  app.services.log.info('Инициализация системных модулей завершена');
-});
+  const log = app.services.log(require('./package.json').name);
+  log.info('Инициализация системных модулей завершена');
 
-architect.on('error', function (err) {
-  console.error(err);
-});
+  app.on('error', function (err) {
+    log.fatal(err);
+    setTimeout(function () {
+      process.exit(1);
+    }, 100);
+  });
 
-/**
- * Error and exception handling, pre-restart clean-up.
- */
-process.on('uncaughtException', function (err) {
-  console.error('При работе приложения произошло необработанное исключение');
-  throw(err);
-  process.exit(1);
-});
+  /**
+   * Error and exception handling, pre-restart clean-up.
+   */
+  process.on('uncaughtException', function (err) {
+    log.fatal(err, 'При работе приложения произошло необработанное исключение');
+    setTimeout(function () {
+      process.exit(1);
+    }, 100);
+  });
 
-process.on('SIGINT', function () {
-  console.log(' <-- Приложение завершило работу (SIGINT)');
+  process.on('SIGINT', function () {
+    log.fatal('Приложение завершило работу (SIGINT)');
 
-  // db.connection.close(function() {
-  //   // log.info('Database connection closed. Will now exit.');
-  // });
-  process.exit(0);
+    // db.connection.close(function() {
+    //   // log.info('Database connection closed. Will now exit.');
+    // });
+    setTimeout(function () {
+      process.exit(0);
+    }, 100);
+  });
+
 });
