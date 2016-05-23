@@ -1,7 +1,5 @@
 _*
 .DS_Store
-.jshintrc
-.jscsrc
 dev
 etc/certs
 node_modules
