@@ -1,11 +1,11 @@
 {
-  "name": "@briskhome/core.playground",
+  "name": "@briskhome/core.telegram",
   "version": "0.3.0",
   "main": "index.js",
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": ["log", "bus", "config", "db"],
-    "provides": []
+    "consumes": ["log", "config", "ldap"],
+    "provides": ["telegram"]
   }
 }

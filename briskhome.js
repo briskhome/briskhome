@@ -11,7 +11,7 @@
 
 /* Clearing the terminal and setting the cursor to 0,0 */
 process.stdout.write('\u001b[2J\u001b[0;0H');
-console.log('[' + new Date().toISOString() + '] START: briskhome/' + process.pid);
+console.log('[' + new Date().toISOString() + ']  INIT: briskhome/' + process.pid);
 
 /* Core modules. */
 const path = require('path');
@@ -40,7 +40,7 @@ architect.createApp(modules, function (err, app) {
    * Error and exception handling, pre-restart clean-up.
    */
   process.on('uncaughtException', function (err) {
-    log.fatal(err, 'При работе приложения произошло необработанное исключение');
+    log.fatal({data: err}, 'При работе приложения произошло необработанное исключение');
     setTimeout(function () {
       process.exit(1);
     }, 100);
