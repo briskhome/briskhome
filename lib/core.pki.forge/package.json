@@ -1,18 +1,16 @@
 {
-  "name": "briskhome-ups",
+  "name": "@briskhome/core.pki",
   "version": "0.3.0",
   "main": "index.js",
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
     "consumes": [
-      "db",
-      "bus",
-      "config",
-      "log"
+      "log",
+      "config"
     ],
     "provides": [
-      "ups"
+      "pki"
     ]
   },
   "devDependencies": {
@@ -23,10 +21,8 @@
     "istanbul": "^0.4.4",
     "mocha": "^3.0.2",
     "mockgoose": "^6.0.6",
+    "nock": "^8.0.0",
     "sinon": "^1.17.5"
-  },
-  "peerDependencies": {
-    "briskhome-core": "^0.3.0-alpha.1"
   },
   "scripts": {
     "lint": "node_modules/eslint/bin/eslint.js --quiet -c .eslintrc index.js",
@@ -34,7 +30,7 @@
     "coverage": "node_modules/istanbul/lib/cli.js cover -x \"**/models/**\" -x \"**/specs/**\" --dir ./specs/coverage --report html node_modules/mocha/bin/_mocha -- -R spec specs/index.spec.js"
   },
   "dependencies": {
-    "async": "^2.0.1",
-    "node-nut": "^0.1.0"
+    "jsrsasign": "^7.1.0",
+    "node-forge": "^0.6.48"
   }
 }
