@@ -2,5 +2,7 @@ _*
 .DS_Store
 dev
 etc/certs
+etc/test*
 node_modules
 log
+coverage

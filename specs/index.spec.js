@@ -26,13 +26,13 @@ describe('BRISKHOME', function () {
     .filter(file => fs.statSync(path.join(srcpath, file)).isDirectory());
   }
 
-  const components = getDirectories('../lib');
+  const components = getDirectories('./lib');
   for (let i = 0; i < components.length; i += 1) {
     if (components[i].indexOf('core.') === 0) {
-      const subdirectories = getDirectories(path.join('../lib', components[i]));
+      const subdirectories = getDirectories(path.resolve('./lib', components[i]));
       if (subdirectories.indexOf('specs') > -1) {
         describe(components[i], function () {
-          require(path.join('../lib', components[i], 'specs', 'index.spec.js'));
+          require(path.resolve('./lib', components[i], 'specs', 'index.spec.js'));
         });
       }
     }
