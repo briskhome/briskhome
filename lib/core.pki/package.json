@@ -30,7 +30,6 @@
     "coverage": "node_modules/istanbul/lib/cli.js cover -x \"**/models/**\" -x \"**/specs/**\" --dir ./specs/coverage --report html node_modules/mocha/bin/_mocha -- -R spec specs/index.spec.js"
   },
   "dependencies": {
-    "jsrsasign": "^7.1.0",
     "node-forge": "^0.6.48"
   }
 }
