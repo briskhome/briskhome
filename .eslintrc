@@ -1,11 +1,11 @@
 {
-  "extends": "airbnb-base",
+  "extends": "airbnb",
   "ecmaFeatures": {
     "modules": false
-    },
+  },
   "env": {
     "es6": true
-    },
+  },
   "rules": {
     "consistent-return": ["warn"],
     "handle-callback-err": ["error"],
@@ -14,5 +14,5 @@
     "no-use-before-define": ["error", { "functions": false }],
     "radix": ["warn", "as-needed"],
     "strict": ["off"]
-    },
+  },
 }

@@ -6,8 +6,7 @@ node_js:
   - "6"
   - "7"
 install:
-  - npm install
-  - npm install -g istanbul mocha
+  - npm install --no-optional
 script:
   - npm test
 env:
