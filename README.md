@@ -1,5 +1,4 @@
 # BRISKHOME
+[![Travis](https://img.shields.io/travis/heuels/briskhome.svg)](https://travis-ci.org/heuels/briskhome) [![Test Coverage](https://img.shields.io/codeclimate/coverage/github/heuels/briskhome.svg)](https://codeclimate.com/github/heuels/briskhome/coverage) [![Code Climate](https://img.shields.io/codeclimate/github/heuels/briskhome.svg)](https://codeclimate.com/github/heuels/briskhome) [![GitHub issues](https://img.shields.io/github/issues/heuels/briskhome.svg)](https://github.com/heuels/briskhome/issues)
 
-### Внимание!
-> Этот релиз (briskhome-core@0.3.0) сломан! Не пытайтесь запустить его на промышленном контуре, это приведет к большому количеству ошибок. В настоящий момент идет добавление нового функционала, отладка и устранение багов будет происходить начиная с конца июня - начала июля.  
-Установка версии из Git не рекомендуется, так как а) в ней 100% есть баги, и б) API меняется с каждым коммитом.
+**BRISK**HOME is a work-in-progress **open-source house monitoring and automation system** for Node.js.
