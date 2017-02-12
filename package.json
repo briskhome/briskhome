@@ -4,7 +4,7 @@
   "description": "",
   "main": "briskhome.js",
   "scripts": {
-    "test": "node_modules/istanbul/lib/cli.js cover --report lcov --dir specs/coverage node_modules/mocha/bin/_mocha -- -R spec specs/index.spec.js",
+    "test": "node_modules/istanbul/lib/cli.js cover -x \"lib/**/models/*\" -x \"lib/**/specs/*\" -x \"specs/*\" --report lcov --dir specs/coverage node_modules/mocha/bin/_mocha -- -R spec specs/index.spec.js",
     "postinstall": "npm config set briskhome_dir /opt/briskhome"
   },
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
