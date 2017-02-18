@@ -5,10 +5,10 @@
 
 ## Installation
 ### Prerequisites
-Prior to installing this application please make sure that your system is properly set up and does meet the requirements listed in **[System Administrator Guide]()**.
+Prior to installing this application please make sure that your system is properly set up, has required system packages installed and does meet the minimum requirements listed in the **[Administrator Guide]()**.
 
 ### Automatic installation
-**BRISK**HOME is currently not published on **npm**. You can install it via the command line with either `curl` or `wget` which will run this [installation script]().
+**BRISK**HOME is currently not published on **npm**. You can install it via the command line with either `curl` or `wget`.
 
 #### via `curl`
 ```shell
@@ -28,17 +28,17 @@ If you would like to manually install the application, please follow the instruc
 Please see the [corresponding section in the]() **[Administrator Guide]()** for configuration instructions.
 
 ## Documentation
-Documentation for the application is available **[online at ReadTheDocs]()** and consists of three separate documents that are intended for different auditories:
-* **[Administrator Guide]()** — this document is aimed at helping local system administrators set up and prepare the system to the installation of **BRISK**HOME.
-* **[Developer Guide]()** — this document describes the application's core and REST API and is intended for developers who want to to add functionality to **BRISK**HOME.
-* **[User Manual]()** — this document contains usage instructions for end-users.
+Documentation for the application is available **[online at ReadTheDocs]()** in both English and Russian languages and consists of three separate documents that are intended for different auditories:
+* **[Administrator Guide]()**. This document is aimed at helping local system administrators prepare and set up the system for the installation of **BRISK**HOME.
+* **[Developer Guide]()**. This document describes the application's core and REST API and is intended for developers who want to to add functionality to **BRISK**HOME.
+* **[User Manual]()**. This document contains usage instructions for end-users.
 
 ## Contributing
 **BRISK**HOME welcomes contributions! There are several ways you can get involved.
 
-* **Coding**. Take a look at a **[next release roadmap]()** and feel free to jump on any tasks you like. When submitting pull requests please **make sure that all new code is unit-tested and linted**.
+* **Developing**. Take a look at a **[next release roadmap]()** and feel free to jump on any tasks you like. Prior to submitting pull requests please make sure that all new code is **unit-tested and linted**.
 * **Documenting**. You can help writing documentation for the latest release in either **[English]()** or **[Russian]()** language.
-* **Reporting bugs**. If you have encountered a bug or an unexpected behavior, please **[open an issue]()**. Note that bugs in external components should be reported and tracked in their corresponding repositories.
+* **Reporting bugs**. If you have encountered a bug or an unexpected behavior, please **[open an issue]()**.
 * **Suggesting features**. You can always suggest a new feature by **[opening an issue]()**.
 
 ## License
