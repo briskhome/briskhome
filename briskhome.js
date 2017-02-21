@@ -9,12 +9,12 @@
 'use strict';
 
 process.stdout.write('\u001b[2J\u001b[0;0H');                 // eslint-disable-next-line no-console
-console.log(`[${new Date().toISOString()}]  INIT: briskkhome/${process.pid}`);
+console.log(`[${new Date().toISOString()}]  INIT: briskhome/${process.pid}`);
 
 const path = require('path');
 const architect = require('architect');
 
-const modules = architect.loadConfig(path.join(__dirname, './lib/index.js'));
+const modules = architect.loadConfig(path.resolve(__dirname, './lib/index.js'));
 architect.createApp(modules, (err, app) => {
   if (err) {
     throw err;
