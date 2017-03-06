@@ -3,6 +3,10 @@
 
 **Briskhome** is a work-in-progress **open-source house monitoring and automation system** for Node.js.
 
+> **Notice – Please Read**  
+> This application currently does not work out of-the-box and requires a lot of time and effort to set up and run. If you're looking for a complete *smart home* solution then you've come to the wrong place – please check back in a year or so.
+
+
 ## Installation
 ### Prerequisites
 Prior to installing this application please make sure that your system is properly set up, has required system packages installed and does meet the minimum requirements listed in the **[Administrator Guide](http://briskhome.readthedocs.io/en/latest/admin/index.html)**.
@@ -40,6 +44,8 @@ Documentation for the application is available **[online at ReadTheDocs](http://
 * **Documenting**. You can help **[writing documentation](https://github.com/heuels/briskhome-docs)** for the latest release or work-in-progress features.
 * **Reporting bugs**. If you have encountered a bug or an unexpected behavior, please **[open an issue](https://github.com/heuels/briskhome/issues/new)**.
 * **Suggesting features**. You can always suggest a new feature by **[opening an issue](https://github.com/heuels/briskhome/issues/new)**.
+
+If you like the project do [contact me](mailto:ezaitsev@briskhomoe.com) – I'd love to work on it together!
 
 ## License
 The MIT License (MIT)
