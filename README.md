@@ -1,4 +1,4 @@
-![Briskhome](https://raw.githubusercontent.com/heuels/briskhome-docs/master/.static/img/briskhome%403x.png)
+![Briskhome](https://raw.githubusercontent.com/briskhome/briskhome-docs/master/.static/img/briskhome%40readme.png)
 [![Travis](https://img.shields.io/travis/heuels/briskhome.svg?style=flat-square)](https://travis-ci.org/heuels/briskhome) [![GitHub release](https://img.shields.io/github/release/heuels/briskhome.svg?style=flat-square)](https://github.com/heuels/briskhome/releases/latest) [![Test Coverage](https://img.shields.io/codeclimate/coverage/github/heuels/briskhome.svg?style=flat-square)](https://codeclimate.com/github/heuels/briskhome/coverage) [![Code Climate](https://img.shields.io/codeclimate/github/heuels/briskhome.svg?style=flat-square)](https://codeclimate.com/github/heuels/briskhome) [![GitHub issues](https://img.shields.io/github/issues/heuels/briskhome.svg?style=flat-square)](https://github.com/heuels/briskhome/issues) [![Documentation](https://readthedocs.org/projects/briskhome/badge/?version=latest&style=flat-square)](http://briskhome.readthedocs.io/en/latest/?badge=latest)
 
 ---
@@ -6,8 +6,7 @@
 **Briskhome** is a work-in-progress **open-source house monitoring and automation system** for Node.js.
 
 > **Notice – Please Read**  
-> This application currently does not work out of-the-box and requires a lot of time and effort to set up and run.  
-> If you're looking for a complete *smart home* solution then you've come to the wrong place – please check back in a year or so.
+> This application currently does not work out of-the-box and requires a lot of time and effort to set up and run. Although it can't be considered a complete *smart home* solution at the moment, we are sure that we will get there eventually, so please do check back from time to time – *or consider contributing yourself!*
 
 
 ## Installation
@@ -32,7 +31,7 @@ Please see the [corresponding section in the](http://briskhome.readthedocs.io/en
 
 ## Configuration
 
-Please see the [corresponding section in the](http://briskhome.readthedocs.io/en/latest/admin/installing-briskhome.html) **[Administrator Guide](http://briskhome.readthedocs.io/en/latest/admin/index.html)** for configuration instructions.
+Please see the [corresponding section in the](http://briskhome.readthedocs.io/en/latest/admin/configuring-briskhome.html) **[Administrator Guide](http://briskhome.readthedocs.io/en/latest/admin/index.html)** for configuration instructions.
 
 ## Documentation
 Documentation for the application is available **[online at ReadTheDocs](http://briskhome.readthedocs.io/)** and consists of three separate documents that are intended for different auditories:

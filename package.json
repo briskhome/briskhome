@@ -1,9 +1,10 @@
 {
-  "name": "@briskhome/core",
-  "version": "0.3.0-alpha.1",
+  "name": "briskhome",
+  "version": "0.3.0",
   "description": "",
   "main": "briskhome.js",
   "scripts": {
+    "start": "node briskhome.js | bunyan -o short",
     "test": "node_modules/istanbul/lib/cli.js cover -x \"lib/**/models/*\" -x \"lib/**/specs/*\" -x \"specs/*\" --report lcov --dir specs/coverage node_modules/mocha/bin/_mocha -- -R spec specs/index.spec.js",
     "postinstall": "npm config set briskhome_dir /opt/briskhome"
   },
