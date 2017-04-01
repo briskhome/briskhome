@@ -12,16 +12,13 @@
 const os = require('os');
 const path = require('path');
 const architect = require('architect');
-
-printLogo();
-printInit();
-
+const briskhome = require('./package.json');
 const components = require('./lib/index.js').enabledComponents();
 
-// XXX: The following definition is used in development only & needs to be removed prior to release.
-const modules = process.env.NODE_ENV === 'development'
-  ? architect.loadConfig(path.resolve(__dirname, './lib/index.json'))
-  : architect.loadConfig(components);
+writeBriskhomeLogo();
+writeBriskhomeInfo();
+
+const modules = architect.resolveConfig(components, path.resolve(__dirname, 'lib'));
 
 architect.createApp(modules, (err, app) => {
   if (err) {
@@ -29,7 +26,7 @@ architect.createApp(modules, (err, app) => {
   }
 
   const log = app.services.log('core');
-  log.info('Initialization complete');
+  log.info('Initialization successful');
 
   app.on('error', (error) => {
     log.fatal({ err: error }, err.message);
@@ -47,9 +44,9 @@ architect.createApp(modules, (err, app) => {
   });
 });
 
-function printLogo() {
-  process.stdout.write('\u001b[2J\u001b[0;0H');                          // eslint-disable-next-line
-  console.log(`
+function writeBriskhomeLogo() {
+  process.stdout.write('\u001b[2J\u001b[0;0H');
+  process.stdout.write(`
      ██████╗ ██████╗ ██╗███████╗██╗  ██╗██╗  ██╗ ██████╗ ███╗   ███╗███████╗
      ██╔══██╗██╔══██╗██║██╔════╝██║ ██╔╝██║  ██║██╔═══██╗████╗ ████║██╔════╝
      ██████╔╝██████╔╝██║███████╗█████╔╝ ███████║██║   ██║██╔████╔██║█████╗
@@ -59,6 +56,6 @@ function printLogo() {
   `);
 }
 
-function printInit() {                                                   // eslint-disable-next-line
-  console.log(`{"name":"briskhome","hostname":"${os.hostname()}","pid":${process.pid},"component":"core","level":30,"msg":"Initializing Briskhome v${require('./package.json').version}","time":"${new Date().toISOString()}","v":0}`);
+function writeBriskhomeInfo() {
+  process.stdout.write(`\n{"name":"briskhome","hostname":"${os.hostname()}","pid":${process.pid},"component":"core","level":30,"msg":"Initializing Briskhome v${briskhome.version}","time":"${new Date().toISOString()}","v":0}\n`);
 }
