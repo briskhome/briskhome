@@ -25,8 +25,10 @@ architect.createApp(modules, (err, app) => {
     throw err;
   }
 
-  const log = app.services.log('core');
+  const log = app.services.log();
   log.info('Initialization successful');
+  const endTime = present();
+  console.log(`result is ${endTime - startTime}`);
 
   app.on('error', (error) => {
     log.fatal({ err: error }, err.message);
