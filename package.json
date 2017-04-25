@@ -4,7 +4,8 @@
   "description": "",
   "main": "briskhome.js",
   "scripts": {
-    "start": "node briskhome.js | bunyan -o short",
+    "lint": "eslint lib --ext .js",
+    "start": "node lib/core.js | bunyan -o short",
     "test": "node_modules/istanbul/lib/cli.js cover -x \"lib/**/models/*\" -x \"lib/**/specs/*\" -x \"specs/*\" --report lcov --dir specs/coverage node_modules/mocha/bin/_mocha -- -R spec specs/index.spec.js",
     "postinstall": "npm config set briskhome_dir /opt/briskhome"
   },
@@ -16,11 +17,11 @@
   "private": true,
   "devDependencies": {
     "chai": "3.4.1",
-    "eslint": "^3.15.0",
+    "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.9.0",
+    "eslint-plugin-react": "^6.10.3",
     "istanbul": "^0.4.4",
     "mocha": "^3.0.2",
     "mock-dgram": "0.1.2",
@@ -30,6 +31,13 @@
   },
   "dependencies": {
     "agenda": "^0.8.1",
+    "@briskhome/core.bus": "file:lib/core.bus",
+    "@briskhome/core.config": "file:lib/core.config",
+    "@briskhome/core.db": "file:lib/core.db",
+    "@briskhome/core.log": "file:lib/core.log",
+    "@briskhome/core.notifications": "file:lib/core.notifications",
+    "@briskhome/core.pki": "file:lib/core.pki",
+    "@briskhome/core.planner": "file:lib/core.planner",
     "architect": "0.1.11",
     "async": "^2.1.4",
     "bunyan": "^1.8.1",
