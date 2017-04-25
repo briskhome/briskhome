@@ -5,7 +5,17 @@
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": ["db", "log", "bus"],
-    "provides": ["notifications"]
+    "consumes": [
+      "db",
+      "log",
+      "bus"
+    ],
+    "provides": [
+      "notifications"
+    ]
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "^0.27.0",
+    "uuid-1345": "^0.99.6"
   }
 }
