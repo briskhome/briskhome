@@ -5,7 +5,15 @@
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": ["config", "db"],
-    "provides": ["log"]
+    "consumes": [
+      "config"
+    ],
+    "provides": [
+      "log"
+    ]
+  },
+  "dependencies": {
+    "bunyan": "^1.8.10",
+    "bunyan-syslog": "github:mcavage/node-bunyan-syslog#9bdb9eb62a763c7d30e032a619138032d5ff8771"
   }
 }
