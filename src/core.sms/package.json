@@ -6,6 +6,7 @@
   "private": true,
   "plugin": {
     "consumes": ["config", "log"],
-    "provides": ["sms"]
+    "provides": ["sms"],
+    "disabled": true
   }
 }
