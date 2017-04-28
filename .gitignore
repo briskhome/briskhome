@@ -1,8 +1,9 @@
 _*
 .DS_Store
 .idea
-lib/**/node_modules
-lib/**/specs/.eslintrc.json
-lib/**/specs/coverage
+lib
 node_modules
 specs/coverage
+src/**/node_modules
+src/**/specs/.eslintrc.json
+src/**/specs/coverage
