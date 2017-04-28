@@ -8,6 +8,7 @@
     "consumes": [
       "config",
       "loader",
+      "log"
     ],
     "provides": [
       "db"
