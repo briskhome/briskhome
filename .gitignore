@@ -1,6 +1,7 @@
 _*
 .DS_Store
 .idea
+.vagrant
 lib
 node_modules
 specs/coverage
