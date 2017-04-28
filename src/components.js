@@ -1,12 +1,14 @@
-/**
+/** @flow
  * @briskhome
  * └core <lib/components.js>
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
-const components = (directories = ['./lib', './node_modules']) => {
+import type { PackageJson } from './utilities/coreTypes';
+
+const components = (directories?: Array<string> = ['./lib', './node_modules']): Array<string> => {
   let modules = [];
   for (let i = 0; i < directories.length; i += 1) { // directories.map()?
     const directory = directories[i];
@@ -20,22 +22,31 @@ const components = (directories = ['./lib', './node_modules']) => {
   return modules;
 };
 
-const parseComponent = directory => (
-  JSON.parse(fs.readFileSync(path.resolve(directory, 'package.json'))) || {}
+const inspectComponent = (directory: string): PackageJson => (
+  JSON.parse(String(fs.readFileSync(path.resolve(directory, 'package.json'))))
 );
 
-const enabledComponents = directories => components(directories).filter(directory => (
-  parseComponent(directory).plugin && !parseComponent(directory).plugin.disabled
+const enabledComponents = (directories?: Array<string>): Array<string> => components(directories)
+  .filter(directory => (
+  inspectComponent(directory).plugin && !inspectComponent(directory).plugin.disabled
 ));
 
-const disabledComponents = directories => components(directories).filter(directory => (
-  parseComponent(directory).plugin && !parseComponent(directory).plugin.disabled
+const disabledComponents = (directories?: Array<string>): Array<string> => components(directories)
+  .filter(directory => (
+  inspectComponent(directory).plugin && !inspectComponent(directory).plugin.disabled
 ));
 
+const resources = (resource: string) => (
+  [].concat( ...enabledComponents()
+    .map(component => fs.readdirSync(component).includes(resource) && fs.readdirSync(path.resolve(component, resource)))
+    .filter(resource => !!resource)
+  )
+);
 
 module.exports = {
   components,
+  inspectComponent,
   enabledComponents,
   disabledComponents,
-  parseComponent,
+  resources
 };
