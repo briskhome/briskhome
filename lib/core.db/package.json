@@ -5,7 +5,15 @@
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": ["config", "loader"],
-    "provides": ["db"]
+    "consumes": [
+      "config",
+      "loader",
+    ],
+    "provides": [
+      "db"
+    ]
+  },
+  "dependencies": {
+    "mongoose": "^4.9.6"
   }
 }

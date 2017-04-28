@@ -5,7 +5,16 @@
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": ["db", "log", "config"],
-    "provides": ["bus"]
+    "consumes": [
+      "db",
+      "log",
+      "config"
+    ],
+    "provides": [
+      "bus"
+    ]
+  },
+  "dependencies": {
+    "mosca": "^2.3.0"
   }
 }

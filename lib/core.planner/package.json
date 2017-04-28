@@ -5,7 +5,16 @@
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": ["db", "log", "config"],
-    "provides": ["planner"]
+    "consumes": [
+      "db",
+      "log",
+      "config"
+    ],
+    "provides": [
+      "planner"
+    ]
+  },
+  "dependencies": {
+    "agenda": "^0.9.1"
   }
 }

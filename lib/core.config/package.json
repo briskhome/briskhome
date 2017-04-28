@@ -5,7 +5,15 @@
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": ["loader"],
-    "provides": ["config"]
+    "consumes": [
+      "loader"
+    ],
+    "provides": [
+      "config"
+    ]
+  },
+  "dependencies": {
+    "nconf": "^0.8.4",
+    "properties": "^1.2.1"
   }
 }
