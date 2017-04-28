@@ -1,14 +1,13 @@
 language: node_js
 sudo: false
 node_js:
-  - "4"
-  - "5"
-  - "6"
   - "7"
 install:
-  - npm install --no-optional
+  - yarn build
+  - yarn install --ignore-optional
 script:
-  - npm test
+  - yarn lint
+  - yarn test
 env:
   - CXX=g++-4.8
 addons:
