@@ -9,21 +9,13 @@ import path from 'path';
 import type { PackageJson } from './utilities/coreTypes';
 
 export const components = (directories?: Array<string> = ['./lib', './node_modules'])
-  : Array<string> => {
-  let modules = [];
-  for (let i = 0; i < directories.length; i += 1) {
-    const directory = directories[i];
-    modules = modules.concat(fs.readdirSync(directory)
-      .filter(subdirectory => (directory === './lib'
-        ? fs.statSync(path.resolve(directory, subdirectory)).isDirectory() &&
-          subdirectory.indexOf('core.') === 0
-        : fs.statSync(path.resolve(directory, subdirectory)).isDirectory() &&
-          subdirectory.indexOf('briskhome-') === 0))
-      .map(subdirectory => path.resolve(directory, subdirectory)));
-  }
-
-  return modules;
-};
+  : Array<string> => [].concat(...directories.map(directory => fs.readdirSync(directory)
+  .filter(subdirectory => (directory === './lib'
+    ? fs.statSync(path.resolve(directory, subdirectory)).isDirectory()
+      && subdirectory.indexOf('core.') === 0
+    : fs.statSync(path.resolve(directory, subdirectory)).isDirectory()
+      && subdirectory.indexOf('briskhome-') === 0))
+  .map(subdirectory => path.resolve(directory, subdirectory))));
 
 export const inspectComponent = (directory: string)
   : PackageJson =>
@@ -40,13 +32,12 @@ export const disabledComponents = (directories?: Array<string>)
     inspectComponent(directory).plugin && inspectComponent(directory).plugin.disabled);
 
 export const requireResources = (directory: string)
-  : Array<string> => (
-  [].concat(...enabledComponents()
-    .map(component => (fs.readdirSync(component).includes(directory)
-      ? fs.readdirSync(path.resolve(component, directory))
-        .map(resource => path.resolve(component, directory, resource))
-      : []))
-    .filter(resource => !!resource)));
+  : Array<string> => [].concat(...enabledComponents()
+  .map(component => (fs.readdirSync(component).includes(directory)
+    ? fs.readdirSync(path.resolve(component, directory))
+      .map(resource => path.resolve(component, directory, resource))
+    : []))
+  .filter(resource => !!resource));
 
 export const enableComponent = (directory: string)
   : boolean =>
