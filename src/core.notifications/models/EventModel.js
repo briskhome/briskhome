@@ -1,42 +1,56 @@
-/**
+/** @flow
  * @briskhome
  * └core.notifications <lib/core.notifications/models/EventModel.js>
- *
- * @author Egor Zaitsev <ezaitsev@briskhome.com>
  */
 
-'use strict';
+import type mongoose from 'mongoose';
+import type { ModelType } from '../../utilities/coreTypes';
 
-module.exports = function model (db) {
+export type EventType = {
+  _id?: string,
+  id: string,
+  name: string,
+  level?: number,
+  description?: string,
+  component: string,
+  createdAt?: string,
+  updatedAt?: string,
+};
+
+export type EventModelType = (document: EventType) => {
+  fetchById(id: string): EventModelType,
+} & EventType & ModelType<EventModelType>;
+
+export default (db: mongoose) => {
   const Schema = db.Schema;
   const eventSchema = new Schema({
     _id: {
       type: String,
-      unique: true
+      unique: true,
     },
     name: {
       type: String,
-      unique: true
+      unique: true,
     },
     level: {
       type: Number,
-      default: 40
+      default: 40,
     },
     description: {
-      type: String
+      type: String,
     },
     component: {
-      type: String
-    }
+      type: String,
+    },
   }, {
     collection: 'events',
     timestamps: {
       createdAt: 'created',
-      updatedAt: 'updated'
-    }
+      updatedAt: 'updated',
+    },
   });
 
-  eventSchema.statics.fetchById = async function fetchById (id) {
+  eventSchema.statics.fetchById = async function fetchById(id: string): Promise<EventType> {
     return this.findOne({ _id: id }).exec();
   };
 

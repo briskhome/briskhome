@@ -1,14 +1,15 @@
-/**
+/** @flow
  * @briskhome
  * └core.db <lib/core.db/index.js>
  */
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import { requireResources } from '../components';
+import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
 
-module.exports = function setup(options, imports, register) {
+module.exports = function setup(options: Object, imports: CoreImports, register: CoreRegister) {
   const { database, hostname, username, password } = imports.config();
   const log = imports.log();
-  const loader = imports.loader;
 
   mongoose.Promise = global.Promise;
   mongoose.connect(`mongodb://${username}:${password}@${hostname}/${database}`);
@@ -19,15 +20,16 @@ module.exports = function setup(options, imports, register) {
 
   mongoose.connection.once('open', () => {
     log.info('Database connection established');
-    const models = loader.load('models');
-    for (let i = 0; i < models.length; i += 1) {
+    requireResources('models').every((model) => {
       try {
-        require(models[i].path)(mongoose);                                    // eslint-disable-line
-      } catch (err) {
-        log.fatal({ err }, `Error loading database model ${models[i].name} from ${models[i].path}`);
-        return register(err);
+        require(model).default(mongoose);                                    // eslint-disable-line
+      } catch (e) {
+        log.fatal({ err: e }, `Error loading database model from ${model}`);
+        return register(e);
       }
-    }
+
+      return true;
+    });
 
     return register(null, { db: mongoose });
   });

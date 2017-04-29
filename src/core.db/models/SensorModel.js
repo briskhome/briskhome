@@ -1,17 +1,11 @@
 /**
- * @briskhome/core.db <lib/core.db/index.js>
- * └ models/sensor.model.js
- *
- * Модель данных датчика.
- *
- * @author Egor Zaitsev <ezaitsev@briskhome.com>
+ * @briskhome
+ * └core.db <lib/core.db/models/SensorModel.js>
  */
-
-'use strict';
 
 const uuid = require('uuid-1345');
 
-module.exports = function model (db) {
+export default (db) => {
   const Schema = db.Schema;
   const SensorSchema = new Schema({
 
@@ -19,7 +13,7 @@ module.exports = function model (db) {
     // использования версии 5 в качестве пространства имен используется UUID устройства.
     _id: {
       type: String,
-      default: () => uuid.v4()
+      default: () => uuid.v4(),
     },
 
     // Серийный номер датчика. У датчиков 1-wire указывается вместе с категорией (например,
@@ -27,14 +21,14 @@ module.exports = function model (db) {
     // строка, позволяющая его однозначно идентифицировать.
     serial: {
       type: String,
-      unique: true
+      unique: true,
     },
 
     // Зарегистрированное в системе устройство, которое управляет или считывает данные с датчика.
     // Временно (до завершения рефакторинга компонента `Onewire`) установлено как необязательное.
     device: {
       type: String,
-      required: false
+      required: false,
     },
 
     // Параметр 'isOnline' показывает результат последней попытки подключения к датчику. В случае,
@@ -44,7 +38,7 @@ module.exports = function model (db) {
     // датчику можно узнать из коллекции 'readings'.
     isOnline: {
       type: Boolean,
-      default: true
+      default: true,
     },
 
     // Параметр `values` показывает типы показателей, которые предоставляет датчик. массив за-
@@ -57,16 +51,16 @@ module.exports = function model (db) {
         'humidity',
         'moisture',
         'pressure',
-        'temperature'
-      ]
+        'temperature',
+      ],
     }],
 
     // Местоположение датчика. Необходимо для привязки в веб-интерфейсе и пользовательской логике.
     // Используется схема core:allocation.
-    location: { type: Schema.Types.Mixed }
+    location: { type: Schema.Types.Mixed },
   }, {
     collection: 'sensors',
-    timestamps: true
+    timestamps: true,
   });
 
   // SensorSchema.methods.addValueType = function() {};
@@ -74,7 +68,7 @@ module.exports = function model (db) {
   // Warning will remore all readings of this subtype;
   // SensorSchema.methods.removeValueType = function() {};
   //
-  SensorSchema.methods.setOnline = function setOnline (state) {
+  SensorSchema.methods.setOnline = function setOnline(state) {
     this.isOnline = state;
     return this.save(); // ?
   };

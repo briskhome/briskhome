@@ -3,6 +3,8 @@
  * └core <utilities/coreTypes.js>
  */
 
+import type mongoose from 'mongoose';
+
 export type PackageJson = {
   name: string,
   version: string,
@@ -11,9 +13,34 @@ export type PackageJson = {
   author: string,
   license: string,
   private: boolean,
+  dependencies: Object,
+  devDependencies: Object,
+  peerDependencies: Object,
+  optionalDependencies: Object,
   plugin: {
     provides?: Array<string>,
     consumes?: Array<string>,
-    disabled?: boolean
-  }
+    disabled?: boolean,
+  },
+};
+
+export type CoreImports = {
+  bus: Object,
+  db: mongoose,
+  config: () => Object,
+  log: () => Object,
+  loader: (string) => Object,
+}
+
+export type CoreRegister = (err: ?Error, data?: Object) => void;
+
+export type ModelType<Model> = {
+  save: (document?: Object) => Model,
+  update: (document?: Object) => Model,
+};
+
+export type SubscriptionType = {
+  username: string,
+  eventId: string,
+  levels?: Array<string>,
 };

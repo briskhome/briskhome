@@ -22,25 +22,27 @@ const components = (directories?: Array<string> = ['./lib', './node_modules']): 
   return modules;
 };
 
-const inspectComponent = (directory: string): PackageJson => (
-  JSON.parse(String(fs.readFileSync(path.resolve(directory, 'package.json'))))
+const inspectComponent = (directory: string): PackageJson =>
+  JSON.parse(String(fs.readFileSync(path.resolve(directory, 'package.json'))),
 );
 
 const enabledComponents = (directories?: Array<string>): Array<string> => components(directories)
-  .filter(directory => (
-  inspectComponent(directory).plugin && !inspectComponent(directory).plugin.disabled
-));
+  .filter(directory =>
+    inspectComponent(directory).plugin && !inspectComponent(directory).plugin.disabled,
+);
 
 const disabledComponents = (directories?: Array<string>): Array<string> => components(directories)
-  .filter(directory => (
-  inspectComponent(directory).plugin && !inspectComponent(directory).plugin.disabled
-));
+  .filter(directory =>
+    inspectComponent(directory).plugin && !inspectComponent(directory).plugin.disabled,
+);
 
-const resources = (resource: string) => (
-  [].concat( ...enabledComponents()
-    .map(component => fs.readdirSync(component).includes(resource) && fs.readdirSync(path.resolve(component, resource)))
-    .filter(resource => !!resource)
-  )
+const requireResources = (directory: string): Array<string> => (
+  [].concat(...enabledComponents()
+    .map(component => (fs.readdirSync(component).includes(directory)
+      ? fs.readdirSync(path.resolve(component, directory))
+        .map(resource => path.resolve(component, directory, resource))
+      : []))
+    .filter(resource => !!resource))
 );
 
 module.exports = {
@@ -48,5 +50,5 @@ module.exports = {
   inspectComponent,
   enabledComponents,
   disabledComponents,
-  resources
+  requireResources,
 };

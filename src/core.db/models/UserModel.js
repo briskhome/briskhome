@@ -1,13 +1,52 @@
-/**
+/** @flow
  * @briskhome
  * └core.db <lib/core.db/models/UserModel.js>
- *
- * @author Egor Zaitsev <ezaitsev@briskhome.com>
  */
 
-'use strict';
+import type mongoose from 'mongoose';
+import type { ModelType } from '../../utilities/coreTypes';
 
-module.exports = function model (db) {
+export type UserContactType = {
+  name: string,
+  value: string,
+  levels: Array<number>,
+};
+
+export type UserDeviceType = {
+
+}
+
+export type UserSubscriptionType = {
+  _id: string,
+  levels: Array<number>,
+};
+
+export type UserLocationType = {
+
+}
+
+export type UserType = {
+  _id?: string,
+  id: string,
+  username: string,
+  firstName: string,
+  lastName: string,
+  type: 'guest' | 'user' | 'superuser',
+  contacts: Array<UserContactType>,
+  devices: Array<UserDeviceType>,
+  subscriptions: Array<UserSubscriptionType>,
+  locations: Array<UserLocationType>,
+
+  createdAt?: string,
+  updatedAt?: string,
+};
+
+export type UserModelType = (document: UserType) => {
+  fetchByUsername(id: string): UserModelType,
+  fetchBySubscription(id: string): UserModelType,
+} & UserType & ModelType<UserModelType>;
+
+export default (db: mongoose) => {
   const Schema = db.Schema;
   const userSchema = new Schema({
     // _id: {
@@ -15,38 +54,38 @@ module.exports = function model (db) {
     // },
     username: {
       type: String,
-      unique: true
+      unique: true,
     },
     firstName: {
-      type: String
+      type: String,
     },
     lastName: {
-      type: String
+      type: String,
     },
     type: {
       type: String,
       enum: [
         'guest',
         'user',
-        'superuser'
-      ]
+        'superuser',
+      ],
     },
     contacts: [{
       name: String,
       value: String,
-      levels: [Number]
+      levels: [Number],
     }],
     devices: [], // ?
 
     // Array of events a user is subscribed to.
     subscriptions: [{
       _id: String,
-      levels: [Number]
+      levels: [Number],
     }],
     location: {
       long: String,
-      lat: String
-    }
+      lat: String,
+    },
   }, {
     collection: 'users',
     timestamps: true
