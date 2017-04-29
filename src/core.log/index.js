@@ -1,11 +1,12 @@
-/**
+/** @flow
  * @briskhome
  * └core.log <lib/core.log/index.js>
  */
 
-const bunyan = require('bunyan');
+import bunyan from 'bunyan';
+import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
 
-module.exports = function setup(options, imports, register) {
+module.exports = function setup(options: Object, imports: CoreImports, register: CoreRegister) {
   const config = imports.config();
   const log = bunyan.createLogger({
     name: 'briskhome',

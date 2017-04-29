@@ -1,20 +1,18 @@
-/**
+/** @flow
  * @briskhome
  * └core.config <lib/core.config/index.js>
- *
- * @author Egor Zaitsev <ezaitsev@briskhome.com>
  */
 
-'use strict';
+import path from 'path';
+import nconf from 'nconf';
+import properties from 'properties';
+import { requireResources } from '../components';
+import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
 
-const path = require('path');
-const nconf = require('nconf');
-const properties = require('properties');
-
-module.exports = function setup(options, imports, register) {
+module.exports = function setup(options: Object, imports: CoreImports, register: CoreRegister) {
   const loader = imports.loader;
 
-  const parse = dir => properties.parse(dir, {
+  const parse = (dir: string) => properties.parse(dir, {
     comments: '#',
     separators: '=',
     sections: true,
@@ -22,7 +20,7 @@ module.exports = function setup(options, imports, register) {
     variables: true,
   });
 
-  const stringify = dir => properties.stringify(dir, {
+  const stringify = (dir: string) => properties.stringify(dir, {
     comment: '#',
     separator: '=',
     unicode: true,
@@ -30,7 +28,6 @@ module.exports = function setup(options, imports, register) {
 
   /** Загрузчик переменных среды */
   nconf.env();
-
   const NODE_ENV = nconf.get('NODE_ENV') || 'briskhome';
 
   /** Загрузчик основной конфигурации приложения */
@@ -43,7 +40,7 @@ module.exports = function setup(options, imports, register) {
     },
   });
 
-  /** Загрузчик конфигурации внешних модулей */
+  // requireResources('etc').map(resource => )
   const configs = loader.load('etc');
   for (let i = 0; i < configs.length; i += 1) {
     nconf.use(configs[i].module, {
@@ -56,8 +53,8 @@ module.exports = function setup(options, imports, register) {
     });
   }
 
-  register(null, { config: () => {
-    return nconf.get(`${new Error().stack.split('\n')[2].split('/').slice(-2, -1)}`.replace('.', ':'));
-  }
+  register(null, {
+    config: () =>
+      nconf.get(String(new Error().stack.split('\n')[2].split('/').slice(-2, -1)).replace('.', ':'))
   });
 };

@@ -40,8 +40,8 @@ export const requireResources = (directory: string)
   .filter(resource => !!resource));
 
 export const enableComponent = (directory: string)
-  : boolean =>
-  !!disabledComponents().filter((component) => {
+  : boolean => !!disabledComponents()
+  .filter((component) => {
     if (component.includes(directory)) {
       const payload = JSON.parse(String(fs.readFileSync(path.resolve(component, 'package.json'))));
       payload.plugin.disabled = false;
@@ -52,8 +52,8 @@ export const enableComponent = (directory: string)
   }).length;
 
 export const disableComponent = (directory: string)
-  : boolean =>
-  !!enabledComponents().filter((component) => {
+  : boolean => !!enabledComponents()
+  .filter((component) => {
     if (component.includes(directory)) {
       const payload = JSON.parse(String(fs.readFileSync(path.resolve(component, 'package.json'))));
       payload.plugin.disabled = true;
