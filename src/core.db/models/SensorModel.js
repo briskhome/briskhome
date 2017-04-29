@@ -3,9 +3,25 @@
  * └core.db <lib/core.db/models/SensorModel.js>
  */
 
-const uuid = require('uuid-1345');
+import uuid from 'uuid-1345';
+import type mongoose from 'mongoose';
+import type { ModelType } from '../../utilities/coreTypes';
 
-export default (db) => {
+export type SensorType = {
+  _id?: string,
+  id: string,
+  serial: string,
+  device: string,
+  isOnline: boolean,
+  values: string,
+  lcoation: Object,
+}
+
+export type SensorModelType = {
+  setOnline: (state: boolean) => SensorModelType
+} & SensorType & ModelType<SensorModelType>
+
+export default (db: mongoose) => {
   const Schema = db.Schema;
   const SensorSchema = new Schema({
 

@@ -1,11 +1,32 @@
-/**
+/** @flow
  * @briskhome
  * └core.db <lib/core.db/models/DeviceModel.js>
  */
 
-const uuid = require('uuid-1345');
+import uuid from 'uuid-1345';
+import type mongoose from 'mongoose';
+import type { ModelType } from '../../utilities/coreTypes';
 
-export default (db) => {
+export type DeviceType = {
+  _id?: string,
+  id: string,
+  mac: string,
+  name: string,
+  address: string,
+  hostname: string,
+  description: string,
+  location: Object,
+  services: Object,
+
+  createdAt?: string,
+  updatedAt?: string,
+}
+
+export type DeviceModelType = (document: DeviceType) => {
+
+} & DeviceType & ModelType<DeviceModelType>;
+
+export default (db: mongoose) => {
   const Schema = db.Schema;
   const DeviceSchema = new Schema({
     _id: {

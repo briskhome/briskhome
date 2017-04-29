@@ -13,7 +13,7 @@ export type UserContactType = {
 };
 
 export type UserDeviceType = {
-
+  // TODO
 }
 
 export type UserSubscriptionType = {
@@ -22,7 +22,7 @@ export type UserSubscriptionType = {
 };
 
 export type UserLocationType = {
-
+  // TODO
 }
 
 export type UserType = {
