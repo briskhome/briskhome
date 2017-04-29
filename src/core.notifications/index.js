@@ -1,14 +1,13 @@
-/**
+/** @flow
  * @briskhome
  * └core.notifications <lib/core.notifications/index.js>
  *
  * @author Egor Zaitsev <ezaitsev@briskhome.com>
  */
 
-const fs = require('fs');
-const uuid = require('uuid-1345');
-
-const {
+import uuid from 'uuid-1345';
+import { requireResources } from '../components';
+import {
   ERR_UNABLE_TO_FETCH,
   ERR_UNABLE_TO_REGISTER,
   ERR_UNABLE_TO_SUBSCRIBE,
@@ -21,24 +20,31 @@ const {
   EVENT_DISPATCH_SUCCESS,
   EVENT_REGISTER_SUCCESS,
   EVENT_UPDATE_SUCCESS,
-} = require('./constants.js');
+} from './constants';
 
-module.exports = function setup(options, imports, register) {
+import type { CoreImports, CoreRegister, SubscriptionType } from '../utilities/coreTypes';
+import type { EventModelType, EventType } from './models/EventModel';
+import type { UserModelType } from '../core.db/models/UserModel';
+
+module.exports = function setup(options: Object, imports: CoreImports, register: CoreRegister) {
   const db = imports.db;
   const bus = imports.bus;
   const log = imports.log();
 
-  const EventModel = db.model('core:event');
-  const UserModel = db.model('core:user');
+  const EventModel: EventModelType = db.model('core:event');
+  const UserModel: UserModelType = db.model('core:user');
 
   /**
    * @constructor
    */
-  function Notifications() {
+  async function Notifications() {
     this.providers = {};
+
+    await this.init();
   }
 
-  Notifications.prototype.init = function init() {
+  Notifications.prototype.init = function init()
+    : void {
     /* load installed providers
      * recreate listeners for every event
      * TODO: move subscribing to event to 'register' function since it is called on every
@@ -46,7 +52,8 @@ module.exports = function setup(options, imports, register) {
      */
   };
 
-  Notifications.prototype.update = function update() {
+  Notifications.prototype.update = function update()
+    : void {
 
   };
 
@@ -54,40 +61,41 @@ module.exports = function setup(options, imports, register) {
    * @async #define()
    * Registers an event definition.
    *
-   * @param  {Object} payload
-   * @param  {String} payload.id           Unique event identifier.
-   * @param  {String} payload.name         Human-readable name of the event.
-   * @param  {String} payload.description  Human-readable description of the event.
+   * @param  {Object} data
+   * @param  {String} data.id           Unique event identifier.
+   * @param  {String} data.name         Human-readable name of the event.
+   * @param  {String} data.description  Human-readable description of the event.
    * @return {Boolean}
    */
-  Notifications.prototype.define = async function define(payload) {
-    const { id, name, description } = payload;
-    const component = `${String(new Error().stack.split('\n')[2].split('/').slice(-2, -1))}`;
+  Notifications.prototype.define = async function define(data: EventType)
+    : Promise<boolean> {
+    const { id, name, description } = data;
+    const component = String(new Error().stack.split('\n')[2].split('/').slice(-2, -1));
     let event;
 
     try {
       event = await EventModel.fetchById(id);
     } catch (e) {
-      log.error({ err: e, payload }, ERR_UNABLE_TO_FETCH);
+      log.error({ err: e, data }, ERR_UNABLE_TO_FETCH);
       return false;
     }
 
     if (!bus.listenerCount(id)) {
       log.trace(`adding listener for event ${id}`);
-      bus.on(id, ...definition => Function.prototype.call(this.evaluate, ...definition));
+      bus.on(id, ...definition => Function.prototype.apply(this.evaluate, definition));
     }
 
     if (event) {
-      // TODO: Updating event properly
+      /* TODO: Add static method to EventModel to update event properly */
       event.update({ id }, { name, description, component });
-      log.debug({ payload }, EVENT_UPDATE_SUCCESS);
+      log.debug({ data }, EVENT_UPDATE_SUCCESS);
     } else {
-      event = new EventModel({ _id: id, name, description, component });
+      event = new EventModel({ id, name, description, component });
       try {
         await event.save();
-        log.debug({ payload }, EVENT_REGISTER_SUCCESS);
+        log.debug({ data }, EVENT_REGISTER_SUCCESS);
       } catch (e) {
-        log.error({ err: e, payload }, ERR_UNABLE_TO_REGISTER);
+        log.error({ err: e, data }, ERR_UNABLE_TO_REGISTER);
         return false;
       }
     }
@@ -99,30 +107,31 @@ module.exports = function setup(options, imports, register) {
    * @async #subscribe()
    * Subscribes user to notifications about a particular event.
    *
-   * @param  {Object} payload
-   * @param  {String} payload.event     Unique registered event identifier.
-   * @param  {String} payload.levels    Event levels user should be subscribed to.
-   * @param  {String} payload.username  Unique registered user identifier.
+   * @param  {Object} data
+   * @param  {String} data.event     Unique registered event identifier.
+   * @param  {String} data.levels    Event levels user should be subscribed to.
+   * @param  {String} data.username  Unique registered user identifier.
    * @return {Boolean}
    */
-  Notifications.prototype.subscribe = async function subscribe(payload) {
-    const { event, username } = payload;
-    const levels = payload.levels || [30, 50, 60]; // info, error & fatal
+  Notifications.prototype.subscribe = async function subscribe(data: SubscriptionType)
+    : Promise<boolean> {
+    const { eventId, username } = data;
+    const levels = data.levels || [30, 50, 60]; // info, error & fatal
 
     let user;
     try {
       user = await UserModel.fetchByUsername(username);
     } catch (e) {
-      log.error({ err: e, payload }, ERR_UNABLE_TO_SUBSCRIBE);
+      log.error({ err: e, data }, ERR_UNABLE_TO_SUBSCRIBE);
       return false;
     }
 
-    user.subscriptions.push({ _id: event, levels });
+    user.subscriptions.push({ _id: eventId, levels });
     user.markModified('subscriptions');
     try {
       await user.save();
     } catch (e) {
-      log.error({ err: e, payload }, ERR_UNABLE_TO_SUBSCRIBE);
+      log.error({ err: e, data }, ERR_UNABLE_TO_SUBSCRIBE);
       return false;
     }
 
@@ -133,39 +142,40 @@ module.exports = function setup(options, imports, register) {
    * @async #unsubscribe()
    * Unsubscribe user from a particular notification.
    *
-   * @param  {String} payload
-   * @param  {String} payload.event     Unique registered event identifier.
-   * @param  {String} payload.username  Unique registered user identifier.
+   * @param  {String} data
+   * @param  {String} data.eventId     Unique registered event identifier.
+   * @param  {String} data.username    Unique registered user identifier.
    * @return {Boolean}
    */
-  Notifications.prototype.unsubscribe = async function unsubscribe(payload) {
-    const { event, username } = payload;
+  Notifications.prototype.unsubscribe = async function unsubscribe(data: SubscriptionType)
+    : Promise<boolean> {
+    const { eventId, username } = data;
 
     let user;
     let subscribers;
 
     try {
       user = await UserModel.fetchByUsername(username);
-      subscribers = await UserModel.fetchBySubscription(event);
+      subscribers = await UserModel.fetchBySubscription(eventId);
     } catch (e) {
-      log.error({ err: e, payload }, ERR_UNABLE_TO_UNSUBSCRIBE);
+      log.error({ err: e, data }, ERR_UNABLE_TO_UNSUBSCRIBE);
       return false;
     }
 
     // Change to Array#filter()
-    const index = user.subscriptions.indexOf(event);
+    const index = user.subscriptions.indexOf(eventId);
     user.subscriptions.splice(index, 1);
     user.markModified('subscriptions');
 
     try {
       await user.save();
     } catch (e) {
-      log.error({ err: e, payload }, ERR_UNABLE_TO_UNSUBSCRIBE);
+      log.error({ err: e, data }, ERR_UNABLE_TO_UNSUBSCRIBE);
       return false;
     }
 
     if (subscribers.length === 1) {
-      bus.removeListener(event, a => Function.prototype.call(this.evaluate, a));
+      bus.removeListener(eventId, a => Function.prototype.apply(this.evaluate, a));
     }
 
     return true;
@@ -177,7 +187,7 @@ module.exports = function setup(options, imports, register) {
    *
    * @param {Object} id  Unique registered event identifier.
    */
-  Notifications.prototype.evaluate = async function evaluate(id) {
+  Notifications.prototype.evaluate = async function evaluate(id: string): Promise<> {
     log.trace({ data: id });
 
     let event;
@@ -193,13 +203,13 @@ module.exports = function setup(options, imports, register) {
 
     if (!event) {
       log.debug({ data: id }, ERR_NO_EVENT);
-      bus.removeListener(id, a => Function.prototype.call(this.evaluate, a));
+      bus.removeListener(id, a => Function.prototype.apply(this.evaluate, a));
       return;
     }
 
     if (!users.length) {
       log.debug({ data: id }, ERR_NO_SUBSCRIBERS);
-      bus.removeListener(id, a => Function.prototype.call(this.evaluate, a));
+      bus.removeListener(id, a => Function.prototype.apply(this.evaluate, a));
       return;
     }
 
@@ -240,16 +250,17 @@ module.exports = function setup(options, imports, register) {
    * @async #verify()
    * Performs user account verification for provider.
    *
-   * @param  {UserModel} user     [description]
-   * @param  {String}    provider [description]
+   * @param  {UserType} user     [description]
+   * @param  {String}    providerId [description]
    * @return {String}  A link or action that needs to be followed in order to verify.
    */
-  Notifications.prototype.verify = async function verify(user, providerId) {
-    const verified = async (userId) => {
-      user.notifications[providerId] = userId;
+  Notifications.prototype.verify = async function verify(user: UserModelType, providerId: string)
+    : Promise<> {
+    const verified = async (contactId) => {
+      user.contacts[providerId] = contactId;                                  // eslint-disable-line
       const result = await user.save();
       if (!result) {
-        log.error(`Unable to verify ${user} with ${providerId} by ${userId}`);
+        log.error(`Unable to verify ${user.username} with ${providerId} by ${contactId}`);
       }
     };
 
@@ -266,8 +277,9 @@ module.exports = function setup(options, imports, register) {
    * [providers description]
    * @return {Array}
    */
-  Notifications.prototype.providers = async function providers() {
-    return fs.readDir('providers');
+  Notifications.prototype.providers = async function providers()
+    :Promise<Array<*>> {
+    return requireResources('providers');
   };
 
   Notifications.levels = {
