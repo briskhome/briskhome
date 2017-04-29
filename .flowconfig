@@ -1,9 +1,14 @@
 [ignore]
 .*/lib/.*
+.*/node_modules/fbjs/lib/.*flow
 
 [include]
-.*/src/.*
+;.*/src/.*
 
 [libs]
+.*/flow-typed/.*
 
 [options]
+module.ignore_non_literal_requires=true
+module.system.node.resolve_dirname=node_modules
+module.system.node.resolve_dirname=src
