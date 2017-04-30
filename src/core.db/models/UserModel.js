@@ -28,7 +28,7 @@ export type UserLocationType = {
 export type UserType = {
   _id?: string,
   id: string,
-  username: string,
+  // username: string,
   firstName: string,
   lastName: string,
   type: 'guest' | 'user' | 'superuser',
@@ -49,13 +49,13 @@ export type UserModelType = (document: UserType) => {
 export default (db: mongoose) => {
   const Schema = db.Schema;
   const userSchema = new Schema({
-    // _id: {
-    //   type: String
-    // },
-    username: {
+    _id: {
       type: String,
-      unique: true,
     },
+    // username: {
+    //   type: String,
+    //   unique: true,
+    // },
     firstName: {
       type: String,
     },
@@ -76,8 +76,6 @@ export default (db: mongoose) => {
       levels: [Number],
     }],
     devices: [], // ?
-
-    // Array of events a user is subscribed to.
     subscriptions: [{
       _id: String,
       levels: [Number],
@@ -88,14 +86,29 @@ export default (db: mongoose) => {
     },
   }, {
     collection: 'users',
-    timestamps: true
+    timestamps: true,
   });
 
-  userSchema.statics.fetchByUsername = async function fetchByUsername (username) {
-    return this.findOne({ username }).exec();
+  userSchema.virtual('name')
+    .get(function get() {
+      return `${this.firstName} ${this.lastName}`;
+    });
+
+  userSchema.virtual('username')
+    .get(function get() {
+      return this._id;                                                        // eslint-disable-line
+    })
+    .set(function set(username) {
+      this._id = username;                                                    // eslint-disable-line
+    });
+
+  userSchema.statics.fetchByUsername = async function fetchByUsername(username: string)
+    : Promise<UserType> {
+    return this.findOne({ _id: username }).exec();
   };
 
-  userSchema.statics.fetchBySubscription = async function fetchBySubscription (id) {
+  userSchema.statics.fetchBySubscription = async function fetchBySubscription(id: string)
+    : Promise<UserType> {
     return this.find({ 'subscriptions._id': id }).exec();
   };
 
