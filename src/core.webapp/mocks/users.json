@@ -1,0 +1,11 @@
+[{
+  "username": "ezaitsev",
+  "firstName": "Egor",
+  "lastName": "Zaitsev",
+  "type": "superuser"
+}, {
+  "username": "ppetrov",
+  "firstName": "Petr",
+  "lastName": "Petrov",
+  "type": "guest"
+}]
