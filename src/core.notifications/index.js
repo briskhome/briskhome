@@ -23,7 +23,7 @@ import {
   EVENT_UPDATE_SUCCESS,
 } from './constants';
 
-import type { CoreImports, CoreRegister, SubscriptionType } from '../utilities/coreTypes';
+import type { CoreImports, CoreRegister, SubscriptionType } from '../types/coreTypes';
 import type { EventModelType, EventType } from './models/EventModel';
 import type { UserModelType } from '../core.db/models/UserModel';
 

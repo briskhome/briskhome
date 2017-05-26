@@ -5,7 +5,7 @@
 
 import mongoose from 'mongoose';
 import { resources } from '../resources';
-import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
+import type { CoreImports, CoreRegister } from '../types/coreTypes';
 
 export default (options: Object, imports: CoreImports, register: CoreRegister) => {
   const { database, hostname, username, password } = imports.config();
