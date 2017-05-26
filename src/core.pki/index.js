@@ -11,7 +11,7 @@ import { spawn } from 'child_process';
 
 const forge = require('node-forge');
 
-module.exports = function setup(options, imports, register) {
+export default (options, imports, register) => {
   const log = imports.log();
 
   /**

@@ -10,7 +10,7 @@
 
 const Agenda = require('agenda');
 
-module.exports = function setup(options, imports, register) {
+export default (options, imports, register) => {
   const log = imports.log();
   const config = imports.config();
 

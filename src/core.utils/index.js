@@ -7,7 +7,7 @@
 
 'use strict';
 
-module.exports = function setup(options, imports, register) {
+export default (options, imports, register) => {
   const db = imports.db;
   const log = imports.log();
   const Device = db.model('core:device');

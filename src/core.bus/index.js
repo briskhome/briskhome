@@ -11,7 +11,7 @@ const Emitter = require('events').EventEmitter;
 const mosca = require('mosca');
 const util = require('util');
 
-module.exports = function setup (options, imports, register) {
+export default (options, imports, register) => {
   const db = imports.db;
   const log = imports.log({ event: 'object' });
   const config = imports.config();

@@ -7,7 +7,7 @@ import bunyan from 'bunyan';
 import { getCallee } from '../utilities/helpers';
 import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
 
-module.exports = function setup(options: Object, imports: CoreImports, register: CoreRegister) {
+export default (options: Object, imports: CoreImports, register: CoreRegister) => {
   const config = imports.config();
   const log = bunyan.createLogger({
     name: 'briskhome',
