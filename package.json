@@ -74,5 +74,8 @@
   },
   "peerDependencies": {
     "kerberos": "0.0.19"
+  },
+  "jest": {
+    "automock": true
   }
 }
