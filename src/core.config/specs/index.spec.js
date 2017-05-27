@@ -1,39 +1,44 @@
-/**
- * @briskhome
- * └core.config <lib/core.config/specs/index.spec.js>
- *
- * @author Egor Zaitsev <ezaitsev@briskhome.com>
- */
+/* globals jest describe beforeAll beforeEach it expect */
+import nconf from 'nconf';
+import properties from 'properties';
 
-'use strict';
+import plugin from '../';
 
-const assert = require('chai').assert;
-const sinon = require('sinon');
+jest.unmock('../');
 
-const logInfoStub = sinon.stub();
-const loadStub = sinon.stub();
-sinon.assert.expose(assert, { prefix: '' });
+describe('core.bus', () => {
+  let sut;
+  let options;
+  let imports;
 
-function Log() {
-  this.info = logInfoStub;
-}
+  const loader = { load: jest.fn() };
 
-const options = {};
-const imports = {
-  log: () => new Log(),
-  loader: {
-    load: loadStub,
-  },
-};
+  const fakeConfig = { test: 'test'};
 
-it('should throw when called without component name');
+  beforeEach(() => {
+    options = {};
+    imports = { loader };
 
-it('should load configuration', function (done) {
-  loadStub.returns([]);
-  require('../')(options, imports, (error, returns) => {
-    const config = returns.config('foo');
-    return done();
+    loader.load.mockReturnValue(['test']);
+  });
+
+  beforeEach(() => {
+    plugin(options, imports, (error, exports) => {
+      expect(error).toBe(null);
+      sut = exports.config;
+    });
+    jest.resetAllMocks();
+  });
+
+  it('should return configuration provided by nconf', async () => {
+    nconf.get.mockReturnValue(fakeConfig);
+    const res = sut();
+    expect(res).toEqual(fakeConfig);
+  });
+
+  it('should automatically determine plugin name', () => {
+    sut();
+    expect(nconf.get).toHaveBeenCalledTimes(1);
+    expect(nconf.get).toHaveBeenCalledWith('specs');
   });
 });
-
-it('should save configuration');
