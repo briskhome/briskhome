@@ -6,8 +6,7 @@
   "private": true,
   "plugin": {
     "consumes": [
-      "log",
-      "config"
+      "log"
     ],
     "provides": [
       "pki"

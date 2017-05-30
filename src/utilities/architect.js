@@ -8,6 +8,8 @@
 import fs from 'fs';
 import path from 'path';
 import events from 'events';
+import { normalizeName } from './plugins';
+
 
 // XXX: Consider replacing the following statement with `packagePathCache = new WeakMap();`
 const packagePathCache: Object = {};
@@ -30,7 +32,6 @@ export const resolvePackage = (base: string, plugin: string):Promise<string> => 
 
   const rejectErr: Object = new Error(`Can't find ${plugin} relative to ${base}`);
   rejectErr.code = 'ENOENT';
-
   if (plugin[0] === '.' || plugin[0] === '/') {
     return new Promise((resolve, reject) => {
       const fullPath = path.resolve(base, plugin);
@@ -50,7 +51,7 @@ export const resolvePackage = (base: string, plugin: string):Promise<string> => 
       return reject(rejectErr);
     }
 
-    const tryPath = path.resolve(base, 'node_modules', plugin);
+    const tryPath = path.resolve(tryBase, 'node_modules', plugin);
     return fs.access(tryPath, fs.constants.R_OK, (accessErr) => {
       if (!accessErr) {
         return fs.realpath(tryPath, (realpathErr, realpathValue) => {
@@ -76,37 +77,46 @@ export const resolvePackage = (base: string, plugin: string):Promise<string> => 
 * @return {[type]}         [description]
 */
 export const resolveModule = async (base: string, plugin: string, key: string = 'plugin')
-  : Promise<*> => {
+  : Promise<Object|Error> => {
   let metadata = {};
   let pluginPackage;
   try {
     pluginPackage = await resolvePackage(base, `${plugin}/package.json`);
     metadata = (pluginPackage && require(pluginPackage)) || {};
-  } catch (e) {
-    if (e.code !== 'ENOENT') throw e;
-  }
+  } catch (e) { if (e.code !== 'ENOENT') return e; }
 
+  const resolvedBase = path.resolve(base, plugin);
   let resolvedPlugin;
   if (!pluginPackage) {
-    resolvedPlugin = await resolvePackage(base, `${plugin}.js`);
+    try {
+      resolvedPlugin = await resolvePackage(base, `${plugin}.js`);
+    } catch (e) { return e; }
   } else if (metadata && metadata.main) {
-    resolvedPlugin = await resolvePackage(plugin,
-      metadata.main[0] === '.' || metadata.main[0] === '/' ? metadata.main : `./${metadata.main}`,
-    );
+    try {
+      resolvedPlugin = await resolvePackage(resolvedBase,
+        (metadata.main[0] === '.' || metadata.main[0] === '/')
+          ? metadata.main
+          : `./${metadata.main}`,
+      );
+    } catch (e) { return e; }
   } else if (!metadata) {
-    resolvedPlugin = await resolvePackage(base, path.dirname(pluginPackage));
+    try {
+      resolvedPlugin = await resolvePackage(base, path.dirname(pluginPackage));
+    } catch (e) { return e; }
   }
 
-  const {
-    consumes,
-    provides,
-  } = (metadata && metadata[key] && metadata[key].consumes && metadata[key].provides)
-    ? { consumes: metadata.plugin.consumes, provides: metadata.plugin.provides }
-    : require(resolvedPlugin);
+  let consumes;
+  let provides;
+  try {
+    [consumes, provides] = (metadata && metadata[key] && metadata[key].consumes && metadata[key].provides)
+      ? [metadata.plugin.consumes, metadata.plugin.provides]
+      : require(resolvedPlugin);
+  } catch (e) { [consumes, provides] = [[], []]; }
 
   metadata.main = resolvedPlugin;
-  metadata.provides = provides || [];
-  metadata.consumes = consumes || [];
+  metadata.dirname = plugin;
+  metadata.consumes = consumes;
+  metadata.provides = provides;
 
   return metadata;
 };
@@ -116,28 +126,26 @@ export const resolveModule = async (base: string, plugin: string, key: string = 
  * @param config
  * @param base
  * @param key
- * @returns {Promise.<void>}
+ * @returns {Promise.Object}
  */
 export const resolveConfig = async (config: Array<*>, base: string, key?: string): Promise<*> => {
-  let plugins = [];
-  try {
-    // FIXME: Promise.all(...) exits on the first reject.
-    plugins = await Promise.all(config.map(plugin =>
-      resolveModule(base, plugin.main || plugin, key)));
-  } catch (e) {
-    console.warn('some plugins failed to load', e);
-    throw e;
-  }
+  const timeout = new Promise((resolve, reject) => setTimeout(() => reject(new Error('Plugin load timeout')), 1000));
+  const plugins: Array<Object> = await Promise.all(config.map(plugin =>
+    Promise.race([resolveModule(base, plugin.main || plugin, key), timeout]),
+  ));
 
-  return plugins.map((plugin, index) => ({
-    main: plugin.main,
-    name: plugin.name,
-    version: plugin.version,
-    consumes: plugin.consumes,
-    provides: plugin.provides,
-    exports: require(plugin.main),
-    ...(config[index].main ? config[index] : {}),
-  }));
+  return plugins
+    .filter(plugin => plugin.constructor !== Error)
+    .map((plugin, index) => ({
+      name: plugin.name,
+      main: plugin.main,
+      dirname: plugin.dirname,
+      version: plugin.version,
+      consumes: plugin.consumes,
+      provides: plugin.provides,
+      exports: require(plugin.main),
+      ...(config[index].main ? config[index] : {}),
+    }));
 };
 
 /**
@@ -296,16 +304,19 @@ export default class Architect extends events.EventEmitter {
   registerPlugin(plugin: Object, next: Function) {
     const app = this;
     const services = app.services;
-    console.log('==>', app.services);
     const imports = {};
+    const { consumes, provides, exports, ...options } = plugin;
+
     if (plugin.consumes) {
       plugin.consumes.forEach((name) => {
         imports[name] = services[name];
       });
     }
+
     try {
-      // XXX: Will this work?
-      (async () => plugin.exports.default(plugin, imports, register))();                          // eslint-disable-line
+      (async () => plugin.exports.default({
+        ...options, ...(services.config ? services.config(normalizeName(plugin.name)) : {}),
+      }, imports, register))();                                                                   // eslint-disable-line
     } catch (e) {
       throw e;
     }
@@ -331,30 +342,29 @@ export default class Architect extends events.EventEmitter {
 
       if (provided && provided.destroy) {
         app.destructors.set(plugin.name, provided.destroy);
-      }
-
-      plugin.destroy = () => {                                                                    // eslint-disable-line
-        if (plugin.provides.length) {
-          let canDestroy = true;
-          const consumes = app.services.reduce((acc, item) => acc.push(item) && acc);
-          plugin.provides.forEach((item) => {
-            if (consumes.includes(item)) canDestroy = false;
-          });
-          if (!canDestroy) {
-            const error = new Error(`Plugins that provide services cannot be disabled. ${JSON.stringify(plugin)}`);
-            app.emit('error', error);
-            return error;
+      } else {
+        plugin.destroy = () => {                                                                  // eslint-disable-line
+          if (plugin.provides.length) {
+            let canDestroy = true;                                                           // eslint-disable-next-line
+            const consumes = Object.keys(app.services).reduce((acc, item) => acc.concat(acc, item));
+            plugin.provides.forEach((item) => {
+              if (consumes.includes(item)) canDestroy = false;
+            });
+            if (!canDestroy) {
+              throw new Error(`Plugins that provide services cannot be disabled. ${JSON.stringify(plugin)}`);
+            }
           }
-        }
 
-        if (provided && provided.destroy) {
-          app.destructors.delete(plugin.name);
-          provided.destroy();
-        }
+          if (provided && provided.destroy) {
+            app.destructors.delete(plugin.name);
+            provided.destroy();
+          }
 
-        app.config.splice(app.config.indexOf(plugin), 1);
-        app.emit('destroyed', plugin);
-      };
+          app.config.splice(app.config.indexOf(plugin), 1);
+          app.emit('destroyed', plugin);
+        };
+        app.destructors.set(plugin.name, plugin.destroy);
+      }
 
       app.emit('plugin', plugin);
       return next();

@@ -6,7 +6,8 @@ jest.unmock('../');
 
 const EventEmitter = require('events').EventEmitter;
 
-const {
+import events from 'events';
+import {
   ERR_UNABLE_TO_FETCH,
   ERR_UNABLE_TO_REGISTER,
   ERR_UNABLE_TO_SUBSCRIBE,
@@ -19,10 +20,13 @@ const {
   EVENT_DISPATCH_SUCCESS,
   EVENT_REGISTER_SUCCESS,
   EVENT_UPDATE_SUCCESS,
-} = require('../constants');
+} from '../constants';
+import plugin from '../';
+
+jest.unmock('../');
 
 describe('core.notifications', () => {
-  const sut = require('../');
+  const sut = plugin;
 
   let options;
   let imports;
@@ -37,7 +41,7 @@ describe('core.notifications', () => {
   };
 
   const db = { model: jest.fn() };
-  const bus = new EventEmitter();
+  const bus = new events.EventEmitter();
   const fetchById = jest.fn();
   const fetchByUsername = jest.fn();
   const fetchBySubscription = jest.fn();

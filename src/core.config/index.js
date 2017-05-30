@@ -6,12 +6,12 @@
 import path from 'path';
 import nconf from 'nconf';
 import properties from 'properties';
-import { resources } from '../resources';
 import { getCallee } from '../utilities/helpers';
+import { resources } from '../utilities/resources';
 import type { CoreImports, CoreRegister } from '../types/coreTypes';
 
 export default (options: Object, imports: CoreImports, register: CoreRegister) => {
-  const parse = (dir: string) => properties.parse(dir, {
+  const parse = (dir: string): Function => properties.parse(dir, {
     comments: '#',
     separators: '=',
     sections: true,
@@ -19,7 +19,7 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
     variables: true,
   });
 
-  const stringify = (dir: string) => properties.stringify(dir, {
+  const stringify = (dir: string): Function => properties.stringify(dir, {
     comment: '#',
     separator: '=',
     unicode: true,
@@ -27,7 +27,7 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
 
   nconf.env();
   [].concat(path.resolve('etc', `${nconf.get('NODE_ENV') || 'briskhome'}.conf`), resources('etc'))
-    .map(config => nconf.use('briskhome', {
+    .map(config => nconf.use(config, {
       type: 'file',
       file: config,
       format: {
@@ -38,6 +38,10 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
   );
 
   register(null, {
-    config: () => nconf.get(getCallee().replace('.', ':')),
+    config: (name?: string) =>
+      (name
+        ? nconf.get(name.replace('.', ':'))
+        : nconf.get(getCallee().replace('.', ':'))
+      ),
   });
 };

@@ -6,7 +6,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { enabledComponents } from './components';
+import { enabledPlugins } from './plugins';
 
 /**
  * resources()
@@ -14,7 +14,7 @@ import { enabledComponents } from './components';
  * If array of arguments is present it is passed to every resource.
  */
 export const resources = (type: string, args?: ?Array<*>): Array<*> =>
-  enabledComponents().reduce((acc, plugin) => {
+  enabledPlugins().reduce((acc, plugin) => {
     if (!fs.readdirSync(plugin).includes(type)) return acc;
     return acc.concat(fs.readdirSync(path.resolve(plugin, type))
       .map((resource) => {

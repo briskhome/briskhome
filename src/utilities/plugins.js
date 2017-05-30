@@ -31,14 +31,6 @@ export const disabledPlugins = (directories?: Array<string>)
   .filter(directory =>
     inspectPlugin(directory).plugin && inspectPlugin(directory).plugin.disabled);
 
-export const requireResources = (directory: string)
-  : Array<string> => [].concat(...enabledPlugins()
-  .map(plugin => (fs.readdirSync(plugin).includes(directory)
-    ? fs.readdirSync(path.resolve(plugin, directory))
-      .map(resource => path.resolve(plugin, directory, resource))
-    : []))
-  .filter(resource => !!resource));
-
 export const enablePlugin = (directory: string)
   : boolean => !!disabledPlugins()
   .filter((plugin) => {
@@ -62,3 +54,25 @@ export const disablePlugin = (directory: string)
     }
     return false;
   }).length;
+
+/**
+ * Strips plugin name from mandatory prefixes and namespaces.
+ * @param {String} name  Plugin name.
+ */
+export const normalizeName = (name: string): string => {
+  let normalizedName: string = name;
+
+  // if (name.indexOf('core.') >= 0) {
+  //   return name.substr(name.indexOf('core.') + 5);
+  // }
+
+  if (normalizedName.indexOf('/') >= 0) {
+    normalizedName = normalizedName.substr(normalizedName.indexOf('/') + 1);
+  }
+
+  if (normalizedName.indexOf('briskhome-') >= 0) {
+    normalizedName = normalizedName.substr(normalizedName.indexOf('briskhome-') + 10);
+  }
+
+  return normalizedName;
+};

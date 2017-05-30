@@ -7,7 +7,7 @@
 
 import uuid from 'uuid-1345';
 import { getCallee } from '../utilities/helpers';
-import { resources } from '../resources';
+import { resources } from '../utilities/resources';
 import {
   ERR_UNABLE_TO_FETCH,
   ERR_UNABLE_TO_REGISTER,
@@ -280,7 +280,7 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
    */
   Notifications.prototype.providers = async function providers()
     :Promise<Array<*>> {
-    return resources('providers', null);
+    return resources('providers');
   };
 
   Notifications.levels = {

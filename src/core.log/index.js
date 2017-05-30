@@ -8,11 +8,10 @@ import { getCallee } from '../utilities/helpers';
 import type { CoreImports, CoreRegister } from '../types/coreTypes';
 
 export default (options: Object, imports: CoreImports, register: CoreRegister) => {
-  const config = imports.config();
   const log = bunyan.createLogger({
     name: 'briskhome',
     streams: [{
-      level: config.level,
+      level: options.level,
       stream: process.stdout,
     }],
   });

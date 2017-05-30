@@ -1,7 +1,7 @@
 /* globals jest describe beforeAll beforeEach it expect */
 import events from 'events';
 import mongoose from 'mongoose';
-import { resources } from '../../resources';
+import { resources } from '../../utilities/resources';
 
 import plugin from '../';
 
