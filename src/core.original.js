@@ -1,6 +1,6 @@
 import path from 'path';
 import * as architect from '../node_modules/architect/architect';
-import { enabledComponents } from './utilities/components';
+import { enabledComponents } from './utilities/plugins';
 
 console.time('c9/architect');
 const config = architect.resolveConfig(enabledComponents(), path.resolve(__dirname, '..'));

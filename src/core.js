@@ -9,7 +9,7 @@ import os from 'os';
 import path from 'path';
 import * as briskhome from '../package.json';
 import Architect, { resolveConfig } from './utilities/architect';
-import { enabledComponents } from './utilities/components';
+import { enabledPlugins } from './utilities/plugins';
 import { briskhomeAsciiLogo } from './utilities/constants';
 
 (async () => {
