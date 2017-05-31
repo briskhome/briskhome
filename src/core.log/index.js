@@ -18,7 +18,6 @@ module.exports = function setup(options: Object, imports: CoreImports, register:
 
   register(null, {
     log: () => {
-      // XXX: Potential bottleneck: getting the callee from stack trace.
       const child = log.child({
         component: String(new Error().stack.split('\n')[2].split('/').slice(-2, -1)),
       });

@@ -1,76 +1,60 @@
-/**
- * @briskhome
- * └core.db <lib/core.db/specs/index.spec.js>
- *
- * @author Egor Zaitsev <ezaitsev@briskhome.com>
- */
+/* globals jest describe beforeAll beforeEach it expect */
+import events from 'events';
+import mongoose from 'mongoose';
+import { requireResources } from '../../components';
 
-'use strict';
+import plugin from '../';
 
-const assert = require('chai').assert;
-const sinon = require('sinon');
-const mongoose = require('mongoose');
-const Emitter = require('events').EventEmitter;
+jest.unmock('../');
+jest.unmock('mongoose');
 
-const connection = new Emitter();
-const configStub = sinon.stub();
-// const mongoStub =
-const loadStub = sinon.stub();
+describe('core.db', () => {
+  let sut;
+  let options;
+  let imports;
 
-sinon.assert.expose(assert, { prefix: '' });
-
-const options = {};
-const imports = {
-  config: configStub,
-  loader: {
-    load: loadStub,
-  },
-};
-
-beforeEach(function () {
-  sinon.stub(mongoose, 'connect').returns({ connection });
-});
-
-afterEach(function () {
-  mongoose.connect.reset();
-  mongoose.connect.restore();
-});
-
-it.skip('should attempt connecting to database', function (done) {
-  loadStub.returns([]);
-  configStub.returns({});
-  require('../')(options, imports, (error, returns) => {
-    const db = returns.db;
-    connection.emit('open');
-    assert.isDefined(db);
-    assert.calledOnce(mongoose.connect);
-    configStub.reset();
-    return done();
+  const loader = { load: jest.fn() };
+  const config = jest.fn();
+  const log = () => ({
+    trace: jest.fn(),
+    debug: jest.fn(),
+    info: jest.fn(),
+    warn: jest.fn(),
+    error: jest.fn(),
+    fatal: jest.fn(),
   });
-});
 
-it.skip('should compile a connection string', function (done) {
-  loadStub.returns([]);
-  configStub.returns({ user: 'foo', pass: 'bar', host: 'foobar', name: 'baz' });
-  require('../')(options, imports, (error, returns) => {
-    const db = returns.db;
-    connection.emit('open');
-    assert.isDefined(db);
-    assert.calledOnce(configStub);
-    assert.calledWith(mongoStub, '`mongodb://foo:bar@foobar/baz');
-    configStub.reset();
-    mongoStub.reset();
-    return done();
+  const mockError = new Error('MockError');
+
+  beforeEach(async (done) => {
+    options = {};
+    imports = { config, loader, log };
+
+    config.mockReturnValueOnce({
+      database: 'test',
+      hostname: 'test',
+      username: 'test',
+      password: 'test',
+    });
+
+    requireResources.mockReturnValueOnce([]);
+    mongoose.connection.close(() => done());
   });
-});
 
-it.skip('should yield error when unable to connect to database', function (done) {
-  loadStub.returns([]);
-  configStub.returns({});
-  require('../')(options, imports, (error) => {
-    assert.instanceOf(error, Error);
-    configStub.reset();
-    mongoStub.reset();
-    return done();
+  it('returns error when unable to connect', () => {
+    plugin(options, imports, (error) => {
+      expect(error).toEqual(mockError);
+    });
+    mongoose.connection.emit('error', mockError);
+    mongoose.connection.close();
+  });
+
+  it.skip('should register', () => {
+    plugin(options, imports, (error, exports) => {
+      expect(error).toBe(null);
+      expect(Object.keys(exports)).toEqual(['db']);
+    });
+    mongoose.connection.emit('open', mockError);
+    mongoose.connection.close();
   });
 });

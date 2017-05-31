@@ -16,7 +16,7 @@ const {
   EVENT_DISPATCH_FAILURE,
   EVENT_DISPATCH_SUCCESS,
   EVENT_REGISTER_SUCCESS,
-  EVENT_UPDATE_SUCCESS
+  EVENT_UPDATE_SUCCESS,
 } = require('../constants');
 
 describe('core.notifications', () => {
@@ -31,7 +31,7 @@ describe('core.notifications', () => {
     info: jest.fn(),
     warn: jest.fn(),
     error: jest.fn(),
-    fatal: jest.fn()
+    fatal: jest.fn(),
   };
 
   const db = { model: jest.fn() };
@@ -41,12 +41,12 @@ describe('core.notifications', () => {
   const fetchBySubscription = jest.fn();
   const mockEventSave = jest.fn();
 
-  function EventModel () {
+  function EventModel() {
     this.save = mockEventSave;
   }
   EventModel.fetchById = fetchById;
 
-  function UserModel () {}
+  function UserModel() {}
   UserModel.fetchBySubscription = fetchBySubscription;
   UserModel.fetchByUsername = fetchByUsername;
 
@@ -56,7 +56,7 @@ describe('core.notifications', () => {
     description: 'Event Definition',
     level: 30,
     save: jest.fn(),
-    update: jest.fn()
+    update: jest.fn(),
   };
   const mockError = new Error('MockError');
   const mockUsers = [{
@@ -65,17 +65,17 @@ describe('core.notifications', () => {
     subscriptions: [{ id: 'foo:bar', levels: [30, 40, 50, 60] }],
     contacts: [{ name: 'phone', levels: [30], value: '+70000000000' }],
     markModified: jest.fn(),
-    save: jest.fn()
+    save: jest.fn(),
   }, {
     id: '222',
     username: 'bar',
     subscriptions: [{ id: 'foo:bar', levels: [40, 50, 60] }],
     contacts: [{ name: 'telegram', levels: [30], value: '1234567' }],
     markModified: jest.fn(),
-    save: jest.fn()
+    save: jest.fn(),
   }];
 
-  beforeAll(() => {
+  beforeEach(() => {
     options = {};
     imports = { db, bus, log: () => log };
 
@@ -91,11 +91,11 @@ describe('core.notifications', () => {
     jest.resetAllMocks();
   });
 
-  describe('#register()', () => {
+  describe('#define()', () => {
     const mockPayload = {
       id: '000000-0000-0000-000000',
       name: 'notifications:randomEvent',
-      description: 'Some random event that happens during tests'
+      description: 'Some random event that happens during tests',
     };
 
     beforeEach(() => {
@@ -106,44 +106,44 @@ describe('core.notifications', () => {
 
     it('returns false when unable to fetch events', async () => {
       EventModel.fetchById.mockReturnValue(Promise.reject(mockError));
-      const res = await component.register(mockPayload);
+      const res = await component.define(mockPayload);
       expect(res).toEqual(false);
       expect(log.error)
-        .toHaveBeenCalledWith({ err: mockError, payload: mockPayload }, ERR_UNABLE_TO_FETCH);
+        .toHaveBeenCalledWith({ err: mockError, data: mockPayload }, ERR_UNABLE_TO_FETCH);
     });
 
     it('returns false when unable to save event', async () => {
       fetchById.mockReturnValueOnce(Promise.resolve(null));
       mockEventSave.mockReturnValueOnce(Promise.reject(mockError));
-      const res = await component.register(mockPayload);
+      const res = await component.define(mockPayload);
       expect(res).toEqual(false);
       expect(mockEventSave).toHaveBeenCalled();
       expect(log.error)
-        .toHaveBeenCalledWith({ err: mockError, payload: mockPayload }, ERR_UNABLE_TO_REGISTER);
+        .toHaveBeenCalledWith({ err: mockError, data: mockPayload }, ERR_UNABLE_TO_REGISTER);
     });
 
     it('updates existing event definition when one exists', async () => {
-      const res = await component.register(mockPayload);
+      const res = await component.define(mockPayload);
       expect(res).toEqual(true);
       expect(mockEvent.update).toHaveBeenCalled();
       expect(log.debug)
-        .toHaveBeenCalledWith({ payload: mockPayload }, EVENT_UPDATE_SUCCESS);
+        .toHaveBeenCalledWith({ data: mockPayload }, EVENT_UPDATE_SUCCESS);
     });
 
     it('creates an event definition when one does not exist', async () => {
       fetchById.mockReturnValueOnce(Promise.resolve(null));
-      const res = await component.register(mockPayload);
+      const res = await component.define(mockPayload);
       expect(res).toEqual(true);
       expect(mockEventSave).toHaveBeenCalled();
       expect(log.debug)
-        .toHaveBeenCalledWith({ payload: mockPayload }, EVENT_REGISTER_SUCCESS);
+        .toHaveBeenCalledWith({ data: mockPayload }, EVENT_REGISTER_SUCCESS);
     });
   });
 
   describe('#subscribe()', () => {
     const mockPayload = {
       event: { id: 'foo:bar' },
-      user: { username: 'foo' }
+      user: { username: 'foo' },
     };
 
     beforeEach(() => {
@@ -158,7 +158,7 @@ describe('core.notifications', () => {
       const res = await component.subscribe(mockPayload);
       expect(res).toEqual(false);
       expect(log.error)
-        .toHaveBeenCalledWith({ err: mockError, payload: mockPayload }, ERR_UNABLE_TO_SUBSCRIBE);
+        .toHaveBeenCalledWith({ err: mockError, data: mockPayload }, ERR_UNABLE_TO_SUBSCRIBE);
     });
 
     it('returns false when unable to save user', async () => {
@@ -166,7 +166,7 @@ describe('core.notifications', () => {
       const res = await component.subscribe(mockPayload);
       expect(res).toEqual(false);
       expect(log.error)
-        .toHaveBeenCalledWith({ err: mockError, payload: mockPayload }, ERR_UNABLE_TO_SUBSCRIBE);
+        .toHaveBeenCalledWith({ err: mockError, data: mockPayload }, ERR_UNABLE_TO_SUBSCRIBE);
     });
 
     it('returns true when subscribes user to notifications', async () => {
@@ -186,7 +186,7 @@ describe('core.notifications', () => {
   describe('#unsubscribe()', () => {
     const mockPayload = {
       event: { id: 'foo:bar' },
-      user: { username: 'foo' }
+      user: { username: 'foo' },
     };
 
     beforeEach(() => {
@@ -201,7 +201,7 @@ describe('core.notifications', () => {
       const res = await component.unsubscribe(mockPayload);
       expect(res).toEqual(false);
       expect(log.error)
-        .toHaveBeenCalledWith({ err: mockError, payload: mockPayload }, ERR_UNABLE_TO_UNSUBSCRIBE);
+        .toHaveBeenCalledWith({ err: mockError, data: mockPayload }, ERR_UNABLE_TO_UNSUBSCRIBE);
     });
 
     it('returns false when unable to fetch subscribers', async () => {
@@ -209,7 +209,7 @@ describe('core.notifications', () => {
       const res = await component.unsubscribe(mockPayload);
       expect(res).toEqual(false);
       expect(log.error)
-        .toHaveBeenCalledWith({ err: mockError, payload: mockPayload }, ERR_UNABLE_TO_UNSUBSCRIBE);
+        .toHaveBeenCalledWith({ err: mockError, data: mockPayload }, ERR_UNABLE_TO_UNSUBSCRIBE);
     });
 
     it('returns false when unable to save user', async () => {
@@ -217,7 +217,7 @@ describe('core.notifications', () => {
       const res = await component.unsubscribe(mockPayload);
       expect(res).toEqual(false);
       expect(log.error)
-        .toHaveBeenCalledWith({ err: mockError, payload: mockPayload }, ERR_UNABLE_TO_UNSUBSCRIBE);
+        .toHaveBeenCalledWith({ err: mockError, data: mockPayload }, ERR_UNABLE_TO_UNSUBSCRIBE);
     });
 
     it('returns true when unsubscribes user from notifications', async () => {
@@ -236,7 +236,7 @@ describe('core.notifications', () => {
 
   describe('#evaluate()', () => {
     const mockProvider = {
-      send: jest.fn().mockReturnValue(Promise.resolve(true))
+      send: jest.fn().mockReturnValue(Promise.resolve(true)),
     };
 
     beforeEach(() => {
@@ -274,7 +274,7 @@ describe('core.notifications', () => {
 
     it('skips when user is not subscribed to level', async () => {
       const mockUserNoContacts = {
-        subscriptions: [{ id: 'foo:bar', levels: [70] }]
+        subscriptions: [{ id: 'foo:bar', levels: [70] }],
       };
       fetchBySubscription.mockReturnValue(Promise.resolve([mockUserNoContacts]));
       await component.evaluate(mockEvent);
@@ -282,34 +282,38 @@ describe('core.notifications', () => {
 
     it('logs when user has no contacts', async () => {
       const mockUserNoContacts = {
-        subscriptions: [{ id: 'foo:bar', levels: [30] }]
+        subscriptions: [{ id: 'foo:bar', levels: [30] }],
       };
       fetchBySubscription.mockReturnValue(Promise.resolve([mockUserNoContacts]));
-      await component.evaluate(mockEvent);
+      await component.evaluate(mockEvent.id);
       expect(log.warn)
-        .toHaveBeenCalledWith({ data: { user: mockUserNoContacts, event: mockEvent } }, ERR_NO_CONTACTS);
+        .toHaveBeenCalledWith({ data: { user: mockUserNoContacts, event: mockEvent } },
+          ERR_NO_CONTACTS);
     });
 
     it('logs when provider not registered', async () => {
       component.providers = {};
-      await component.evaluate(mockEvent);
+      await component.evaluate(mockEvent.id);
       expect(log.warn)
-        .toHaveBeenCalledWith({ data: { user: mockUsers[0], event: mockEvent, contact: mockUsers[0].contacts[0] } }, ERR_NO_SUCH_PROVIDER);
+        .toHaveBeenCalledWith({ data: { user: mockUsers[0], event: mockEvent, contact: mockUsers[0].contacts[0] } },
+          ERR_NO_SUCH_PROVIDER);
     });
 
     it('logs when unable to push notification', async () => {
       mockProvider.send.mockReturnValue(Promise.reject(mockError));
-      await component.evaluate(mockEvent);
-      expect(mockProvider.send).toHaveBeenCalledWith(mockEvent);
+      await component.evaluate(mockEvent.id);
+      expect(mockProvider.send).toHaveBeenCalledWith({ id: mockUsers[0].contacts[0].id, event: mockEvent });
       expect(log.warn)
-        .toHaveBeenCalledWith({ data: { user: mockUsers[0], event: mockEvent, contact: mockUsers[0].contacts[0] } }, EVENT_DISPATCH_FAILURE);
+        .toHaveBeenCalledWith({ data: { event: mockEvent, user: mockUsers[0], contact: mockUsers[0].contacts[0] } },
+          EVENT_DISPATCH_FAILURE);
     });
 
     it('logs when notification is sent', async () => {
-      await component.evaluate(mockEvent);
-      expect(mockProvider.send).toHaveBeenCalledWith(mockEvent);
+      await component.evaluate(mockEvent.id);
+      expect(mockProvider.send).toHaveBeenCalledWith({ id: mockUsers[0].contacts[0].id, event: mockEvent });
       expect(log.info)
-        .toHaveBeenCalledWith({ data: { user: mockUsers[0], event: mockEvent, contact: mockUsers[0].contacts[0] } }, EVENT_DISPATCH_SUCCESS);
+        .toHaveBeenCalledWith({ data: { event: mockEvent, user: mockUsers[0], contact: mockUsers[0].contacts[0] } },
+          EVENT_DISPATCH_SUCCESS);
     });
   });
 });

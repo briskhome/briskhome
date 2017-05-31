@@ -1,45 +1,54 @@
-/**
- * @briskhome
- * └core.db <lib/core.db/specs/index.spec.js>
- *
- * @author Egor Zaitsev <ezaitsev@briskhome.com>
- */
+/* globals jest describe beforeAll beforeEach it expect */
+import bunyan from 'bunyan';
+import plugin from '../';
 
-'use strict';
+jest.unmock('../');
 
-const assert = require('chai').assert;
-const sinon = require('sinon');
+describe('core.log', () => {
+  let sut;
+  let options;
+  let imports;
 
-const discriminatorStub = sinon.spy();
-const configStub = sinon.stub();
-const databaseMock = {
-  model: sinon.stub(),
-  Schema: sinon.stub(),
-};
+  const config = jest.fn();
+  const log = {
+    trace: jest.fn(),
+    debug: jest.fn(),
+    info: jest.fn(),
+    warn: jest.fn(),
+    error: jest.fn(),
+    fatal: jest.fn(),
+    child: jest.fn(),
+  };
 
-const options = {};
-const imports = {
-  config: configStub,
-  db: databaseMock,
-};
+  beforeEach(() => {
+    config.mockReturnValueOnce({
+      username: 'test',
+      password: 'test',
+      hostname: 'test',
+      database: 'test',
+    });
 
-beforeEach(function () {
-  configStub.returns({});
-  databaseMock.model.returns({ discriminator: discriminatorStub });
-});
+    options = {};
+    imports = { config };
+  });
 
-afterEach(function () {
-  configStub.reset();
-  databaseMock.model.reset();
-  databaseMock.Schema.reset();
-});
+  beforeEach(() => {
+    bunyan.createLogger.mockReturnValueOnce(log);
+    log.child.mockReturnValueOnce(log);
+  });
 
-it('should register component', function (done) {
-  require('../')(options, imports, (error, returns) => {
-    const log = returns.log;
-    assert.isDefined(log);
-    return done();
+  it('should register', async () => {
+    plugin(options, imports, (err, exports) => {
+      expect(err).toBe(null);
+      expect(Object.keys(exports)).toEqual(['log']);
+    });
+  });
+
+  it('should return child logger', async () => {
+    plugin(options, imports, (err, exports) => {
+      exports.log();
+      expect(log.child).toHaveBeenCalledTimes(1);
+      expect(log.child).toHaveBeenCalledWith({ component: 'specs' });
+    });
   });
 });
-
-it('should register additional log schema when provided');

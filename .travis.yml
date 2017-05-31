@@ -3,10 +3,10 @@ sudo: false
 node_js:
   - "7"
 install:
-  - yarn build
   - yarn install --ignore-optional
+  - yarn build
 script:
-  - yarn lint
+  # - yarn lint
   - yarn test
 env:
   - CXX=g++-4.8
@@ -19,5 +19,5 @@ addons:
   code_climate:
     repo_token: "71ee8424e2660dbc7dd88d81e0715f4434453db7fb57af35604d165d2db6203a"
 after_success:
-  - npm install -g codeclimate-test-reporter
-  - codeclimate-test-reporter < ./specs/coverage/lcov.info
+  - npm install -g codecov
+  - codecov

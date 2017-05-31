@@ -37,10 +37,10 @@ module.exports = function setup(options: Object, imports: CoreImports, register:
   /**
    * @constructor
    */
-  async function Notifications() {
+  function Notifications() {
     this.providers = {};
 
-    await this.init();
+    this.init();
   }
 
   Notifications.prototype.init = function init()
@@ -82,7 +82,7 @@ module.exports = function setup(options: Object, imports: CoreImports, register:
 
     if (!bus.listenerCount(id)) {
       log.trace(`adding listener for event ${id}`);
-      bus.on(id, ...definition => Function.prototype.apply(this.evaluate, definition));
+      bus.on(id, (...definition) => Function.prototype.apply(this.evaluate, definition));
     }
 
     if (event) {
@@ -213,7 +213,7 @@ module.exports = function setup(options: Object, imports: CoreImports, register:
       return;
     }
 
-    users.map((user) => {
+    users.forEach((user) => {
       const hasMatchingSubscription = !!user.subscriptions.filter((subscription) => {
         return subscription.id === event.id && subscription.levels.includes(event.level);
       }).length;
