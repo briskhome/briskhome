@@ -1,6 +1,7 @@
 [ignore]
 .*/lib/.*
 .*/node_modules/fbjs/lib/.*flow
+.*/node_modules/@briskhome/.*
 
 [include]
 ;.*/src/.*
