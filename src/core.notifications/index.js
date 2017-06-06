@@ -6,7 +6,7 @@
  */
 
 import uuid from 'uuid-1345';
-import { requireResources } from '../components';
+import { resources } from '../resources';
 import {
   ERR_UNABLE_TO_FETCH,
   ERR_UNABLE_TO_REGISTER,
@@ -279,7 +279,7 @@ module.exports = function setup(options: Object, imports: CoreImports, register:
    */
   Notifications.prototype.providers = async function providers()
     :Promise<Array<*>> {
-    return requireResources('providers');
+    return resources('providers', null);
   };
 
   Notifications.levels = {

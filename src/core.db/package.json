@@ -7,7 +7,6 @@
   "plugin": {
     "consumes": [
       "config",
-      "loader",
       "log"
     ],
     "provides": [
