@@ -1,6 +1,7 @@
 /* globals jest describe beforeAll beforeEach it expect */
 import nconf from 'nconf';
 import properties from 'properties';
+import { resources } from '../../resources';
 
 import plugin from '../';
 
@@ -11,15 +12,13 @@ describe('core.bus', () => {
   let options;
   let imports;
 
-  const loader = { load: jest.fn() };
-
-  const fakeConfig = { test: 'test'};
+  const fakeConfig = { test: 'test' };
 
   beforeEach(() => {
     options = {};
-    imports = { loader };
+    imports = {};
 
-    loader.load.mockReturnValue(['test']);
+    resources.mockReturnValue(['test']);
   });
 
   beforeEach(() => {

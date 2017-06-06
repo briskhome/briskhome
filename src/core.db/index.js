@@ -4,7 +4,7 @@
  */
 
 import mongoose from 'mongoose';
-import { requireResources } from '../components';
+import { resources } from '../resources';
 import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
 
 module.exports = function setup(options: Object, imports: CoreImports, register: CoreRegister) {
@@ -25,16 +25,7 @@ module.exports = function setup(options: Object, imports: CoreImports, register:
 
   mongoose.connection.once('connected', () => {
     log.info({ hostname, database, username }, 'Database connection established');
-    requireResources('models').every((model) => {
-      try {
-        require(model).default(mongoose);                                    // eslint-disable-line
-      } catch (e) {
-        log.fatal({ err: e }, `Error loading database model from ${model}`);
-        return register(e);
-      }
-
-      return true;
-    });
+    resources('models', [mongoose]);
 
     return register(null, { db: mongoose });
   });

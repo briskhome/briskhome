@@ -31,14 +31,6 @@ export const disabledComponents = (directories?: Array<string>)
   .filter(directory =>
     inspectComponent(directory).plugin && inspectComponent(directory).plugin.disabled);
 
-export const requireResources = (directory: string)
-  : Array<string> => [].concat(...enabledComponents()
-  .map(component => (fs.readdirSync(component).includes(directory)
-    ? fs.readdirSync(path.resolve(component, directory))
-      .map(resource => path.resolve(component, directory, resource))
-    : []))
-  .filter(resource => !!resource));
-
 export const enableComponent = (directory: string)
   : boolean => !!disabledComponents()
   .filter((component) => {
@@ -62,4 +54,3 @@ export const disableComponent = (directory: string)
     }
     return false;
   }).length;
-

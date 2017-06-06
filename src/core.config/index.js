@@ -6,12 +6,10 @@
 import path from 'path';
 import nconf from 'nconf';
 import properties from 'properties';
-import { requireResources } from '../components';
+import { resources } from '../resources';
 import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
 
 module.exports = function setup(options: Object, imports: CoreImports, register: CoreRegister) {
-  const loader = imports.loader;
-
   const parse = (dir: string) => properties.parse(dir, {
     comments: '#',
     separators: '=',
@@ -40,12 +38,11 @@ module.exports = function setup(options: Object, imports: CoreImports, register:
     },
   });
 
-  // requireResources('etc').map(resource => )
-  const configs = loader.load('etc');
+  const configs = resources('etc', null);
   for (let i = 0; i < configs.length; i += 1) {
-    nconf.use(configs[i].module, {
+    nconf.use(configs[i], {
       type: 'file',
-      file: configs[i].path,
+      file: configs[i],
       format: {
         parse,
         stringify,

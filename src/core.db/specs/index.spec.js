@@ -1,7 +1,7 @@
 /* globals jest describe beforeAll beforeEach it expect */
 import events from 'events';
 import mongoose from 'mongoose';
-import { requireResources } from '../../components';
+import { resources } from '../../resources';
 
 import plugin from '../';
 
@@ -37,7 +37,7 @@ describe('core.db', () => {
       password: 'test',
     });
 
-    requireResources.mockReturnValueOnce([]);
+    resources.mockReturnValueOnce([]);
     mongoose.connection.close(() => done());
   });
 
