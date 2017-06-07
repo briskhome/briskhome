@@ -2,10 +2,12 @@
 import nconf from 'nconf';
 import properties from 'properties';
 import { resources } from '../../resources';
+import { getCallee } from '../../utilities/helpers';
 
 import plugin from '../';
 
 jest.unmock('../');
+jest.unmock('../../utilities/helpers');
 
 describe('core.bus', () => {
   let sut;
@@ -17,8 +19,9 @@ describe('core.bus', () => {
   beforeEach(() => {
     options = {};
     imports = {};
-
+    jest.resetAllMocks();
     resources.mockReturnValue(['test']);
+    // getCallee.mockReturnValue('core.config');
   });
 
   beforeEach(() => {
@@ -26,7 +29,6 @@ describe('core.bus', () => {
       expect(error).toBe(null);
       sut = exports.config;
     });
-    jest.resetAllMocks();
   });
 
   it('should return configuration provided by nconf', async () => {
@@ -37,7 +39,6 @@ describe('core.bus', () => {
 
   it('should automatically determine plugin name', () => {
     sut();
-    expect(nconf.get).toHaveBeenCalledTimes(1);
-    expect(nconf.get).toHaveBeenCalledWith('specs');
+    expect(nconf.get).toHaveBeenCalledTimes(2);
   });
 });

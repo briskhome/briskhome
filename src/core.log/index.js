@@ -4,6 +4,7 @@
  */
 
 import bunyan from 'bunyan';
+import { getCallee } from '../utilities/helpers';
 import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
 
 module.exports = function setup(options: Object, imports: CoreImports, register: CoreRegister) {
@@ -19,7 +20,7 @@ module.exports = function setup(options: Object, imports: CoreImports, register:
   register(null, {
     log: () => {
       const child = log.child({
-        component: String(new Error().stack.split('\n')[2].split('/').slice(-2, -1)),
+        component: getCallee(),
       });
       child.debug('Initialized logger instance for component');
       return child;

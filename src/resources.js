@@ -20,9 +20,9 @@ export const resources = (type: string, args?: ?Array<*>): Array<*> =>
       .map((resource) => {
         switch (args) {
           case undefined:
-            return require(path.resolve(plugin, type, resource)).default                          // eslint-disable-line
-          case null:
             return path.resolve(plugin, type, resource);
+          case null:
+            return require(path.resolve(plugin, type, resource)).default                          // eslint-disable-line
           default:
             return require(path.resolve(plugin, type, resource)).default(...args);                // eslint-disable-line
         }
