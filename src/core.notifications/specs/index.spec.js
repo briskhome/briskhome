@@ -1,4 +1,6 @@
 /* globals jest expect describe it beforeEach beforeAll */
+import { getCallee } from '../../utilities/helpers';
+
 jest.enableAutomock();
 jest.unmock('../');
 
@@ -81,6 +83,7 @@ describe('core.notifications', () => {
 
     db.model.mockReturnValueOnce(EventModel);
     db.model.mockReturnValueOnce(UserModel);
+    getCallee.mockReturnValueOnce('core.notifications');
 
     sut(options, imports, (...result) => {
       component = result[1].notifications;

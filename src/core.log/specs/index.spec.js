@@ -1,5 +1,6 @@
 /* globals jest describe beforeAll beforeEach it expect */
 import bunyan from 'bunyan';
+import { getCallee } from '../../utilities/helpers';
 import plugin from '../';
 
 jest.unmock('../');
@@ -34,6 +35,7 @@ describe('core.log', () => {
 
   beforeEach(() => {
     bunyan.createLogger.mockReturnValueOnce(log);
+    getCallee.mockReturnValueOnce('core.log');
     log.child.mockReturnValueOnce(log);
   });
 
@@ -48,7 +50,7 @@ describe('core.log', () => {
     plugin(options, imports, (err, exports) => {
       exports.log();
       expect(log.child).toHaveBeenCalledTimes(1);
-      expect(log.child).toHaveBeenCalledWith({ component: 'specs' });
+      expect(log.child).toHaveBeenCalledWith({ component: 'core.log' });
     });
   });
 });

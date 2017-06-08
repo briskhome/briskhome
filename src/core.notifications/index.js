@@ -6,6 +6,7 @@
  */
 
 import uuid from 'uuid-1345';
+import { getCallee } from '../utilities/helpers';
 import { resources } from '../resources';
 import {
   ERR_UNABLE_TO_FETCH,
@@ -70,7 +71,7 @@ module.exports = function setup(options: Object, imports: CoreImports, register:
   Notifications.prototype.define = async function define(data: EventType)
     : Promise<boolean> {
     const { id, name, description } = data;
-    const component = String(new Error().stack.split('\n')[2].split('/').slice(-2, -1));
+    const component = getCallee();
     let event;
 
     try {
