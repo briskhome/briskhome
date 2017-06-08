@@ -12,7 +12,9 @@
     "lint": "eslint src --ext .js",
     "start": "node lib/core.js | bunyan -o short",
     "test": "node_modules/.bin/jest src --coverage",
-    "postinstall": "npm config set briskhome_dir /opt/briskhome"
+    "postinstall": "npm config set briskhome_dir /opt/briskhome",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "license": "MIT",
@@ -21,9 +23,11 @@
   },
   "private": true,
   "devDependencies": {
+    "@storybook/react": "^3.0.1",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-preset-es2015-node": "^6.1.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "chai": "3.4.1",
@@ -33,6 +37,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "express": "^4.15.2",
     "flow-bin": "^0.45.0",
     "istanbul": "^0.4.4",
     "jest": "^20.0.4",
@@ -40,7 +45,18 @@
     "mock-dgram": "0.1.2",
     "mockgoose": "^6.0.8",
     "mongo-mock": "2.0.1",
-    "sinon": "^1.17.7"
+    "react": "^15.5.4",
+    "react-bootstrap": "^0.31.0",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.4",
+    "react-router": "^4.1.1",
+    "react-router-bootstrap": "^0.24.2",
+    "react-router-dom": "^4.1.1",
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
+    "sinon": "^1.17.7",
+    "webpack": "^2.4.1"
   },
   "dependencies": {
     "@briskhome/core.bus": "file:src/core.bus",
