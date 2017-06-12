@@ -1,12 +1,6 @@
 ![Briskhome](https://raw.githubusercontent.com/briskhome/briskhome-docs/master/.static/img/briskhome%40readme.png)
-<center>
-[![Travis](https://img.shields.io/travis/briskhome/briskhome.svg?style=flat-square)](https://travis-ci.org/briskhome/briskhome)
-[![GitHub release](https://img.shields.io/github/release/briskhome/briskhome.svg?style=flat-square)](https://github.com/briskhome/briskhome/releases/latest)
-[![Test Coverage](https://img.shields.io/codeclimate/coverage/github/briskhome/briskhome.svg?style=flat-square)](https://codeclimate.com/github/briskhome/briskhome/coverage)
-[![Code Climate](https://img.shields.io/codeclimate/github/briskhome/briskhome.svg?style=flat-square)](https://codeclimate.com/github/briskhome/briskhome)
-[![GitHub issues](https://img.shields.io/github/issues/briskhome/briskhome.svg?style=flat-square)](https://github.com/briskhome/briskhome/issues)
-[![Documentation](https://readthedocs.org/projects/briskhome/badge/?version=latest&style=flat-square)](http://docs.briskhome.com/en/latest/?badge=latest)
-</center>
+[![Travis](https://img.shields.io/travis/briskhome/briskhome.svg?style=flat-square)](https://travis-ci.org/briskhome/briskhome) [![GitHub release](https://img.shields.io/github/release/briskhome/briskhome.svg?style=flat-square)](https://github.com/briskhome/briskhome/releases/latest) [![Test Coverage](https://img.shields.io/codeclimate/coverage/github/briskhome/briskhome.svg?style=flat-square)](https://codeclimate.com/github/briskhome/briskhome/coverage) [![Code Climate](https://img.shields.io/codeclimate/github/briskhome/briskhome.svg?style=flat-square)](https://codeclimate.com/github/briskhome/briskhome) [![GitHub issues](https://img.shields.io/github/issues/briskhome/briskhome.svg?style=flat-square)](https://github.com/briskhome/briskhome/issues) [![Documentation](https://readthedocs.org/projects/briskhome/badge/?version=latest&style=flat-square)](http://docs.briskhome.com/en/latest/?badge=latest)
+
 ---
 **Briskhome** is a work-in-progress **extensible open-source house monitoring and automation system** for Node.js that is limited by your imagination only.
 
