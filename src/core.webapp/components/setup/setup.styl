@@ -1,0 +1,109 @@
+.setup
+  display flex
+  height 400px
+  width 750px
+  border-radius 2px
+  box-shadow: 1px 2px 3px 0 rgba(0,0,0,0.10);
+
+  &__input
+
+    // margin 25px 0 0 0
+
+    width 100%
+
+  &__button
+    background: #F9D21C;
+    border 0
+    box-shadow: 0 4px 0 0 #E5BD06;
+    border-radius: 4px;
+    height 42px
+    width 200px
+    font-family Roboto
+    font-size 14px
+    color white
+    margin-top 25px
+    text-align center
+
+  &__help
+    height 24px
+    width 24px
+    background-color #efefef
+    border-radius 50%
+    text-align center
+    font-family Roboto
+    color #43474D
+    position: absolute
+    line-height 1.5
+    vertical-align center
+    left 92%
+
+  &__image
+    margin-top 75px
+    text-align center
+
+  fieldset
+    border 0
+    color #43474D
+    font-family Roboto
+    text-align center
+
+    legend
+      color #43474D
+      font-size 26px
+      font-weight 100
+      padding 50px 0 25px 0
+
+    select
+      -webkit-appearance none
+      background-color #efefef
+      border 0
+      border-radius 6px
+      color #BDBDBD
+      font-family Roboto
+      font-size 14px
+      height 42px
+      padding 0 20px
+      width 100%
+
+    input
+      border 2px solid #efefef
+      border-radius 6px
+      box-sizing: border-box;
+      font-family Roboto
+      font-size 14px
+      height 39px
+      margin 25px 0 0 0
+      padding 0 20px
+      width 100%
+      &:focus
+        border 2px solid #bdbdbd
+        outline 0
+        transition-timing-function: ease-in;
+        transition: 0.3s;
+      &::placeholder
+        color #BDBDBD
+
+    input+input
+      margin 15px 0 0 0
+
+  &__left
+    background-color #efefef
+    font-family Roboto
+    text-align center
+    width 50%
+
+    h1
+      font-size 48px
+      font-weight 100
+      color #43474D
+      margin 20px 0 0 0
+
+    p
+      font-size 16px
+      color #43474D
+      padding 0 20px
+
+  &__right
+    background-color white
+    padding 10px
+    width 50%

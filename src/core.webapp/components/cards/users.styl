@@ -1,0 +1,45 @@
+.briskhome-card
+  background-color white
+  border-radius 6px
+  font-family Roboto
+  width: 300px
+  height: 300px
+  box-shadow 0px 2px 4px 3px rgba(0,0,0,0.10);
+
+  &__header
+    height 48px
+    border-radius 6px 6px 0 0
+    display flex
+    padding-bottom 10px
+    box-shadow 0px 1px 2px 0px rgba(0,0,0,0.10);
+    // padding 20px
+
+  &__heading
+    font-size 24px
+    font-weight 200
+    color #43474D
+    margin 0
+    padding 15px 20px
+    vertical-align middle
+
+  &__action
+    margin-left auto
+    line-height 0.75
+    color #43474D
+    font-size 12px
+    padding 5px 10px
+    // background-color red
+    > ul
+      padding 0
+    > ul > li
+      // display inline-block
+      list-style-type none
+      padding 0 5px
+      &:before
+        content: '\25A0';
+
+  &__body
+    height 100px
+
+  &__footer
+    height 48px

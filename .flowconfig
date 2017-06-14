@@ -2,7 +2,6 @@
 .*/lib/.*
 .*/node_modules/@briskhome/.*
 .*/node_modules/fbjs/lib/.*flow
-.*/node_modules/@briskhome/.*
 
 [include]
 ;.*/src/.*

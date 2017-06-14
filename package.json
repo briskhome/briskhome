@@ -5,16 +5,17 @@
   "main": "briskhome.js",
   "scripts": {
     "babel-watch": "node_modules/.bin/babel src --watch --out-dir lib --copy-files --ignore node_modules",
-    "build": "node_modules/.bin/babel src -d lib --copy-files --ignore node_modules",
     "build-cleanup": "rm -rf lib/*",
+    "build-storybook": "build-storybook",
     "build-watch": "yarn build-cleanup && yarn babel-watch",
+    "build": "node_modules/.bin/babel src -d lib --copy-files --ignore node_modules",
     "flow": "node_modules/.bin/flow",
     "lint": "eslint src --ext .js",
-    "start": "node lib/core.js | bunyan -o short",
-    "test": "node_modules/.bin/jest src --coverage",
     "postinstall": "npm config set briskhome_dir /opt/briskhome",
+    "start": "node lib/core.js | bunyan -o short",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "test": "node_modules/.bin/jest src --coverage",
+    "webapp": "node_modules/.bin/nodemon lib/core.webapp/lib/index.js"
   },
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "license": "MIT",
@@ -23,6 +24,7 @@
   },
   "private": true,
   "devDependencies": {
+    "@storybook/addon-centered": "^3.1.2",
     "@storybook/react": "^3.0.1",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
@@ -31,6 +33,7 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "chai": "3.4.1",
+    "css-loader": "^0.28.4",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-flowtype": "^2.32.1",
@@ -45,6 +48,7 @@
     "mock-dgram": "0.1.2",
     "mockgoose": "^6.0.8",
     "mongo-mock": "2.0.1",
+    "raw-loader": "^0.5.1",
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",
     "react-dom": "^15.5.4",
@@ -56,6 +60,9 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "sinon": "^1.17.7",
+    "style-loader": "^0.18.2",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
     "webpack": "^2.4.1"
   },
   "dependencies": {

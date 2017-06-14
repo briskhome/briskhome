@@ -11,8 +11,12 @@ module.exports = {
     // your custom plugins
   ],
   module: {
-    loaders: [
+    rules: [
       // add your custom loaders.
+      {
+        test: /\.styl$/,
+        loaders: ['style-loader', 'css-loader', 'stylus-loader'],
+      },
     ],
   },
 };
