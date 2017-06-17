@@ -1,0 +1,88 @@
+fieldset
+  border 0
+  margin 0
+  padding 0
+
+.briskhome-form
+  position relative
+  font-family Roboto
+
+  &__label
+    display block
+    vertical-align middle
+    padding 5px 5px
+
+  &__input
+    display inline-block
+    vertical-align middle
+    font-weight 100
+    border 2px solid #efefef
+    border-radius 6px
+    box-sizing: border-box;
+    font-family Roboto
+    font-size 16px
+    height 39px
+    // margin 25px 0 0 0
+    text-overflow ellipsis
+    padding 0 15px 0 15px
+    width 300px
+    transition: border-color 0.2s ease-in-out 0s;
+
+    &:focus, &:hover
+      border 2px solid lighten(#bdbdbd, 50%)
+      outline 0
+
+    &::placeholder
+      color #BDBDBD
+
+  &__status
+    position absolute
+    display inline-block
+
+    width 0
+    height 0
+
+    &_warning
+      top 43px
+      right 10px
+      border-left 6px solid transparent
+      border-right 6px solid transparent
+      border-bottom 10px solid transparent
+      border-bottom-color inherit
+
+    &_error
+      top 45px
+      right 11px
+      border-left 5px solid transparent
+      border-right 5px solid transparent
+      border-top 5px solid transparent
+      border-bottom 5px solid transparent
+      border-color inherit
+
+    &_success
+      right 11px
+      top 40px
+      width 5px
+      border-bottom 3px solid transparent
+      height 11px
+      border-right 3px solid transparent
+      border-color inherit
+      transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+
+  &_warning
+    border-color lighten(#F9D21C, 50%)
+    &:focus, &:hover
+      border-color #F9D21C
+
+  &_error
+    border-color lighten(#CF4B5D, 50%)
+    &:focus, &:hover
+      border-color #CF4B5D
+
+  &_success
+    border-color lighten(#64D095, 50%)
+    &:focus, &:hover
+      border-color #64D095
