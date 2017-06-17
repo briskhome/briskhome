@@ -20,7 +20,7 @@ module.exports = function setup(options: Object, imports: CoreImports, register:
   });
 
   mongoose.connection.on('connecting', () => {
-    log.trace({ hostname, database, username, password }, 'Trying to connect to MongoDB instance');
+    log.debug({ hostname, database, username, password }, 'Trying to connect to MongoDB instance');
   });
 
   mongoose.connection.once('connected', () => {
@@ -31,11 +31,11 @@ module.exports = function setup(options: Object, imports: CoreImports, register:
   });
 
   mongoose.connection.on('disconnecting', () => {
-    log.trace({ hostname, database, username }, 'Disconnecting from MongoDB instance');
+    log.debug({ hostname, database, username }, 'Disconnecting from MongoDB instance');
   });
 
   mongoose.connection.on('disconnected', () => {
-    log.debug({ hostname, database, username }, 'Disconnected from MongoDB instance');
+    log.info({ hostname, database, username }, 'Disconnected from MongoDB instance');
   });
 
   mongoose.connection.on('reconnected', () => {
