@@ -4,11 +4,11 @@
  */
 
 import mongoose from 'mongoose';
-import { resources } from '../resources';
-import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
+import { resources } from '../utilities/resources';
+import type { CoreImports, CoreRegister } from '../types/coreTypes';
 
-module.exports = function setup(options: Object, imports: CoreImports, register: CoreRegister) {
-  const { database, hostname, username, password } = imports.config();
+export default (options: Object, imports: CoreImports, register: CoreRegister) => {
+  const { database, hostname, username, password } = options;
   const credentials = password ? `${username}:${password}` : username || '';
   const log = imports.log();
 

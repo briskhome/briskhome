@@ -7,7 +7,7 @@
 
 import uuid from 'uuid-1345';
 import { getCallee } from '../utilities/helpers';
-import { resources } from '../resources';
+import { resources } from '../utilities/resources';
 import {
   ERR_UNABLE_TO_FETCH,
   ERR_UNABLE_TO_REGISTER,
@@ -23,11 +23,11 @@ import {
   EVENT_UPDATE_SUCCESS,
 } from './constants';
 
-import type { CoreImports, CoreRegister, SubscriptionType } from '../utilities/coreTypes';
+import type { CoreImports, CoreRegister, SubscriptionType } from '../types/coreTypes';
 import type { EventModelType, EventType } from './models/EventModel';
 import type { UserModelType } from '../core.db/models/UserModel';
 
-module.exports = function setup(options: Object, imports: CoreImports, register: CoreRegister) {
+export default (options: Object, imports: CoreImports, register: CoreRegister) => {
   const db = imports.db;
   const bus = imports.bus;
   const log = imports.log();
@@ -280,7 +280,7 @@ module.exports = function setup(options: Object, imports: CoreImports, register:
    */
   Notifications.prototype.providers = async function providers()
     :Promise<Array<*>> {
-    return resources('providers', null);
+    return resources('providers');
   };
 
   Notifications.levels = {

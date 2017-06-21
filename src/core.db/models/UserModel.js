@@ -4,7 +4,7 @@
  */
 
 import type mongoose from 'mongoose';
-import type { ModelType } from '../../utilities/coreTypes';
+import type { ModelType } from '../../types/coreTypes';
 
 export type UserContactType = {
   name: string,

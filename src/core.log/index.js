@@ -5,14 +5,13 @@
 
 import bunyan from 'bunyan';
 import { getCallee } from '../utilities/helpers';
-import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
+import type { CoreImports, CoreRegister } from '../types/coreTypes';
 
-module.exports = function setup(options: Object, imports: CoreImports, register: CoreRegister) {
-  const config = imports.config();
+export default (options: Object, imports: CoreImports, register: CoreRegister) => {
   const log = bunyan.createLogger({
     name: 'briskhome',
     streams: [{
-      level: config.level,
+      level: options.level,
       stream: process.stdout,
     }],
   });

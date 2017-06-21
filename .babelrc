@@ -1,5 +1,5 @@
 {
-  "presets": ["flow", "react"],
+  "presets": ["flow", "react", "stage-3"],
   "plugins": [
     "transform-es2015-modules-commonjs", ["module-resolver", {
       "root": ["./src"]

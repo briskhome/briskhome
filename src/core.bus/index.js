@@ -5,28 +5,24 @@
  * @author Egor Zaitsev <ezaitsev@briskhome.com>
  */
 
-'use strict';
-
 const Emitter = require('events').EventEmitter;
 const mosca = require('mosca');
 const util = require('util');
 
-module.exports = function setup (options, imports, register) {
-  const db = imports.db;
+export default (options, imports, register) => {
   const log = imports.log({ event: 'object' });
-  const config = imports.config();
 
   const params = {
-    port: config.port,
+    port: options.port,
     backend: {
       type: 'mongo',
-      url: `mongodb://${config.username}:${config.password}@${config.hostname}/${config.database}`,
+      url: `mongodb://${options.username}:${options.password}@${options.hostname}/${options.database}`,
       pubsubCollection: 'mqtt',
-      mongo: {}
-    }
+      mongo: {},
+    },
   };
 
-  function Bus () {
+  function Bus() {
     this.mqtt = new mosca.Server(params);
 
     this.mqtt.on('clientConnected', (client) => {
@@ -36,8 +32,8 @@ module.exports = function setup (options, imports, register) {
     this.mqtt.on('published', (packet, client) => {
       if (client) {
         log.trace('Получено сообщение по протоколу MQTT', {
-          'Тема': packet.topic,
-          'Содержание': packet.payload.toString()
+          Тема: packet.topic,
+          Содержание: packet.payload.toString(),
         });
       }
     });

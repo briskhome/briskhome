@@ -1,8 +1,8 @@
 /* globals jest describe beforeAll beforeEach it expect */
 import nconf from 'nconf';
 import properties from 'properties';
-import { resources } from '../../resources';
 import { getCallee } from '../../utilities/helpers';
+import { resources } from '../../utilities/resources';
 
 import plugin from '../';
 
