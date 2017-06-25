@@ -8,7 +8,7 @@
 import fs from 'fs';
 import path from 'path';
 import events from 'events';
-import { normalizeName } from './plugins';
+import { normalizeName } from './helpers';
 
 
 // XXX: Consider replacing the following statement with `packagePathCache = new WeakMap();`

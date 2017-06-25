@@ -1,6 +1,6 @@
 /* globals jest describe beforeAll beforeEach it expect */
 import bunyan from 'bunyan';
-import { getCallee } from '../../utilities/helpers';
+import { getCallee, normalizeName } from '../../utilities/helpers';
 import plugin from '../';
 
 jest.unmock('../');
@@ -35,7 +35,8 @@ describe('core.log', () => {
 
   beforeEach(() => {
     bunyan.createLogger.mockReturnValueOnce(log);
-    getCallee.mockReturnValueOnce('core.log');
+    normalizeName.mockReturnValueOnce('core.log');
+    getCallee.mockReturnValueOnce('@briskhome/core.log');
     log.child.mockReturnValueOnce(log);
   });
 
