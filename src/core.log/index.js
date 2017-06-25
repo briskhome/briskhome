@@ -4,7 +4,7 @@
  */
 
 import bunyan from 'bunyan';
-import { getCallee } from '../utilities/helpers';
+import { getCallee, normalizeName } from '../utilities/helpers';
 import type { CoreImports, CoreRegister } from '../types/coreTypes';
 
 export default (options: Object, imports: CoreImports, register: CoreRegister) => {
@@ -17,9 +17,9 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
   });
 
   register(null, {
-    log: () => {
+    log: (name?: string) => {
       const child = log.child({
-        component: getCallee(),
+        component: name || normalizeName(getCallee()),
       });
       child.debug('Initialized logger instance for component');
       return child;

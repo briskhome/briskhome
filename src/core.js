@@ -22,7 +22,7 @@ import { briskhomeAsciiLogo } from './utilities/constants';
     process.stderr.write(e.toString());
     process.exit(1);
   } finally {
-    const logger = app ? app.services.log() : () => null;
+    const logger = app ? app.services.log('core') : () => null;
     logger.info('Briskhome initialization successful');
   }
 })();
