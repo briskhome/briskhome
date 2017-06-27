@@ -9,7 +9,7 @@
 ## Installation
 > **Heads Up!** Very thorough installation instructions are available in the [documentation](http://docs.briskhome.com/).
 
-The best way to get your hands on **Briskhome** as quickly as possible is with **Vagrant**. Simply clone this repository and run `vagrant up`. This will download and configure a minimal linux image, install all the dependencies and seed your **Briskhome** installation with demo data.
+The best way to get your hands on **Briskhome** as quickly as possible is with **[Vagrant](https://www.vagrantup.com/)** and **[VirtualBox](https://www.virtualbox.org/)**. Install these tools and then Simply clone this repository and run `vagrant up`. **Vagrant** will download and configure a minimal linux image, install all the dependencies and seed your **Briskhome** installation with demo data.
 
 For a real-world installation we recommend using prebuilt installation packages. We provide packages for current versions of Ubuntu, Debian and CentOS. Download them from [releases](/briskhome/briskhome/releases) page and install it with your package manager of choice.
 
