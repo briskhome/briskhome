@@ -5,7 +5,7 @@
   "main": "briskhome.js",
   "scripts": {
     "babel-watch": "node_modules/.bin/babel src --watch --out-dir lib --copy-files --ignore node_modules",
-    "build": "node_modules/.bin/babel src -d lib --copy-files --ignore node_modules",
+    "build": "yarn build-cleanup && node_modules/.bin/babel src -d lib --copy-files --ignore node_modules",
     "build-cleanup": "rm -rf lib/*",
     "build-watch": "yarn build-cleanup && yarn babel-watch",
     "flow": "node_modules/.bin/flow",
