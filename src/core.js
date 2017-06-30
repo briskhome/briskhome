@@ -19,7 +19,8 @@ import { briskhomeAsciiLogo } from './utilities/constants';
     app = await new Architect().loadPlugins(plugins);
   } catch (e) {
     process.stdout.write(`{"name":"briskhome","hostname":"${os.hostname()}","pid":${process.pid},"component":"core","level":60,"msg":"${e.toString()}","time":"${new Date().toISOString()}","v":0}\n`);
-    process.stderr.write(e.toString());
+    process.stderr.write(e.stack);
+    process.stderr.write('\n');
     process.exit(1);
   } finally {
     const logger = app ? app.services.log('core') : () => null;
