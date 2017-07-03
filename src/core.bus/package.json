@@ -12,8 +12,5 @@
     "provides": [
       "bus"
     ]
-  },
-  "dependencies": {
-    "mosca": "^2.3.0"
   }
 }

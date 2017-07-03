@@ -61,7 +61,6 @@
     "ldapjs": "^1.0.0",
     "mjpeg-proxy": "^0.2.0",
     "mongoose": "4.2.8",
-    "mosca": "2.2.0",
     "nconf": "^0.8.4",
     "node-forge": "^0.6.48",
     "node-nut": "^0.1.0",
