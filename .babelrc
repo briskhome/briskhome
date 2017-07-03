@@ -1,8 +1,8 @@
 {
-  "presets": ["flow", "react", "stage-3"],
-  "plugins": [
-    "transform-es2015-modules-commonjs", ["module-resolver", {
-      "root": ["./src"]
-    }]
-  ]
+ "presets": ["flow", "react"],
+ "plugins": [
+   "transform-inline-imports-commonjs",
+   "transform-object-rest-spread",
+   ["module-resolver", { "root": ["./src"] }]
+ ]
 }
