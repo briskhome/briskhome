@@ -11,6 +11,7 @@
     "flow": "node_modules/.bin/flow",
     "lint": "eslint src --ext .js",
     "start": "node lib/core.js | bunyan -o short",
+    "start-ugly": "node lib/core.js --ugly | bunyan -o short",
     "test": "node_modules/.bin/jest src --coverage",
     "postinstall": "npm config set briskhome_dir /opt/briskhome"
   },
@@ -50,6 +51,7 @@
     "async": "^2.1.4",
     "bunyan": "^1.8.1",
     "bunyan-mongodb-stream": "0.0.3",
+    "eventemitter2": "^4.1.0",
     "forge": "2.3.0",
     "ldapjs": "^1.0.0",
     "mjpeg-proxy": "^0.2.0",

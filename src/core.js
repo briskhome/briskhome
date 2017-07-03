@@ -13,19 +13,35 @@ import { enabledPlugins } from './utilities/plugins';
 import { briskhomeAsciiLogo } from './utilities/constants';
 
 (async () => {
-  let app, plugins;                                                                               // eslint-disable-line
+  let app;
   try {
-    plugins = await resolveConfig(enabledPlugins(), path.resolve(__dirname, '..'));
-    app = await new Architect().loadPlugins(plugins);
+    app = await new Architect()
+      .loadPlugins(await resolveConfig(enabledPlugins(), path.resolve(__dirname, '..')));
   } catch (e) {
-    process.stdout.write(`{"name":"briskhome","hostname":"${os.hostname()}","pid":${process.pid},"component":"core","level":60,"msg":"${e.toString()}","time":"${new Date().toISOString()}","v":0}\n`);
+    process.stdout.write(`{
+      "name":"briskhome",
+      "hostname":"${os.hostname()}",
+      "pid":${process.pid},
+      "component":"core",
+      "level":60,
+      "msg":"${e.toString()}",
+      "time":"${new Date().toISOString()}",
+      "v":0
+    }\n`);
     process.stderr.write(e.stack);
     process.stderr.write('\n');
     process.exit(1);
-  } finally {
-    const logger = app ? app.services.log('core') : () => null;
-    logger.info('Briskhome initialization successful');
   }
+
+  const bus = app.services.bus;
+  const log = app.services.log('core');
+  log.info('Briskhome initialization successful');
+  bus.emit('core:ready');
+
+  process.on('unhandledRejection', (err, promise) => {
+    log.error({ err, promise }, 'unhandledRejection');
+    process.exit(1);
+  });
 })();
 
 const writeBriskhomeLogo = (): void => {
@@ -34,7 +50,16 @@ const writeBriskhomeLogo = (): void => {
 };
 
 const writeBriskhomeInfo = (): void => {
-  process.stdout.write(`{"name":"briskhome","hostname":"${os.hostname()}","pid":${process.pid},"component":"core","level":30,"msg":"Initializing Briskhome v${briskhome.version}","time":"${new Date().toISOString()}","v":0}\n`);
+  process.stdout.write(`{
+    "name":"briskhome",
+    "hostname":"${os.hostname()}",
+    "pid":${process.pid},
+    "component":"core",
+    "level":30,
+    "msg":"Initializing Briskhome v${briskhome.version}",
+    "time":"${new Date().toISOString()}",
+    "v":0
+  }\n`);
   process.title = 'briskhome';
 };
 

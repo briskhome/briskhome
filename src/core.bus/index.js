@@ -5,15 +5,30 @@
  * @author Egor Zaitsev <ezaitsev@briskhome.com>
  */
 
-const Emitter = require('events').EventEmitter;
-const util = require('util');
+import EventEmitter from 'eventemitter2';
 
 export default (options, imports, register) => {
-  imports.log();
+  const log = imports.log();
+  const bus = new EventEmitter({
+    delimiter: ':',
+    newListener: false,
+    verboseMemoryLeak: true,
+    wildcard: true,
+  });
 
-  function Bus() {}
+  bus.on('broadcast:**', function coreEvent(...data) {                                            // eslint-disable-line
+    log.trace({ event: this.event }, data);
+  });
 
-  util.inherits(Bus, Emitter);
+  bus.on('core:**', function coreEvent(...data) {                                                 // eslint-disable-line
+    log.trace({ event: this.event }, data);
+  });
 
-  register(null, { bus: new Bus() });
+  bus.on('core:ready', () => {
+    setInterval(() => {
+      bus.emit('broadcast:poll');
+    }, options.interval);
+  });
+
+  register(null, { bus });
 };
