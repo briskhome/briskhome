@@ -45,13 +45,6 @@
     "sinon": "^1.17.7"
   },
   "dependencies": {
-    "@briskhome/core.bus": "file:src/core.bus",
-    "@briskhome/core.config": "file:src/core.config",
-    "@briskhome/core.db": "file:src/core.db",
-    "@briskhome/core.log": "file:src/core.log",
-    "@briskhome/core.notifications": "file:src/core.notifications",
-    "@briskhome/core.pki": "file:src/core.pki",
-    "@briskhome/core.planner": "file:src/core.planner",
     "agenda": "^0.8.1",
     "architect": "0.1.11",
     "async": "^2.1.4",
