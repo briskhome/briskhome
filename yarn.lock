@@ -2,41 +2,6 @@
 # yarn lockfile v1
 
 
-"@briskhome/core.bus@file:src/core.bus":
-  version "0.3.0-alpha.1"
-  dependencies:
-    mosca "^2.3.0"
-
-"@briskhome/core.config@file:src/core.config":
-  version "0.3.0-alpha.1"
-
-"@briskhome/core.db@file:src/core.db":
-  version "0.3.0-alpha.1"
-  dependencies:
-    mongoose "^4.9.6"
-
-"@briskhome/core.log@file:src/core.log":
-  version "0.3.0-alpha.1"
-  dependencies:
-    bunyan "^1.8.10"
-    bunyan-syslog "github:mcavage/node-bunyan-syslog#9bdb9eb62a763c7d30e032a619138032d5ff8771"
-
-"@briskhome/core.notifications@file:src/core.notifications":
-  version "0.3.0-alpha.1"
-  dependencies:
-    node-telegram-bot-api "^0.27.0"
-    uuid-1345 "^0.99.6"
-
-"@briskhome/core.pki@file:src/core.pki":
-  version "0.3.0-alpha.1"
-  dependencies:
-    node-forge "^0.6.48"
-
-"@briskhome/core.planner@file:src/core.planner":
-  version "0.3.0-alpha.1"
-  dependencies:
-    agenda "^0.9.1"
-
 abab@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.3.tgz#b81de5f7274ec4e756d797cd834f303642724e5d"
