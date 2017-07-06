@@ -25,11 +25,13 @@ export type PackageJson = {
 };
 
 export type CoreImports = {
-  db: mongoose,
-  config: () => Object,
   bus: Object,
+  config: () => Object,
+  dataloader: Function,
+  db: mongoose,
+  graphql: Object,
   log: () => Object,
-  loader: (string) => Object,
+  webapp: Function,
 }
 
 export type CoreRegister = (err: ?Error, data?: Object) => void;
@@ -37,6 +39,16 @@ export type CoreRegister = (err: ?Error, data?: Object) => void;
 export type ModelType<Model> = {
   save: (document?: Object) => Model,
   update: (document?: Object) => Model,
+};
+
+export type CoreGraphQL = {
+  schema: string,
+  queries?: string,
+  mutations?: string,
+  resolvers?: {
+    queries?: { [string]: Function },
+    mutations?: { [string]: Function }
+  }
 };
 
 export type SubscriptionType = {
