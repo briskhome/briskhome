@@ -68,3 +68,8 @@ if (!process.argv.includes('--ugly')) {
   writeBriskhomeLogo();
   writeBriskhomeInfo();
 }
+
+process.on('unhandledRejection', (error, promise) => {
+  console.log({ error, promise });
+  process.exit(1);
+});

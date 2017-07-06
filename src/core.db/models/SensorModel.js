@@ -4,8 +4,7 @@
  */
 
 import uuid from 'uuid-1345';
-import type mongoose from 'mongoose';
-import type { ModelType } from '../../types/coreTypes';
+import type { CoreImports, ModelType } from '../types/coreTypes';
 
 export type SensorType = {
   _id?: string,
@@ -21,7 +20,7 @@ export type SensorModelType = {
   setOnline: (state: boolean) => SensorModelType
 } & SensorType & ModelType<SensorModelType>
 
-export default (db: mongoose) => {
+export default ({ db }: CoreImports) => {
   const Schema = db.Schema;
   const SensorSchema = new Schema({
     _id: {
@@ -30,7 +29,6 @@ export default (db: mongoose) => {
     },
     device: {
       type: String,
-      required: false,
     },
     isOnline: {
       type: Boolean,
@@ -38,15 +36,17 @@ export default (db: mongoose) => {
     },
     values: [{
       type: String,
-      enum: [
-        'distance',
-        'humidity',
-        'moisture',
-        'pressure',
-        'temperature',
-      ],
     }],
-    location: { type: Schema.Types.Mixed },
+    bounds: [{
+      _id: false,
+      type: { type: String },
+      operation: { type: String },
+      value: { type: String },
+    }],
+    location: {
+      type: String,
+      default: null,
+    },
   }, {
     collection: 'sensors',
     timestamps: true,
@@ -55,13 +55,22 @@ export default (db: mongoose) => {
   SensorSchema.methods.setOnline = async function setOnline(state: boolean)
     : Promise<SensorType> {
     this.isOnline = state;
-    return this.save(); // ?
+    return this.save();
   };
 
-  SensorSchema.statics.fetchBySerial = async function fetchBySerial(serial: string)
+  SensorSchema.statics.sensorById = async function fetchBySerial(id: string)
     : Promise<SensorType> {
-    return this.findOne({ _id: serial }).exec();
+    return this.findOne({ _id: id }).exec();
   };
+
+  SensorSchema.statics.sensorsByDeviceId = async function fetchBySerial(deviceId: string)
+    : Promise<Array<SensorType>> {
+    return this.find({ device: deviceId }).exec();
+  };
+
+  SensorSchema.virtual('id').get(function () {
+    return this._id;
+  });
 
   return db.model('core:sensor', SensorSchema);
 };

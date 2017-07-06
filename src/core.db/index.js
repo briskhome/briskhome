@@ -9,11 +9,12 @@ import type { CoreImports, CoreRegister } from '../types/coreTypes';
 
 export default (options: Object, imports: CoreImports, register: CoreRegister) => {
   const { database, hostname, username, password } = options;
-  const credentials = password ? `${username}:${password}` : username || '';
+  const credentials = password ? `${username}:${password}@` : `${username}@` || '';
   const log = imports.log();
 
   mongoose.Promise = global.Promise;
-  mongoose.connect(`mongodb://${credentials}@${hostname}/${database}`);
+  mongoose.set('debug', true);
+  mongoose.connect(`mongodb://${credentials}${hostname}/${database}`);
   mongoose.connection.on('error', (err) => {
     log.fatal({ err, hostname, database, username }, 'Error establishing connection to MongoDB instance');
     return register(err);
@@ -23,9 +24,19 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
     log.debug({ hostname, database, username, password }, 'Trying to connect to MongoDB instance');
   });
 
+  function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+  }
+
+
   mongoose.connection.once('connected', () => {
     log.info({ hostname, database, username }, 'Database connection established');
-    resources('models', [mongoose]);
+    resources('models', [{ ...imports, db: mongoose }]);
+
+    const ReadingModel = mongoose.model('core:reading');
+    ReadingModel.upsertReading('28.F2FBE3467CC2', { type: 'temperature', value: getRandomIntInclusive(0, 100) });
 
     return register(null, { db: mongoose });
   });
@@ -35,7 +46,7 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
   });
 
   mongoose.connection.on('disconnected', () => {
-    log.info({ hostname, database, username }, 'Disconnected from MongoDB instance');
+    log.warn({ hostname, database, username }, 'Disconnected from MongoDB instance');
   });
 
   mongoose.connection.on('reconnected', () => {

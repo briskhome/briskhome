@@ -3,8 +3,7 @@
  * └core.db <lib/core.db/models/UserModel.js>
  */
 
-import type mongoose from 'mongoose';
-import type { ModelType } from '../../types/coreTypes';
+import type { CoreImports, ModelType } from '../types/coreTypes';
 
 export type UserContactType = {
   name: string,
@@ -46,7 +45,7 @@ export type UserModelType = (document: UserType) => {
   fetchBySubscription(id: string): UserModelType,
 } & UserType & ModelType<UserModelType>;
 
-export default (db: mongoose) => {
+export default ({ db }: CoreImports) => {
   const Schema = db.Schema;
   const userSchema = new Schema({
     _id: {

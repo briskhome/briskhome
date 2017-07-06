@@ -3,8 +3,7 @@
  * └core.notifications <lib/core.notifications/models/EventModel.js>
  */
 
-import type mongoose from 'mongoose';
-import type { ModelType } from '../../types/coreTypes';
+import type { CoreImports, ModelType } from '../types/coreTypes';
 
 export type EventType = {
   _id?: string,
@@ -21,7 +20,7 @@ export type EventModelType = (document: EventType) => {
   fetchById(id: string): EventModelType,
 } & EventType & ModelType<EventModelType>;
 
-export default (db: mongoose) => {
+export default ({ db }: CoreImports) => {
   const Schema = db.Schema;
   const eventSchema = new Schema({
     _id: {
