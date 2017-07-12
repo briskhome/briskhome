@@ -16,28 +16,20 @@ describe('core.bus', () => {
     error: jest.fn(),
     fatal: jest.fn(),
   };
-  const config = jest.fn();
 
   beforeAll(() => {
-    config.mockReturnValueOnce({
-      username: 'test',
-      password: 'test',
-      hostname: 'test',
-      database: 'test',
-    });
-
-    options = {};
-    imports = { db, log, config };
+    options = { interval: 30000 };
+    imports = { db, log: () => log };
   });
 
   beforeEach(() => {
     jest.resetAllMocks();
   });
 
-  it.skip('should register', () => {
+  it('should register', () => {
     plugin(options, imports, (err, exports) => {
       expect(err).toBe(null);
-      expect(Object.keys(exports)).toEqual(['config']);
+      expect(Object.keys(exports)).toEqual(['bus']);
     });
   });
 });

@@ -261,9 +261,10 @@ export default class Architect extends events.EventEmitter {
     app.services = {};
   }
 
-  loadPlugins(config: Array<*>) {
-    return new Promise((resolve, reject) => {
+  loadPlugins(promisedConfig: Array<*>|Promise<Array<*>>) {
+    return new Promise(async (resolve, reject) => {
       const app = this;
+      const config = await promisedConfig;
       let sortedConfig;
       try {
         sortedConfig = checkConfig(config).filter(c => config.indexOf(c) > -1);

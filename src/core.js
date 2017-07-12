@@ -16,7 +16,7 @@ import { briskhomeAsciiLogo } from './utilities/constants';
   let app;
   try {
     app = await new Architect()
-      .loadPlugins(await resolveConfig(enabledPlugins(), path.resolve(__dirname, '..')));
+      .loadPlugins(resolveConfig(enabledPlugins(), path.resolve(__dirname, '..')));
   } catch (e) {
     process.stdout.write(`{
       "name":"briskhome",
@@ -31,6 +31,7 @@ import { briskhomeAsciiLogo } from './utilities/constants';
     process.stderr.write(e.stack);
     process.stderr.write('\n');
     process.exit(1);
+    return;
   }
 
   const bus = app.services.bus;
