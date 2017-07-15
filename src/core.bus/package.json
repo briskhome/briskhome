@@ -6,7 +6,6 @@
   "private": true,
   "plugin": {
     "consumes": [
-      "db",
       "log"
     ],
     "provides": [

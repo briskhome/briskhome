@@ -14,7 +14,9 @@ export const getCallee = (depth?: number = 3): string => {
   try {
     return require(path.join('/', d.join('/'), 'package.json')).name;                             // eslint-disable-line
   } catch (e) {
-    return d.reduce((acc, s, i, a) => (s === 'lib' || s === 'node_modules' ? a[i + 1] : acc), '').split(':').shift();
+    try {
+      return d.reduce((acc, s, i, a) => (s === 'lib' || s === 'node_modules' ? a[i + 1] : acc), '').split(':').shift();
+    } catch (ex) { return 'unknown'; }
   }
 };
 

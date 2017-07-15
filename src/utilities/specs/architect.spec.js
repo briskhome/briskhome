@@ -273,7 +273,7 @@ describe('utilities/architect', () => {
         const res = await app.loadPlugins(config);
         expect(res).toBeTruthy();
         expect(res.config).toEqual(config);
-        expect(Object.keys(res.services).length).toBe(3);
+        expect(Object.keys(res.services).length).toBe(2);
       });
 
       it('should collect provided destructors', async () => {
@@ -281,7 +281,7 @@ describe('utilities/architect', () => {
         const res = await app.loadPlugins(config);
         expect(res).toBeTruthy();
         expect(res.config).toEqual(config);
-        expect(Object.keys(res.services).length).toBe(3);
+        expect(Object.keys(res.services).length).toBe(2);
       });
 
       it('should emit error when plugin fails to initialize', async () => {

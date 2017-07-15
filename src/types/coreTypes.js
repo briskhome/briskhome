@@ -25,9 +25,9 @@ export type PackageJson = {
 };
 
 export type CoreImports = {
-  bus: Object,
   db: mongoose,
   config: () => Object,
+  bus: Object,
   log: () => Object,
   loader: (string) => Object,
 }

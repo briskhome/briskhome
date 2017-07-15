@@ -164,7 +164,7 @@ export const checkCycles = (config: Array<Object>): Array<Object> => {
   }
 
   const sorted = [];
-  const resolved = ['hub'];
+  const resolved = [];
 
   let retry = true;
   while (plugins.length && retry) {
@@ -258,16 +258,13 @@ export default class Architect extends events.EventEmitter {
     const app = this;
     app.config = [];
     app.destructors = new Map();
-    app.services = {
-      hub: {
-        on: (name, callback) => app.on(name, callback),
-      },
-    };
+    app.services = {};
   }
 
-  loadPlugins(config: Array<*>) {
-    return new Promise((resolve, reject) => {
+  loadPlugins(promisedConfig: Array<*>|Promise<Array<*>>) {
+    return new Promise(async (resolve, reject) => {
       const app = this;
+      const config = await promisedConfig;
       let sortedConfig;
       try {
         sortedConfig = checkConfig(config).filter(c => config.indexOf(c) > -1);
@@ -323,13 +320,15 @@ export default class Architect extends events.EventEmitter {
 
     function register(err, provided) {
       if (err) {
-        return app.emit('error', err);
+        if (!services.bus) throw err;
+        return services.bus.emit('core:error', err);
       }
 
       plugin.provides.forEach((name) => {
         if (!Object.keys(provided).includes(name)) {
           const error = new Error(`Plugin failed to provide ${name} service. ${JSON.stringify(plugin)}`);
-          return app.emit('error', error);
+          if (!services.bus) throw error;
+          return services.bus.emit('core:error', error);
         }
 
         services[name] = provided[name];
@@ -337,7 +336,8 @@ export default class Architect extends events.EventEmitter {
           provided[name].name = name;                                                             // eslint-disable-line
         }
 
-        return app.emit('service', name, services[name]);
+        if (services.bus) services.bus.emit('core:service', name, services[name]);
+        return;
       });
 
       if (provided && provided.destroy) {
@@ -361,12 +361,12 @@ export default class Architect extends events.EventEmitter {
           }
 
           app.config.splice(app.config.indexOf(plugin), 1);
-          app.emit('destroyed', plugin);
+          if (services.bus) services.bus.emit('core:destroyed', plugin);
         };
         app.destructors.set(plugin.name, plugin.destroy);
       }
 
-      app.emit('plugin', plugin);
+      if (services.bus) services.bus.emit('core:plugin', plugin);
       return next();
     }
   }
