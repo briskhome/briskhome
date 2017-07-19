@@ -3,7 +3,7 @@
  * └core.db <lib/core.db/models/UserModel.js>
  */
 
-import type { CoreImports, ModelType } from '../types/coreTypes';
+import type { CoreImports, ModelType } from '../../utilities/coreTypes';
 
 export type UserContactType = {
   name: string,
@@ -95,10 +95,10 @@ export default ({ db }: CoreImports) => {
 
   userSchema.virtual('username')
     .get(function get() {
-      return this._id;                                                        // eslint-disable-line
+      return this._id;
     })
     .set(function set(username) {
-      this._id = username;                                                    // eslint-disable-line
+      this._id = username;
     });
 
   userSchema.statics.fetchByUsername = async function fetchByUsername(username: string)

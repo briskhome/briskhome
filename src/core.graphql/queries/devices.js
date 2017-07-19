@@ -1,16 +1,15 @@
 import {
-  GraphQLFieldConfig,
-  GraphQLObjectType,
   GraphQLList,
   GraphQLString,
 } from 'graphql';
 import DeviceType from '../types/Device';
-import type { CoreImports } from '../../types/coreTypes';
+import type { CoreImports } from '../../utilities/coreTypes';
 
-export default ({ dataloader, db, log }: CoreImports) => {
+export default (imports: CoreImports) => {
+  const { dataloader, db } = imports;
   const DeviceModel = db.model('core:device');
-  const Device = DeviceType({ dataloader, db, log });
-  return ({
+  const Device = DeviceType(imports);
+  return ({                                                                                                // $FlowFixMe
     type: new GraphQLList(Device),
     args: {
       id: {
@@ -22,12 +21,10 @@ export default ({ dataloader, db, log }: CoreImports) => {
         description: 'Location identifier',
       },
     },
-    resolve: async (src, args, ctx, info) => {
+    resolve: async (src: Object, args: Object) => {
       if (args.id) return dataloader.deviceById.loadMany([args.id]);
       if (args.location) {
-        console.log(args);
         const ids = await DeviceModel.find({ location: args.location }).select('id').lean().exec();
-        console.log({ ids });
         if (!ids.length) return null;
         return dataloader.deviceById.loadMany(ids.reduce((acc, doc) => acc.concat(doc._id), []));
       }

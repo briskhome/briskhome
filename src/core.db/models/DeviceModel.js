@@ -4,7 +4,7 @@
  */
 
 import uuid from 'uuid-1345';
-import type { CoreImports, ModelType } from '../types/coreTypes';
+import type { CoreImports, ModelType } from '../../utilities/coreTypes';
 
 export type DeviceType = {
   _id?: string,
@@ -60,7 +60,7 @@ export default ({ db }: CoreImports) => {
     timestamps: true,
   });
 
-  DeviceSchema.virtual('id').get(function () {
+  DeviceSchema.virtual('id').get(function get() {
     return this._id;
   });
 

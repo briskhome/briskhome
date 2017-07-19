@@ -24,12 +24,12 @@ export default (options, imports, register) => {
   //   done();
   // });
 
-  agenda.on('start', (job) => {
-    console.log('Job %s starting', job.attrs.name);
+  agenda.on('start', (/* job */) => {
+    // console.log('Job %s starting', job.attrs.name);
   });
 
   agenda.on('error', (err) => {
-    console.log(err);
+    // console.log(err);
     register(err);
   });
 

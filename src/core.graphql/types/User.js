@@ -1,17 +1,15 @@
 /** @flow
  * @briskhome
- * └core.graphql <lib/core.graphql/index.js>
+ * └core.graphql <types/User.js>
  */
 
 import {
   GraphQLString,
   GraphQLObjectType,
-  GraphQLList,
 } from 'graphql';
-import type { CoreGraphQL, CoreImports } from '../../types/coreTypes';
 
-export default ({ dataloader, db, log }: CoreImports): CoreGraphQL => {
-  return new GraphQLObjectType({
+export default (): GraphQLObjectType =>
+  new GraphQLObjectType({
     name: 'User',
     description: 'This is a generic user',
     fields: {
@@ -33,4 +31,3 @@ export default ({ dataloader, db, log }: CoreImports): CoreGraphQL => {
       },
     },
   });
-};

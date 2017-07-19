@@ -1,15 +1,14 @@
 import {
-  GraphQLFieldConfig,
-  GraphQLObjectType,
   GraphQLList,
   GraphQLString,
 } from 'graphql';
 import UserType from '../types/User';
-import type { CoreImports } from '../../types/coreTypes';
+import type { CoreImports } from '../../utilities/coreTypes';
 
-export default ({ dataloader, db, log }: CoreImports) => {
-  const User = UserType({ dataloader, db, log });
-  return ({
+export default (imports: CoreImports) => {
+  const { dataloader } = imports;
+  const User = UserType(imports);
+  return ({                                                                                                // $FlowFixMe
     type: new GraphQLList(User),
     args: {
       id: {
@@ -17,7 +16,7 @@ export default ({ dataloader, db, log }: CoreImports) => {
         description: 'Username of the user you are trying to fetch',
       },
     },
-    resolve: async (src, args, ctx, info) => {
+    resolve: async (src, args) => {
       if (args.id) return dataloader.userById.loadMany([args.id]);
       return dataloader.userById.loadAll();
     },

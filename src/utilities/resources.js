@@ -21,9 +21,9 @@ export const resources = (type: string, args?: ?Array<*>): Array<*> =>
           case undefined:
             return path.resolve(plugin, type, resource);
           case null:
-            return require(path.resolve(plugin, type, resource)).default                          // eslint-disable-line
+            return require(path.resolve(plugin, type, resource)).default;
           default:
-            return require(path.resolve(plugin, type, resource)).default(...args);                // eslint-disable-line
+            return require(path.resolve(plugin, type, resource)).default(...args);
         }
       }),
     );

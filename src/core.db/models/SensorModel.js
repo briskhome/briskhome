@@ -4,7 +4,7 @@
  */
 
 import uuid from 'uuid-1345';
-import type { CoreImports, ModelType } from '../types/coreTypes';
+import type { CoreImports, ModelType } from '../../utilities/coreTypes';
 
 export type SensorType = {
   _id?: string,
@@ -68,7 +68,7 @@ export default ({ db }: CoreImports) => {
     return this.find({ device: deviceId }).exec();
   };
 
-  SensorSchema.virtual('id').get(function () {
+  SensorSchema.virtual('id').get(function get() {
     return this._id;
   });
 

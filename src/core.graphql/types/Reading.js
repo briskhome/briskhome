@@ -1,11 +1,15 @@
+/** @flow
+ * @briskhome
+ * └core.graphql <types/Reading.js>
+ */
+
 import {
   GraphQLString,
   GraphQLObjectType,
 } from 'graphql';
-import type { CoreGraphQL, CoreImports } from '../../types/coreTypes';
 
-export default ({ dataloader, db, log }: CoreImports): CoreGraphQL => { 
-  return new GraphQLObjectType({
+export default (): GraphQLObjectType =>
+  new GraphQLObjectType({
     name: 'Reading',
     description: 'No desc for now',
     fields: {
@@ -23,4 +27,3 @@ export default ({ dataloader, db, log }: CoreImports): CoreGraphQL => {
       },
     },
   });
-};

@@ -5,6 +5,11 @@
     "flowtype"
   ],
   "rules": {
+    "global-require": ["off"],
+    "import/no-dynamic-require": ["off"],
+    "import/no-extraneous-dependencies": ["off"],
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }],
     "max-len": ["error", 120]
   }
 }

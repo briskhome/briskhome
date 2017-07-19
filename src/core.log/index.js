@@ -5,7 +5,7 @@
 
 import bunyan from 'bunyan';
 import { getCallee, normalizeName } from '../utilities/helpers';
-import type { CoreImports, CoreRegister } from '../types/coreTypes';
+import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
 
 export default (options: Object, imports: CoreImports, register: CoreRegister) => {
   const log = bunyan.createLogger({
