@@ -1,13 +1,12 @@
-/**
+/** @flow
  * @briskhome
- * └core.bus <lib/core.bus/index.js>
- *
- * @author Egor Zaitsev <ezaitsev@briskhome.com>
+ * └core.bus <index.js>
  */
 
 import EventEmitter from 'eventemitter2';
+import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
 
-export default (options, imports, register) => {
+export default (options: Object, imports: CoreImports, register: CoreRegister) => {
   const log = imports.log();
   const bus = new EventEmitter({
     delimiter: ':',

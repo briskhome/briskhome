@@ -1,4 +1,8 @@
-/* globals jest describe beforeAll beforeEach it expect */
+/**
+ * @briskhome
+ * └core.log <specs/index.spec.js>
+ */
+
 import bunyan from 'bunyan';
 import { getCallee, normalizeName } from '../../utilities/helpers';
 import plugin from '../';

@@ -1,12 +1,6 @@
-/* globals jest expect describe it beforeEach beforeAll */
-
 /**
  * @briskhome
- * └core.pki </lib/core.pki/specs/index.spec.js>
- *
- * Юнит-тесты для компонента инфраструктуры приватных ключей.
- *
- * @author  Егор Зайцев <ezaitsev@briskhome.com>
+ * └core.pki <specs/index.spec.js>
  */
 
 // import fs from 'fs';

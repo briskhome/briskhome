@@ -1,3 +1,8 @@
+/** @flow
+ * @briskhome
+ * └core.graphql <queries/users.js>
+ */
+
 import {
   GraphQLList,
   GraphQLString,
@@ -16,7 +21,7 @@ export default (imports: CoreImports) => {
         description: 'Username of the user you are trying to fetch',
       },
     },
-    resolve: async (src, args) => {
+    resolve: async (src: Object, args: Object) => {
       if (args.id) return dataloader.userById.loadMany([args.id]);
       return dataloader.userById.loadAll();
     },

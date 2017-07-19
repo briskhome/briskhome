@@ -1,4 +1,8 @@
-/* globals jest describe beforeAll beforeEach it expect */
+/**
+ * @briskhome
+ * └core.bus <specs/index.spec.js>
+ */
+
 import plugin from '../';
 
 jest.enableAutomock();

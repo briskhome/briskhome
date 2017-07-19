@@ -1,6 +1,6 @@
 /** @flow
  * @briskhome
- * └core.db <lib/core.db/models/UserModel.js>
+ * └core.db <models/UserModel.js>
  */
 
 import type { CoreImports, ModelType } from '../../utilities/coreTypes';

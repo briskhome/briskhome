@@ -1,6 +1,6 @@
 /**
  * @briskhome
- * └core.db <lib/core.db/models/ReadingeModel.js>
+ * └core.db <models/ReadingeModel.js>
  */
 
 import moment from 'moment';

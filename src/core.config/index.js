@@ -1,6 +1,6 @@
 /** @flow
  * @briskhome
- * └core.config <lib/core.config/index.js>
+ * └core.config <index.js>
  */
 
 import path from 'path';

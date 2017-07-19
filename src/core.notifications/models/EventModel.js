@@ -1,6 +1,6 @@
 /** @flow
  * @briskhome
- * └core.notifications <lib/core.notifications/models/EventModel.js>
+ * └core.notifications <models/EventModel.js>
  */
 
 import type { CoreImports, ModelType } from '../../utilities/coreTypes';

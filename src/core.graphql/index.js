@@ -1,6 +1,6 @@
 /** @flow
  * @briskhome
- * └core.graphql <lib/core.graphql/index.js>
+ * └core.graphql <index.js>
  */
 
 import {

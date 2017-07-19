@@ -1,6 +1,6 @@
 /**
  * @briskhome
- * └core.notifications <lib/core.notifications/providers/telegram.js>
+ * └core.notifications <providers/telegram.js>
  */
 
 const TelegramBot = require('node-telegram-bot-api');

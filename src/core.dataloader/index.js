@@ -1,6 +1,6 @@
 /** @flow
  * @briskhome
- * └core.dataloader <lib/core.dataloader/index.js>
+ * └core.dataloader <index.js>
  */
 
 import Dataloader from './dataloader';

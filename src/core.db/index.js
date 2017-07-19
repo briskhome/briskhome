@@ -1,6 +1,6 @@
 /** @flow
  * @briskhome
- * └core.db <lib/core.db/index.js>
+ * └core.db <index.js>
  */
 
 import mongoose from 'mongoose';

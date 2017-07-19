@@ -1,6 +1,6 @@
 /** @flow
  * @briskhome
- * └core.log <lib/core.log/index.js>
+ * └core.log <index.js>
  */
 
 import bunyan from 'bunyan';

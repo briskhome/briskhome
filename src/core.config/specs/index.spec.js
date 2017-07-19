@@ -1,4 +1,7 @@
-/* globals jest describe beforeAll beforeEach it expect */
+/**
+ * @briskhome
+ * └core.config <specs/index.spec.js>
+ */
 import nconf from 'nconf';
 import properties from 'properties';
 import { getCallee } from '../../utilities/helpers';

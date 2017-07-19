@@ -1,6 +1,6 @@
 /** @flow
  * @briskhome
- * └core.db <lib/core.db/models/SensorModel.js>
+ * └core.db <models/SensorModel.js>
  */
 
 import uuid from 'uuid-1345';
