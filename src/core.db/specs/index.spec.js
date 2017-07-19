@@ -1,4 +1,8 @@
-/* globals jest describe beforeAll beforeEach it expect */
+/**
+ * @briskhome
+ * └core.db <specs/index.spec.js>
+ */
+
 import events from 'events';
 import mongoose from 'mongoose';
 import { resources } from '../../utilities/resources';

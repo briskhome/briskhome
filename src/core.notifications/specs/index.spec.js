@@ -1,4 +1,8 @@
-/* globals jest expect describe it beforeEach beforeAll */
+/**
+ * @briskhome
+ * └core.notifications <specs/index.spec.js>
+ */
+
 import { getCallee } from '../../utilities/helpers';
 
 jest.enableAutomock();

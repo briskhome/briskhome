@@ -1,6 +1,6 @@
 /** @flow
  * @briskhome
- * └core <lib/plugins.js>
+ * └core <utilities/plugins.js>
  */
 
 import fs from 'fs';

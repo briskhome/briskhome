@@ -1,9 +1,6 @@
-/**
- * @briskhome/core.pki <lib/core.pki/index.js>
- *
- * Компонент инфраструктуры публичных ключей.
- *
- * @author Egor Zaitsev <ezaitsev@briskhome.com>
+/** @flow
+ * @briskhome
+ * └core.pki <index.js>
  */
 
 import fs from 'fs';

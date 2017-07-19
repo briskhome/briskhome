@@ -1,3 +1,8 @@
+/** @flow
+ * @briskhome
+ * └core.graphql <queries/devices.js>
+ */
+
 import {
   GraphQLList,
   GraphQLString,

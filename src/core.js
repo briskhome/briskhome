@@ -2,7 +2,7 @@
 
 /** @flow
  * @briskhome
- * └core <lib/core.js>
+ * └core <core.js>
  */
 
 import os from 'os';

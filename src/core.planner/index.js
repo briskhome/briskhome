@@ -1,9 +1,6 @@
 /**
- * @briskhome/core.planner <lib/core.planner/index.js>
- *
- * Компонент планировщика задач.
- *
- * @author Egor Zaitsev <ezaitsev@briskhome.com>
+ * @briskhome
+ * └core.planner <index.js>
  */
 
 const Agenda = require('agenda');

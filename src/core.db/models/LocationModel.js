@@ -1,6 +1,6 @@
 /** @flow
  * @briskhome
- * └core.db <lib/core.db/models/LocationModel.js>
+ * └core.db <models/LocationModel.js>
  */
 
 import uuid from 'uuid-1345';

@@ -1,4 +1,7 @@
-/* global jest beforeEach describe it expect */
+/**
+ * @briskhome
+ * └architect <utilities/specs/architect.spec.js>
+ */
 
 import path from 'path';
 import Architect, {

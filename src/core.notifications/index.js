@@ -1,8 +1,6 @@
 /** @flow
  * @briskhome
- * └core.notifications <lib/core.notifications/index.js>
- *
- * @author Egor Zaitsev <ezaitsev@briskhome.com>
+ * └core.notifications <index.js>
  */
 
 import uuid from 'uuid-1345';
