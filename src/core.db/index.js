@@ -5,7 +5,7 @@
 
 import mongoose from 'mongoose';
 import { resources } from '../utilities/resources';
-import type { CoreImports, CoreRegister } from '../types/coreTypes';
+import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
 
 export default (options: Object, imports: CoreImports, register: CoreRegister) => {
   const { database, hostname, username, password } = options;
@@ -13,7 +13,7 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
   const log = imports.log();
 
   mongoose.Promise = global.Promise;
-  mongoose.set('debug', true);
+  mongoose.set('debug', options.NODE_ENV === 'development');
   mongoose.connect(`mongodb://${credentials}${hostname}/${database}`);
   mongoose.connection.on('error', (err) => {
     log.fatal({ err, hostname, database, username }, 'Error establishing connection to MongoDB instance');
@@ -24,20 +24,9 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
     log.debug({ hostname, database, username, password }, 'Trying to connect to MongoDB instance');
   });
 
-  function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
-  }
-
-
   mongoose.connection.once('connected', () => {
     log.info({ hostname, database, username }, 'Database connection established');
     resources('models', [{ ...imports, db: mongoose }]);
-
-    const ReadingModel = mongoose.model('core:reading');
-    ReadingModel.upsertReading('28.F2FBE3467CC2', { type: 'temperature', value: getRandomIntInclusive(0, 100) });
-
     return register(null, { db: mongoose });
   });
 

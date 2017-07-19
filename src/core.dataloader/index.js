@@ -3,8 +3,6 @@
  * └core.dataloader <lib/core.dataloader/index.js>
  */
 
-/* eslint no-underscore-dangle: [2, { "allow": ["_id"], "allowAfterSuper": true, "allowAfterThis": true }] */
-
 import Dataloader from './dataloader';
 import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
 

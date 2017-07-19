@@ -8,7 +8,7 @@ import nconf from 'nconf';
 import properties from 'properties';
 import { getCallee } from '../utilities/helpers';
 import { resources } from '../utilities/resources';
-import type { CoreImports, CoreRegister } from '../types/coreTypes';
+import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
 
 export default (options: Object, imports: CoreImports, register: CoreRegister) => {
   const parse = (dir: string): Function => properties.parse(dir, {

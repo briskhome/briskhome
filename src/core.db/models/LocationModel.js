@@ -4,7 +4,7 @@
  */
 
 import uuid from 'uuid-1345';
-import type { CoreImports, ModelType } from '../types/coreTypes';
+import type { CoreImports, ModelType } from '../../utilities/coreTypes';
 
 export type RoomType = {
   id: string,

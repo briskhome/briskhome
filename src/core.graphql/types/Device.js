@@ -1,6 +1,6 @@
 /** @flow
  * @briskhome
- * └core.graphql <lib/core.graphql/index.js>
+ * └core.graphql <types/Device.js>
  */
 
 import {
@@ -9,11 +9,12 @@ import {
   GraphQLList,
 } from 'graphql';
 import SensorType from './Sensor';
-import type { CoreGraphQL, CoreImports } from '../../types/coreTypes';
+import type { CoreImports } from '../../utilities/coreTypes';
 
-export default ({ dataloader, db, log }: CoreImports): CoreGraphQL => {
+export default (imports: CoreImports): GraphQLObjectType => {
+  const { dataloader, db } = imports;
   const SensorModel = db.model('core:sensor');
-  const Sensor = SensorType({ dataloader, db, log });
+  const Sensor = SensorType(imports);
   return new GraphQLObjectType({
     name: 'Device',
     description: 'This is a generic device',

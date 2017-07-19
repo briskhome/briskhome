@@ -1,5 +1,3 @@
-/* eslint-disable import/no-dynamic-require, global-require, no-console */
-
 /** @flow
  * @briskhome
  * └architect <utilities/architect.js>

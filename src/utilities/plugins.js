@@ -6,7 +6,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import type { PackageJson } from '../types/coreTypes';
+import type { PackageJson } from '../utilities/coreTypes';
 
 export const plugins = (directories?: Array<string> = ['./lib', './node_modules'])
   : Array<string> => [].concat(...directories.map(directory => fs.readdirSync(directory)

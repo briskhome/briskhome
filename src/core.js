@@ -15,8 +15,8 @@ import { briskhomeAsciiLogo } from './utilities/constants';
 (async () => {
   let app;
   try {
-    app = await new Architect()
-      .loadPlugins(resolveConfig(enabledPlugins(), path.resolve(__dirname, '..')));
+    const plugins = await resolveConfig(enabledPlugins(), path.resolve(__dirname, '..'));
+    app = await new Architect().loadPlugins(plugins);
   } catch (e) {
     process.stdout.write(`{
       "name":"briskhome",
@@ -69,7 +69,17 @@ if (!process.argv.includes('--ugly')) {
   writeBriskhomeInfo();
 }
 
-process.on('unhandledRejection', (error, promise) => {
-  console.log({ error, promise });
+process.on('unhandledRejection', (e, promise) => {
+  process.stdout.write(`{
+    "name":"briskhome",
+    "hostname":"${os.hostname()}",
+    "pid":${process.pid},
+    "component":"core",
+    "level":60,
+    "msg":"${e.toString()}",
+    "time":"${new Date().toISOString()}",
+    "v":0
+  }\n`);
+  process.stdout.write(promise);
   process.exit(1);
 });

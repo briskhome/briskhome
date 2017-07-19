@@ -7,11 +7,12 @@
  */
 
 import fs from 'fs';
+import forge from 'node-forge';
 import { spawn } from 'child_process';
 
-const forge = require('node-forge');
+import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
 
-export default (options, imports, register) => {
+export default (options: Object, imports: CoreImports, register: CoreRegister) => {
   const log = imports.log();
 
   /**

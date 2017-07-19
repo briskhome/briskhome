@@ -23,7 +23,7 @@ import {
   EVENT_UPDATE_SUCCESS,
 } from './constants';
 
-import type { CoreImports, CoreRegister, SubscriptionType } from '../types/coreTypes';
+import type { CoreImports, CoreRegister, SubscriptionType } from '../utilities/coreTypes';
 import type { EventModelType, EventType } from './models/EventModel';
 import type { UserModelType } from '../core.db/models/UserModel';
 
@@ -215,16 +215,16 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
     }
 
     users.forEach((user) => {
-      const hasMatchingSubscription = !!user.subscriptions.filter((subscription) => {
-        return subscription.id === event.id && subscription.levels.includes(event.level);
-      }).length;
+      const hasMatchingSubscription = !!user.subscriptions.filter(subscription =>
+        subscription.id === event.id && subscription.levels.includes(event.level),
+      ).length;
 
       if (!hasMatchingSubscription) {
         return false;
       }
 
       if (user.contacts) {
-        user.contacts
+        return user.contacts
           .filter(contact => contact.levels.includes(event.level))
           .map(async (contact) => {
             if (!this.providers[contact.name]) {
@@ -241,9 +241,10 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
 
             log.info({ data: { user, event, contact } }, EVENT_DISPATCH_SUCCESS);
           });
-      } else {
-        log.warn({ data: { user, event } }, ERR_NO_CONTACTS);
       }
+
+      log.warn({ data: { user, event } }, ERR_NO_CONTACTS);
+      return null;
     });
   };
 
@@ -258,7 +259,7 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
   Notifications.prototype.verify = async function verify(user: UserModelType, providerId: string)
     : Promise<> {
     const verified = async (contactId) => {
-      user.contacts[providerId] = contactId;                                  // eslint-disable-line
+      user.contacts[providerId] = contactId;                                                      // eslint-disable-line
       const result = await user.save();
       if (!result) {
         log.error(`Unable to verify ${user.username} with ${providerId} by ${contactId}`);

@@ -1,6 +1,6 @@
 /** @flow
  * @briskhome
- * └core.graphql <lib/core.graphql/index.js>
+ * └core.graphql <types/Sensor.js>
  */
 
 import {
@@ -10,11 +10,12 @@ import {
 } from 'graphql';
 import moment from 'moment';
 import ReadingType from './Reading';
-import type { CoreGraphQL, CoreImports } from '../../types/coreTypes';
+import type { CoreImports } from '../../utilities/coreTypes';
 
-export default ({ dataloader, db, log }: CoreImports): GraphQLObjectType => {
+export default (imports: CoreImports): GraphQLObjectType => {
+  const { db } = imports;
   const ReadingModel = db.model('core:reading');
-  const Reading = ReadingType({ dataloader, db, log });
+  const Reading = ReadingType(imports);
   return new GraphQLObjectType({
     name: 'Sensor',
     description: 'This is a generic sensor',
@@ -47,11 +48,11 @@ export default ({ dataloader, db, log }: CoreImports): GraphQLObjectType => {
             defaultValue: moment(),
           },
         },
-        resolve: async (src, args, ctx) => {
+        resolve: async (src, args) => {
           const type = args.type || (src.values.length === 1 ? src.values[0] : null);
           if (!type) return null;
           const query = await ReadingModel.find({
-            sensor: src._id,                                                                      // eslint-disable-line
+            sensor: src._id,
             timestamp: { $gte: moment(args.from).utc().startOf('day'), $lte: moment(args.to).utc().endOf('day') },
             'values.type': type,
             'values.timestamp': { $gte: moment(args.from).utc().toDate(), $lte: moment(args.to).utc().toDate() },
