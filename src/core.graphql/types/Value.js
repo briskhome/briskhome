@@ -1,6 +1,6 @@
 /** @flow
  * @briskhome
- * └core.graphql <types/Reading.js>
+ * └core.graphql <types/Value.js>
  */
 
 import {
@@ -10,7 +10,7 @@ import {
 
 export default (): GraphQLObjectType =>
   new GraphQLObjectType({
-    name: 'Reading',
+    name: 'Value',
     description: 'No desc for now',
     fields: {
       timestamp: {

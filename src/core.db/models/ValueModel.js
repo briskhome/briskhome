@@ -1,26 +1,26 @@
 /**
  * @briskhome
- * └core.db <models/ReadingeModel.js>
+ * └core.db <models/ValueModel.js>
  */
 
 import moment from 'moment';
 import type { CoreImports, ModelType } from '../../utilities/coreTypes';
 
-export type ReadingValueType = {
+export type ValueValueType = {
   timestamp?: Date,
   type: string,
   value: string,
 };
 
-export type ReadingType = {
+export type ValueType = {
   sensor: string,
-  values: Array<ReadingValueType>,
+  values: Array<ValueValueType>,
   timestamp: string,
 }
 
-export type ReadingModelType = (document: ModelType) => {
+export type ValueModelType = (document: ModelType) => {
 
-} & ReadingType & ModelType<ReadingModelType>
+} & ValueType & ModelType<ValueModelType>
 
 const operators = {
   lt: (boundary: any, value: any) => boundary < value,
@@ -33,16 +33,16 @@ const operators = {
 export default ({ bus, db }: CoreImports) => {
   const Schema = db.Schema;
   const SensorModel = db.model('core:sensor');
-  const ReadingSchema = new Schema({
+  const ValueSchema = new Schema({
     sensor: { type: String, ref: 'core:sensor' },
     values: [{ type: db.Schema.Types.Mixed, _id: false }],
     timestamp: { type: Date, default: moment().startOf('day') },
   }, {
-    collection: 'readings',
+    collection: 'values',
   });
 
-  ReadingSchema.statics.upsertReading = async function upsertReading(sensor: string, { timestamp, type, value }
-    : ReadingValueType) {
+  ValueSchema.statics.upsertValue = async function upsertValue(sensor: string, { timestamp, type, value }
+    : ValueValueType) {
     const fetchedSensor = SensorModel.findOne({ _id: sensor, 'bounds.type': type });
     if (fetchedSensor) {
       const boundsForType = fetchedSensor.bounds.filter(boundary => boundary.type === type);
@@ -61,7 +61,7 @@ export default ({ bus, db }: CoreImports) => {
         : moment().utc().startOf('day').toDate(),
     }).exec();
 
-    if (!reading) reading = new this({ sensor, timestamp: moment().utc().startOf('day').toDate(), values: [] });
+    if (!value) reading = new this({ sensor, timestamp: moment().utc().startOf('day').toDate(), values: [] });
     reading.values.push({
       timestamp: timestamp
         ? moment(timestamp).utc().toDate()
@@ -74,5 +74,5 @@ export default ({ bus, db }: CoreImports) => {
     return reading.save();
   };
 
-  return db.model('core:reading', ReadingSchema);
+  return db.model('core:value', ValueSchema);
 };

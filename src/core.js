@@ -70,16 +70,17 @@ if (!process.argv.includes('--ugly')) {
 }
 
 process.on('unhandledRejection', (e, promise) => {
-  process.stdout.write(`{
-    "name":"briskhome",
-    "hostname":"${os.hostname()}",
-    "pid":${process.pid},
-    "component":"core",
-    "level":60,
-    "msg":"${e.toString()}",
-    "time":"${new Date().toISOString()}",
-    "v":0
-  }\n`);
-  process.stdout.write(promise);
+  // process.stdout.write(`{
+  //   "name":"briskhome",
+  //   "hostname":"${os.hostname()}",
+  //   "pid":${process.pid},
+  //   "component":"core",
+  //   "level":60,
+  //   "msg":"${e.toString()}",
+  //   "time":"${new Date().toISOString()}",
+  //   "v":0
+  // }\n`);
+  console.error(promise);
+  console.error(e);
   process.exit(1);
 });
