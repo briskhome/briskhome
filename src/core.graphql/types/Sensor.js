@@ -9,13 +9,13 @@ import {
   GraphQLList,
 } from 'graphql';
 import moment from 'moment';
-import ReadingType from './Reading';
+import ValueType from './Value';
 import type { CoreImports } from '../../utilities/coreTypes';
 
 export default (imports: CoreImports): GraphQLObjectType => {
   const { db } = imports;
-  const ReadingModel = db.model('core:reading');
-  const Reading = ReadingType(imports);
+  const ValueModel = db.model('core:value');
+  const Value = ValueType(imports);
   return new GraphQLObjectType({
     name: 'Sensor',
     description: 'This is a generic sensor',
@@ -30,8 +30,8 @@ export default (imports: CoreImports): GraphQLObjectType => {
         resolve: s => s.values,
       },
       values: {
-        type: new GraphQLList(Reading),
-        description: 'A list of readings',
+        type: new GraphQLList(Value),
+        description: 'A list of values',
         args: {
           type: {
             type: GraphQLString,
@@ -51,7 +51,7 @@ export default (imports: CoreImports): GraphQLObjectType => {
         resolve: async (src, args) => {
           const type = args.type || (src.values.length === 1 ? src.values[0] : null);
           if (!type) return null;
-          const query = await ReadingModel.find({
+          const query = await ValueModel.find({
             sensor: src._id,
             timestamp: { $gte: moment(args.from).utc().startOf('day'), $lte: moment(args.to).utc().endOf('day') },
             'values.type': type,
