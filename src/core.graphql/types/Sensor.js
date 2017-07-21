@@ -12,22 +12,49 @@ import moment from 'moment';
 import ValueType from './Value';
 import type { CoreImports } from '../../utilities/coreTypes';
 
+const BoundaryType = new GraphQLObjectType({
+  type: {
+    type: GraphQLString,
+    description: 'Type of value this boundary applies to',
+  },
+  operation: {
+    type: GraphQLString,
+    description: 'Type of boundary',
+  },
+  value: {
+    type: GraphQLString,
+    description: 'Boundary value',
+  },
+});
+
 export default (imports: CoreImports): GraphQLObjectType => {
   const { db } = imports;
   const ValueModel = db.model('core:value');
   const Value = ValueType(imports);
   return new GraphQLObjectType({
     name: 'Sensor',
-    description: 'This is a generic sensor',
+    description: 'A sensor registered with Briskhome',
     fields: {
       id: {
         type: GraphQLString,
-        description: 'Unique sensor identifier',
+        description: 'Unique sensor identifier (e.g. serial number)',
+      },
+      device: {
+        type: GraphQLString,
+        description: 'A device that controls this sensor',
       },
       types: {
         type: new GraphQLList(GraphQLString),
         description: 'Types of values this sensor collects',
         resolve: s => s.values,
+      },
+      bounds: {
+        type: new GraphQLList(BoundaryType),
+        description: 'Sensor value boundaries by value types',
+      },
+      location: {
+        type: GraphQLString,
+        description: 'Location identifier',
       },
       values: {
         type: new GraphQLList(Value),

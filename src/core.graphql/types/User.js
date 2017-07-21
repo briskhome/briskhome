@@ -11,7 +11,7 @@ import {
 export default (): GraphQLObjectType =>
   new GraphQLObjectType({
     name: 'User',
-    description: 'This is a generic user',
+    description: 'A Briskhome user',
     fields: {
       id: {
         type: GraphQLString,
@@ -19,15 +19,19 @@ export default (): GraphQLObjectType =>
       },
       lastName: {
         type: GraphQLString,
+        description: 'Last name',
       },
       firstName: {
         type: GraphQLString,
+        description: 'First name',
       },
       name: {
         type: GraphQLString,
+        description: 'Name',
       },
-      type: {
+      role: {
         type: GraphQLString,
+        description: 'Either admin, user or guest',
       },
     },
   });

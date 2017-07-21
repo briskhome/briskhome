@@ -17,7 +17,7 @@ export default (imports: CoreImports): GraphQLObjectType => {
   const Sensor = SensorType(imports);
   return new GraphQLObjectType({
     name: 'Device',
-    description: 'This is a generic device',
+    description: 'A device registered with Briskhome',
     fields: {
       id: {
         type: GraphQLString,
@@ -27,6 +27,26 @@ export default (imports: CoreImports): GraphQLObjectType => {
         type: GraphQLString,
         description: 'Human-readable device name',
       },
+      mac: {
+        type: GraphQLString,
+        description: 'MAC address',
+      },
+      address: {
+        type: GraphQLString,
+        description: 'IP address on the local area network',
+      },
+      hostname: {
+        type: GraphQLString,
+        description: 'Device hostname',
+      },
+      description: {
+        type: GraphQLString,
+        description: 'Human-readable device description',
+      },
+      location: {
+        type: GraphQLString,
+        description: 'Location identifier',
+      },
       sensors: {
         type: new GraphQLList(Sensor),
         description: 'Sensors that are connected to or operated by this device',
@@ -35,6 +55,14 @@ export default (imports: CoreImports): GraphQLObjectType => {
           if (!ids.length) return null;
           return dataloader.sensorById.loadMany(ids.reduce((acc, doc) => acc.concat(doc._id), []));
         },
+      },
+      createdAt: {
+        type: GraphQLString,
+        description: 'Creation timestamp',
+      },
+      updatedAt: {
+        type: GraphQLString,
+        description: 'Timestamp of a last update',
       },
     },
   });

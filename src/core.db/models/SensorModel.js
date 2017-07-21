@@ -13,7 +13,7 @@ export type SensorType = {
   device: string,
   isOnline: boolean,
   values: string,
-  lcoation: Object,
+  location: Object,
 }
 
 export type SensorModelType = {
@@ -34,6 +34,8 @@ export default ({ db }: CoreImports) => {
       type: Boolean,
       default: true,
     },
+    // TODO: Rename values to types.
+    // Do not forget to change resolver in graphql/types/Sensor
     values: [{
       type: String,
     }],

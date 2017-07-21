@@ -15,7 +15,7 @@ export default (): GraphQLObjectType =>
     fields: {
       timestamp: {
         type: GraphQLString,
-        description: 'Timestamp when value was collected',
+        description: 'Timestamp of when the value was collected',
       },
       type: {
         type: GraphQLString,
@@ -23,7 +23,7 @@ export default (): GraphQLObjectType =>
       },
       value: {
         type: GraphQLString,
-        description: 'Value it is',
+        description: 'Collected value',
       },
     },
   });
