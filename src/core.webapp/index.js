@@ -3,6 +3,7 @@
  * └core.webapp <lib/core.webapp/index.js>
  */
 
+import path from 'path';
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
@@ -18,6 +19,11 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
     rootValue: root,
     graphiql: true,
   }));
+
+  app.use('/static', express.static(path.resolve(__dirname, 'public')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'index.html'));
+  });
 
   app.listen(4000);
 

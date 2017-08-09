@@ -1,0 +1,63 @@
+.widget-table
+  width 100%
+
+  .profile-image
+    display inline-block
+    border-radius 50px
+    border 1px solid #eaeaea
+    overflow hidden
+    height 42px
+    width 42px
+    vertical-align middle
+    background-color #eaeaea//#F9D21C
+    color white
+    text-align center
+    font-size x-large
+    line-height 175%
+
+
+  .profile-status
+    width 4px
+    height 4px
+
+  &__row
+    height 48px
+    background-color white
+    // &+&
+    //   border-top 1px solid #eaeaea
+    &:hover
+      background-color #fafafa
+
+  &__cell
+    vertical-align middle
+
+    &_first
+      width 60px
+
+      .briskhome-avatar
+        margin 8px
+
+    &_middle
+      // padding 4px 0
+      // width 50%
+
+    &_last
+      test-align right
+
+    &-title
+      font-size 16px
+      margin-bottom 4px
+
+    &-subtitle
+      font-size 14px
+      color gray
+
+    &-action
+      border solid #8e8e93
+      border-width 0 3px 3px 0
+      display inline-block
+      padding 3px
+      transform rotate(45deg)
+      margin-left 16px
+      margin-bottom 2px
+      cursor pointer
