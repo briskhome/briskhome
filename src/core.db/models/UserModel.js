@@ -30,7 +30,7 @@ export type UserType = {
   // username: string,
   firstName: string,
   lastName: string,
-  type: 'guest' | 'user' | 'superuser',
+  type: 'guest' | 'regular' | 'superuser',
   contacts: Array<UserContactType>,
   devices: Array<UserDeviceType>,
   subscriptions: Array<UserSubscriptionType>,

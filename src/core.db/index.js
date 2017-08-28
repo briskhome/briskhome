@@ -27,6 +27,14 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
   mongoose.connection.once('connected', () => {
     log.info({ hostname, database, username }, 'Database connection established');
     resources('models', [{ ...imports, db: mongoose }]);
+    const User = mongoose.model('core:user');
+    const user = new User({
+      _id: `user${(Math.floor(Math.random() * 100))}`,
+      firstName: 'Test',
+      lastName: 'Account',
+      type: Math.random() > 0.5 ? 'guest' : 'user',
+    });
+    // user.save();
     return register(null, { db: mongoose });
   });
 

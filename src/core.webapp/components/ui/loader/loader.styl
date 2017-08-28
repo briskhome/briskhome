@@ -1,0 +1,29 @@
+.briskhome-loader
+  &_content
+    padding 16px
+    text-align center
+    & > div
+      background-color #f9d21c
+      border-radius 1px
+      width 8px
+      height 8px
+      margin 2px
+      animation-fill-mode both
+      display inline-block 
+      &:nth-child(1)
+        animation: scale 1s -0.24s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08)
+      &:nth-child(2)
+        animation: scale 1s -0.12s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08)
+      &:nth-child(3)
+        animation: scale 1s 0s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08)
+
+@keyframes scale
+  0%
+    transform scale(1)
+    opacity 1
+  45%
+    transform scale(0)
+    opacity 0.7
+  80%
+    transform scale(1)
+    opacity 1

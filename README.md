@@ -2,7 +2,7 @@
 [![Travis](https://img.shields.io/travis/briskhome/briskhome.svg?style=flat-square)](https://travis-ci.org/briskhome/briskhome) [![GitHub release](https://img.shields.io/github/release/briskhome/briskhome.svg?style=flat-square)](https://github.com/briskhome/briskhome/releases/latest) [![Test Coverage](https://img.shields.io/codeclimate/coverage/github/briskhome/briskhome.svg?style=flat-square)](https://codeclimate.com/github/briskhome/briskhome/coverage) [![Code Climate](https://img.shields.io/codeclimate/github/briskhome/briskhome.svg?style=flat-square)](https://codeclimate.com/github/briskhome/briskhome) [![GitHub issues](https://img.shields.io/github/issues/briskhome/briskhome.svg?style=flat-square)](https://github.com/briskhome/briskhome/issues) [![Documentation](https://readthedocs.org/projects/briskhome/badge/?version=latest&style=flat-square)](http://docs.briskhome.com/en/latest/?badge=latest)
 
 ---
-**Briskhome** is a work-in-progress **extensible open-source house monitoring and automation system** for Node.js that is limited by your imagination only.
+**Briskhome** is a work-in-progress **extensible open-source house monitoring and automation system** for Node.js that is limited by your imagination only — a high-level abstraction over all things smart home.
 
 <!-- See live demo of **Briskhome** web interface at **[demo.briskhome.com]()**. -->
 

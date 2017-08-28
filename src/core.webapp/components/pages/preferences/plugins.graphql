@@ -1,0 +1,11 @@
+{
+  plugins {
+    id
+    name
+    version
+    author
+    disabled
+    consumes
+    provides
+  }
+}

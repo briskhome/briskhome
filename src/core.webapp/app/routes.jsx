@@ -1,31 +1,29 @@
 import React from 'react';
-import { Dashboard } from '../components/dashboard';
 import { ApolloProvider } from 'react-apollo';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-} from 'react-router-dom';
-import configureStore, {
-  client,
-} from './redux/store';
-
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import configureStore, { client } from './redux/store';
+import { Preferences } from '../components/pages/preferences';
 import { Navigation } from '../components/navigation';
+import { Dashboard } from '../components/pages/dashboard';
+import { NotFound } from '../components/notfound';
+import { Example } from '../components/onboarding/example';
+
 import './app.styl';
-
-const store = configureStore();
-
+import './stuff.styl';
 
 export const Routes = () => {
   return (
-    <ApolloProvider store={ store } client={ client }>
+    <ApolloProvider store={configureStore()} client={client}>
       <Router>
         <div>
           <Navigation />
           <section>
-            <Route exact path='/' component={ Dashboard } />
-            <Route path='/about' component={ Dashboard } />
-            <Route path='/topics' component={ Dashboard } />
+            <Switch>
+              <Route exact path="/" component={Dashboard} />
+              <Route path="/cameras" component={Example} />
+              <Route path="/preferences" component={Preferences} />
+              <Route path="*" component={NotFound} />
+            </Switch>
           </section>
         </div>
       </Router>

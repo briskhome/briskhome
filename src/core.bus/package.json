@@ -3,13 +3,10 @@
   "version": "0.3.0-alpha.1",
   "main": "index.js",
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
+  "description": "A core plugin which provides a common bus interface for other plugins to communicate and cooperate.",
   "private": true,
   "plugin": {
-    "consumes": [
-      "log"
-    ],
-    "provides": [
-      "bus"
-    ]
+    "consumes": ["log"],
+    "provides": ["bus"]
   }
 }

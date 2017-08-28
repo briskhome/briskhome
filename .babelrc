@@ -1,9 +1,12 @@
 {
- "presets": ["flow", "react"],
- "plugins": [
-   "transform-class-properties",
-   "transform-inline-imports-commonjs",
-   "transform-object-rest-spread",
-   ["module-resolver", { "root": ["./src"] }]
- ]
+  "presets": ["flow", "react"],
+  "plugins": [
+    "transform-class-properties",
+    "transform-inline-imports-commonjs",
+    "transform-object-rest-spread",
+    ["module-resolver", { "root": ["./src"] }]
+  ],
+  "ignore": [
+      "./**/**/__mocks__"
+  ]
 }
