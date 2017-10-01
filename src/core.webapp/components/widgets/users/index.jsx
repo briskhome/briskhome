@@ -7,7 +7,7 @@ import Avatar from '../../avatar';
 import Card from '../../card';
 import Menu from '../../ui/menu';
 import AddUserSheet from '../../onboarding/addUserSheet';
-import { users, createUser } from './graphql';
+import { users as UsersQuery, removeUser } from './graphql';
 import './users.styl';
 import './modal.styl';
 
@@ -23,50 +23,66 @@ export class UserCard extends React.Component {
 
   toggleAddUserModal: Function = () => {
     this.setState({ addUserModalOpen: !this.state.addUserModalOpen });
-  }
+  };
 
   renderContent: Function = () => {
-    const { data: { users = [] } } = this.props;
+    const { data: { users = [] }, mutate } = this.props;
     if (!users.length) {
       return (
-        <span className='card__content_empty'>No users are registered.</span>
+        <span className="card__content_empty">No users are registered.</span>
       );
     }
 
     return (
       <div>
-        <table className='widget-table'>
+        <table className="widget-table">
           <tbody>
-            {users && users.map(user => (
-              <tr className='widget-table__row'>
-                <td className='widget-table__cell widget-table__cell_first'>
-                  <Avatar
-                    name={user.name.split(' ').map(el => el[0]).join('')}
-                    online
-                  />
-                </td>
-                <td className='widget-table__cell widget-table__cell_middle'>
-                  <div className='widget-table__cell-title'>{user.name}</div>
-                  <div className='widget-table__cell-subtitle'>{user.id}</div>
-                </td>
-                <td className='widget-table__cell widget-table__cell_last'>
-                  <Menu
-                    arrow
-                    options={[
-                      <a className='link' href='#'>More info</a>,
-                      <a className='link link_red' href='#'>Revoke access</a>,
-                    ]}
-                  />
-                </td>
-              </tr>
-            ))}
+            {users &&
+              users.map(user => (
+                <tr className="widget-table__row">
+                  <td className="widget-table__cell widget-table__cell_first">
+                    <Avatar
+                      name={user.name
+                        .split(' ')
+                        .map(el => el[0])
+                        .join('')}
+                      online
+                    />
+                  </td>
+                  <td className="widget-table__cell widget-table__cell_middle">
+                    <div className="widget-table__cell-title">{user.name}</div>
+                    <div className="widget-table__cell-subtitle">{user.id}</div>
+                  </td>
+                  <td className="widget-table__cell widget-table__cell_last">
+                    <Menu
+                      arrow
+                      options={[
+                        <a className="link" href="#">
+                          More info
+                        </a>,
+                        <a
+                          className="link link_red"
+                          href="#"
+                          onClick={() =>
+                            mutate({
+                              variables: { username: user.id },
+                              refetchQueries: [{ query: UsersQuery }],
+                            })}
+                        >
+                          Revoke access
+                        </a>,
+                      ]}
+                    />
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
         <Modal
           isOpen={this.state.addUserModalOpen}
           onRequestClose={this.toggleAddUserModal}
           closeTimeoutMS={250}
-          contentLabel='AddUserModal'
+          contentLabel="AddUserModal"
           className={{
             base: 'briskhome-modal__content',
             afterOpen: 'briskhome-modal__content_open',
@@ -77,7 +93,7 @@ export class UserCard extends React.Component {
             afterOpen: 'briskhome-modal__overlay_open',
             beforeClose: 'briskhome-modal__overlay_close',
           }}
-          portalClassName='briskhome-modal'
+          portalClassName="briskhome-modal"
         >
           <AddUserSheet />
         </Modal>
@@ -91,10 +107,10 @@ export class UserCard extends React.Component {
       <Card
         error={error}
         loading={loading}
-        title='Users & Guests'
-        button='Add'
+        title="Users & Guests"
+        button="Add"
         onClick={this.toggleAddUserModal}
-        caption='No users online'
+        caption="No users online"
       >
         {this.renderContent()}
       </Card>
@@ -102,7 +118,4 @@ export class UserCard extends React.Component {
   }
 }
 
-export default compose(
-  graphql(users),
-  // graphql(createUser),
-)(UserCard);
+export default compose(graphql(UsersQuery), graphql(removeUser))(UserCard);
