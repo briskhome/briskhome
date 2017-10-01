@@ -1,36 +1,89 @@
 /** @flow
  * @briskhome
- * └core.graphql <queries/devices.js>
+ * └core.graphql <mutations/users/createUser.js>
  */
 
 import {
   GraphQLString,
-  GraphQLBoolean,
   GraphQLNonNull,
   GraphQLEnumType,
   GraphQLObjectType,
   GraphQLInputObjectType,
 } from 'graphql';
 
-export default ({
+import type Mongoose from 'mongoose';
+import type { Mongoose$Model } from 'mongoose';
+import type { CoreContextType } from '../../../utilities/coreTypes';
+// import type { UserType } from '../../../core.db/models/UserModel';
+
+declare class UserType extends Mongoose$Model {
+  _id: string,
+  id: string,
+  username?: string,
+  firstName: string,
+  lastName: string,
+  type: 'guest' | 'regular' | 'superuser',
+  contacts: Array<UserContactType>,
+  devices: Array<UserDeviceType>,
+  subscriptions: Array<UserSubscriptionType>,
+  locations: Array<UserLocationType>,
+
+  createdAt?: string,
+  updatedAt?: string,
+}
+
+type GenerateUsernameInput = {|
+  lastName: string,
+  firstName: string,
+  db: Mongoose,
+|};
+
+const generateUsername = async ({
+  lastName,
+  firstName,
+  db,
+}: GenerateUsernameInput): Promise<string> => {
+  const username = `${firstName[0]}${lastName}`.toLocaleLowerCase();
+  const UserModel: Mongoose$Model<UserType> = db.model('core:user');
+
+  const users: Array<string> = await UserModel.find({
+    _id: new RegExp(`^${username}`, 'i'),
+  });
+
+  if (users.length === 0) return username;
+  return `${username}${users.length + 1}`;
+};
+
+const UserTypeEnum = new GraphQLEnumType({
+  name: 'UserTypeEnum',
+  values: {
+    guest: {
+      value: 'guest',
+    },
+    regular: {
+      value: 'regular',
+    },
+    superuser: {
+      value: 'superuser',
+    },
+  },
+});
+
+export default {
   type: new GraphQLObjectType({
     name: 'createUserPayload',
     fields: {
       firstName: {
         type: GraphQLString,
-        description: 'Имя пользователя',
       },
       lastName: {
         type: GraphQLString,
-        description: 'Фамилия пользователя',
       },
       username: {
         type: GraphQLString,
-        description: 'Логин',
       },
       type: {
-        type: GraphQLString, // TODO -> GraphQLEnumType
-        description: 'Тип пользователя',
+        type: UserTypeEnum,
       },
     },
   }),
@@ -41,26 +94,33 @@ export default ({
         fields: {
           firstName: {
             type: new GraphQLNonNull(GraphQLString),
-            description: 'Last name',
           },
           lastName: {
             type: new GraphQLNonNull(GraphQLString),
-            description: 'First name',
           },
           password: {
             type: new GraphQLNonNull(GraphQLString),
-            description: 'Password',
           },
           type: {
-            type: new GraphQLNonNull(GraphQLString), // TODO -> GraphQLEnumType
+            type: new GraphQLNonNull(UserTypeEnum),
             description: 'A set of priviliges the user should have',
           },
         },
       }),
     },
   },
-  resolve: (obj: Object, args: Object, context: Object) => {
-    console.log(args, context);
-    return null;
+  resolve: async (obj: Object, args: Object, context: CoreContextType) => {
+    const { db, log } = context;
+    log.info({ mutation: 'createUser' }, { args });
+    const { input: { lastName, firstName, password, type } } = args;
+    const User: Mongoose$Model<UserType> = db.model('core:user');
+    const user = new User({
+      _id: await generateUsername({ db, lastName, firstName }),
+      lastName,
+      firstName,
+      password,
+      type,
+    });
+    return user.save();
   },
-});
+};
