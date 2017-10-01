@@ -9,40 +9,43 @@ import {
   GraphQLNonNull,
   GraphQLBoolean,
   GraphQLObjectType,
-  GraphQLInputObjectType
-} from "graphql";
-import devicesQuery from "./queries/devices";
-import pluginsQuery from "./queries/plugins";
-import usersQuery from "./queries/users";
-import createUser from "./mutations/users/createUser";
-import type { CoreImports, CoreRegister } from "../utilities/coreTypes";
+  GraphQLInputObjectType,
+} from 'graphql';
+import devicesQuery from './queries/devices';
+import pluginsQuery from './queries/plugins';
+import usersQuery from './queries/users';
+import createUser from './mutations/users/createUser';
+import disableUser from './mutations/users/disableUser';
+import removeUser from './mutations/users/removeUser';
+import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
 
 export default (
   options: Object,
   imports: CoreImports,
-  register: CoreRegister
+  register: CoreRegister,
 ) => {
   const log = imports.log();
   const devices = devicesQuery({ ...imports, log });
   const plugins = pluginsQuery({ ...imports, log });
   const users = usersQuery({ ...imports, log });
-  const createUserQuery = "";
 
   const schema = new GraphQLSchema({
     query: new GraphQLObjectType({
-      name: "RootQueryType",
+      name: 'RootQueryType',
       fields: {
         devices,
         plugins,
-        users
-      }
+        users,
+      },
     }),
     mutation: new GraphQLObjectType({
-      name: "RootMutationType",
+      name: 'RootMutationType',
       fields: {
-        createUser
-      }
-    })
+        createUser,
+        disableUser,
+        removeUser,
+      },
+    }),
   });
 
   return register(null, { graphql: { schema } });

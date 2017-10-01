@@ -9,12 +9,12 @@ import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
 
 export default (options: Object, imports: CoreImports, register: CoreRegister) => {
   const { database, hostname, username, password } = options;
-  const credentials = password ? `${username}:${password}@` : `${username}@` || '';
+  const credentials = password ? `${username}:${password}@` : username ? `${username}@` : '';
   const log = imports.log();
 
   mongoose.Promise = global.Promise;
   mongoose.set('debug', options.NODE_ENV === 'development');
-  mongoose.connect(`mongodb://${credentials}${hostname}/${database}`);
+  mongoose.connect(`mongodb://${credentials||''}${hostname}/${database}`);
   mongoose.connection.on('error', (err) => {
     log.fatal({ err, hostname, database, username }, 'Error establishing connection to MongoDB instance');
     return register(err);

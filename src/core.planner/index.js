@@ -10,7 +10,7 @@ export default (options, imports, register) => {
 
   const agenda = new Agenda({
     db: {
-      address: `mongodb://${options.username}:${options.password}@${options.hostname}/${options.database}`,
+      address: `mongodb://${options.hostname}/${options.database}`,
       collection: 'jobs',
     },
   });
