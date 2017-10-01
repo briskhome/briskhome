@@ -4,8 +4,9 @@
   "description": "",
   "main": "briskhome.js",
   "scripts": {
+    "babel": "node_modules/.bin/babel src -d lib --copy-files --ignore node_modules",
     "babel-watch": "vagrant up && node_modules/.bin/babel src --watch --out-dir lib --copy-files --ignore node_modules & yarn webpack-watch",
-    "build": "yarn build-cleanup && node_modules/.bin/babel src -d lib --copy-files --ignore node_modules & yarn webpack",
+    "build": "yarn build-cleanup && yarn babel && yarn webpack",
     "build-cleanup": "rm -rf lib/*",
     "build-watch": "yarn build-cleanup && yarn babel-watch",
     "flow": "node_modules/.bin/flow",
