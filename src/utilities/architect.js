@@ -335,7 +335,7 @@ export default class Architect extends events.EventEmitter {
         }
 
         if (services.bus) services.bus.emit('core:service', name, services[name]);
-        return;
+        return null;
       });
 
       if (provided && provided.destroy) {
