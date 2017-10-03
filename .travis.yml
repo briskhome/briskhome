@@ -1,26 +1,19 @@
 language: node_js
-sudo: false
 node_js:
-- '7'
-env:
-  - CXX=g++-4.8
-install:
-- yarn install --ignore-optional
-- yarn build
-script:
-- yarn flow
-- yarn test
+  - '7'
+jobs:
+  include:
+    - stage: build
+      script: yarn build
+    - stage: check
+      script: yarn lint
+    - script: yarn flow
+    - script: yarn test
+      after_success:
+      - yarn global add codecov && codecov
 addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-4.8
   code_climate:
     repo_token: 71ee8424e2660dbc7dd88d81e0715f4434453db7fb57af35604d165d2db6203a
-after_success:
-- npm install -g codecov
-- codecov
 notifications:
   slack:
     secure: QUGo52dH4An+DP+MP1S7adoj+KGfNUxvjCS3/wfT7OVT8QPe70R98DpoGLhRt73SFlg5enYvWitz9tdzj6HA2QP3tXkL0MWlKOTg2lblZ3cJxHAqy+NcayinhjHoKDvhQwtQZ+Eo3pspneEj9emWA9HAQuJLWBw8KaGn+xRTzeker9ae88zjO19uzhBMAXQaVAYIMMShiGsWoIO5mouVk4axsR5UtR/MJiAQ7hG+Lx0/PYQBDvVFo1vsswYLz32cedPZ+XpHXyYte8TcL9EDfPeiz1N0bLMa3Z2maKZDYrIL5MLvbwZ+U7vLFiKsbUjAmGuBUmAN/uzbyzSCymcyoV0ELbZpD2/KlnBcFWb82OCkYoDW6ca6aEQhEEKMFu7ACPf51tjIbNj7q3Gu3193V2GblSR5eKVRskHg7gqla+92BHVigI5RIq4uNQOl44PupCC3rdAxCv0ohCJNgaqIcuxXJjqXTjyfkaT7Q/DEZkdAQwRvnb8eA/oiuTrYU5Hlguk1ZFO0enGJluuTu25Pg/uCJ3pr4YBXEWDDqON1JBt3RNUielOy/kyTAXPHMxLb+Ue5VB6vGUvKOBlBxuhCfUCj7Xtybd5jhmwpnqEiLv/mPobzQMneXAxAQn9ZeQdGbwc4CvhUeldsVCp/dSfKOqoheamblNC7OtaqQJ+7M+E=
