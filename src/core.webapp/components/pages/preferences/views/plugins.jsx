@@ -22,60 +22,39 @@ const plugins = gql`
 const Plugin = ({
   name,
   description,
-  version,
-  author,
   disabled = false,
   consumes = [],
   provides = [],
-}): Object => {
-  return (
-    <div className="preferences__list-item">
-      <Title small extraClassName="plugin__name">
-        {name}
-      </Title>
-      <Toggle extraClassName="plugin__disabled" checked={!disabled} disabled />
-      <p className="plugin__description">
-        {description}
-      </p>
-      {provides.length
-        ? <div className="plugin__provides">
-            <span className="plugin__provides-title">Provides:</span>
-            {provides.map(service =>
-              <span className="plugin__provides-item">
-                {service}
-              </span>,
-            )}
-          </div>
-        : null}
-      {consumes.length
-        ? <div className="plugin__consumes">
-            <span className="plugin__consumes-title">Consumes:</span>
-            {consumes.map(service =>
-              <span className="plugin__consumes-item">
-                {service}
-              </span>,
-            )}
-          </div>
-        : null}
-    </div>
-  );
-};
-
-type PluginsPaneProps = {
-  loading: boolean,
-  error: string,
-  data: {
-    plugins: Array<Object>,
-  },
-};
-
-type PluginsPaneState = {
-  filter: {
-    value: ?string,
-  },
-};
+  // version,
+  // author,
+}): Object => (
+  <div className="preferences__list-item">
+    <Title small extraClassName="plugin__name">
+      {name}
+    </Title>
+    <Toggle extraClassName="plugin__disabled" checked={!disabled} disabled />
+    <p className="plugin__description">{description}</p>
+    {provides.length ? (
+      <div className="plugin__provides">
+        <span className="plugin__provides-title">Provides:</span>
+        {provides.map(service => (
+          <span className="plugin__provides-item">{service}</span>
+        ))}
+      </div>
+    ) : null}
+    {consumes.length ? (
+      <div className="plugin__consumes">
+        <span className="plugin__consumes-title">Consumes:</span>
+        {consumes.map(service => (
+          <span className="plugin__consumes-item">{service}</span>
+        ))}
+      </div>
+    ) : null}
+  </div>
+);
 
 export class PluginsPane extends React.Component {
+  displayName: 'Plugins';
   constructor() {
     super();
     this.state = {
@@ -84,10 +63,6 @@ export class PluginsPane extends React.Component {
       },
     };
   }
-
-  displayName: 'Plugins';
-  props: PluginsPaneProps;
-  state: PluginsPaneState;
 
   render() {
     return (

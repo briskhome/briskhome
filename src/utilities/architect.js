@@ -8,7 +8,6 @@ import path from 'path';
 import events from 'events';
 import { normalizeName } from './helpers';
 
-
 // XXX: Consider replacing the following statement with `packagePathCache = new WeakMap();`
 const packagePathCache: Object = {};
 
@@ -18,7 +17,10 @@ const packagePathCache: Object = {};
 * @param  {String} plugin    Either a path (absolute or relative) or module name.
 * @return {Promise<string>}  Real path to package.json file.
 */
-export const resolvePackage = (base: string, plugin: string):Promise<string> => {
+export const resolvePackage = (
+  base: string,
+  plugin: string,
+): Promise<string> => {
   if (!(base in packagePathCache)) {
     packagePathCache[base] = {};
   }
@@ -28,12 +30,14 @@ export const resolvePackage = (base: string, plugin: string):Promise<string> => 
     return cache[plugin];
   }
 
-  const rejectErr: Object = new Error(`Can't find ${plugin} relative to ${base}`);
+  const rejectErr: Object = new Error(
+    `Can't find ${plugin} relative to ${base}`,
+  );
   rejectErr.code = 'ENOENT';
   if (plugin[0] === '.' || plugin[0] === '/') {
     return new Promise((resolve, reject) => {
       const fullPath = path.resolve(base, plugin);
-      return fs.access(fullPath, fs.constants.R_OK, (accessErr) => {
+      return fs.access(fullPath, fs.constants.R_OK, accessErr => {
         if (accessErr) reject(rejectErr);
         return fs.realpath(fullPath, (realpathErr, realpathValue) => {
           if (realpathErr) reject(rejectErr);
@@ -44,25 +48,26 @@ export const resolvePackage = (base: string, plugin: string):Promise<string> => 
     });
   }
 
-  const tryNext = (tryBase: string):Promise<string> => new Promise((resolve, reject) => {
-    if (tryBase === '/') {
-      return reject(rejectErr);
-    }
-
-    const tryPath = path.resolve(tryBase, 'node_modules', plugin);
-    return fs.access(tryPath, fs.constants.R_OK, (accessErr) => {
-      if (!accessErr) {
-        return fs.realpath(tryPath, (realpathErr, realpathValue) => {
-          if (realpathErr) reject(rejectErr);
-          cache[plugin] = realpathValue;
-          return resolve(realpathValue);
-        });
+  const tryNext = (tryBase: string): Promise<string> =>
+    new Promise((resolve, reject) => {
+      if (tryBase === '/') {
+        return reject(rejectErr);
       }
 
-      const nextBase = path.resolve(tryBase, '..');
-      return resolve(tryNext(nextBase === tryBase ? '/' : nextBase));
+      const tryPath = path.resolve(tryBase, 'node_modules', plugin);
+      return fs.access(tryPath, fs.constants.R_OK, accessErr => {
+        if (!accessErr) {
+          return fs.realpath(tryPath, (realpathErr, realpathValue) => {
+            if (realpathErr) reject(rejectErr);
+            cache[plugin] = realpathValue;
+            return resolve(realpathValue);
+          });
+        }
+
+        const nextBase = path.resolve(tryBase, '..');
+        return resolve(tryNext(nextBase === tryBase ? '/' : nextBase));
+      });
     });
-  });
 
   return tryNext(base);
 };
@@ -74,42 +79,60 @@ export const resolvePackage = (base: string, plugin: string):Promise<string> => 
 * @param  {[type]} key     [description]
 * @return {[type]}         [description]
 */
-export const resolveModule = async (base: string, plugin: string, key: string = 'plugin')
-  : Promise<Object|Error> => {
+export const resolveModule = async (
+  base: string,
+  plugin: string,
+  key: string = 'plugin',
+): Promise<Object | Error> => {
   let metadata = {};
   let pluginPackage;
   try {
     pluginPackage = await resolvePackage(base, `${plugin}/package.json`);
     metadata = (pluginPackage && require(pluginPackage)) || {};
-  } catch (e) { if (e.code !== 'ENOENT') return e; }
+  } catch (e) {
+    if (e.code !== 'ENOENT') return e;
+  }
 
   const resolvedBase = path.resolve(base, plugin);
   let resolvedPlugin;
   if (!pluginPackage) {
     try {
       resolvedPlugin = await resolvePackage(base, `${plugin}.js`);
-    } catch (e) { return e; }
+    } catch (e) {
+      return e;
+    }
   } else if (metadata && metadata.main) {
     try {
-      resolvedPlugin = await resolvePackage(resolvedBase,
-        (metadata.main[0] === '.' || metadata.main[0] === '/')
+      resolvedPlugin = await resolvePackage(
+        resolvedBase,
+        metadata.main[0] === '.' || metadata.main[0] === '/'
           ? metadata.main
           : `./${metadata.main}`,
       );
-    } catch (e) { return e; }
+    } catch (e) {
+      return e;
+    }
   } else if (!metadata) {
     try {
       resolvedPlugin = await resolvePackage(base, path.dirname(pluginPackage));
-    } catch (e) { return e; }
+    } catch (e) {
+      return e;
+    }
   }
 
   let consumes;
   let provides;
   try {
-    [consumes, provides] = (metadata && metadata[key] && metadata[key].consumes && metadata[key].provides)
-      ? [metadata.plugin.consumes, metadata.plugin.provides]
-      : require(resolvedPlugin);
-  } catch (e) { [consumes, provides] = [[], []]; }
+    [consumes, provides] =
+      metadata &&
+      metadata[key] &&
+      metadata[key].consumes &&
+      metadata[key].provides
+        ? [metadata.plugin.consumes, metadata.plugin.provides]
+        : require(resolvedPlugin);
+  } catch (e) {
+    [consumes, provides] = [[], []];
+  }
 
   metadata.main = resolvedPlugin;
   metadata.dirname = plugin;
@@ -126,11 +149,19 @@ export const resolveModule = async (base: string, plugin: string, key: string = 
  * @param key
  * @returns {Promise.Object}
  */
-export const resolveConfig = async (config: Array<*>, base: string, key?: string): Promise<*> => {
-  const timeout = new Promise((resolve, reject) => setTimeout(() => reject(new Error('Plugin load timeout')), 1000));
-  const plugins: Array<Object> = await Promise.all(config.map(plugin =>
-    Promise.race([resolveModule(base, plugin.main || plugin, key), timeout]),
-  ));
+export const resolveConfig = async (
+  config: Array<*>,
+  base: string,
+  key?: string,
+): Promise<*> => {
+  const timeout = new Promise((resolve, reject) =>
+    setTimeout(() => reject(new Error('Plugin load timeout')), 1000),
+  );
+  const plugins: Array<Object> = await Promise.all(
+    config.map(plugin =>
+      Promise.race([resolveModule(base, plugin.main || plugin, key), timeout]),
+    ),
+  );
 
   return plugins
     .filter(plugin => plugin.constructor !== Error)
@@ -167,7 +198,8 @@ export const checkCycles = (config: Array<Object>): Array<Object> => {
   let retry = true;
   while (plugins.length && retry) {
     retry = false;
-    plugins.forEach((plugin) => {                                                                 // eslint-disable-line
+    plugins.forEach(plugin => {
+      // eslint-disable-line
       const consumes = plugin.consumes.concat();
 
       let resolvedAll = true;
@@ -193,8 +225,8 @@ export const checkCycles = (config: Array<Object>): Array<Object> => {
 
   if (plugins.length) {
     const unresolved = {};
-    plugins.forEach((plugin) => {
-      plugin.consumes.forEach((name) => {
+    plugins.forEach(plugin => {
+      plugin.consumes.forEach(name => {
         if (unresolved[name] === false) {
           return;
         }
@@ -206,12 +238,12 @@ export const checkCycles = (config: Array<Object>): Array<Object> => {
         unresolved[name].push(plugin.main);
       });
 
-      plugin.provides.forEach((name) => {
+      plugin.provides.forEach(name => {
         unresolved[name] = false;
       });
     });
 
-    Object.keys(unresolved).forEach((name) => {
+    Object.keys(unresolved).forEach(name => {
       if (unresolved[name] === false) {
         delete unresolved[name];
       }
@@ -231,16 +263,24 @@ export const checkCycles = (config: Array<Object>): Array<Object> => {
  * @param config
  */
 export const checkConfig = (config: Array<Object>): Array<Object> =>
-  checkCycles(config.map((plugin) => {
-    if (!Object.prototype.hasOwnProperty.call(plugin, 'checked')) {
-      if (!Object.prototype.hasOwnProperty.call(plugin, 'consumes')) {
-        throw new Error(`Plugin ${plugin.name} is missing the consumes array`, JSON.stringify(plugin));
-      } else if (!Object.prototype.hasOwnProperty.call(plugin, 'provides')) {
-        throw new Error(`Plugin ${plugin.name} is missing the provides array`, JSON.stringify(plugin));
+  checkCycles(
+    config.map(plugin => {
+      if (!Object.prototype.hasOwnProperty.call(plugin, 'checked')) {
+        if (!Object.prototype.hasOwnProperty.call(plugin, 'consumes')) {
+          throw new Error(
+            `Plugin ${plugin.name} is missing the consumes array`,
+            JSON.stringify(plugin),
+          );
+        } else if (!Object.prototype.hasOwnProperty.call(plugin, 'provides')) {
+          throw new Error(
+            `Plugin ${plugin.name} is missing the provides array`,
+            JSON.stringify(plugin),
+          );
+        }
       }
-    }
-    return plugin;
-  }));
+      return plugin;
+    }),
+  );
 
 /**
  * The Architect.
@@ -259,7 +299,7 @@ export default class Architect extends events.EventEmitter {
     app.services = {};
   }
 
-  loadPlugins(promisedConfig: Array<*>|Promise<Array<*>>) {
+  loadPlugins(promisedConfig: Array<*> | Promise<Array<*>>) {
     return new Promise(async (resolve, reject) => {
       const app = this;
       const config = await promisedConfig;
@@ -303,15 +343,23 @@ export default class Architect extends events.EventEmitter {
     const { consumes, provides, exports, ...options } = plugin;
 
     if (plugin.consumes) {
-      plugin.consumes.forEach((name) => {
+      plugin.consumes.forEach(name => {
         imports[name] = services[name];
       });
     }
 
     try {
-      (async () => plugin.exports.default({
-        ...options, ...(services.config ? services.config(normalizeName(plugin.name)) : {}),
-      }, imports, register))();                                                                   // eslint-disable-line
+      (async () =>
+        plugin.exports.default(
+          {
+            ...options,
+            ...(services.config
+              ? services.config(normalizeName(plugin.name))
+              : {}),
+          },
+          imports,
+          register,
+        ))(); // eslint-disable-line
     } catch (e) {
       throw e;
     }
@@ -322,16 +370,20 @@ export default class Architect extends events.EventEmitter {
         return services.bus.emit('core:error', err);
       }
 
-      plugin.provides.forEach((name) => {
+      plugin.provides.forEach(name => {
         if (!Object.keys(provided).includes(name)) {
-          const error = new Error(`Plugin failed to provide ${name} service. ${JSON.stringify(plugin)}`);
+          const error = new Error(
+            `Plugin failed to provide ${name} service. ${JSON.stringify(
+              plugin,
+            )}`,
+          );
           if (!services.bus) throw error;
           return services.bus.emit('core:error', error);
         }
 
         services[name] = provided[name];
         if (typeof provided[name] !== 'function') {
-          provided[name].name = name;                                                             // eslint-disable-line
+          provided[name].name = name; // eslint-disable-line
         }
 
         if (services.bus) services.bus.emit('core:service', name, services[name]);
@@ -341,15 +393,22 @@ export default class Architect extends events.EventEmitter {
       if (provided && provided.destroy) {
         app.destructors.set(plugin.name, provided.destroy);
       } else {
-        plugin.destroy = () => {                                                                  // eslint-disable-line
+        plugin.destroy = () => {
+          // eslint-disable-line
           if (plugin.provides.length) {
-            let canDestroy = true;                                                           // eslint-disable-next-line
-            const consumes = Object.keys(app.services).reduce((acc, item) => acc.concat(acc, item));
-            plugin.provides.forEach((item) => {
+            let canDestroy = true; // eslint-disable-next-line
+            const consumes = Object.keys(app.services).reduce((acc, item) =>
+              acc.concat(acc, item),
+            );
+            plugin.provides.forEach(item => {
               if (consumes.includes(item)) canDestroy = false;
             });
             if (!canDestroy) {
-              throw new Error(`Plugins that provide services cannot be disabled. ${JSON.stringify(plugin)}`);
+              throw new Error(
+                `Plugins that provide services cannot be disabled. ${JSON.stringify(
+                  plugin,
+                )}`,
+              );
             }
           }
 

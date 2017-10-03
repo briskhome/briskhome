@@ -8,14 +8,16 @@ type AvatarPropsType = {
   online?: boolean,
 };
 
-export const BriskhomeAvatar = ({ name, image, online }: AvatarPropsType): React.Element<*> => {
-  return (
-    <div className='briskhome-avatar'>
-      {name && <span className='briskhome-avatar__name'>{name}</span>}
-      {image && <img className='briskhome-avatar__image' src={image} alt='' />}
-      {online && <div className='briskhome-avatar__online' />}
-    </div>
-  );
-};
+export const BriskhomeAvatar = ({
+  name,
+  image,
+  online,
+}: AvatarPropsType): React.Element<*> => (
+  <div className="briskhome-avatar">
+    {name && <span className="briskhome-avatar__name">{name}</span>}
+    {image && <img className="briskhome-avatar__image" src={image} alt="" />}
+    {online && <div className="briskhome-avatar__online" />}
+  </div>
+);
 
 export default BriskhomeAvatar;

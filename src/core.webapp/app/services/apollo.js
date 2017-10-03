@@ -1,6 +1,5 @@
-import ApolloClient, {
-  // createNetworkInterface,
-} from 'apollo-client';
+import ApolloClient from 'apollo-client';
+// createNetworkInterface,
 
 // when need token based authentication:
 // networkInterface.use([{
@@ -14,7 +13,6 @@ import ApolloClient, {
 //   },
 // }]);
 
-
 // export const apolloClient = new ApolloClient({
 //   networkInterface: createNetworkInterface({
 //     uri: 'http://localhost:4000/graphql',
@@ -23,3 +21,4 @@ import ApolloClient, {
 // });
 
 export const apolloClient = new ApolloClient();
+export default apolloClient;

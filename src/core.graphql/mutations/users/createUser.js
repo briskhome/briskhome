@@ -12,25 +12,7 @@ import {
 } from 'graphql';
 
 import type Mongoose from 'mongoose';
-import type { Mongoose$Model } from 'mongoose';
 import type { CoreContextType } from '../../../utilities/coreTypes';
-// import type { UserType } from '../../../core.db/models/UserModel';
-
-declare class UserType extends Mongoose$Model {
-  _id: string,
-  id: string,
-  username?: string,
-  firstName: string,
-  lastName: string,
-  type: 'guest' | 'regular' | 'superuser',
-  contacts: Array<UserContactType>,
-  devices: Array<UserDeviceType>,
-  subscriptions: Array<UserSubscriptionType>,
-  locations: Array<UserLocationType>,
-
-  createdAt?: string,
-  updatedAt?: string,
-}
 
 type GenerateUsernameInput = {|
   lastName: string,
@@ -44,7 +26,7 @@ const generateUsername = async ({
   db,
 }: GenerateUsernameInput): Promise<string> => {
   const username = `${firstName[0]}${lastName}`.toLocaleLowerCase();
-  const UserModel: Mongoose$Model<UserType> = db.model('core:user');
+  const UserModel = db.model('core:user');
 
   const users: Array<string> = await UserModel.find({
     _id: new RegExp(`^${username}`, 'i'),
@@ -113,7 +95,7 @@ export default {
     const { db, log } = context;
     log.info({ mutation: 'createUser' }, { args });
     const { input: { lastName, firstName, password, type } } = args;
-    const User: Mongoose$Model<UserType> = db.model('core:user');
+    const User = db.model('core:user');
     const user = new User({
       _id: await generateUsername({ db, lastName, firstName }),
       lastName,

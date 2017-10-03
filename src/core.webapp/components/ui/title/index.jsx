@@ -7,9 +7,9 @@ type TitleProps = {
   extraClassName?: string,
   large?: boolean,
   medium?: boolean,
-  small ?: boolean,
+  small?: boolean,
   gray?: boolean,
-}
+};
 
 export default ({
   extraClassName,

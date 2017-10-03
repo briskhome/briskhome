@@ -23,6 +23,10 @@ export type PackageJson = {
   },
 };
 
+export type CoreOptions = {
+  [key: string]: string,
+};
+
 export type CoreImports = {
   bus: Object,
   config: () => Object,

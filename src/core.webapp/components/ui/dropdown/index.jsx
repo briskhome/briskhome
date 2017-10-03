@@ -33,10 +33,7 @@ export default ({
   caption,
   value,
 }: DropdownProps) => {
-  const className = cn(
-    extraClassName,
-    'briskhome-dropdown',
-  );
+  const className = cn(extraClassName, 'briskhome-dropdown');
   const captionClassNames = cn(
     'anim_show_block',
     'briskhome-label',
@@ -50,7 +47,7 @@ export default ({
   return (
     <div className={className}>
       <Dropdown
-        baseClassName='briskhome-dropdown'
+        baseClassName="briskhome-dropdown"
         placeholder={placeholder}
         disabled={disabled}
         options={options}

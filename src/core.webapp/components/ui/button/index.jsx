@@ -10,7 +10,7 @@ type ButtonProps = {
   target?: string,
   link?: string,
   onClick?: Function,
-  children?: React.Children
+  children?: React.Children,
 };
 
 export default ({
@@ -22,26 +22,24 @@ export default ({
   link,
   onClick,
   children,
-}: ButtonProps) => {
-  return (
-    <a
-      className={cn(
-        'briskhome-button',
-        {
-          'briskhome-button_yellow': yellow,
-          'briskhome-button_loading': loading,
-          'briskhome-button_disabled': disabled,
-        },
-        extraClassName,
-      )}
-      role='button'
-      type='button'
-      disabled={loading || disabled}
-      href={link || '#'}
-      target={target || '_self'}
-      onClick={onClick}
-    >
-      {children}
-    </a>
-  );
-};
+}: ButtonProps) => (
+  <a
+    className={cn(
+      'briskhome-button',
+      {
+        'briskhome-button_yellow': yellow,
+        'briskhome-button_loading': loading,
+        'briskhome-button_disabled': disabled,
+      },
+      extraClassName,
+    )}
+    role="button"
+    type="button"
+    disabled={loading || disabled}
+    href={link || '#'}
+    target={target || '_self'}
+    onClick={onClick}
+  >
+    {children}
+  </a>
+);

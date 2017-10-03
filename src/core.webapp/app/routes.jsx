@@ -11,22 +11,22 @@ import { Example } from '../components/onboarding/example';
 import './app.styl';
 import './stuff.styl';
 
-export const Routes = () => {
-  return (
-    <ApolloProvider store={configureStore()} client={client}>
-      <Router>
-        <div>
-          <Navigation />
-          <section>
-            <Switch>
-              <Route exact path="/" component={Dashboard} />
-              <Route path="/cameras" component={Example} />
-              <Route path="/preferences" component={Preferences} />
-              <Route path="*" component={NotFound} />
-            </Switch>
-          </section>
-        </div>
-      </Router>
-    </ApolloProvider>
-  );
-};
+export const Routes = () => (
+  <ApolloProvider store={configureStore()} client={client}>
+    <Router>
+      <div>
+        <Navigation />
+        <section>
+          <Switch>
+            <Route exact path="/" component={Dashboard} />
+            <Route path="/cameras" component={Example} />
+            <Route path="/preferences" component={Preferences} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </section>
+      </div>
+    </Router>
+  </ApolloProvider>
+);
+
+export default Routes;

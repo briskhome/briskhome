@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import Modal from 'react-modal';
-import { gql, graphql, compose } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 
 import Avatar from '../../avatar';
 import Card from '../../card';
@@ -13,7 +13,7 @@ import './modal.styl';
 
 // type UserCardProps = { data: { error, loading, users =[] } };
 
-export class UserCard extends React.Component {
+export class UserCard extends React.Component<*> {
   constructor() {
     super();
     this.state = {

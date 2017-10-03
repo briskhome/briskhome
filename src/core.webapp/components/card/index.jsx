@@ -32,21 +32,18 @@ export const Card = ({
 
   return (
     <div className="card">
-      <div className="card__content">
-        {renderContent()}
-      </div>
+      <div className="card__content">{renderContent()}</div>
       <div className="card__footer">
-        {icon &&
+        {icon && (
           <div className="card__icon">
-            <img src="" />
-          </div>}
-        <div className="card__title card__title_uppercase">
-          {title}
-        </div>
+            <img alt="" src="" />
+          </div>
+        )}
+        <div className="card__title card__title_uppercase">{title}</div>
         <div className="card__title card__title_small card__title_gray">
           {caption}
         </div>
-        {button &&
+        {button && (
           <div className="card__action">
             <a
               className="card__action-link"
@@ -56,7 +53,8 @@ export const Card = ({
             >
               {button}
             </a>
-          </div>}
+          </div>
+        )}
       </div>
     </div>
   );

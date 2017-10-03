@@ -1,6 +1,5 @@
 import React from 'react';
-import Modal from 'react-modal';
-import { gql, graphql, compose } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import { createUser, users as usersQuery } from '../widgets/users/graphql';
 
 import Title from '../ui/title';
@@ -24,7 +23,6 @@ class UsersSheet extends React.Component {
 
   render() {
     const { mutate } = this.props;
-    console.log(this.state);
     return (
       <div>
         <Title
