@@ -40,7 +40,7 @@
     "jest": "^20.0.4"
   },
   "dependencies": {
-    "agenda": "^0.8.1",
+    "agenda": "1.0.0",
     "architect": "0.1.11",
     "async": "^2.1.4",
     "bunyan": "^1.8.1",
@@ -58,9 +58,6 @@
     "nodemon": "^1.11.0",
     "properties": "1.2.1",
     "uuid-1345": "^0.99.6"
-  },
-  "peerDependencies": {
-    "kerberos": "0.0.19"
   },
   "jest": {
     "automock": true
