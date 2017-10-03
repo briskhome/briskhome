@@ -51,7 +51,7 @@
     "forge": "2.3.0",
     "graphql": "^0.10.5",
     "graphql-tools": "^1.0.0",
-    "mongoose": "4.2.8",
+    "mongoose": "4.11.14",
     "nconf": "^0.8.4",
     "node-forge": "^0.6.48",
     "node-telegram-bot-api": "^0.21.1",
