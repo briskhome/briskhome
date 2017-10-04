@@ -4,7 +4,7 @@
  */
 
 import uuid from 'uuid-1345';
-import type { CoreImports, ModelType } from '../../utilities/coreTypes';
+import type { CoreImports } from '../../utilities/coreTypes';
 
 export type SensorType = {
   _id?: string,
@@ -16,9 +16,9 @@ export type SensorType = {
   lcoation: Object,
 }
 
-export type SensorModelType = {
-  setOnline: (state: boolean) => SensorModelType
-} & SensorType & ModelType<SensorModelType>
+// export type SensorModelType = {
+//   setOnline: (state: boolean) => SensorModelType
+// } & SensorType & ModelType<SensorModelType>
 
 export default ({ db }: CoreImports) => {
   const Schema = db.Schema;

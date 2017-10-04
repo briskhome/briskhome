@@ -14,7 +14,7 @@ export default (imports: CoreImports) => {
   const { dataloader, db } = imports;
   const DeviceModel = db.model('core:device');
   const Device = DeviceType(imports);
-  return ({                                                                                                // $FlowFixMe
+  return ({
     type: new GraphQLList(Device),
     args: {
       id: {

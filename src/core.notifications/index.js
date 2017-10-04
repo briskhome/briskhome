@@ -22,16 +22,15 @@ import {
 } from './constants';
 
 import type { CoreImports, CoreRegister, SubscriptionType } from '../utilities/coreTypes';
-import type { EventModelType, EventType } from './models/EventModel';
-import type { UserModelType } from '../core.db/models/UserModel';
+import type { EventType } from './models/EventModel';
 
 export default (options: Object, imports: CoreImports, register: CoreRegister) => {
   const db = imports.db;
   const bus = imports.bus;
   const log = imports.log();
 
-  const EventModel: EventModelType = db.model('core:event');
-  const UserModel: UserModelType = db.model('core:user');
+  const EventModel = db.model('core:event');
+  const UserModel = db.model('core:user');
 
   /**
    * @constructor
@@ -254,7 +253,7 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
    * @param  {String}    providerId [description]
    * @return {String}  A link or action that needs to be followed in order to verify.
    */
-  Notifications.prototype.verify = async function verify(user: UserModelType, providerId: string)
+  Notifications.prototype.verify = async function verify(user, providerId: string)
     : Promise<> {
     const verified = async (contactId) => {
       user.contacts[providerId] = contactId;                                                      // eslint-disable-line

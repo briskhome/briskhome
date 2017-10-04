@@ -2,7 +2,6 @@
  * @briskhome
  * └core <utilities/coreTypes.js>
  */
-import type { Mongoose$Model } from 'mongoose';
 
 export type PackageJson = {
   name: string,
@@ -31,7 +30,7 @@ export type CoreImports = {
   bus: Object,
   config: () => Object,
   dataloader: Function,
-  db: { model: Mongoose$Model },
+  db: Object,
   graphql: Object,
   log: () => Object,
   webapp: Function,

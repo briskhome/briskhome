@@ -9,7 +9,7 @@ type CardType = {
   caption: string,
   button?: string,
   onClick?: Function,
-  children: React.Element<*>,
+  children?: ?React.Element<*>,
   loading?: boolean,
   error?: boolean,
 };
@@ -24,7 +24,7 @@ export const Card = ({
   loading,
   error,
 }: CardType): React.Element<*> => {
-  const renderContent = (): React.Element<*> => {
+  const renderContent = (): ?React.Element<*> => {
     if (loading) return <Loader />;
     if (error) return <div />;
     return children;

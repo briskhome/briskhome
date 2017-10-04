@@ -12,7 +12,7 @@ import './users.styl';
 import './modal.styl';
 
 // type UserCardProps = { data: { error, loading, users =[] } };
-
+// $FlowFixMe
 export class UserCard extends React.Component<*> {
   constructor() {
     super();
