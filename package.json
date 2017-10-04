@@ -70,7 +70,7 @@
     "express": "^4.15.3",
     "express-graphql": "^0.6.6",
     "forge": "2.3.0",
-    "graphql": "^0.10.5",
+    "graphql": "0.11.7",
     "graphql-tools": "^1.0.0",
     "mongoose": "4.11.14",
     "nconf": "^0.8.4",
@@ -99,7 +99,9 @@
     "uuid-1345": "^0.99.6"
   },
   "jest": {
-    "modulePathIgnorePatterns": ["<rootDir>/lib/"],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/lib/"
+    ],
     "moduleNameMapper": {
       "\\.(css|styl)$": "<rootDir>/src/__mocks__/styl.js"
     }

@@ -1,6 +1,7 @@
 [ignore]
 .*/lib/.*
 .*/node_modules/eslint-plugin-jsx-a11y/__mocks__/.*
+.*/node_modules/graphql/**/.*flow
 .*/node_modules/apollo-client/.*flow
 .*/node_modules/react-apollo/.*flow
 .*/node_modules/fbjs/lib/.*flow
