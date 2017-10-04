@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for core.pki/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">All files</a> / <a href="index.html">core.pki</a> index.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">38.03% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>27/71</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>12/24</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">58.33% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>7/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">38.03% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>27/71</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/** @flow
+ * @briskhome
+ * └core.pki &lt;index.js&gt;
+ */
+&nbsp;
+import fs from 'fs';
+import forge from 'node-forge';
+import { spawn } from 'child_process';
+&nbsp;
+import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
+&nbsp;
+export default (options: Object, imports: CoreImports, register: CoreRegister) =&gt; {
+  const log = imports.log();
+&nbsp;
+  /**
+   *
+   */
+  function PKI() {
+&nbsp;
+  }
+&nbsp;
+  /**
+   * #generateRequest() Creates a certificate signing request (CSR) and stores it in a database.
+   * The CSR then needs to be approved by a system administrator for a certificate to be issued.
+   * All data properties are optional except `data.cn` and `data.mail`.
+   *
+   * @param {Object} data
+   * @param {Object} data.subject
+   * @param {String} data.subject.cn  2 character country code defined in ISO 3166
+   * @param {String} data.subject.st  State or province name
+   * @param {String} data.subject.l   Locality name
+   * @param {String} data.subject.o   Organization name or even organisational name
+   * @param {String} data.subject.ou  Usually department or any sub entity
+   * @param {String} data.subject.cn  Common name
+   * @param {String} data.subject.e   Email address
+   *
+   * @returns {Promise&lt;*&gt;}
+   */
+  PKI.prototype.generateRequest = function generateRequest(data) {
+    return new Promise((resolve, reject) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (!data || !Object.prototype.hasOwnProperty.call(data, 'subject')) {
+        const dataErr = new Error('Unable to generate CSR - no data object passed in');
+        log.warn({ err: dataErr }, dataErr.message);
+        return reject(dataErr);
+      }
+&nbsp;
+      const subject = <span class="cstat-no" title="statement not covered" >data.subject;</span>
+      const attrs = <span class="cstat-no" title="statement not covered" >Object.prototype.hasOwnProperty.call(data, 'attrs') ? data.attrs : undefined;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return forge.pki.rsa.generateKeyPair({ bits: 2048, workers: 2 }, <span class="fstat-no" title="function not covered" >(k</span>eypairErr, keypair) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (keypairErr) {</span>
+<span class="cstat-no" title="statement not covered" >          log.error({ err: keypairErr }, 'Unable to generate keypair');</span>
+<span class="cstat-no" title="statement not covered" >          return reject(keypairErr);</span>
+        }
+&nbsp;
+        const csr = <span class="cstat-no" title="statement not covered" >forge.pki.createCertificationRequest();</span>
+        const subjectArray = <span class="cstat-no" title="statement not covered" >[];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        for (let i = 0; i &lt; Object.keys(subject).length; i += 1) {</span>
+          const name = <span class="cstat-no" title="statement not covered" >Object.keys(subject)[i];</span>
+          const value = <span class="cstat-no" title="statement not covered" >subject[name];</span>
+          const entry = <span class="cstat-no" title="statement not covered" >{ shortName: name.toUpperCase(), value };</span>
+<span class="cstat-no" title="statement not covered" >          subjectArray.push(entry);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        csr.publicKey = keypair.publicKey;</span>
+<span class="cstat-no" title="statement not covered" >        csr.setSubject(subjectArray);</span>
+<span class="cstat-no" title="statement not covered" >        if (attrs) {</span>
+<span class="cstat-no" title="statement not covered" >          csr.setAttributes(attrs);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        csr.sign(keypair.privateKey);</span>
+<span class="cstat-no" title="statement not covered" >        if (!csr.verify()) {</span>
+          const verifyError = <span class="cstat-no" title="statement not covered" >new Error('Unable to verify a generated CSR');</span>
+<span class="cstat-no" title="statement not covered" >          log.error({ err: verifyError }, verifyError.message);</span>
+<span class="cstat-no" title="statement not covered" >          return reject(verifyError);</span>
+        }
+&nbsp;
+        const pem = <span class="cstat-no" title="statement not covered" >forge.pki.certificationRequestToPem(csr);</span>
+<span class="cstat-no" title="statement not covered" >        return fs.writeFile(`csr/${subject.cn}.csr`, pem, <span class="fstat-no" title="function not covered" >(w</span>riteErr) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          if (writeErr) {</span>
+<span class="cstat-no" title="statement not covered" >            log.warn(writeErr, writeErr.message);</span>
+<span class="cstat-no" title="statement not covered" >            reject(writeErr);</span>
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          return resolve(pem);</span>
+        });
+      });
+    });
+  };
+&nbsp;
+  /**
+   * #issue() Issues a certificate based on a previously generated CRS and private key that are
+   * stored in a database.
+   *
+   * @param {Object} data
+   * @param {String} data.issuer      One of the following: bcca, buca
+   * @param {String} data.notBefore   Time string in the following format: `130511235959Z`
+   * @param {String} data.notAfter
+   * @param {Object} data.extensions
+   *
+   * @callback cb
+   */
+  PKI.prototype.issueCertificate = function <span class="fstat-no" title="function not covered" >issue(</span>/* data */) {
+<span class="cstat-no" title="statement not covered" >    return new Promise(<span class="fstat-no" title="function not covered" >(/</span>* resolve, reject */) =&gt; {</span>
+      const keys = <span class="cstat-no" title="statement not covered" >forge.pki.rsa.generateKeyPair(2048);</span>
+      const cert = <span class="cstat-no" title="statement not covered" >forge.pki.createCertificate();</span>
+<span class="cstat-no" title="statement not covered" >      cert.publicKey = keys.publicKey;</span>
+      // alternatively set public key from a csr
+      // cert.publicKey = csr.publicKey;
+<span class="cstat-no" title="statement not covered" >      cert.serialNumber = '01';</span>
+<span class="cstat-no" title="statement not covered" >      cert.validity.notBefore = new Date();</span>
+<span class="cstat-no" title="statement not covered" >      cert.validity.notAfter = new Date();</span>
+<span class="cstat-no" title="statement not covered" >      cert.validity.notAfter.setFullYear(cert.validity.notBefore.getFullYear() + 1);</span>
+      const attrs = <span class="cstat-no" title="statement not covered" >[{</span>
+        name: 'commonName',
+        value: 'example.org',
+      }, {
+        name: 'countryName',
+        value: 'US',
+      }, {
+        shortName: 'ST',
+        value: 'Virginia',
+      }, {
+        name: 'localityName',
+        value: 'Blacksburg',
+      }, {
+        name: 'organizationName',
+        value: 'Test',
+      }, {
+        shortName: 'OU',
+        value: 'Test',
+      }];
+<span class="cstat-no" title="statement not covered" >      cert.setSubject(attrs);</span>
+      // alternatively set subject from a csr
+      // cert.setSubject(csr.subject.attributes);
+<span class="cstat-no" title="statement not covered" >      cert.setIssuer(attrs);</span>
+<span class="cstat-no" title="statement not covered" >      cert.setExtensions([{</span>
+        name: 'basicConstraints',
+        cA: true,
+      }, {
+        name: 'keyUsage',
+        keyCertSign: true,
+        digitalSignature: true,
+        nonRepudiation: true,
+        keyEncipherment: true,
+        dataEncipherment: true,
+      }, {
+        name: 'extKeyUsage',
+        serverAuth: true,
+        clientAuth: true,
+        codeSigning: true,
+        emailProtection: true,
+        timeStamping: true,
+      }, {
+        name: 'nsCertType',
+        client: true,
+        server: true,
+        email: true,
+        objsign: true,
+        sslCA: true,
+        emailCA: true,
+        objCA: true,
+      }, {
+        name: 'subjectAltName',
+        altNames: [{
+          type: 6, // URI
+          value: 'http://example.org/webid#me',
+        }, {
+          type: 7, // IP
+          ip: '127.0.0.1',
+        }],
+      }, {
+        name: 'subjectKeyIdentifier',
+      }]);
+      /* alternatively set extensions from a csr
+      var extensions = csr.getAttribute({name: 'extensionRequest'}).extensions;
+      // optionally add more extensions
+      extensions.push.apply(extensions, [{
+        name: 'basicConstraints',
+        cA: true
+      }, {
+        name: 'keyUsage',
+        keyCertSign: true,
+        digitalSignature: true,
+        nonRepudiation: true,
+        keyEncipherment: true,
+        dataEncipherment: true
+      }]);
+      cert.setExtensions(extensions);
+      */
+      // self-sign certificate
+<span class="cstat-no" title="statement not covered" >      cert.sign(keys.privateKey);</span>
+&nbsp;
+      // convert a Forge certificate to PEM
+<span class="cstat-no" title="statement not covered" >      return forge.pki.certificateToPem(cert);</span>
+    });
+  };
+&nbsp;
+  /**
+   * #signData()
+   * @param {Object} data  [description]
+   *
+   * @return {Promise&lt;*&gt;}
+   */
+  PKI.prototype.signData = function sign(data) {
+    return new Promise((resolve, reject) =&gt; {
+      if (!data
+        || !Object.prototype.hasOwnProperty.call(data, 'signer')
+        || !Object.prototype.hasOwnProperty.call(data, 'inkey')
+        || !Object.prototype.hasOwnProperty.call(data, 'certfile')
+      ) {
+        const dataErr = new Error('No data object or some of required attributes provided');
+        log.error({ err: dataErr }, dataErr.message);
+        return reject(dataErr);
+      }
+&nbsp;
+      let command = `openssl smime -sign -text -nodetach -outform der -binary
+        -signer ${data.signer}
+        -inkey ${data.inkey}
+        -certfile ${data.certfile} `;
+&nbsp;
+      if (data.password) {
+        command += `-passin pass:${data.password} `;
+      }
+&nbsp;
+      const der = [];
+      const args = command.split(' ');
+      const child = spawn(args[0], args.splice(1));
+&nbsp;
+      child.stdout.on('data', <span class="fstat-no" title="function not covered" >(c</span>hunk) =&gt; {
+<span class="cstat-no" title="statement not covered" >        der.push(chunk);</span>
+      });
+&nbsp;
+      return child.on('close', (code) =&gt; {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (code !== 0) {
+          const commandError = new Error('Error');
+          log.error({ err: commandError }, commandError.message);
+          return reject(commandError);
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return resolve(der);</span>
+      });
+    });
+  };
+&nbsp;
+  register(null, { pki: new PKI() });
+};
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 03 2017 19:57:28 GMT+0300 (MSK)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

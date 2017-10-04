@@ -3,52 +3,51 @@
  * └core.db <models/UserModel.js>
  */
 
-import type { CoreImports, ModelType } from '../../utilities/coreTypes';
-import typeof { Mongoose$Model } from 'mongoose';
+import type { CoreImports } from '../../utilities/coreTypes';
 
-export type UserContactType = {
-  name: string,
-  value: string,
-  levels: Array<number>,
-};
+// export type UserContactType = {
+//   name: string,
+//   value: string,
+//   levels: Array<number>,
+// };
 
-export type UserDeviceType = {
-  // TODO
-};
+// export type UserDeviceType = {
+//   // TODO
+// };
 
-export type UserSubscriptionType = {
-  _id: string,
-  levels: Array<number>,
-};
+// export type UserSubscriptionType = {
+//   _id: string,
+//   levels: Array<number>,
+// };
 
-export type UserLocationType = {
-  // TODO
-};
+// export type UserLocationType = {
+//   // TODO
+// };
 
-declare class UserType extends Mongoose$Model {
-  _id: string,
-  id: string,
-  username?: string,
-  firstName: string,
-  lastName: string,
-  type: 'guest' | 'regular' | 'superuser',
-  contacts: Array<UserContactType>,
-  devices: Array<UserDeviceType>,
-  subscriptions: Array<UserSubscriptionType>,
-  locations: Array<UserLocationType>,
-  isDisabled: boolean,
+// declare class UserType {
+//   _id: string;
+//   id: string;
+//   username?: string;
+//   firstName: string;
+//   lastName: string;
+//   type: 'guest' | 'regular' | 'superuser';
+//   contacts: Array<UserContactType>;
+//   devices: Array<UserDeviceType>;
+//   subscriptions: Array<UserSubscriptionType>;
+//   locations: Array<UserLocationType>;
+//   isDisabled: boolean;
 
-  createdAt?: string,
-  updatedAt?: string,
-}
+//   createdAt?: string;
+//   updatedAt?: string;
+// }
 
-export type UserModelType = (
-  document: UserType,
-) => {
-  fetchByUsername(id: string): UserModelType,
-  fetchBySubscription(id: string): UserModelType,
-} & UserType &
-  ModelType<UserType>;
+// export type UserModelType = (
+//   document: UserType,
+// ) => {
+//   fetchByUsername(id: string): UserModelType,
+//   fetchBySubscription(id: string): UserModelType,
+// } & UserType &
+//   ModelType<UserType>;
 
 export default ({ db }: CoreImports) => {
   const Schema = db.Schema;
@@ -111,13 +110,13 @@ export default ({ db }: CoreImports) => {
 
   userSchema.statics.fetchByUsername = async function fetchByUsername(
     username: string,
-  ): Promise<UserType> {
+  ): Promise<*> {
     return this.findOne({ _id: username }).exec();
   };
 
   userSchema.statics.fetchBySubscription = async function fetchBySubscription(
     id: string,
-  ): Promise<UserType> {
+  ): Promise<*> {
     return this.find({ 'subscriptions._id': id }).exec();
   };
 

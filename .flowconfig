@@ -1,15 +1,18 @@
 [ignore]
 .*/lib/.*
-.*/node_modules/.*
-.*/node_modules/@briskhome/.*
+.*/node_modules/eslint-plugin-jsx-a11y/__mocks__/.*
+.*/node_modules/apollo-client/.*flow
+.*/node_modules/react-apollo/.*flow
+.*/node_modules/fbjs/lib/.*flow
 
 [include]
-;.*/src/.*
 
 [libs]
-.*/flow-typed/.*
 
 [options]
+esproposal.class_static_fields=enable
+esproposal.class_instance_fields=enable
 module.ignore_non_literal_requires=true
-module.name_mapper='.*\.styl$' -> '<PROJECT_ROOT>/src/__mocks__/styl.js'
 module.system.node.resolve_dirname=src
+module.system.node.resolve_dirname=node_modules
+module.name_mapper='.*\.styl$' -> '<PROJECT_ROOT>/src/__mocks__/styl.js'

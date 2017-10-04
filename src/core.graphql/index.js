@@ -3,14 +3,7 @@
  * └core.graphql <index.js>
  */
 
-import {
-  GraphQLSchema,
-  GraphQLString,
-  GraphQLNonNull,
-  GraphQLBoolean,
-  GraphQLObjectType,
-  GraphQLInputObjectType,
-} from 'graphql';
+import { GraphQLSchema, GraphQLObjectType } from 'graphql';
 import devicesQuery from './queries/devices';
 import pluginsQuery from './queries/plugins';
 import usersQuery from './queries/users';
