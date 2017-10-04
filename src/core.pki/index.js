@@ -7,17 +7,23 @@ import fs from 'fs';
 import forge from 'node-forge';
 import { spawn } from 'child_process';
 
-import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
+import type {
+  CoreOptions,
+  CoreImports,
+  CoreRegister,
+} from '../utilities/coreTypes';
 
-export default (options: Object, imports: CoreImports, register: CoreRegister) => {
+export default (
+  options: CoreOptions,
+  imports: CoreImports,
+  register: CoreRegister,
+) => {
   const log = imports.log();
 
   /**
    *
    */
-  function PKI() {
-
-  }
+  function PKI() {}
 
   /**
    * #generateRequest() Creates a certificate signing request (CSR) and stores it in a database.
@@ -39,53 +45,60 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
   PKI.prototype.generateRequest = function generateRequest(data) {
     return new Promise((resolve, reject) => {
       if (!data || !Object.prototype.hasOwnProperty.call(data, 'subject')) {
-        const dataErr = new Error('Unable to generate CSR - no data object passed in');
+        const dataErr = new Error(
+          'Unable to generate CSR - no data object passed in',
+        );
         log.warn({ err: dataErr }, dataErr.message);
         return reject(dataErr);
       }
 
       const subject = data.subject;
-      const attrs = Object.prototype.hasOwnProperty.call(data, 'attrs') ? data.attrs : undefined;
+      const attrs = Object.prototype.hasOwnProperty.call(data, 'attrs')
+        ? data.attrs
+        : undefined;
 
-      return forge.pki.rsa.generateKeyPair({ bits: 2048, workers: 2 }, (keypairErr, keypair) => {
-        if (keypairErr) {
-          log.error({ err: keypairErr }, 'Unable to generate keypair');
-          return reject(keypairErr);
-        }
-
-        const csr = forge.pki.createCertificationRequest();
-        const subjectArray = [];
-
-        for (let i = 0; i < Object.keys(subject).length; i += 1) {
-          const name = Object.keys(subject)[i];
-          const value = subject[name];
-          const entry = { shortName: name.toUpperCase(), value };
-          subjectArray.push(entry);
-        }
-
-        csr.publicKey = keypair.publicKey;
-        csr.setSubject(subjectArray);
-        if (attrs) {
-          csr.setAttributes(attrs);
-        }
-
-        csr.sign(keypair.privateKey);
-        if (!csr.verify()) {
-          const verifyError = new Error('Unable to verify a generated CSR');
-          log.error({ err: verifyError }, verifyError.message);
-          return reject(verifyError);
-        }
-
-        const pem = forge.pki.certificationRequestToPem(csr);
-        return fs.writeFile(`csr/${subject.cn}.csr`, pem, (writeErr) => {
-          if (writeErr) {
-            log.warn(writeErr, writeErr.message);
-            reject(writeErr);
+      return forge.pki.rsa.generateKeyPair(
+        { bits: 2048, workers: 2 },
+        (keypairErr, keypair) => {
+          if (keypairErr) {
+            log.error({ err: keypairErr }, 'Unable to generate keypair');
+            return reject(keypairErr);
           }
 
-          return resolve(pem);
-        });
-      });
+          const csr = forge.pki.createCertificationRequest();
+          const subjectArray = [];
+
+          for (let i = 0; i < Object.keys(subject).length; i += 1) {
+            const name = Object.keys(subject)[i];
+            const value = subject[name];
+            const entry = { shortName: name.toUpperCase(), value };
+            subjectArray.push(entry);
+          }
+
+          csr.publicKey = keypair.publicKey;
+          csr.setSubject(subjectArray);
+          if (attrs) {
+            csr.setAttributes(attrs);
+          }
+
+          csr.sign(keypair.privateKey);
+          if (!csr.verify()) {
+            const verifyError = new Error('Unable to verify a generated CSR');
+            log.error({ err: verifyError }, verifyError.message);
+            return reject(verifyError);
+          }
+
+          const pem = forge.pki.certificationRequestToPem(csr);
+          return fs.writeFile(`csr/${subject.cn}.csr`, pem, writeErr => {
+            if (writeErr) {
+              log.warn(writeErr, writeErr.message);
+              reject(writeErr);
+            }
+
+            return resolve(pem);
+          });
+        },
+      );
     });
   };
 
@@ -111,68 +124,87 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
       cert.serialNumber = '01';
       cert.validity.notBefore = new Date();
       cert.validity.notAfter = new Date();
-      cert.validity.notAfter.setFullYear(cert.validity.notBefore.getFullYear() + 1);
-      const attrs = [{
-        name: 'commonName',
-        value: 'example.org',
-      }, {
-        name: 'countryName',
-        value: 'US',
-      }, {
-        shortName: 'ST',
-        value: 'Virginia',
-      }, {
-        name: 'localityName',
-        value: 'Blacksburg',
-      }, {
-        name: 'organizationName',
-        value: 'Test',
-      }, {
-        shortName: 'OU',
-        value: 'Test',
-      }];
+      cert.validity.notAfter.setFullYear(
+        cert.validity.notBefore.getFullYear() + 1,
+      );
+      const attrs = [
+        {
+          name: 'commonName',
+          value: 'example.org',
+        },
+        {
+          name: 'countryName',
+          value: 'US',
+        },
+        {
+          shortName: 'ST',
+          value: 'Virginia',
+        },
+        {
+          name: 'localityName',
+          value: 'Blacksburg',
+        },
+        {
+          name: 'organizationName',
+          value: 'Test',
+        },
+        {
+          shortName: 'OU',
+          value: 'Test',
+        },
+      ];
       cert.setSubject(attrs);
       // alternatively set subject from a csr
       // cert.setSubject(csr.subject.attributes);
       cert.setIssuer(attrs);
-      cert.setExtensions([{
-        name: 'basicConstraints',
-        cA: true,
-      }, {
-        name: 'keyUsage',
-        keyCertSign: true,
-        digitalSignature: true,
-        nonRepudiation: true,
-        keyEncipherment: true,
-        dataEncipherment: true,
-      }, {
-        name: 'extKeyUsage',
-        serverAuth: true,
-        clientAuth: true,
-        codeSigning: true,
-        emailProtection: true,
-        timeStamping: true,
-      }, {
-        name: 'nsCertType',
-        client: true,
-        server: true,
-        email: true,
-        objsign: true,
-        sslCA: true,
-        emailCA: true,
-        objCA: true,
-      }, {
-        name: 'subjectAltName',
-        altNames: [{
-          type: 6, // URI
-          value: 'http://example.org/webid#me',
-        }, {
-          type: 7, // IP
-          ip: '127.0.0.1',
-        }],
-      }, {
-        name: 'subjectKeyIdentifier',
-      }]);
+      cert.setExtensions([
+        {
+          name: 'basicConstraints',
+          cA: true,
+        },
+        {
+          name: 'keyUsage',
+          keyCertSign: true,
+          digitalSignature: true,
+          nonRepudiation: true,
+          keyEncipherment: true,
+          dataEncipherment: true,
+        },
+        {
+          name: 'extKeyUsage',
+          serverAuth: true,
+          clientAuth: true,
+          codeSigning: true,
+          emailProtection: true,
+          timeStamping: true,
+        },
+        {
+          name: 'nsCertType',
+          client: true,
+          server: true,
+          email: true,
+          objsign: true,
+          sslCA: true,
+          emailCA: true,
+          objCA: true,
+        },
+        {
+          name: 'subjectAltName',
+          altNames: [
+            {
+              type: 6, // URI
+              value: 'http://example.org/webid#me',
+            },
+            {
+              type: 7, // IP
+              ip: '127.0.0.1',
+            },
+          ],
+        },
+        {
+          name: 'subjectKeyIdentifier',
+        },
+      ]);
       /* alternatively set extensions from a csr
       var extensions = csr.getAttribute({name: 'extensionRequest'}).extensions;
       // optionally add more extensions
@@ -205,12 +237,15 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
    */
   PKI.prototype.signData = function sign(data) {
     return new Promise((resolve, reject) => {
-      if (!data
-        || !Object.prototype.hasOwnProperty.call(data, 'signer')
-        || !Object.prototype.hasOwnProperty.call(data, 'inkey')
-        || !Object.prototype.hasOwnProperty.call(data, 'certfile')
+      if (
+        !data ||
+        !Object.prototype.hasOwnProperty.call(data, 'signer') ||
+        !Object.prototype.hasOwnProperty.call(data, 'inkey') ||
+        !Object.prototype.hasOwnProperty.call(data, 'certfile')
       ) {
-        const dataErr = new Error('No data object or some of required attributes provided');
+        const dataErr = new Error(
+          'No data object or some of required attributes provided',
+        );
         log.error({ err: dataErr }, dataErr.message);
         return reject(dataErr);
       }
@@ -228,11 +263,11 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
       const args = command.split(' ');
       const child = spawn(args[0], args.splice(1));
 
-      child.stdout.on('data', (chunk) => {
+      child.stdout.on('data', chunk => {
         der.push(chunk);
       });
 
-      return child.on('close', (code) => {
+      return child.on('close', code => {
         if (code !== 0) {
           const commandError = new Error('Error');
           log.error({ err: commandError }, commandError.message);

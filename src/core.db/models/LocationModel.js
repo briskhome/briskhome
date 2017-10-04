@@ -10,14 +10,14 @@ export type RoomType = {
   id: string,
   name: string,
   description: string,
-}
+};
 
 export type ZoneType = {
   id: string,
   name: string,
   description: string,
   rooms: Array<RoomType>,
-}
+};
 
 export type LocationType = {
   id: string,
@@ -29,7 +29,7 @@ export type LocationType = {
     radius: string,
   },
   zones: Array<ZoneType>,
-}
+};
 
 // export type LocationModelType = (document: LocationType) => {
 

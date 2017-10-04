@@ -28,7 +28,9 @@ export default {
         .lean()
         .exec();
       if (!ids.length) return null;
-      return dataloader.deviceById.loadMany(ids.reduce((acc, doc) => acc.concat(doc._id), []));
+      return dataloader.deviceById.loadMany(
+        ids.reduce((acc, doc) => acc.concat(doc._id), []),
+      );
     }
     return dataloader.deviceById.loadAll();
   },

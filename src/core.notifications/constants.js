@@ -8,7 +8,8 @@ module.exports = {
   ERR_NO_SUBSCRIBERS: 'Unable to find subsribers',
   ERR_NO_SUCH_PROVIDER: 'Unable to find such provider',
   EVENT_DISPATCH_FAILURE: 'Unable to push notification to user via provider',
-  EVENT_DISPATCH_SUCCESS: 'Successfully pushed notification to user via provider',
+  EVENT_DISPATCH_SUCCESS:
+    'Successfully pushed notification to user via provider',
   EVENT_REGISTER_SUCCESS: 'Successfully registered event definition',
   EVENT_UPDATE_SUCCESS: 'Successfully updated event definition',
 };

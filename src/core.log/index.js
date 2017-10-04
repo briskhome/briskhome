@@ -5,15 +5,25 @@
 
 import bunyan from 'bunyan';
 import { getCallee, normalizeName } from '../utilities/helpers';
-import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
+import type {
+  CoreOptions,
+  CoreImports,
+  CoreRegister,
+} from '../utilities/coreTypes';
 
-export default (options: Object, imports: CoreImports, register: CoreRegister) => {
+export default (
+  options: CoreOptions,
+  imports: CoreImports,
+  register: CoreRegister,
+) => {
   const log = bunyan.createLogger({
     name: 'briskhome',
-    streams: [{
-      level: options.level,
-      stream: process.stdout,
-    }],
+    streams: [
+      {
+        level: options.level,
+        stream: process.stdout,
+      },
+    ],
   });
 
   register(null, {

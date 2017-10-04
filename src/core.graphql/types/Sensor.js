@@ -26,7 +26,8 @@ export default new GraphQLObjectType({
       args: {
         type: {
           type: GraphQLString,
-          description: 'Value types to return if sensor owns more than one value type.',
+          description:
+            'Value types to return if sensor owns more than one value type.',
         },
         from: {
           type: GraphQLString,
@@ -43,7 +44,8 @@ export default new GraphQLObjectType({
         const { db } = ctx;
         const ValueModel = db.model('core:value');
 
-        const type = args.type || (src.values.length === 1 ? src.values[0] : null);
+        const type =
+          args.type || (src.values.length === 1 ? src.values[0] : null);
         if (!type) return null;
 
         const query = await ValueModel.find({

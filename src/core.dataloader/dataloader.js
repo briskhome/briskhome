@@ -15,7 +15,7 @@ type Options<K, V> = {
   batch?: boolean,
   cache?: boolean,
   cacheMap?: CacheMap<K, Promise<V>>,
-  cacheKeyFn?: (key: any) => any
+  cacheKeyFn?: (key: any) => any,
 };
 
 export default class AllDataLoader<K, V> extends DataLoader<K, V> {
@@ -26,8 +26,8 @@ export default class AllDataLoader<K, V> extends DataLoader<K, V> {
   constructor(
     batchLoadFn: BatchLoadFn<K, V>,
     loadAllFn: LoadAllFn<K, V>,
-    options?: Options<K, V>) {
-
+    options?: Options<K, V>,
+  ) {
     super(batchLoadFn, options);
     this._loadAllFn = loadAllFn;
     this._shouldCache = !options || options.cache !== false;
@@ -43,13 +43,11 @@ export default class AllDataLoader<K, V> extends DataLoader<K, V> {
 
     const keys = new Array(entries.length);
     const values = new Array(entries.length);
-    entries.forEach(
-      ([key, value], index) => {
-        super.prime(key, value);
-        keys[index] = key;
-        values[index] = value;
-      }
-    );
+    entries.forEach(([key, value], index) => {
+      super.prime(key, value);
+      keys[index] = key;
+      values[index] = value;
+    });
 
     this._trackedKeys = keys;
     return values;

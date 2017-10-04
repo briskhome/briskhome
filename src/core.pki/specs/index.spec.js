@@ -42,12 +42,20 @@ describe('core.pki', () => {
 
   describe('#generateRequest()', () => {
     it('should yield error if no data object is provided', async () => {
-      try { await sut.generateRequest(); } catch (e) { err = e; }
+      try {
+        await sut.generateRequest();
+      } catch (e) {
+        err = e;
+      }
       expect(err).toBeInstanceOf(Error);
     });
 
     it('should yield error if no subject is provided', async () => {
-      try { await sut.generateRequest({ foo: 'bar' }); } catch (e) { err = e; }
+      try {
+        await sut.generateRequest({ foo: 'bar' });
+      } catch (e) {
+        err = e;
+      }
       expect(err).toBeInstanceOf(Error);
     });
 
@@ -123,36 +131,73 @@ describe('core.pki', () => {
 
   describe('#signData()', () => {
     it('should yield error if no data object is provided', async () => {
-      try { await sut.signData(); } catch (e) { err = e; }
+      try {
+        await sut.signData();
+      } catch (e) {
+        err = e;
+      }
       expect(err).toBeInstanceOf(Error);
-      expect(err.message).toBe('No data object or some of required attributes provided');
+      expect(err.message).toBe(
+        'No data object or some of required attributes provided',
+      );
     });
 
     it('should yield error if no signer info is provided', async () => {
-      try { await sut.signData({ inkey: 'foo', certfile: 'bar' }); } catch (e) { err = e; }
+      try {
+        await sut.signData({ inkey: 'foo', certfile: 'bar' });
+      } catch (e) {
+        err = e;
+      }
       expect(err).toBeInstanceOf(Error);
-      expect(err.message).toBe('No data object or some of required attributes provided');
+      expect(err.message).toBe(
+        'No data object or some of required attributes provided',
+      );
     });
 
     it('should yield error if no inkey is provided', async () => {
-      try { await sut.signData({ signer: 'foo', certfile: 'bar' }); } catch (e) { err = e; }
+      try {
+        await sut.signData({ signer: 'foo', certfile: 'bar' });
+      } catch (e) {
+        err = e;
+      }
       expect(err).toBeInstanceOf(Error);
-      expect(err.message).toBe('No data object or some of required attributes provided');
+      expect(err.message).toBe(
+        'No data object or some of required attributes provided',
+      );
     });
 
     it('should yield error if no certfile is provided', async () => {
-      try { await sut.signData({ signer: 'foo', inkey: 'bar' }); } catch (e) { err = e; }
+      try {
+        await sut.signData({ signer: 'foo', inkey: 'bar' });
+      } catch (e) {
+        err = e;
+      }
       expect(err).toBeInstanceOf(Error);
-      expect(err.message).toBe('No data object or some of required attributes provided');
+      expect(err.message).toBe(
+        'No data object or some of required attributes provided',
+      );
     });
 
     it('should append password when provided', async () => {
-      try { await sut.signData({ signer: 'foo', inkey: 'bar', certfile: 'foo', password: 'bar' }); } catch (e) { err = e; }
+      try {
+        await sut.signData({
+          signer: 'foo',
+          inkey: 'bar',
+          certfile: 'foo',
+          password: 'bar',
+        });
+      } catch (e) {
+        err = e;
+      }
       expect(err).toBeInstanceOf(Error);
     });
 
     it('should yield error if unable to sign data', async () => {
-      try { await sut.signData({ signer: 'foo', inkey: 'bar', certfile: 'foobar' }); } catch (e) { err = e; }
+      try {
+        await sut.signData({ signer: 'foo', inkey: 'bar', certfile: 'foobar' });
+      } catch (e) {
+        err = e;
+      }
       expect(err).toBeInstanceOf(Error);
     });
   });

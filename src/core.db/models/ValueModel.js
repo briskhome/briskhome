@@ -16,11 +16,11 @@ export type ValueType = {
   sensor: string,
   values: Array<ValueValueType>,
   timestamp: string,
-}
+};
 
-export type ValueModelType = (document: ModelType) => {
-
-} & ValueType & ModelType<ValueModelType>
+export type ValueModelType = (
+  document: ModelType,
+) => {} & ValueType & ModelType<ValueModelType>;
 
 const operators = {
   lt: (boundary: any, value: any) => boundary < value,
@@ -33,22 +33,34 @@ const operators = {
 export default ({ bus, db }: CoreImports) => {
   const Schema = db.Schema;
   const SensorModel = db.model('core:sensor');
-  const ValueSchema = new Schema({
-    sensor: { type: String, ref: 'core:sensor' },
-    values: [{ type: db.Schema.Types.Mixed, _id: false }],
-    timestamp: { type: Date, default: moment().startOf('day') },
-  }, {
-    collection: 'values',
-  });
+  const ValueSchema = new Schema(
+    {
+      sensor: { type: String, ref: 'core:sensor' },
+      values: [{ type: db.Schema.Types.Mixed, _id: false }],
+      timestamp: { type: Date, default: moment().startOf('day') },
+    },
+    {
+      collection: 'values',
+    },
+  );
 
-  ValueSchema.statics.upsertValue = async function upsertValue(sensor: string, { timestamp, type, value }
-    : ValueValueType) {
-    const fetchedSensor = SensorModel.findOne({ _id: sensor, 'bounds.type': type });
+  ValueSchema.statics.upsertValue = async function upsertValue(
+    sensor: string,
+    { timestamp, type, value }: ValueValueType,
+  ) {
+    const fetchedSensor = SensorModel.findOne({
+      _id: sensor,
+      'bounds.type': type,
+    });
     if (fetchedSensor) {
-      const boundsForType = fetchedSensor.bounds.filter(boundary => boundary.type === type);
-      Object.keys(boundsForType).forEach((boundary) => {
-        if (Object.keys(operators).includes(boundary.operation)
-          && operators[boundary.operation](boundary.value, value)) {
+      const boundsForType = fetchedSensor.bounds.filter(
+        boundary => boundary.type === type,
+      );
+      Object.keys(boundsForType).forEach(boundary => {
+        if (
+          Object.keys(operators).includes(boundary.operation) &&
+          operators[boundary.operation](boundary.value, value)
+        ) {
           bus.emit('broadcast:outofbounds');
         }
       });
@@ -57,15 +69,32 @@ export default ({ bus, db }: CoreImports) => {
     let reading = await this.findOne({
       sensor,
       timestamp: timestamp
-        ? moment(timestamp).utc().startOf('day')
-        : moment().utc().startOf('day').toDate(),
+        ? moment(timestamp)
+            .utc()
+            .startOf('day')
+        : moment()
+            .utc()
+            .startOf('day')
+            .toDate(),
     }).exec();
 
-    if (!value) reading = new this({ sensor, timestamp: moment().utc().startOf('day').toDate(), values: [] });
+    if (!value)
+      reading = new this({
+        sensor,
+        timestamp: moment()
+          .utc()
+          .startOf('day')
+          .toDate(),
+        values: [],
+      });
     reading.values.push({
       timestamp: timestamp
-        ? moment(timestamp).utc().toDate()
-        : moment().utc().toDate(),
+        ? moment(timestamp)
+            .utc()
+            .toDate()
+        : moment()
+            .utc()
+            .toDate(),
       value,
       type,
     });

@@ -198,7 +198,8 @@ export const checkCycles = (config: Array<Object>): Array<Object> => {
   let retry = true;
   while (plugins.length && retry) {
     retry = false;
-    plugins.forEach(plugin => {                                                                   // eslint-disable-line
+    plugins.forEach(plugin => {
+      // eslint-disable-line
       const consumes = plugin.consumes.concat();
 
       let resolvedAll = true;
@@ -357,7 +358,7 @@ export default class Architect extends events.EventEmitter {
               : {}),
           },
           imports,
-          register,                                                                               // eslint-disable-line
+          register, // eslint-disable-line
         ))();
     } catch (e) {
       throw e;
@@ -382,19 +383,21 @@ export default class Architect extends events.EventEmitter {
 
         services[name] = provided[name];
         if (typeof provided[name] !== 'function') {
-          provided[name].name = name;                                                             // eslint-disable-line
+          provided[name].name = name; // eslint-disable-line
         }
 
-        if (services.bus) services.bus.emit('core:service', name, services[name]);
+        if (services.bus)
+          services.bus.emit('core:service', name, services[name]);
         return null;
       });
 
       if (provided && provided.destroy) {
         app.destructors.set(plugin.name, provided.destroy);
       } else {
-        plugin.destroy = () => {                                                                  // eslint-disable-line
+        plugin.destroy = () => {
+          // eslint-disable-line
           if (plugin.provides.length) {
-            let canDestroy = true;                                                           // eslint-disable-next-line
+            let canDestroy = true; // eslint-disable-next-line
             const consumes = Object.keys(app.services).reduce((acc, item) =>
               acc.concat(acc, item),
             );

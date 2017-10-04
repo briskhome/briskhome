@@ -15,15 +15,17 @@ import { enabledPlugins } from './plugins';
 export const resources = (type: string, args?: ?Array<*>): Array<*> =>
   enabledPlugins().reduce((acc, plugin) => {
     if (!fs.readdirSync(plugin).includes(type)) return acc;
-    return acc.concat(fs.readdirSync(path.resolve(plugin, type))
-      .map((resource) => {
+    return acc.concat(
+      fs.readdirSync(path.resolve(plugin, type)).map(resource => {
         switch (args) {
           case undefined:
             return path.resolve(plugin, type, resource);
           case null:
             return require(path.resolve(plugin, type, resource)).default;
           default:
-            return require(path.resolve(plugin, type, resource)).default(...args);
+            return require(path.resolve(plugin, type, resource)).default(
+              ...args,
+            );
         }
       }),
     );

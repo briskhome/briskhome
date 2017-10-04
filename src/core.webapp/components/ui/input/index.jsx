@@ -66,15 +66,9 @@ export default ({
     <label
       className={cn(extraClassName, 'briskhome-label', 'briskhome-label_input')}
     >
-      {label &&
-        <span className={labelClassNames}>
-          {label}
-        </span>}
+      {label && <span className={labelClassNames}>{label}</span>}
       {mask ? <InputMask mask={mask} {...props} /> : <input {...props} />}
-      {caption &&
-        <span className={captionClassNames}>
-          {caption}
-        </span>}
+      {caption && <span className={captionClassNames}>{caption}</span>}
     </label>
   );
 };

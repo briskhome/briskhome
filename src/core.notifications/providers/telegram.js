@@ -16,7 +16,7 @@ module.exports = function setup(options, imports, register) {
     this.chats = {};
     this.invites = {};
 
-    this.bot.on('message', (msg) => {
+    this.bot.on('message', msg => {
       const chatId = msg.chat.id;
       const commandId = msg.text.split(' ').shift();
 
@@ -37,7 +37,7 @@ module.exports = function setup(options, imports, register) {
       }
     });
 
-    this.bot.on('error', (err) => {
+    this.bot.on('error', err => {
       log.error(err);
     });
   }

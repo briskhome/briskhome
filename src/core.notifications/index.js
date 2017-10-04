@@ -21,10 +21,19 @@ import {
   EVENT_UPDATE_SUCCESS,
 } from './constants';
 
-import type { CoreImports, CoreRegister, SubscriptionType } from '../utilities/coreTypes';
+import type {
+  CoreOptions,
+  CoreImports,
+  CoreRegister,
+  SubscriptionType,
+} from '../utilities/coreTypes';
 import type { EventType } from './models/EventModel';
 
-export default (options: Object, imports: CoreImports, register: CoreRegister) => {
+export default (
+  options: CoreOptions,
+  imports: CoreImports,
+  register: CoreRegister,
+) => {
   const db = imports.db;
   const bus = imports.bus;
   const log = imports.log();
@@ -41,8 +50,7 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
     this.init();
   }
 
-  Notifications.prototype.init = function init()
-    : void {
+  Notifications.prototype.init = function init(): void {
     /* load installed providers
      * recreate listeners for every event
      * TODO: move subscribing to event to 'register' function since it is called on every
@@ -50,10 +58,7 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
      */
   };
 
-  Notifications.prototype.update = function update()
-    : void {
-
-  };
+  Notifications.prototype.update = function update(): void {};
 
   /**
    * @async #define()
@@ -65,8 +70,9 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
    * @param  {String} data.description  Human-readable description of the event.
    * @return {Boolean}
    */
-  Notifications.prototype.define = async function define(data: EventType)
-    : Promise<boolean> {
+  Notifications.prototype.define = async function define(
+    data: EventType,
+  ): Promise<boolean> {
     const { id, name, description } = data;
     const component = getCallee();
     let event;
@@ -80,7 +86,9 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
 
     if (!bus.listenerCount(id)) {
       log.trace(`adding listener for event ${id}`);
-      bus.on(id, (...definition) => Function.prototype.apply(this.evaluate, definition));
+      bus.on(id, (...definition) =>
+        Function.prototype.apply(this.evaluate, definition),
+      );
     }
 
     if (event) {
@@ -111,8 +119,9 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
    * @param  {String} data.username  Unique registered user identifier.
    * @return {Boolean}
    */
-  Notifications.prototype.subscribe = async function subscribe(data: SubscriptionType)
-    : Promise<boolean> {
+  Notifications.prototype.subscribe = async function subscribe(
+    data: SubscriptionType,
+  ): Promise<boolean> {
     const { eventId, username } = data;
     const levels = data.levels || [30, 50, 60]; // info, error & fatal
 
@@ -145,8 +154,9 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
    * @param  {String} data.username    Unique registered user identifier.
    * @return {Boolean}
    */
-  Notifications.prototype.unsubscribe = async function unsubscribe(data: SubscriptionType)
-    : Promise<boolean> {
+  Notifications.prototype.unsubscribe = async function unsubscribe(
+    data: SubscriptionType,
+  ): Promise<boolean> {
     const { eventId, username } = data;
 
     let user;
@@ -173,7 +183,9 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
     }
 
     if (subscribers.length === 1) {
-      bus.removeListener(eventId, a => Function.prototype.apply(this.evaluate, a));
+      bus.removeListener(eventId, a =>
+        Function.prototype.apply(this.evaluate, a),
+      );
     }
 
     return true;
@@ -185,7 +197,9 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
    *
    * @param {Object} id  Unique registered event identifier.
    */
-  Notifications.prototype.evaluate = async function evaluate(id: string): Promise<> {
+  Notifications.prototype.evaluate = async function evaluate(
+    id: string,
+  ): Promise<> {
     log.trace({ data: id });
 
     let event;
@@ -211,9 +225,11 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
       return;
     }
 
-    users.forEach((user) => {
-      const hasMatchingSubscription = !!user.subscriptions.filter(subscription =>
-        subscription.id === event.id && subscription.levels.includes(event.level),
+    users.forEach(user => {
+      const hasMatchingSubscription = !!user.subscriptions.filter(
+        subscription =>
+          subscription.id === event.id &&
+          subscription.levels.includes(event.level),
       ).length;
 
       if (!hasMatchingSubscription) {
@@ -223,20 +239,32 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
       if (user.contacts) {
         return user.contacts
           .filter(contact => contact.levels.includes(event.level))
-          .map(async (contact) => {
+          .map(async contact => {
             if (!this.providers[contact.name]) {
-              log.warn({ data: { event, user, contact } }, ERR_NO_SUCH_PROVIDER);
+              log.warn(
+                { data: { event, user, contact } },
+                ERR_NO_SUCH_PROVIDER,
+              );
               return;
             }
 
             try {
-              await this.providers[contact.name].send({ id: contact.id, event });
+              await this.providers[contact.name].send({
+                id: contact.id,
+                event,
+              });
             } catch (e) {
-              log.warn({ data: { user, event, contact } }, EVENT_DISPATCH_FAILURE);
+              log.warn(
+                { data: { user, event, contact } },
+                EVENT_DISPATCH_FAILURE,
+              );
               return;
             }
 
-            log.info({ data: { user, event, contact } }, EVENT_DISPATCH_SUCCESS);
+            log.info(
+              { data: { user, event, contact } },
+              EVENT_DISPATCH_SUCCESS,
+            );
           });
       }
 
@@ -253,18 +281,24 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
    * @param  {String}    providerId [description]
    * @return {String}  A link or action that needs to be followed in order to verify.
    */
-  Notifications.prototype.verify = async function verify(user, providerId: string)
-    : Promise<> {
-    const verified = async (contactId) => {
-      user.contacts[providerId] = contactId;                                                      // eslint-disable-line
+  Notifications.prototype.verify = async function verify(
+    user,
+    providerId: string,
+  ): Promise<> {
+    const verified = async contactId => {
+      user.contacts[providerId] = contactId; // eslint-disable-line
       const result = await user.save();
       if (!result) {
-        log.error(`Unable to verify ${user.username} with ${providerId} by ${contactId}`);
+        log.error(
+          `Unable to verify ${user.username} with ${providerId} by ${contactId}`,
+        );
       }
     };
 
     if (!Object.keys(this.providers).includes(providerId)) {
-      log.error(`Notifications provider with providerId ${providerId} not found`);
+      log.error(
+        `Notifications provider with providerId ${providerId} not found`,
+      );
       return null;
     }
 
@@ -276,8 +310,9 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
    * [providers description]
    * @return {Array}
    */
-  Notifications.prototype.providers = async function providers()
-    :Promise<Array<*>> {
+  Notifications.prototype.providers = async function providers(): Promise<
+    Array<*>,
+  > {
     return resources('providers');
   };
 

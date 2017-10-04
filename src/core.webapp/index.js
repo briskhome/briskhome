@@ -6,10 +6,14 @@
 import path from 'path';
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
-import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
+import type {
+  CoreOptions,
+  CoreImports,
+  CoreRegister,
+} from '../utilities/coreTypes';
 
 export default (
-  options: Object,
+  options: CoreOptions,
   imports: CoreImports,
   register: CoreRegister,
 ) => {

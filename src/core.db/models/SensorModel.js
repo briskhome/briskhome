@@ -14,7 +14,7 @@ export type SensorType = {
   isOnline: boolean,
   values: string,
   lcoation: Object,
-}
+};
 
 // export type SensorModelType = {
 //   setOnline: (state: boolean) => SensorModelType
@@ -22,49 +22,59 @@ export type SensorType = {
 
 export default ({ db }: CoreImports) => {
   const Schema = db.Schema;
-  const SensorSchema = new Schema({
-    _id: {
-      type: String,
-      default: () => uuid.v4(),
+  const SensorSchema = new Schema(
+    {
+      _id: {
+        type: String,
+        default: () => uuid.v4(),
+      },
+      device: {
+        type: String,
+      },
+      isOnline: {
+        type: Boolean,
+        default: true,
+      },
+      values: [
+        {
+          type: String,
+        },
+      ],
+      bounds: [
+        {
+          _id: false,
+          type: { type: String },
+          operation: { type: String },
+          value: { type: String },
+        },
+      ],
+      location: {
+        type: String,
+        default: null,
+      },
     },
-    device: {
-      type: String,
+    {
+      collection: 'sensors',
+      timestamps: true,
     },
-    isOnline: {
-      type: Boolean,
-      default: true,
-    },
-    values: [{
-      type: String,
-    }],
-    bounds: [{
-      _id: false,
-      type: { type: String },
-      operation: { type: String },
-      value: { type: String },
-    }],
-    location: {
-      type: String,
-      default: null,
-    },
-  }, {
-    collection: 'sensors',
-    timestamps: true,
-  });
+  );
 
-  SensorSchema.methods.setOnline = async function setOnline(state: boolean)
-    : Promise<SensorType> {
+  SensorSchema.methods.setOnline = async function setOnline(
+    state: boolean,
+  ): Promise<SensorType> {
     this.isOnline = state;
     return this.save();
   };
 
-  SensorSchema.statics.sensorById = async function fetchBySerial(id: string)
-    : Promise<SensorType> {
+  SensorSchema.statics.sensorById = async function fetchBySerial(
+    id: string,
+  ): Promise<SensorType> {
     return this.findOne({ _id: id }).exec();
   };
 
-  SensorSchema.statics.sensorsByDeviceId = async function fetchBySerial(deviceId: string)
-    : Promise<Array<SensorType>> {
+  SensorSchema.statics.sensorsByDeviceId = async function fetchBySerial(
+    deviceId: string,
+  ): Promise<Array<SensorType>> {
     return this.find({ device: deviceId }).exec();
   };
 
