@@ -4,7 +4,8 @@ node_js:
 jobs:
   include:
     - stage: build
-      script: yarn build
+      script: yarn babel
+    - script: yarn webpack
     - stage: check
       script: yarn lint
     - script: yarn flow
