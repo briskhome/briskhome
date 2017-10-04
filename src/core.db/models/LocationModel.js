@@ -4,7 +4,7 @@
  */
 
 import uuid from 'uuid-1345';
-import type { CoreImports, ModelType } from '../../utilities/coreTypes';
+import type { CoreImports } from '../../utilities/coreTypes';
 
 export type RoomType = {
   id: string,
@@ -31,9 +31,9 @@ export type LocationType = {
   zones: Array<ZoneType>,
 }
 
-export type LocationModelType = (document: LocationType) => {
+// export type LocationModelType = (document: LocationType) => {
 
-} & LocationType & ModelType<LocationModelType>
+// } & LocationType & ModelType<LocationModelType>
 
 export default ({ db }: CoreImports) => {
   const Schema = db.Schema;

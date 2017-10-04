@@ -4,26 +4,7 @@
  */
 
 import uuid from 'uuid-1345';
-import type { CoreImports, ModelType } from '../../utilities/coreTypes';
-
-export type DeviceType = {
-  _id?: string,
-  id: string,
-  mac: string,
-  name: string,
-  address: string,
-  hostname: string,
-  description: string,
-  location: string,
-  services: Object,
-
-  createdAt?: string,
-  updatedAt?: string,
-}
-
-export type DeviceModelType = (document: DeviceType) => {
-
-} & DeviceType & ModelType<DeviceModelType>;
+import type { CoreImports } from '../../utilities/coreTypes';
 
 export default ({ db }: CoreImports) => {
   const Schema = db.Schema;

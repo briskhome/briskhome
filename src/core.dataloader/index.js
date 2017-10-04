@@ -6,7 +6,11 @@
 import Dataloader from './dataloader';
 import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
 
-export default (options: Object, imports: CoreImports, register: CoreRegister) => {
+export default (
+  options: Object,
+  imports: CoreImports,
+  register: CoreRegister,
+) => {
   const db = imports.db;
   const log = imports.log();
 
@@ -16,30 +20,48 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
 
   const createDataloaders = () => {
     const batchLoadDevicesById = async (ids: Array<string>) => {
-      log.debug({ dataloader: 'deviceById' }, 'batchLoadDeviceById', { count: ids.length, ids });
+      log.debug({ dataloader: 'deviceById' }, 'batchLoadDeviceById', {
+        count: ids.length,
+        ids,
+      });
       return Promise.all(ids.map(id => Device.findOne({ _id: id }).exec()));
     };
     const batchLoadDevices = async () => {
       log.debug({ dataloader: 'deviceById' }, 'batchLoadDevices');
-      return Array.prototype.map.call(await Device.find({}).exec(), device => [device._id, device]);
+      return Array.prototype.map.call(await Device.find({}).exec(), device => [
+        device._id,
+        device,
+      ]);
     };
 
     const batchLoadSensorsById = async (ids: Array<string>) => {
-      log.debug({ dataloader: 'sensorById' }, 'batchLoadSensorById', { count: ids.length, ids });
+      log.debug({ dataloader: 'sensorById' }, 'batchLoadSensorById', {
+        count: ids.length,
+        ids,
+      });
       return Promise.all(ids.map(id => Sensor.findOne({ _id: id }).exec()));
     };
     const batchLoadSensors = async () => {
       log.debug({ dataloader: 'sensorById' }, 'batchLoadSensors');
-      return Array.prototype.map.call(await Sensor.find({}).exec(), sensor => [sensor._id, sensor]);
+      return Array.prototype.map.call(await Sensor.find({}).exec(), sensor => [
+        sensor._id,
+        sensor,
+      ]);
     };
 
     const batchLoadUsersById = async (ids: Array<string>) => {
-      log.debug({ dataloader: 'userById' }, 'batchLoadUsersById', { count: ids.length, ids });
+      log.debug({ dataloader: 'userById' }, 'batchLoadUsersById', {
+        count: ids.length,
+        ids,
+      });
       return Promise.all(ids.map(id => User.findOne({ _id: id }).exec()));
     };
     const batchLoadUsers = async () => {
       log.debug({ dataloader: 'userById' }, 'batchLoadUsers');
-      return Array.prototype.map.call(await User.find({}).exec(), user => [user._id, user]);
+      return Array.prototype.map.call(await User.find({}).exec(), user => [
+        user._id,
+        user,
+      ]);
     };
 
     const deviceById = new Dataloader(batchLoadDevicesById, batchLoadDevices);
@@ -53,5 +75,5 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
     };
   };
 
-  register(null, { dataloader: createDataloaders() });
+  register(null, { dataloader: createDataloaders });
 };

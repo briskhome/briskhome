@@ -5,7 +5,7 @@
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": ["graphql", "log"],
+    "consumes": ["graphql", "log", "dataloader", "db"],
     "provides": ["webapp"]
   }
 }

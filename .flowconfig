@@ -1,15 +1,20 @@
 [ignore]
 .*/lib/.*
+.*/node_modules/eslint-plugin-jsx-a11y/__mocks__/.*
+.*/node_modules/graphql/**/.*flow
+.*/node_modules/apollo-client/.*flow
+.*/node_modules/react-apollo/.*flow
 .*/node_modules/fbjs/lib/.*flow
-.*/node_modules/@briskhome/.*
 
 [include]
-;.*/src/.*
 
 [libs]
-.*/flow-typed/.*
 
 [options]
+esproposal.class_static_fields=enable
+esproposal.class_instance_fields=enable
 module.ignore_non_literal_requires=true
-module.system.node.resolve_dirname=node_modules
 module.system.node.resolve_dirname=src
+module.system.node.resolve_dirname=node_modules
+module.file_ext=.styl
+module.name_mapper.extension='styl' -> 'empty/object'

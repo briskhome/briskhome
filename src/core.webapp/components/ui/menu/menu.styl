@@ -1,0 +1,93 @@
+.briskhome-menu
+  display inline-block
+  height 100%
+  position relative
+
+  &__arrow
+    display inline-block
+    margin 8px
+    padding 3px
+    cursor pointer
+    transform rotate(45deg)
+    border solid #b9b9b9
+    border-width 0 2px 2px 0
+    vertical-align middle
+
+  &__content
+    top 32px
+    right -12px
+    display none
+    position absolute
+    // margin-top 8px
+    // margin-left -126px
+    z-index 2
+    background-color white
+    border-radius 4px
+    border 1px solid #b9b9b9
+    box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+    
+    &:after, &:before {
+      bottom: 100%;
+      right: 10%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+
+    &:after {
+      border-color: rgba(255, 255, 255, 0);
+      border-bottom-color: #fff;
+      border-width: 9px;
+      margin-right: -1px;
+    }
+    &:before {
+      border-color: rgba(185, 185, 185, 0);
+      border-bottom-color: #b9b9b9;
+      border-width: 11px;
+      margin-right: -3px;
+    }
+
+    li+li
+      border-top 1px solid #eaeaea
+
+    li
+      height 40px
+      box-sizing border-box
+      padding 12px 20px
+      text-align left
+      white-space nowrap
+      
+      &:hover
+        background-color #fafafa
+      > a
+        color black
+        text-decoration none
+        // font-size 16px
+        font-weight normal
+
+//   &__trigger
+//     height 100%
+//     width 100%
+
+.dropdown--active .dropdown__content
+  display block
+
+//   @media(max-width: 768px)
+//     max-height 48px
+
+
+// .dropdown {
+//     display: inline-block;
+// }
+
+// .dropdown__content {
+//     display: none;
+//     position: absolute;
+// }
+
+// .dropdown--active .dropdown__content {
+//     display: block;
+// }

@@ -3,7 +3,7 @@
  * └core.notifications <models/EventModel.js>
  */
 
-import type { CoreImports, ModelType } from '../../utilities/coreTypes';
+import type { CoreImports } from '../../utilities/coreTypes';
 
 export type EventType = {
   _id?: string,
@@ -16,9 +16,9 @@ export type EventType = {
   updatedAt?: string,
 };
 
-export type EventModelType = (document: EventType) => {
-  fetchById(id: string): EventModelType,
-} & EventType & ModelType<EventModelType>;
+// export type EventModelType = (document: EventType) => {
+//   fetchById(id: string): EventModelType,
+// } & EventType & ModelType<EventModelType>;
 
 export default ({ db }: CoreImports) => {
   const Schema = db.Schema;

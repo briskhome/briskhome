@@ -3,8 +3,6 @@
  * └core <utilities/coreTypes.js>
  */
 
-import type mongoose from 'mongoose';
-
 export type PackageJson = {
   name: string,
   version: string,
@@ -24,22 +22,21 @@ export type PackageJson = {
   },
 };
 
+export type CoreOptions = {
+  [key: string]: string,
+};
+
 export type CoreImports = {
   bus: Object,
   config: () => Object,
   dataloader: Function,
-  db: mongoose,
+  db: Object,
   graphql: Object,
   log: () => Object,
   webapp: Function,
-}
+};
 
 export type CoreRegister = (err: ?Error, data?: Object) => void;
-
-export type ModelType<Model> = {
-  save: (document?: Object) => Model,
-  update: (document?: Object) => Model,
-};
 
 export type CoreGraphQL = {
   schema: string,
@@ -47,8 +44,8 @@ export type CoreGraphQL = {
   mutations?: string,
   resolvers?: {
     queries?: { [string]: Function },
-    mutations?: { [string]: Function }
-  }
+    mutations?: { [string]: Function },
+  },
 };
 
 export type SubscriptionType = {
@@ -56,3 +53,5 @@ export type SubscriptionType = {
   eventId: string,
   levels?: Array<string>,
 };
+
+export type CoreContextType = CoreImports;

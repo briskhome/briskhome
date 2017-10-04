@@ -1,0 +1,20 @@
+{
+    "name": "BRISKHOME",
+    "icons": [
+        {
+            "src": "/public/assets/img/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/public/assets/img/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#f9d21c",
+    "background_color": "#f9d21c",
+    "start_url": "http://my.local.briskhome.com",
+    "display": "standalone",
+    "orientation": "portrait"
+}

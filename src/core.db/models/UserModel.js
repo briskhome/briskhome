@@ -3,97 +3,104 @@
  * └core.db <models/UserModel.js>
  */
 
-import type { CoreImports, ModelType } from '../../utilities/coreTypes';
+import type { CoreImports } from '../../utilities/coreTypes';
 
-export type UserContactType = {
-  name: string,
-  value: string,
-  levels: Array<number>,
-};
+// export type UserContactType = {
+//   name: string,
+//   value: string,
+//   levels: Array<number>,
+// };
 
-export type UserDeviceType = {
-  // TODO
-}
+// export type UserDeviceType = {
+//   // TODO
+// };
 
-export type UserSubscriptionType = {
-  _id: string,
-  levels: Array<number>,
-};
+// export type UserSubscriptionType = {
+//   _id: string,
+//   levels: Array<number>,
+// };
 
-export type UserLocationType = {
-  // TODO
-}
+// export type UserLocationType = {
+//   // TODO
+// };
 
-export type UserType = {
-  _id?: string,
-  id: string,
-  // username: string,
-  firstName: string,
-  lastName: string,
-  type: 'guest' | 'user' | 'superuser',
-  contacts: Array<UserContactType>,
-  devices: Array<UserDeviceType>,
-  subscriptions: Array<UserSubscriptionType>,
-  locations: Array<UserLocationType>,
+// declare class UserType {
+//   _id: string;
+//   id: string;
+//   username?: string;
+//   firstName: string;
+//   lastName: string;
+//   type: 'guest' | 'regular' | 'superuser';
+//   contacts: Array<UserContactType>;
+//   devices: Array<UserDeviceType>;
+//   subscriptions: Array<UserSubscriptionType>;
+//   locations: Array<UserLocationType>;
+//   isDisabled: boolean;
 
-  createdAt?: string,
-  updatedAt?: string,
-};
+//   createdAt?: string;
+//   updatedAt?: string;
+// }
 
-export type UserModelType = (document: UserType) => {
-  fetchByUsername(id: string): UserModelType,
-  fetchBySubscription(id: string): UserModelType,
-} & UserType & ModelType<UserModelType>;
+// export type UserModelType = (
+//   document: UserType,
+// ) => {
+//   fetchByUsername(id: string): UserModelType,
+//   fetchBySubscription(id: string): UserModelType,
+// } & UserType &
+//   ModelType<UserType>;
 
 export default ({ db }: CoreImports) => {
   const Schema = db.Schema;
-  const userSchema = new Schema({
-    _id: {
-      type: String,
-    },
-    // username: {
-    //   type: String,
-    //   unique: true,
-    // },
-    firstName: {
-      type: String,
-    },
-    lastName: {
-      type: String,
-    },
-    type: {
-      type: String,
-      enum: [
-        'guest',
-        'user',
-        'superuser',
+  const userSchema = new Schema(
+    {
+      _id: {
+        type: String,
+      },
+      firstName: {
+        type: String,
+      },
+      lastName: {
+        type: String,
+      },
+      type: {
+        type: String,
+        enum: ['guest', 'regular', 'superuser'],
+      },
+      contacts: [
+        {
+          name: String,
+          value: String,
+          levels: [Number],
+        },
       ],
+      devices: [], // ?
+      subscriptions: [
+        {
+          _id: String,
+          levels: [Number],
+        },
+      ],
+      location: {
+        long: String,
+        lat: String,
+      },
+      isDisabled: {
+        type: Boolean,
+        default: false,
+      },
     },
-    contacts: [{
-      name: String,
-      value: String,
-      levels: [Number],
-    }],
-    devices: [], // ?
-    subscriptions: [{
-      _id: String,
-      levels: [Number],
-    }],
-    location: {
-      long: String,
-      lat: String,
+    {
+      collection: 'users',
+      timestamps: true,
     },
-  }, {
-    collection: 'users',
-    timestamps: true,
+  );
+
+  userSchema.virtual('name').get(function get() {
+    return `${this.firstName} ${this.lastName}`;
   });
 
-  userSchema.virtual('name')
-    .get(function get() {
-      return `${this.firstName} ${this.lastName}`;
-    });
-
-  userSchema.virtual('username')
+  userSchema
+    .virtual('username')
     .get(function get() {
       return this._id;
     })
@@ -101,13 +108,15 @@ export default ({ db }: CoreImports) => {
       this._id = username;
     });
 
-  userSchema.statics.fetchByUsername = async function fetchByUsername(username: string)
-    : Promise<UserType> {
+  userSchema.statics.fetchByUsername = async function fetchByUsername(
+    username: string,
+  ): Promise<*> {
     return this.findOne({ _id: username }).exec();
   };
 
-  userSchema.statics.fetchBySubscription = async function fetchBySubscription(id: string)
-    : Promise<UserType> {
+  userSchema.statics.fetchBySubscription = async function fetchBySubscription(
+    id: string,
+  ): Promise<*> {
     return this.find({ 'subscriptions._id': id }).exec();
   };
 
