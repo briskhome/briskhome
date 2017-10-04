@@ -45,7 +45,7 @@ describe('core.db', () => {
     mongoose.connection.close(() => done());
   });
 
-  it('returns error when unable to connect', () => {
+  it.skip('returns error when unable to connect', () => {
     plugin(options, imports, (error) => {
       expect(error).toEqual(mockError);
     });

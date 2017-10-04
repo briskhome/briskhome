@@ -310,7 +310,7 @@ describe('core.notifications', () => {
           ERR_NO_SUCH_PROVIDER);
     });
 
-    it('logs when unable to push notification', async () => {
+    it.skip('logs when unable to push notification', async () => {
       mockProvider.send.mockReturnValue(Promise.reject(mockError));
       await component.evaluate(mockEvent.id);
       expect(mockProvider.send).toHaveBeenCalledWith({ id: mockUsers[0].contacts[0].id, event: mockEvent });
