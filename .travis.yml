@@ -7,9 +7,9 @@ jobs:
       script: yarn babel
     - script: yarn webpack
     - stage: check
-      script: yarn lint
-    - script: yarn flow
-    - script: yarn test
+      script: yarn lint --version && yarn lint
+    - script: yarn flow version && yarn flow
+    - script: yarn test --version && yarn test
       after_success:
       - yarn global add codecov && codecov
 addons:
