@@ -4,24 +4,15 @@
  */
 
 import { GraphQLSchema, GraphQLObjectType } from 'graphql';
-import devicesQuery from './queries/devices';
-import pluginsQuery from './queries/plugins';
-import usersQuery from './queries/users';
+import devices from './queries/devices';
+import plugins from './queries/plugins';
+import users from './queries/users';
 import createUser from './mutations/users/createUser';
 import disableUser from './mutations/users/disableUser';
 import removeUser from './mutations/users/removeUser';
 import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
 
-export default (
-  options: Object,
-  imports: CoreImports,
-  register: CoreRegister,
-) => {
-  const log = imports.log();
-  const devices = devicesQuery({ ...imports, log });
-  const plugins = pluginsQuery({ ...imports, log });
-  const users = usersQuery({ ...imports, log });
-
+export default (options: Object, imports: CoreImports, register: CoreRegister) => {
   const schema = new GraphQLSchema({
     query: new GraphQLObjectType({
       name: 'RootQueryType',
