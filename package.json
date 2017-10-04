@@ -16,7 +16,7 @@
     "start-ugly": "node lib/core.js --ugly | bunyan -o short",
     "test": "node_modules/.bin/jest src --coverage",
     "postinstall": "npm config set briskhome_dir /opt/briskhome",
-    "webpack": "node_modules/.bin/webpack --config ./lib/core.webapp/webpack.config.js --context ./lib/core.webapp",
+    "webpack": "node_modules/.bin/webpack --config ./src/core.webapp/webpack.config.js --context ./src/core.webapp",
     "webpack-watch": "node_modules/.bin/webpack --config ./src/core.webapp/webpack.config.js --context ./src/core.webapp --watch",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
