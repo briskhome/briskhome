@@ -22,34 +22,39 @@ export type EventType = {
 
 export default ({ db }: CoreImports) => {
   const Schema = db.Schema;
-  const eventSchema = new Schema({
-    _id: {
-      type: String,
-      unique: true,
+  const eventSchema = new Schema(
+    {
+      _id: {
+        type: String,
+        unique: true,
+      },
+      name: {
+        type: String,
+        unique: true,
+      },
+      level: {
+        type: Number,
+        default: 40,
+      },
+      description: {
+        type: String,
+      },
+      component: {
+        type: String,
+      },
     },
-    name: {
-      type: String,
-      unique: true,
+    {
+      collection: 'events',
+      timestamps: {
+        createdAt: 'created',
+        updatedAt: 'updated',
+      },
     },
-    level: {
-      type: Number,
-      default: 40,
-    },
-    description: {
-      type: String,
-    },
-    component: {
-      type: String,
-    },
-  }, {
-    collection: 'events',
-    timestamps: {
-      createdAt: 'created',
-      updatedAt: 'updated',
-    },
-  });
+  );
 
-  eventSchema.statics.fetchById = async function fetchById(id: string): Promise<EventType> {
+  eventSchema.statics.fetchById = async function fetchById(
+    id: string,
+  ): Promise<EventType> {
     return this.findOne({ _id: id }).exec();
   };
 

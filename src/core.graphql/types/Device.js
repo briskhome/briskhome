@@ -26,7 +26,9 @@ export default new GraphQLObjectType({
         const SensorModel = db.model('core:sensor');
         const ids = await SensorModel.sensorsByDeviceId(src.id);
         if (!ids.length) return null;
-        return dataloader.sensorById.loadMany(ids.reduce((acc, doc) => acc.concat(doc._id), []));
+        return dataloader.sensorById.loadMany(
+          ids.reduce((acc, doc) => acc.concat(doc._id), []),
+        );
       },
     },
   },

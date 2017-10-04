@@ -4,9 +4,17 @@
  */
 
 import EventEmitter from 'eventemitter2';
-import type { CoreImports, CoreRegister } from '../utilities/coreTypes';
+import type {
+  CoreOptions,
+  CoreImports,
+  CoreRegister,
+} from '../utilities/coreTypes';
 
-export default (options: Object, imports: CoreImports, register: CoreRegister) => {
+export default (
+  options: CoreOptions,
+  imports: CoreImports,
+  register: CoreRegister,
+) => {
   const log = imports.log();
   const bus = new EventEmitter({
     delimiter: ':',
@@ -15,11 +23,11 @@ export default (options: Object, imports: CoreImports, register: CoreRegister) =
     wildcard: true,
   });
 
-  bus.on('broadcast:**', function coreEvent(...data) {                                            // eslint-disable-line
+  bus.on('broadcast:**', function coreEvent(...data) {
     log.trace({ event: this.event }, data);
   });
 
-  bus.on('core:**', function coreEvent(...data) {                                                 // eslint-disable-line
+  bus.on('core:**', function coreEvent(...data) {
     log.trace({ event: this.event }, data);
   });
 

@@ -30,7 +30,7 @@ describe('core.db', () => {
 
   const mockError = new Error('MockError');
 
-  beforeEach(async (done) => {
+  beforeEach(async done => {
     options = {};
     imports = { config, loader, log };
 
@@ -46,7 +46,7 @@ describe('core.db', () => {
   });
 
   it.skip('returns error when unable to connect', () => {
-    plugin(options, imports, (error) => {
+    plugin(options, imports, error => {
       expect(error).toEqual(mockError);
     });
     mongoose.connection.emit('error', mockError);

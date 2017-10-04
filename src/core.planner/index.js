@@ -25,7 +25,7 @@ export default (options, imports, register) => {
     // console.log('Job %s starting', job.attrs.name);
   });
 
-  agenda.on('error', (err) => {
+  agenda.on('error', err => {
     // console.log(err);
     register(err);
   });

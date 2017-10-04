@@ -15,7 +15,10 @@ import { briskhomeAsciiLogo } from './utilities/constants';
 (async () => {
   let app;
   try {
-    const plugins = await resolveConfig(enabledPlugins(), path.resolve(__dirname, '..'));
+    const plugins = await resolveConfig(
+      enabledPlugins(),
+      path.resolve(__dirname, '..'),
+    );
     app = await new Architect().loadPlugins(plugins);
   } catch (e) {
     process.stdout.write(`{

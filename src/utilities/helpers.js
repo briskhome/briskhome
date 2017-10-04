@@ -11,13 +11,25 @@ import path from 'path';
  * @returns {String} Either a name of directory or module name from package.json.
  */
 export const getCallee = (depth?: number = 3): string => {
-  const d = new Error().stack.split('\n')[depth].split('/').slice(1, -1);
+  const d = new Error().stack
+    .split('\n')
+    [depth].split('/')
+    .slice(1, -1);
   try {
     return require(path.join('/', d.join('/'), 'package.json')).name;
   } catch (e) {
     try {
-      return d.reduce((acc, s, i, a) => (s === 'lib' || s === 'node_modules' ? a[i + 1] : acc), '').split(':').shift();
-    } catch (ex) { return 'unknown'; }
+      return d
+        .reduce(
+          (acc, s, i, a) =>
+            s === 'lib' || s === 'node_modules' ? a[i + 1] : acc,
+          '',
+        )
+        .split(':')
+        .shift();
+    } catch (ex) {
+      return 'unknown';
+    }
   }
 };
 
@@ -37,7 +49,9 @@ export const normalizeName = (name: string): string => {
   }
 
   if (normalizedName.indexOf('briskhome-') >= 0) {
-    normalizedName = normalizedName.substr(normalizedName.indexOf('briskhome-') + 10);
+    normalizedName = normalizedName.substr(
+      normalizedName.indexOf('briskhome-') + 10,
+    );
   }
 
   return normalizedName;
