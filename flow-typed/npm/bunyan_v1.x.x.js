@@ -1,5 +1,5 @@
-// flow-typed signature: e8b1123da85075f400a3b0d58b085df8
-// flow-typed version: d147050580/bunyan_v1.x.x/flow_>=v0.21.x
+// flow-typed signature: a312495210247e4306e7f02f9fee8a50
+// flow-typed version: aae6f1c1a1/bunyan_v1.x.x/flow_>=v0.21.x
 
 declare module 'bunyan' {
     declare var TRACE: 10;
@@ -34,11 +34,14 @@ declare module 'bunyan' {
         },
         [key: string]: any
     };
+    declare type Writable = {
+      write(rec: BunyanRecord): void
+  }
     declare class Logger extends events$EventEmitter {
         constructor(options: LoggerOptions): any;
         addStream(stream: Stream): void;
         addSerializers(serializers: Serializers): void;
-        child(opts: LoggerOptions, simple?: boolean): Logger;
+        child(opts?: LoggerOptions, simple?: boolean): Logger;
         reopenFileStreams(): void;
         level(): string | number;
         level(value: number | string): void;
@@ -105,7 +108,7 @@ declare module 'bunyan' {
         type?: string;
         level?: number | string;
         path?: string;
-        stream?: stream$Writable | tty$WriteStream | Stream;
+        stream?: stream$Writable | tty$WriteStream | Stream | Writable;
         closeOnExit?: boolean;
         period?: string;
         count?: number;
