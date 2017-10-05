@@ -7,12 +7,9 @@ const Agenda = require('agenda');
 
 export default (options, imports, register) => {
   const log = imports.log();
-
   const agenda = new Agenda({
-    db: {
-      address: `mongodb://${options.hostname}/${options.database}`,
-      collection: 'jobs',
-    },
+    db: { collection: 'jobs' },
+    mongo: imports.db.connections[0],
   });
 
   // agenda.define('irrigation.start', function (job, done) {
@@ -41,6 +38,6 @@ export default (options, imports, register) => {
 
     agenda.start();
     // console.log(agenda);
-    register(null, {agenda});
+    register(null, { agenda });
   });
 };
