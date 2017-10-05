@@ -1,6 +1,6 @@
 /**
  * @briskhome
- * └core.planner <index.js>
+ * └core.agenda <index.js>
  */
 
 const Agenda = require('agenda');
@@ -41,6 +41,6 @@ export default (options, imports, register) => {
 
     agenda.start();
     // console.log(agenda);
-    register(null, { planner: agenda });
+    register(null, {agenda});
   });
 };
