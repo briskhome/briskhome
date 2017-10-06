@@ -42,6 +42,10 @@ import { briskhomeAsciiLogo } from './utilities/constants';
   log.info('Briskhome initialization successful');
   bus.emit('core:ready');
 
+  if (process.argv.includes('--stop')) {
+    process.exit(0);
+  }
+
   bus.on('core:error', err => {
     log.error({ err }, 'Error event received on bus');
     process.exit(1);
@@ -51,7 +55,10 @@ import { briskhomeAsciiLogo } from './utilities/constants';
     log.error({ err, promise }, 'unhandledRejection');
     process.exit(1);
   });
-})();
+})().catch(err => {
+  console.error({ err }, 'unhandledRejection');
+  process.exit(1);
+});
 
 const writeBriskhomeLogo = (): void => {
   process.stdout.write('\u001b[2J\u001b[0;0H');

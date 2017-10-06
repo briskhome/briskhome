@@ -7,11 +7,18 @@ jobs:
       script: yarn babel
     - script: yarn webpack
     - stage: check
-      script: yarn lint --version && yarn lint
-    - script: yarn flow version && yarn flow
-    - script: yarn test --version && yarn test
+      script: yarn lint
+    - script: yarn flow
+    - script: yarn test
       after_success:
-      - yarn global add codecov && codecov
+        - yarn global add codecov && codecov
+    - stage: run
+      script: yarn start-stop
+      services:
+        - mongodb
+      before_script:
+        - mongo briskhome --eval 'db.createUser({user:"briskhome",pwd:"briskhome",roles:["readWrite"]});'
+        - yarn babel
 addons:
   code_climate:
     repo_token: 71ee8424e2660dbc7dd88d81e0715f4434453db7fb57af35604d165d2db6203a
