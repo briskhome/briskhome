@@ -22,14 +22,9 @@ export default (
     mongo: imports.db.connections[0],
   });
 
-  // agenda.define('irrigation.start', function (job, done) {
-  //   log.debug('Задача irrigation.start');
-  //
-  //   done();
-  // });
-
-  agenda.on('start', (/* job */) => {
-    // console.log('Job %s starting', job.attrs.name);
+  agenda.define('com.briskhome.job.poll', function(job, done) {
+    bus.emit('broadcast:poll');
+    return done();
   });
 
   agenda.on('error', err => {
@@ -38,6 +33,7 @@ export default (
 
   agenda.on('ready', () => {
     agenda.every('1 minute', 'com.briskhome.job.poll');
+    bus.on('core:ready', () => agenda.start());
     return register(null, { agenda });
   });
 
