@@ -1,11 +1,21 @@
-/**
+/** @flow
  * @briskhome
  * └core.agenda <index.js>
  */
 
-const Agenda = require('agenda');
+import Agenda from 'agenda';
+import type {
+  CoreOptions,
+  CoreImports,
+  CoreRegister,
+} from '../utilities/coreTypes';
 
-export default (options, imports, register) => {
+export default (
+  options: CoreOptions,
+  imports: CoreImports,
+  register: CoreRegister,
+) => {
+  const { bus } = imports;
   const log = imports.log();
   const agenda = new Agenda({
     db: { collection: 'jobs' },
@@ -23,21 +33,16 @@ export default (options, imports, register) => {
   });
 
   agenda.on('error', err => {
-    // console.log(err);
-    register(err);
+    return register(err);
   });
 
   agenda.on('ready', () => {
-    log.info('Инициализация планировщика задач');
+    agenda.every('1 minute', 'com.briskhome.job.poll');
+    return register(null, { agenda });
+  });
 
-    // agenda.now('irrigation.start', function (job) {
-    //   log.debug('Запуск задачи', { data: job });
-    // });
-    //
-    // agenda.every('5 seconds', 'irrigation.start');
-
-    agenda.start();
-    // console.log(agenda);
-    register(null, { agenda });
+  agenda.on('start', job => {
+    log.debug({ job: job.attrs.name }, `Starting job`);
+    log.trace({ job });
   });
 };
