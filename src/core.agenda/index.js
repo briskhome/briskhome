@@ -27,6 +27,11 @@ export default (
     return done();
   });
 
+  agenda.on('start', job => {
+    log.debug({ job: job.attrs.name }, 'Starting job');
+    log.trace({ job });
+  });
+
   agenda.on('error', err => {
     return register(err);
   });
@@ -35,10 +40,5 @@ export default (
     agenda.every('1 minute', 'com.briskhome.job.poll');
     bus.on('core:ready', () => agenda.start());
     return register(null, { agenda });
-  });
-
-  agenda.on('start', job => {
-    log.debug({ job: job.attrs.name }, `Starting job`);
-    log.trace({ job });
   });
 };
