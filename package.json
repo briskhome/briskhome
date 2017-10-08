@@ -78,7 +78,7 @@
     "mongoose": "4.11.14",
     "nconf": "^0.8.4",
     "node-forge": "^0.6.48",
-    "node-telegram-bot-api": "^0.21.1",
+    "node-telegram-bot-api": "0.28.0",
     "nodemon": "^1.11.0",
     "properties": "1.2.1",
     "rc-menu": "^5.0.10",
