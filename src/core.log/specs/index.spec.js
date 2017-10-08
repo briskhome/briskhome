@@ -7,7 +7,8 @@ import bunyan from 'bunyan';
 import { getCallee, normalizeName } from '../../utilities/helpers';
 import plugin from '../';
 
-jest.unmock('../');
+jest.mock('bunyan');
+jest.mock('../../utilities/helpers');
 
 describe('core.log', () => {
   let sut;

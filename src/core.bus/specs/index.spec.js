@@ -5,8 +5,7 @@
 
 import plugin from '../';
 
-jest.enableAutomock();
-jest.unmock('../');
+jest.mock('eventemitter2');
 
 describe('core.bus', () => {
   let options;

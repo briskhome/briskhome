@@ -1,17 +1,12 @@
 {
-  "name": "@briskhome/core.planner",
+  "name": "@briskhome/core.agenda",
   "version": "0.3.0-alpha.1",
   "main": "index.js",
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
   "private": true,
   "plugin": {
-    "consumes": [
-      "db",
-      "log"
-    ],
-    "provides": [
-      "planner"
-    ]
+    "consumes": ["bus", "db", "log"],
+    "provides": ["agenda"]
   },
   "dependencies": {
     "agenda": "^0.9.1"

@@ -9,8 +9,8 @@ import { resources } from '../../utilities/resources';
 
 import plugin from '../';
 
-jest.unmock('../');
-jest.unmock('../../utilities/helpers');
+jest.mock('nconf');
+jest.mock('../../utilities/resources');
 
 describe('core.bus', () => {
   let sut;

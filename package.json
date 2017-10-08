@@ -102,7 +102,6 @@
     "uuid-1345": "^0.99.6"
   },
   "jest": {
-    "automock": true,
     "modulePathIgnorePatterns": [
       "<rootDir>/lib/"
     ],

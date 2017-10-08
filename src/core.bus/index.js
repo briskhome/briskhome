@@ -31,11 +31,5 @@ export default (
     log.trace({ event: this.event }, data);
   });
 
-  bus.on('core:ready', () => {
-    setInterval(() => {
-      bus.emit('broadcast:poll');
-    }, options.interval);
-  });
-
   register(null, { bus });
 };
