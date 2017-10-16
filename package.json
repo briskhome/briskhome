@@ -82,6 +82,8 @@
     "node-forge": "^0.6.48",
     "node-telegram-bot-api": "^0.21.1",
     "nodemon": "^1.11.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.0",
     "properties": "1.2.1",
     "rc-menu": "^5.0.10",
     "react": "^15.6.1",
