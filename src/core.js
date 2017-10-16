@@ -12,6 +12,8 @@ import Architect, { resolveConfig } from './utilities/architect';
 import { enabledPlugins } from './utilities/plugins';
 import { briskhomeAsciiLogo } from './utilities/constants';
 
+process.on('unhandledRejection', err => dump(err));
+
 (async () => {
   let app;
   try {
@@ -20,52 +22,34 @@ import { briskhomeAsciiLogo } from './utilities/constants';
       path.resolve(__dirname, '..'),
     );
     app = await new Architect().loadPlugins(plugins);
-  } catch (e) {
-    process.stdout.write(`{
-      "name":"briskhome",
-      "hostname":"${os.hostname()}",
-      "pid":${process.pid},
-      "component":"core",
-      "level":60,
-      "msg":"${e.toString()}",
-      "time":"${new Date().toISOString()}",
-      "v":0
-    }\n`);
-    process.stderr.write(e.stack);
-    process.stderr.write('\n');
-    process.exit(1);
-    return;
+  } catch (err) {
+    return dump(err);
   }
 
   const bus = app.services.bus;
   const log = app.services.log('core');
   log.info('Briskhome initialization successful');
-  bus.emit('core:ready');
+  bus.emit('core:ready', app);
 
   if (process.argv.includes('--stop')) {
     process.exit(0);
   }
 
-  bus.on('core:error', err => {
-    log.error({ err }, 'Error event received on bus');
-    process.exit(1);
-  });
+  bus.on('core:error', (err: Error) => dump(err));
+})();
 
-  process.on('unhandledRejection', (err, promise) => {
-    log.error({ err, promise }, 'unhandledRejection');
-    process.exit(1);
-  });
-})().catch(err => {
-  console.error({ err }, 'unhandledRejection');
-  process.exit(1);
-});
+if (!process.argv.includes('--ugly')) {
+  writeBriskhomeLogo();
+  writeBriskhomeInfo();
+}
 
-const writeBriskhomeLogo = (): void => {
+function writeBriskhomeLogo(): void {
   process.stdout.write('\u001b[2J\u001b[0;0H');
   process.stdout.write(briskhomeAsciiLogo);
-};
+}
 
-const writeBriskhomeInfo = (): void => {
+function writeBriskhomeInfo(): void {
+  process.title = 'briskhome';
   process.stdout.write(`{
     "name":"briskhome",
     "hostname":"${os.hostname()}",
@@ -76,10 +60,20 @@ const writeBriskhomeInfo = (): void => {
     "time":"${new Date().toISOString()}",
     "v":0
   }\n`);
-  process.title = 'briskhome';
-};
+}
 
-if (!process.argv.includes('--ugly')) {
-  writeBriskhomeLogo();
-  writeBriskhomeInfo();
+function dump(err: Error): void {
+  process.stdout.write(`{
+    "name":"briskhome",
+    "hostname":"${os.hostname()}",
+    "pid":${process.pid},
+    "component":"core",
+    "level":60,
+    "msg":"${err.toString()}",
+    "time":"${new Date().toISOString()}",
+    "v":0
+  }\n`);
+  process.stderr.write(err.stack);
+  process.stderr.write('\n');
+  process.exit(1);
 }
