@@ -335,10 +335,6 @@ aproba@^1.0.3:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.1.1.tgz#95d3600f07710aa0e9298c726ad5ecf2eacbabab"
 
-architect@0.1.11:
-  version "0.1.11"
-  resolved "https://registry.yarnpkg.com/architect/-/architect-0.1.11.tgz#591352ad7dfb2ead05965db3b37d3c490c21d7a2"
-
 are-we-there-yet@~1.1.2:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/are-we-there-yet/-/are-we-there-yet-1.1.4.tgz#bb5dca382bb94f05e15194373d16fd3ba1ca110d"

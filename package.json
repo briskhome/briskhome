@@ -64,7 +64,6 @@
   },
   "dependencies": {
     "agenda": "1.0.0",
-    "architect": "0.1.11",
     "async": "^2.1.4",
     "bunyan": "^1.8.1",
     "dataloader": "^1.3.0",
