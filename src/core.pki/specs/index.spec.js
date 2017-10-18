@@ -8,7 +8,7 @@
 import plugin from '../';
 
 jest.unmock('../');
-jest.unmock('forge');
+jest.unmock('node-forge');
 
 describe('core.pki', () => {
   let sut;
