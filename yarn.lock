@@ -1992,11 +1992,11 @@ configstore@^3.0.0, configstore@^3.1.0:
     write-file-atomic "^2.0.0"
     xdg-basedir "^3.0.0"
 
-connect-mongo@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/connect-mongo/-/connect-mongo-2.0.0.tgz#3e4d036a6869385b0191a3737d3051a86abc2fb8"
+connect-mongodb-session@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/connect-mongodb-session/-/connect-mongodb-session-1.4.0.tgz#87d850cca387e88bbfee7c87b3b76e211ec62806"
   dependencies:
-    mongodb "^2.0.36"
+    mongodb "~2.2.0"
 
 console-browserify@^1.1.0:
   version "1.1.0"
@@ -5214,7 +5214,7 @@ mongodb@2.2.31, mongodb@^2.2.10:
     mongodb-core "2.1.15"
     readable-stream "2.2.7"
 
-mongodb@^2.0.36:
+mongodb@~2.2.0:
   version "2.2.33"
   resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-2.2.33.tgz#b537c471d34a6651b48f36fdbf29750340e08b50"
   dependencies:
