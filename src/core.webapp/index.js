@@ -25,7 +25,7 @@ export default (
   register: CoreRegister,
 ) => {
   const { db, graphql: { root, schema } } = imports;
-  imports.log();
+  const log = imports.log();
 
   const app = express();
   app.use(cookieParser());
@@ -46,15 +46,28 @@ export default (
   app.use(passport.initialize());
   app.use(passport.session());
 
-  passport.serializeUser(function(user, done) {
-    console.log('serialize', user);
-    done(null, user.name);
-  });
+  passport.serializeUser((user, done) =>
+    done(null, { id: user._id, type: user.type }),
+  );
 
-  passport.deserializeUser(function(id, done) {
-    console.log('deserialize', id);
-    done(null, { id });
-  });
+  passport.deserializeUser(
+    async ({ id, type }: { id: string, type: string }, done) => {
+      const UserModel = db.model('core:user');
+      const user = await UserModel.fetchByUsername(id, { lean: true });
+
+      if (!user) {
+        log.warn({ user: { id, type } }, 'User account not found in database');
+        return null;
+      }
+
+      if (user.isDisabled) {
+        log.warn({ user: { id, type } }, 'User account is disabled');
+        return null;
+      }
+
+      return done(null, user);
+    },
+  );
 
   app.use(
     '/graphql',
