@@ -37,8 +37,9 @@ export default (
       secret: options.secret,
       saveUninitialized: false,
       store: new MongoStore({
-        mongooseConnection: db.connection,
-        ttl: 60 * 60 * 24 * 30,
+        uri: db.uri,
+        expires: 30 * 24 * 60 * 60,
+        collection: 'sessions',
       }),
     }),
   );
