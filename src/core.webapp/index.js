@@ -34,8 +34,8 @@ export default (
       genid: () => uuid.v4(),
       name: 'session',
       resave: true,
-      secret: options.secret,
       saveUninitialized: false,
+      secret: options.secret,
       store: new MongoStore({
         uri: db.uri,
         expires: 30 * 24 * 60 * 60,
@@ -85,7 +85,7 @@ export default (
   );
 
   app.use('/static', express.static(path.resolve(__dirname, 'public')));
-  app.get('/', (req, res) => {
+  app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'index.html'));
   });
 
