@@ -15,7 +15,7 @@ jobs:
     - script: yarn flow
     - script: yarn test
       after_success:
-        - yarn global add codecov && codecov
+        - yarn codecov
     - stage: run
       script: yarn start-stop
       services:
