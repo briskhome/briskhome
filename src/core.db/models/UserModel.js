@@ -110,8 +110,11 @@ export default ({ db }: CoreImports) => {
 
   userSchema.statics.fetchByUsername = async function fetchByUsername(
     username: string,
+    opts?: { lean?: boolean } = {},
   ): Promise<*> {
-    return this.findOne({ _id: username }).exec();
+    return this.findOne({ _id: username })
+      .lean(opts && opts.lean)
+      .exec();
   };
 
   userSchema.statics.fetchBySubscription = async function fetchBySubscription(
