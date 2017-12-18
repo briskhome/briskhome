@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.webapp / components / pages / login renders 1`] = `
+<Login>
+  <form
+    className="briskhome-login"
+  >
+    <img
+      alt="Briskhome"
+      className="briskhome-login__image"
+      src="/static/assets/img/logo@256w-i.png"
+    />
+    <Component
+      autoComplete="username"
+      onChange={[Function]}
+      placeholder="Username"
+      valid={true}
+    >
+      <label
+        className="briskhome-label briskhome-label_input"
+      >
+        <input
+          autoComplete="username"
+          className="briskhome-input"
+          onChange={[Function]}
+          placeholder="Username"
+        />
+      </label>
+    </Component>
+    <Component
+      autoComplete="current-password"
+      onChange={[Function]}
+      placeholder="Password"
+      type="password"
+      valid={true}
+    >
+      <label
+        className="briskhome-label briskhome-label_input"
+      >
+        <input
+          autoComplete="current-password"
+          className="briskhome-input"
+          onChange={[Function]}
+          placeholder="Password"
+          type="password"
+        />
+      </label>
+    </Component>
+    <Component
+      caps={true}
+      className="briskhome-login__button_submit"
+      display="inline-block"
+      large={true}
+      loading={false}
+      onClick={[Function]}
+      type="submit"
+      yellow={true}
+    >
+      <a
+        className="briskhome-button briskhome-button_yellow briskhome-button_caps briskhome-button_inline-block briskhome-login__button_submit"
+        href="#"
+        onClick={[Function]}
+        role="button"
+        target="_self"
+        type="submit"
+      >
+        Log in
+      </a>
+    </Component>
+    <Component
+      className="briskhome-login__button_restore"
+      display="inline-block"
+    >
+      <a
+        className="briskhome-button briskhome-button_inline-block briskhome-login__button_restore"
+        href="#"
+        role="button"
+        target="_self"
+        type="button"
+      >
+        Forgot password?
+      </a>
+    </Component>
+  </form>
+</Login>
+`;
