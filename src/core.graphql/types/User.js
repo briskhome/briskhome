@@ -3,7 +3,7 @@
  * └core.graphql <types/User.js>
  */
 
-import { GraphQLString, GraphQLObjectType } from 'graphql';
+import { GraphQLEnumType, GraphQLString, GraphQLObjectType } from 'graphql';
 
 export default new GraphQLObjectType({
   name: 'User',
@@ -11,7 +11,7 @@ export default new GraphQLObjectType({
   fields: {
     id: {
       type: GraphQLString,
-      description: 'Unique device identifier',
+      description: 'Username',
     },
     lastName: {
       type: GraphQLString,
@@ -24,6 +24,21 @@ export default new GraphQLObjectType({
     },
     type: {
       type: GraphQLString,
+    },
+  },
+});
+
+export const UserTypeEnum = new GraphQLEnumType({
+  name: 'UserTypeEnum',
+  values: {
+    guest: {
+      value: 'guest',
+    },
+    regular: {
+      value: 'regular',
+    },
+    superuser: {
+      value: 'superuser',
     },
   },
 });

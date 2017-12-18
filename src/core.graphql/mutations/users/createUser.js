@@ -6,11 +6,10 @@
 import {
   GraphQLString,
   GraphQLNonNull,
-  GraphQLEnumType,
   GraphQLObjectType,
   GraphQLInputObjectType,
 } from 'graphql';
-
+import { UserTypeEnum } from '../../types/User';
 import type Mongoose from 'mongoose';
 import type { CoreContextType } from '../../../utilities/coreTypes';
 
@@ -35,21 +34,6 @@ const generateUsername = async ({
   if (users.length === 0) return username;
   return `${username}${users.length + 1}`;
 };
-
-const UserTypeEnum = new GraphQLEnumType({
-  name: 'UserTypeEnum',
-  values: {
-    guest: {
-      value: 'guest',
-    },
-    regular: {
-      value: 'regular',
-    },
-    superuser: {
-      value: 'superuser',
-    },
-  },
-});
 
 export default {
   type: new GraphQLObjectType({
