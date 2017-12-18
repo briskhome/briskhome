@@ -72,16 +72,18 @@ export default (
 
   app.use(
     '/graphql',
-    graphqlHTTP({
+    graphqlHTTP((req, res) => ({
       schema,
       context: {
         ...imports,
         dataloader: imports.dataloader(),
         log: imports.log('core.graphql'),
+        req,
+        res,
       },
       rootValue: root,
       graphiql: true,
-    }),
+    })),
   );
 
   app.use('/static', express.static(path.resolve(__dirname, 'public')));

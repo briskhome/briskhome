@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import configureStore, { client } from './redux/store';
 import { Preferences } from '../components/pages/preferences';
 import { Navigation } from '../components/navigation';
+import Login from '../components/pages/login';
 import { Dashboard } from '../components/pages/dashboard';
 import { NotFound } from '../components/notfound';
 import { Example } from '../components/onboarding/example';
@@ -19,6 +20,7 @@ export const Routes = () => (
         <section>
           <Switch>
             <Route exact path="/" component={Dashboard} />
+            <Route path="/login" component={Login} />
             <Route path="/cameras" component={Example} />
             <Route path="/preferences" component={Preferences} />
             <Route path="*" component={NotFound} />
