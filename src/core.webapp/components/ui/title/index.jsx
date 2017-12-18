@@ -5,7 +5,7 @@ import './title.styl';
 
 type TitleProps = {
   children?: React.Node,
-  extraClassName?: string,
+  className?: string,
   large?: boolean,
   medium?: boolean,
   small?: boolean,
@@ -13,7 +13,7 @@ type TitleProps = {
 };
 
 export default ({
-  extraClassName,
+  className,
   children,
   large,
   medium,
@@ -31,7 +31,7 @@ export default ({
       {
         'briskhome-title_gray': gray,
       },
-      extraClassName,
+      className,
     ),
     children,
   };

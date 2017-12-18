@@ -1,18 +1,18 @@
 /** @flow */
 import * as React from 'react';
-import InputMask from 'react-input-mask';
 import cn from 'classnames';
 import './input.styl';
 
 type InputProps = {
-  extraClassName?: string,
+  autoComplete?: string,
   placeholder?: string,
+  className?: string,
   disabled?: boolean,
   caption?: string,
   label?: string,
   valid?: boolean,
-  mask?: string,
   name?: string,
+  type?: string,
   value?: string,
   onBlur?: Function,
   onFocus?: Function,
@@ -20,27 +20,28 @@ type InputProps = {
 };
 
 export default ({
-  extraClassName = '',
+  autoComplete,
   placeholder,
+  className = '',
   disabled,
   caption,
   label,
   valid = true,
-  mask,
   name,
+  type,
   value,
   onBlur,
   onFocus,
   onChange,
 }: InputProps) => {
-  const inputClassNames = cn(extraClassName, 'briskhome-input', {
+  const inputClassNames = cn(className, 'briskhome-input', {
     'briskhome-input_disabled': disabled,
     'briskhome-input_invalid': !valid,
   });
   const labelClassNames = cn(
     'briskhome-label',
     'briskhome-label__text',
-    `${extraClassName}_label`,
+    `${className}_label`,
   );
   const captionClassNames = cn(
     'anim_show_block',
@@ -50,13 +51,15 @@ export default ({
     'briskhome-label__caption',
     {
       'briskhome-label_red': !valid,
-      [`${extraClassName}_caption`]: extraClassName,
+      [`${className}_caption`]: className,
     },
   );
   const props = {
     className: inputClassNames,
+    autoComplete,
     placeholder,
     name,
+    type,
     value,
     disabled,
     onBlur,
@@ -65,10 +68,12 @@ export default ({
   };
   return (
     <label
-      className={cn(extraClassName, 'briskhome-label', 'briskhome-label_input')}
+      className={cn(className, 'briskhome-label', 'briskhome-label_input', {
+        'briskhome-label_invalid': !valid,
+      })}
     >
       {label && <span className={labelClassNames}>{label}</span>}
-      {mask ? <InputMask mask={mask} {...props} /> : <input {...props} />}
+      <input {...props} />
       {caption && <span className={captionClassNames}>{caption}</span>}
     </label>
   );
