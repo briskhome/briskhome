@@ -249,9 +249,12 @@ export const checkCycles = (config: Array<Object>): Array<Object> => {
       }
     });
 
+    /* eslint-disable no-console */
     console.error('Could not resolve dependencies of these plugins:', plugins);
     console.error('Resolved services:', resolved);
     console.error('Missing services:', unresolved);
+    /* eslint-enable no-console */
+
     throw new Error('Could not resolve dependencies');
   }
 
@@ -340,7 +343,12 @@ export default class Architect extends events.EventEmitter {
     const app = this;
     const services = app.services;
     const imports = {};
-    const { consumes, provides, exports, ...options } = plugin;
+    const {
+      consumes: unusedConsumes,
+      provides: unusedProvides,
+      exports: unusedExports,
+      ...options
+    } = plugin;
 
     if (plugin.consumes) {
       plugin.consumes.forEach(name => {
