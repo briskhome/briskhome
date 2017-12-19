@@ -11,10 +11,13 @@
 [libs]
 
 [options]
+module.file_ext=.js
+module.file_ext=.jsx
+module.file_ext=.json
+module.file_ext=.styl
+module.ignore_non_literal_requires=true
+module.system.node.resolve_dirname=node_modules
+module.name_mapper.extension='styl' -> '<PROJECT_ROOT>/flow-typed/styl.flow'
+
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable
-module.ignore_non_literal_requires=true
-module.system.node.resolve_dirname=src
-module.system.node.resolve_dirname=node_modules
-module.file_ext=.styl
-module.name_mapper.extension='styl' -> 'empty/object'
