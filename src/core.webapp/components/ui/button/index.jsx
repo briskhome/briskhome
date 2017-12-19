@@ -1,4 +1,5 @@
-import React from 'react';
+/** @flow */
+import * as React from 'react';
 import cn from 'classnames';
 import './button.styl';
 
@@ -10,7 +11,7 @@ type ButtonProps = {
   target?: string,
   link?: string,
   onClick?: Function,
-  children?: React.Children,
+  children?: React.ChildrenArray<string>,
 };
 
 export default ({

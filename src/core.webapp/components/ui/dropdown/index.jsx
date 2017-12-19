@@ -1,4 +1,5 @@
-import React from 'react';
+/** @flow */
+import * as React from 'react';
 import Dropdown from 'react-dropdown';
 import cn from 'classnames';
 import './dropdown.styl';
@@ -25,7 +26,7 @@ type DropdownProps = {
 };
 
 export default ({
-  extraClassName,
+  extraClassName = '',
   placeholder,
   disabled,
   onChange,

@@ -1,5 +1,5 @@
 /* @flow */
-import React from 'react';
+import * as React from 'react';
 import Loader from '../ui/loader';
 import './card.styl';
 
@@ -9,7 +9,7 @@ type CardType = {
   caption: string,
   button?: string,
   onClick?: Function,
-  children?: ?React.Element<*>,
+  children?: ?React.Node,
   loading?: boolean,
   error?: boolean,
 };
@@ -23,8 +23,8 @@ export const Card = ({
   children,
   loading,
   error,
-}: CardType): React.Element<*> => {
-  const renderContent = (): ?React.Element<*> => {
+}: CardType): React.Node => {
+  const renderContent = (): ?React.Node => {
     if (loading) return <Loader />;
     if (error) return <div />;
     return children;

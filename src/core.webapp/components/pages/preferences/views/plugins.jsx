@@ -1,4 +1,6 @@
-import React from 'react';
+/** @flow */
+
+import * as React from 'react';
 import { gql, graphql, compose } from 'react-apollo';
 
 import Input from '../../../ui/input';
@@ -19,15 +21,23 @@ const plugins = gql`
   }
 `;
 
+type PluginType = {
+  name: string,
+  description: ?string,
+  disabled: boolean,
+  consumes: string[],
+  provides: string[],
+};
+
 const Plugin = ({
   name,
   description,
   disabled = false,
   consumes = [],
   provides = [],
-  // version,
-  // author,
-}): Object => (
+}: // version,
+// author,
+PluginType): React.Node => (
   <div className="preferences__list-item">
     <Title small extraClassName="plugin__name">
       {name}
@@ -53,7 +63,21 @@ const Plugin = ({
   </div>
 );
 
-export class PluginsPane extends React.Component {
+type PluginsPaneProps = {
+  data: {
+    plugins: PluginType[],
+  },
+};
+
+type PluginsPaneState = {
+  filter: {
+    value: string,
+  },
+};
+export class PluginsPane extends React.Component<
+  PluginsPaneProps,
+  PluginsPaneState,
+> {
   displayName: 'Plugins';
   constructor() {
     super();
