@@ -1,5 +1,5 @@
 /* @flow */
-import React from 'react';
+import * as React from 'react';
 import './avatar.styl';
 
 type AvatarPropsType = {
@@ -12,7 +12,7 @@ export const BriskhomeAvatar = ({
   name,
   image,
   online,
-}: AvatarPropsType): React.Element<*> => (
+}: AvatarPropsType): React.Node => (
   <div className="briskhome-avatar">
     {name && <span className="briskhome-avatar__name">{name}</span>}
     {image && <img className="briskhome-avatar__image" src={image} alt="" />}

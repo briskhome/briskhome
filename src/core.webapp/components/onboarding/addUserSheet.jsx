@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { graphql, compose } from 'react-apollo';
 import { createUser, users as usersQuery } from '../widgets/users/graphql';
 

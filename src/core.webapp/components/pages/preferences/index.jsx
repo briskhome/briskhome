@@ -1,11 +1,11 @@
 /* @flow */
-import React from 'react';
+import * as React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import General from './views/general';
 import Plugins from './views/plugins';
 import './preferences.styl';
 
-export const Preferences = ({ match }: any): React.Element<*> => (
+export const Preferences = ({ match }: any): React.Node => (
   <div className="briskhome-page preferences">
     {/* <h1 className='briskhome__title'>System Preferences</h1> */}
     <div className="briskhome__sidebar">

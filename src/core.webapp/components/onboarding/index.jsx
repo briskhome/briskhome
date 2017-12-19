@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Title from '../ui/title';
 import OnboardingSheet from './sheet';
 import { HouseIcon } from './house';

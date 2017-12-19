@@ -1,4 +1,5 @@
-import React from 'react';
+/** @flow */
+import * as React from 'react';
 import InputMask from 'react-input-mask';
 import cn from 'classnames';
 import './input.styl';
@@ -19,7 +20,7 @@ type InputProps = {
 };
 
 export default ({
-  extraClassName,
+  extraClassName = '',
   placeholder,
   disabled,
   caption,

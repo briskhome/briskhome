@@ -32,7 +32,7 @@ export type CoreImports = {
   dataloader: Function,
   db: Object,
   graphql: Object,
-  log: () => Object,
+  log: (?string) => Object,
   webapp: Function,
 };
 

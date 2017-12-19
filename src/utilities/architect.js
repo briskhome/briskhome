@@ -150,7 +150,7 @@ export const resolveModule = async (
  * @returns {Promise.Object}
  */
 export const resolveConfig = async (
-  config: Array<*>,
+  config: Array<string>,
   base: string,
   key?: string,
 ): Promise<*> => {
@@ -159,22 +159,29 @@ export const resolveConfig = async (
   );
   const plugins: Array<Object> = await Promise.all(
     config.map(plugin =>
-      Promise.race([resolveModule(base, plugin.main || plugin, key), timeout]),
+      Promise.race([
+        // $FlowFixMe
+        resolveModule(base, plugin.main || plugin, key),
+        timeout,
+      ]),
     ),
   );
 
-  return plugins
-    .filter(plugin => plugin.constructor !== Error)
-    .map((plugin, index) => ({
-      name: plugin.name,
-      main: plugin.main,
-      dirname: plugin.dirname,
-      version: plugin.version,
-      consumes: plugin.consumes,
-      provides: plugin.provides,
-      exports: require(plugin.main),
-      ...(config[index].main ? config[index] : {}),
-    }));
+  return (
+    plugins
+      .filter(plugin => plugin.constructor !== Error)
+      // $FlowFixMe
+      .map((plugin, index) => ({
+        name: plugin.name,
+        main: plugin.main,
+        dirname: plugin.dirname,
+        version: plugin.version,
+        consumes: plugin.consumes,
+        provides: plugin.provides,
+        exports: require(plugin.main),
+        ...(config[index].main ? config[index] : {}),
+      }))
+  );
 };
 
 /**
@@ -271,12 +278,12 @@ export const checkConfig = (config: Array<Object>): Array<Object> =>
       if (!Object.prototype.hasOwnProperty.call(plugin, 'checked')) {
         if (!Object.prototype.hasOwnProperty.call(plugin, 'consumes')) {
           throw new Error(
-            `Plugin ${plugin.name} is missing the consumes array`,
+            `Plugin ${plugin.name} is missing the consumes array`, // $FlowFixMe
             JSON.stringify(plugin),
           );
         } else if (!Object.prototype.hasOwnProperty.call(plugin, 'provides')) {
           throw new Error(
-            `Plugin ${plugin.name} is missing the provides array`,
+            `Plugin ${plugin.name} is missing the provides array`, // $FlowFixMe
             JSON.stringify(plugin),
           );
         }
@@ -303,6 +310,7 @@ export default class Architect extends events.EventEmitter {
   }
 
   loadPlugins(promisedConfig: Array<*> | Promise<Array<*>>) {
+    // $FlowFixMe
     return new Promise(async (resolve, reject) => {
       const app = this;
       const config = await promisedConfig;

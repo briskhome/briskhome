@@ -1,5 +1,6 @@
 /* @flow */
-import React from 'react';
+
+import * as React from 'react';
 import Modal from 'react-modal';
 import { graphql, compose } from 'react-apollo';
 
@@ -11,9 +12,15 @@ import { users as UsersQuery, removeUser } from './graphql';
 import './users.styl';
 import './modal.styl';
 
-// type UserCardProps = { data: { error, loading, users =[] } };
+type UserCardProps = {
+  data: { error: boolean, loading: boolean, users: any },
+  mutate: Function,
+};
+type UserCardState = {
+  addUserModalOpen: boolean,
+};
 // $FlowFixMe
-export class UserCard extends React.Component<*> {
+export class UserCard extends React.Component<UserCardProps, UserCardState> {
   constructor() {
     super();
     this.state = {

@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import cn from 'classnames';
 
-export const HouseIcon = ({ extraClassNames }): React.Element<*> => {
+export const HouseIcon = ({ extraClassNames }): React.Node => {
   const classNames = cn('icon-house', extraClassNames);
   return (
     <svg

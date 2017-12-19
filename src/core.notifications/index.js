@@ -199,7 +199,7 @@ export default (
    */
   Notifications.prototype.evaluate = async function evaluate(
     id: string,
-  ): Promise<> {
+  ): Promise<any> {
     log.trace({ data: id });
 
     let event;
@@ -284,7 +284,7 @@ export default (
   Notifications.prototype.verify = async function verify(
     user,
     providerId: string,
-  ): Promise<> {
+  ): Promise<any> {
     const verified = async contactId => {
       user.contacts[providerId] = contactId; // eslint-disable-line
       const result = await user.save();

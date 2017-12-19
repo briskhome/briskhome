@@ -1,4 +1,5 @@
-import React from 'react';
+/** @flow */
+import * as React from 'react';
 import Dropdown, {
   DropdownTrigger,
   DropdownContent,
@@ -8,19 +9,13 @@ import './menu.styl';
 
 type MenuProps = {
   extraClassName?: string,
-  trigger?: React.Element<*>,
+  trigger?: React.Node,
   options: Array<*>,
   arrow?: boolean,
   // disabled?: boolean,
 };
 
-export default ({
-  extraClassName,
-  trigger,
-  options,
-  arrow,
-}: // disabled,
-MenuProps) => {
+export default ({ extraClassName, trigger, options, arrow }: MenuProps) => {
   const className = cn(extraClassName, 'briskhome-menu');
 
   return (

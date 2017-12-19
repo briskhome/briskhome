@@ -1,9 +1,10 @@
-import React from 'react';
+/** @flow */
+import * as React from 'react';
 import cn from 'classnames';
 import './title.styl';
 
 type TitleProps = {
-  children?: React.Element<*>,
+  children?: React.Node,
   extraClassName?: string,
   large?: boolean,
   medium?: boolean,
