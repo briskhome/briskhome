@@ -11,7 +11,7 @@ import {
   GraphQLInputObjectType,
 } from 'graphql';
 
-import type { CoreContextType } from '../../../utilities/coreTypes';
+import type { Context } from '../../../utilities/coreTypes';
 
 export default {
   type: new GraphQLObjectType({
@@ -34,7 +34,7 @@ export default {
       }),
     },
   },
-  resolve: async (obj: Object, args: Object, context: CoreContextType) => {
+  resolve: async (obj: Object, args: Object, context: Context) => {
     const { db } = context;
     const { input: { username } } = args;
     const User = db.model('core:user');

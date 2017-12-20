@@ -11,7 +11,7 @@ import {
 } from 'graphql';
 import { UserTypeEnum } from '../../types/User';
 import type Mongoose from 'mongoose';
-import type { CoreContextType } from '../../../utilities/coreTypes';
+import type { Context } from '../../../utilities/coreTypes';
 
 type GenerateUsernameInput = {|
   lastName: string,
@@ -75,7 +75,7 @@ export default {
       }),
     },
   },
-  resolve: async (obj: Object, args: Object, context: CoreContextType) => {
+  resolve: async (obj: Object, args: Object, context: Context) => {
     const { db, log } = context;
     log.info({ mutation: 'createUser' }, { args });
     const { input: { lastName, firstName, password, type } } = args;

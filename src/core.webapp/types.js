@@ -5,7 +5,7 @@ export type BriskhomeState = {
   user?: User,
 };
 
-type User = {|
+export type User = {|
   id: string,
   firstName: string,
   lastName: string,

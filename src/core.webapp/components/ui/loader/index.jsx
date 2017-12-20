@@ -3,7 +3,12 @@ import * as React from 'react';
 import cn from 'classnames';
 import './loader.styl';
 
-export default ({ inline, white }: { inline: boolean, white: boolean }) => (
+type SpinnerProps = {
+  inline?: boolean,
+  white?: boolean,
+};
+
+export default ({ inline, white }: SpinnerProps) => (
   <div className="briskhome-spinner">
     <div
       className={cn('briskhome-spinner__content', {

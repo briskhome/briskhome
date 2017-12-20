@@ -14,19 +14,18 @@ import type { LoginAction } from '../../../app/redux/reducers';
 type LoginProps = {
   loginUser: User => void,
   mutate: Function,
+  history: any,
 };
 
 type LoginState = {
   username: string,
   password: string,
   isLoading: boolean,
+  errors: string[],
 };
 
-export class Login extends React.Component {
-  props: LoginProps;
-  state: LoginState;
-
-  constructor(props: LoginProps): Login {
+export class Login extends React.Component<LoginProps, LoginState> {
+  constructor(props: LoginProps): void {
     super(props);
 
     this.state = {
@@ -72,7 +71,7 @@ export class Login extends React.Component {
       return;
     }
 
-    loginUser();
+    // loginUser();
     history.replace('/');
   }
 

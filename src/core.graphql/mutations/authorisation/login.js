@@ -11,7 +11,7 @@ import {
 } from 'graphql';
 import useragent from 'useragent';
 import { UserTypeEnum } from '../../types/User';
-import type { CoreContextType } from '../../../utilities/coreTypes';
+import type { Context } from '../../../utilities/coreTypes';
 
 type LoginInput = {|
   input: {
@@ -53,7 +53,7 @@ export default {
       }),
     },
   },
-  resolve: async (obj: Object, args: LoginInput, context: CoreContextType) => {
+  resolve: async (obj: Object, args: LoginInput, context: Context) => {
     const { db, log, login, req, req: { headers } } = context;
     const { input: { username, password } } = args;
 

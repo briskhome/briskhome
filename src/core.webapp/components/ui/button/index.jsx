@@ -7,19 +7,20 @@ import './button.styl';
 type ButtonProps = {
   className?: string,
   display?: 'inline' | 'inline-block' | 'block',
-  yellow?: string,
+  yellow?: boolean,
   loading?: boolean,
   disabled?: boolean,
   target?: string,
   link?: string,
   caps?: boolean,
+  type?: string,
   onClick?: Function,
   children?: React.ChildrenArray<string>,
 };
 
 export default ({
   className,
-  display,
+  display = 'inline-block',
   yellow,
   loading,
   disabled,
