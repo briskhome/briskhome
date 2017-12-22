@@ -66,7 +66,7 @@ export default {
     if (user.password !== password) throw new Error('E_INVALID_PASSWORD');
 
     try {
-      await login(user);
+      await login({ username: user._id, ...user });
       req.session.useragent = useragent.parse(headers['user-agent']).toJSON();
     } catch (e) {
       log.warn(

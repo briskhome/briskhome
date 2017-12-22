@@ -6,9 +6,9 @@ export type BriskhomeState = {
 };
 
 export type User = {|
-  id: string,
   firstName: string,
   lastName: string,
+  username: string,
   type: UserType,
 |};
 
