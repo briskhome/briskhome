@@ -9,6 +9,7 @@ import {
   GraphQLObjectType,
   GraphQLInputObjectType,
 } from 'graphql';
+import useragent from 'useragent';
 import { UserTypeEnum } from '../../types/User';
 import type { CoreContextType } from '../../../utilities/coreTypes';
 
@@ -53,13 +54,27 @@ export default {
     },
   },
   resolve: async (obj: Object, args: LoginInput, context: CoreContextType) => {
-    const { db, log } = context;
+    const { db, log, login, req, req: { headers } } = context;
     const { input: { username, password } } = args;
-    log.info({ mutation: 'authorisation.login' }, { args });
+
+    log.info({ mutation: 'authorisation.login' });
+
     const UserModel = db.model('core:user');
     const user = await UserModel.fetchByUsername(username, { lean: true });
+
     if (!user) throw new Error('E_INVALID_USERNAME');
     if (user.password !== password) throw new Error('E_INVALID_PASSWORD');
+
+    try {
+      await login(user);
+      req.session.useragent = useragent.parse(headers['user-agent']).toJSON();
+    } catch (e) {
+      log.warn(
+        { user: { id: user.id, type: user.type } },
+        'Unable to log user in',
+      );
+    }
+
     return user;
   },
 };
