@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 
 import './login.styl';
 import type { BriskhomeState, User } from '../../../types';
-import type { LoginAction } from '../../../app/redux/reducers';
+import type { LoginAction } from '../../../app/redux/types';
 
 type LoginProps = {
   loginUser: User => void,
@@ -36,12 +36,6 @@ export class Login extends React.Component<LoginProps, LoginState> {
     };
   }
 
-  setError(error: string): void {
-    const { errors } = this.state;
-    if (errors.includes(error)) return;
-    this.setState({ errors: errors.concat(error) });
-  }
-
   resetErrors(): void {
     this.setState({ errors: [] });
   }
@@ -58,20 +52,21 @@ export class Login extends React.Component<LoginProps, LoginState> {
 
     this.setState({ isLoading: true });
 
+    let user: ?User;
     try {
-      await mutate({
+      ({ data: { login: user } } = await mutate({
         variables: {
           username,
           password,
         },
-      });
+      }));
     } catch (e) {
       this.setState({ errors: e.graphQLErrors.pop().message });
       this.setState({ isLoading: false });
       return;
     }
 
-    // loginUser();
+    loginUser(user);
     history.replace('/');
   }
 
