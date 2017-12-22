@@ -1,13 +1,18 @@
-/* @flow */
+/** @flow */
+
 import React from 'react';
 import Button from '../../ui/button';
 import Input from '../../ui/input';
 import { login as loginQuery } from './graphql';
 import { graphql, compose } from 'react-apollo';
+import { connect } from 'react-redux';
 
 import './login.styl';
+import type { BriskhomeState, User } from '../../../types';
+import type { LoginAction } from '../../../app/redux/reducers';
 
 type LoginProps = {
+  loginUser: User => void,
   mutate: Function,
 };
 
@@ -21,8 +26,8 @@ export class Login extends React.Component {
   props: LoginProps;
   state: LoginState;
 
-  constructor() {
-    super();
+  constructor(props: LoginProps): Login {
+    super(props);
 
     this.state = {
       username: '',
@@ -43,7 +48,7 @@ export class Login extends React.Component {
   }
 
   async submit(): Promise<void> {
-    const { history, mutate } = this.props;
+    const { history, loginUser, mutate } = this.props;
     const { username, password } = this.state;
 
     this.resetErrors();
@@ -67,8 +72,8 @@ export class Login extends React.Component {
       return;
     }
 
+    loginUser();
     history.replace('/');
-    this.setState({ isLoading: false });
   }
 
   render() {
@@ -122,4 +127,17 @@ export class Login extends React.Component {
   }
 }
 
-export default compose(graphql(loginQuery))(Login);
+export default compose(
+  connect(
+    (state: BriskhomeState) => {
+      return state;
+    },
+    dispatch => {
+      return {
+        loginUser: (user: User) =>
+          dispatch(({ type: '@@BRISKHOME/LOGIN', value: user }: LoginAction)),
+      };
+    },
+  ),
+  graphql(loginQuery),
+)(Login);
