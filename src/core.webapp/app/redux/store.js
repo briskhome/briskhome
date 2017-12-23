@@ -4,6 +4,7 @@ import thunkMiddleware from 'redux-thunk';
 import { routerReducer } from 'react-router-redux';
 // import * as reducers from '../reducers';
 import { apolloClient } from '../services/apollo';
+import { userReducer } from '../redux/reducers';
 
 const loggerMiddleware = createLogger({
   level: 'info',
@@ -24,6 +25,7 @@ const reducer = combineReducers({
   // ...reducers,
   apollo: apolloClient.reducer(), // apollo reducer
   routing: routerReducer,
+  user: userReducer,
 });
 
 // export default =  "redux store"

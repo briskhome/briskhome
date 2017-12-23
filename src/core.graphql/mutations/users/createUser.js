@@ -6,13 +6,13 @@
 import {
   GraphQLString,
   GraphQLNonNull,
-  GraphQLEnumType,
   GraphQLObjectType,
   GraphQLInputObjectType,
 } from 'graphql';
-
+import bcrypt from 'bcrypt';
+import { UserTypeEnum } from '../../types/User';
 import type Mongoose from 'mongoose';
-import type { CoreContextType } from '../../../utilities/coreTypes';
+import type { Context } from '../../../utilities/coreTypes';
 
 type GenerateUsernameInput = {|
   lastName: string,
@@ -35,21 +35,6 @@ const generateUsername = async ({
   if (users.length === 0) return username;
   return `${username}${users.length + 1}`;
 };
-
-const UserTypeEnum = new GraphQLEnumType({
-  name: 'UserTypeEnum',
-  values: {
-    guest: {
-      value: 'guest',
-    },
-    regular: {
-      value: 'regular',
-    },
-    superuser: {
-      value: 'superuser',
-    },
-  },
-});
 
 export default {
   type: new GraphQLObjectType({
@@ -91,16 +76,16 @@ export default {
       }),
     },
   },
-  resolve: async (obj: Object, args: Object, context: CoreContextType) => {
+  resolve: async (obj: Object, args: Object, context: Context) => {
     const { db, log } = context;
     log.info({ mutation: 'createUser' }, { args });
     const { input: { lastName, firstName, password, type } } = args;
     const User = db.model('core:user');
     const user = new User({
-      _id: await generateUsername({ db, lastName, firstName }),
+      username: await generateUsername({ db, lastName, firstName }),
       lastName,
       firstName,
-      password,
+      password: await bcrypt.hash(password, 10),
       type,
     });
     return user.save();

@@ -9,7 +9,7 @@ import UserType from '../types/User';
 export default {
   type: new GraphQLList(UserType),
   args: {
-    id: {
+    username: {
       type: GraphQLString,
       description: 'Username of the user you are trying to fetch',
     },
@@ -17,7 +17,8 @@ export default {
   resolve: async (src: Object, args: Object, ctx: Object) => {
     const { db } = ctx;
     const UserModel = db.model('core:user');
-    if (args.id) return UserModel.findOne({ _id: args.id }).exec();
+    if (args.id)
+      return UserModel.fetchByUsername(args.username, { lean: true });
     return UserModel.find({}).exec();
   },
 };

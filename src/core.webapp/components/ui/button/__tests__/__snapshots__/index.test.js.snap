@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.webapp -> ui -> button renders 1`] = `
+<Component>
+  <a
+    className="briskhome-button briskhome-button_inline-block"
+    href="#"
+    role="button"
+    target="_self"
+    type="button"
+  >
+    Lorem ispum
+  </a>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> button renders in caps  1`] = `
+<Component
+  caps={true}
+>
+  <a
+    className="briskhome-button briskhome-button_caps briskhome-button_inline-block"
+    href="#"
+    role="button"
+    target="_self"
+    type="button"
+  >
+    Lorem ispum
+  </a>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> button renders in disabled state  1`] = `
+<Component
+  disabled={true}
+>
+  <a
+    className="briskhome-button briskhome-button_disabled briskhome-button_inline-block"
+    disabled={true}
+    href="#"
+    role="button"
+    target="_self"
+    type="button"
+  >
+    Lorem ispum
+  </a>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> button renders in loading state  1`] = `
+<Component
+  loading={true}
+>
+  <a
+    className="briskhome-button briskhome-button_loading briskhome-button_inline-block"
+    disabled={true}
+    href="#"
+    role="button"
+    target="_self"
+    type="button"
+  >
+    <Component
+      inline={true}
+      white={true}
+    >
+      <div
+        className="briskhome-spinner"
+      >
+        <div
+          className="briskhome-spinner__content briskhome-spinner__content_inline briskhome-spinner__content_white"
+        >
+          <div />
+          <div />
+          <div />
+        </div>
+      </div>
+    </Component>
+  </a>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> button renders in yellow 1`] = `
+<Component
+  yellow={true}
+>
+  <a
+    className="briskhome-button briskhome-button_yellow briskhome-button_inline-block"
+    href="#"
+    role="button"
+    target="_self"
+    type="button"
+  >
+    Lorem ispum
+  </a>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> button renders with provided className 1`] = `
+<Component
+  className="lorem-ipsum"
+>
+  <a
+    className="briskhome-button briskhome-button_inline-block lorem-ipsum"
+    href="#"
+    role="button"
+    target="_self"
+    type="button"
+  >
+    Lorem ispum
+  </a>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> button renders with provided display 1`] = `
+<Component
+  display="inline"
+>
+  <a
+    className="briskhome-button briskhome-button_inline"
+    href="#"
+    role="button"
+    target="_self"
+    type="button"
+  >
+    Lorem ispum
+  </a>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> button renders with provided link 1`] = `
+<Component
+  link="http://www.example.com"
+>
+  <a
+    className="briskhome-button briskhome-button_inline-block"
+    href="http://www.example.com"
+    role="button"
+    target="_self"
+    type="button"
+  >
+    Lorem ispum
+  </a>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> button renders with provided onClick event handler 1`] = `
+<Component
+  onClick={[Function]}
+>
+  <a
+    className="briskhome-button briskhome-button_inline-block"
+    href="#"
+    onClick={[Function]}
+    role="button"
+    target="_self"
+    type="button"
+  >
+    Lorem ispum
+  </a>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> button renders with provided target 1`] = `
+<Component
+  target="_blank"
+>
+  <a
+    className="briskhome-button briskhome-button_inline-block"
+    href="#"
+    role="button"
+    target="_blank"
+    type="button"
+  >
+    Lorem ispum
+  </a>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> button renders with provided type 1`] = `
+<Component
+  type="lorem"
+>
+  <a
+    className="briskhome-button briskhome-button_inline-block"
+    href="#"
+    role="button"
+    target="_self"
+    type="lorem"
+  >
+    Lorem ispum
+  </a>
+</Component>
+`;

@@ -1,7 +1,8 @@
-.briskhome-loader
-  &_content
+.briskhome-spinner
+  &__content
     padding 16px
     text-align center
+
     & > div
       background-color #f9d21c
       border-radius 1px
@@ -16,6 +17,12 @@
         animation: scale 1s -0.12s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08)
       &:nth-child(3)
         animation: scale 1s 0s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08)
+    
+    &_white > div
+      background-color white
+
+    &_inline
+      padding 0
 
 @keyframes scale
   0%

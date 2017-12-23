@@ -2,22 +2,34 @@
   position relative
   display inline-block
   box-sizing border-box
-  border-radius 8px
+  border-radius 4px
   text-align center
   text-decoration none
-  padding 12px 20px 11px
-  margin 20px auto
+  padding 12px 20px
+  font-size 16px
+  font-weight 500
   height 40px
-  
+
   transition background-color 0.25s ease
 
   &_yellow
     background-color #F9D21C
-    border 1px solid #eaeaea
     color white
     
     &:hover
       background-color #F9D21C + 25%
       
     &:active
-      background-color #F9D21C
+      background-color #F9D21C - 10%
+
+  &_caps
+    text-transform uppercase
+
+  &_inline
+    display inline
+
+  &_inline-block
+    display inline-block
+
+  &_block
+    display block

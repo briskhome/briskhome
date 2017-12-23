@@ -48,10 +48,20 @@ export type CoreGraphQL = {
   },
 };
 
+export type Context = CoreImports & {
+  req: Req,
+  res: Res,
+  login: ({ id: string, type: string }) => Promise<void>,
+  logout: () => Promise<void>,
+};
+export type Req = {
+  headers: { [string]: string },
+  session: any,
+};
+export type Res = {};
+
 export type SubscriptionType = {
   username: string,
   eventId: string,
   levels?: Array<string>,
 };
-
-export type CoreContextType = CoreImports;

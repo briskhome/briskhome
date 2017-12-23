@@ -8,18 +8,15 @@ import cn from 'classnames';
 import './menu.styl';
 
 type MenuProps = {
-  extraClassName?: string,
+  className?: string,
   trigger?: React.Node,
   options: Array<*>,
   arrow?: boolean,
-  // disabled?: boolean,
 };
 
-export default ({ extraClassName, trigger, options, arrow }: MenuProps) => {
-  const className = cn(extraClassName, 'briskhome-menu');
-
+export default ({ className, trigger, options, arrow }: MenuProps) => {
   return (
-    <Dropdown className={className}>
+    <Dropdown className={cn(className, 'briskhome-menu')}>
       <DropdownTrigger className="briskhome-menu__trigger">
         {trigger} {arrow && <div className="briskhome-menu__arrow" />}
       </DropdownTrigger>

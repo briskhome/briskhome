@@ -11,6 +11,7 @@ import passport from 'passport';
 import mongoStore from 'connect-mongodb-session';
 import graphqlHTTP from 'express-graphql';
 import cookieParser from 'cookie-parser';
+import { promisify } from 'util';
 import type {
   CoreOptions,
   CoreImports,
@@ -33,23 +34,20 @@ export default (
     session({
       genid: () => uuid.v4(),
       name: 'session',
-      resave: true,
+      resave: false,
       saveUninitialized: false,
       secret: options.secret,
       store: new MongoStore({
-        uri: db.uri,
+        uri: options.database,
         expires: 30 * 24 * 60 * 60,
         collection: 'sessions',
       }),
     }),
   );
 
-  app.use(passport.initialize());
-  app.use(passport.session());
-
-  passport.serializeUser((user, done) =>
-    done(null, { id: user._id, type: user.type }),
-  );
+  passport.serializeUser((user, done) => {
+    done(null, { id: user._id, type: user.type });
+  });
 
   passport.deserializeUser(
     async ({ id, type }: { id: string, type: string }, done) => {
@@ -70,18 +68,26 @@ export default (
     },
   );
 
+  app.use(passport.initialize());
+  app.use(passport.session());
+
   app.use(
     '/graphql',
-    graphqlHTTP({
+    passport.authenticate(['session', 'local'], {}),
+    graphqlHTTP((req, res) => ({
       schema,
       context: {
         ...imports,
         dataloader: imports.dataloader(),
         log: imports.log('core.graphql'),
+        req,
+        res,
+        login: promisify(req.login).bind(req),
+        logout: promisify(req.logout).bind(req),
       },
       rootValue: root,
       graphiql: true,
-    }),
+    })),
   );
 
   app.use('/static', express.static(path.resolve(__dirname, 'public')));

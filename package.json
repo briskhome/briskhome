@@ -66,6 +66,7 @@
   "dependencies": {
     "agenda": "1.0.0",
     "async": "^2.1.4",
+    "bcrypt": "^1.0.3",
     "bunyan": "^1.8.1",
     "connect-mongodb-session": "^1.4.0",
     "cookie-parser": "^1.4.3",
@@ -102,6 +103,7 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
+    "useragent": "^2.2.1",
     "uuid-1345": "^0.99.6"
   },
   "jest": {
