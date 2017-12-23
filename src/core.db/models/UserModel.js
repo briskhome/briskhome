@@ -5,62 +5,24 @@
 
 import type { CoreImports } from '../../utilities/coreTypes';
 
-// export type UserContactType = {
-//   name: string,
-//   value: string,
-//   levels: Array<number>,
-// };
-
-// export type UserDeviceType = {
-//   // TODO
-// };
-
-// export type UserSubscriptionType = {
-//   _id: string,
-//   levels: Array<number>,
-// };
-
-// export type UserLocationType = {
-//   // TODO
-// };
-
-// declare class UserType {
-//   _id: string;
-//   id: string;
-//   username?: string;
-//   firstName: string;
-//   lastName: string;
-//   type: 'guest' | 'regular' | 'superuser';
-//   contacts: Array<UserContactType>;
-//   devices: Array<UserDeviceType>;
-//   subscriptions: Array<UserSubscriptionType>;
-//   locations: Array<UserLocationType>;
-//   isDisabled: boolean;
-
-//   createdAt?: string;
-//   updatedAt?: string;
-// }
-
-// export type UserModelType = (
-//   document: UserType,
-// ) => {
-//   fetchByUsername(id: string): UserModelType,
-//   fetchBySubscription(id: string): UserModelType,
-// } & UserType &
-//   ModelType<UserType>;
-
 export default ({ db }: CoreImports) => {
   const Schema = db.Schema;
   const userSchema = new Schema(
     {
-      _id: {
-        type: String,
-      },
       firstName: {
         type: String,
       },
       lastName: {
         type: String,
+      },
+      username: {
+        type: String,
+        unique: true,
+        required: true,
+      },
+      password: {
+        type: String,
+        required: true,
       },
       type: {
         type: String,
@@ -99,20 +61,11 @@ export default ({ db }: CoreImports) => {
     return `${this.firstName} ${this.lastName}`;
   });
 
-  userSchema
-    .virtual('username')
-    .get(function get() {
-      return this._id;
-    })
-    .set(function set(username) {
-      this._id = username;
-    });
-
   userSchema.statics.fetchByUsername = async function fetchByUsername(
     username: string,
     opts?: { lean?: boolean } = {},
   ): Promise<*> {
-    return this.findOne({ _id: username })
+    return this.findOne({ username })
       .lean(opts && opts.lean)
       .exec();
   };

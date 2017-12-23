@@ -9,6 +9,7 @@ import {
   GraphQLObjectType,
   GraphQLInputObjectType,
 } from 'graphql';
+import bcrypt from 'bcrypt';
 import useragent from 'useragent';
 import { UserTypeEnum } from '../../types/User';
 import type { Context } from '../../../utilities/coreTypes';
@@ -63,14 +64,15 @@ export default {
     const user = await UserModel.fetchByUsername(username, { lean: true });
 
     if (!user) throw new Error('E_INVALID_USERNAME');
-    if (user.password !== password) throw new Error('E_INVALID_PASSWORD');
+    if (!await bcrypt.compare(password, user.password))
+      throw new Error('E_INVALID_PASSWORD');
 
     try {
-      await login({ username: user._id, ...user });
+      await login(user);
       req.session.useragent = useragent.parse(headers['user-agent']).toJSON();
     } catch (e) {
       log.warn(
-        { user: { id: user.id, type: user.type } },
+        { user: { username: user.username, type: user.type } },
         'Unable to log user in',
       );
     }
