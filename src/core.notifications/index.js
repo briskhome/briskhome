@@ -290,7 +290,9 @@ export default (
       const result = await user.save();
       if (!result) {
         log.error(
-          `Unable to verify ${user.username} with ${providerId} by ${contactId}`,
+          `Unable to verify ${
+            user.username
+          } with ${providerId} by ${contactId}`,
         );
       }
     };
