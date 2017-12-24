@@ -29,7 +29,7 @@ const generateUsername = async ({
   const UserModel = db.model('core:user');
 
   const users: Array<string> = await UserModel.find({
-    _id: new RegExp(`^${username}`, 'i'),
+    username: new RegExp(`^${username}`, 'i'),
   });
 
   if (users.length === 0) return username;
