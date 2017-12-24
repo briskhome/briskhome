@@ -12,11 +12,11 @@ import { normalizeName } from './helpers';
 const packagePathCache: Object = {};
 
 /**
-* Checks whether the file at provided path exists and returns real path.
-* @param  {String} base      Directory to be used as a base for searching.
-* @param  {String} plugin    Either a path (absolute or relative) or module name.
-* @return {Promise<string>}  Real path to package.json file.
-*/
+ * Checks whether the file at provided path exists and returns real path.
+ * @param  {String} base      Directory to be used as a base for searching.
+ * @param  {String} plugin    Either a path (absolute or relative) or module name.
+ * @return {Promise<string>}  Real path to package.json file.
+ */
 export const resolvePackage = (
   base: string,
   plugin: string,
@@ -73,12 +73,12 @@ export const resolvePackage = (
 };
 
 /**
-* Collects plugin metadata and wraps it in the Architect-friendly way.
-* @param  {[type]} base    [description]
-* @param  {[type]} plugin  [description]
-* @param  {[type]} key     [description]
-* @return {[type]}         [description]
-*/
+ * Collects plugin metadata and wraps it in the Architect-friendly way.
+ * @param  {[type]} base    [description]
+ * @param  {[type]} plugin  [description]
+ * @param  {[type]} key     [description]
+ * @return {[type]}         [description]
+ */
 export const resolveModule = async (
   base: string,
   plugin: string,
