@@ -76,7 +76,8 @@ export class UserCard extends React.Component<UserCardProps, UserCardState> {
                             mutate({
                               variables: { username: user.id },
                               refetchQueries: [{ query: UsersQuery }],
-                            })}
+                            })
+                          }
                         >
                           Revoke access
                         </a>,

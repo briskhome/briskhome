@@ -66,7 +66,8 @@ class UsersSheet extends React.Component {
                   type: this.state.type,
                 },
                 refetchQueries: [{ query: usersQuery }],
-              })}
+              })
+            }
           >
             Create account
           </Button>
