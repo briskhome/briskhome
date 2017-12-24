@@ -8,6 +8,7 @@ import Login from '../../components/pages/login';
 import { Dashboard } from '../../components/pages/dashboard';
 import { NotFound } from '../../components/notfound';
 import { Example } from '../../components/onboarding/example';
+import ProtectedRoute from './ProtectedRoute';
 
 import '../app.styl';
 import '../stuff.styl';
@@ -20,9 +21,9 @@ export const Routes = () => (
         <section>
           <Switch>
             <Route path="/login" component={Login} />
-            <Route exact path="/" component={Dashboard} />
-            <Route path="/cameras" component={Example} />
-            <Route path="/preferences" component={Preferences} />
+            <ProtectedRoute exact path="/" component={Dashboard} />
+            <ProtectedRoute path="/cameras" component={Example} />
+            <ProtectedRoute path="/preferences" component={Preferences} />
             <Route path="*" component={NotFound} />
           </Switch>
         </section>
