@@ -58,7 +58,9 @@ export class UserCard extends React.Component<UserCardProps, UserCardState> {
                   </td>
                   <td className="widget-table__cell widget-table__cell_middle">
                     <div className="widget-table__cell-title">{user.name}</div>
-                    <div className="widget-table__cell-subtitle">{user.id}</div>
+                    <div className="widget-table__cell-subtitle">
+                      {user.username}
+                    </div>
                   </td>
                   <td className="widget-table__cell widget-table__cell_last">
                     <Menu

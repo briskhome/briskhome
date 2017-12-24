@@ -9,14 +9,13 @@ export default new GraphQLObjectType({
   name: 'User',
   description: 'This is a generic user',
   fields: {
-    id: {
-      type: GraphQLString,
-      description: 'Username',
-    },
     lastName: {
       type: GraphQLString,
     },
     firstName: {
+      type: GraphQLString,
+    },
+    username: {
       type: GraphQLString,
     },
     name: {
