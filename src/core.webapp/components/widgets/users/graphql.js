@@ -3,7 +3,7 @@ import { gql } from 'react-apollo';
 export const users = gql`
   query users {
     users {
-      id
+      username
       name
       type
     }
