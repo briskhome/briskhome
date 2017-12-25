@@ -17,7 +17,7 @@ export default {
   resolve: async (src: Object, args: Object, ctx: Object) => {
     const { db } = ctx;
     const UserModel = db.model('core:user');
-    if (args.id)
+    if (args.username)
       return UserModel.fetchByUsername(args.username, { lean: true });
     return UserModel.find({}).exec();
   },

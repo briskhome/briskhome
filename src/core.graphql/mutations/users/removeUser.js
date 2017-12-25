@@ -38,6 +38,7 @@ export default {
     const { db } = context;
     const { input: { username } } = args;
     const User = db.model('core:user');
-    return User.remove({ _id: username });
+    await User.remove({ username });
+    return { result: true };
   },
 };

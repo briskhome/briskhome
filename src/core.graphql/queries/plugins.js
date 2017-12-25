@@ -1,6 +1,6 @@
 /** @flow
  * @briskhome
- * └core.graphql <queries/devices.js>
+ * └core.graphql <queries/plugins.js>
  */
 
 import { GraphQLList } from 'graphql';

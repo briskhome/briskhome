@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.graphql -> queries -> devices query 1`] = `
+Object {
+  "data": Object {
+    "devices": Array [
+      Object {
+        "id": "19a967d4-62cb-45ec-8938-8d590960266c",
+        "name": "Lorem Ipsum",
+      },
+    ],
+  },
+}
+`;
+
+exports[`core.graphql -> queries -> devices query by id 1`] = `
+Object {
+  "data": Object {
+    "devices": Array [
+      Object {
+        "id": "19a967d4-62cb-45ec-8938-8d590960266c",
+        "name": "Lorem Ipsum",
+      },
+    ],
+  },
+}
+`;
+
+exports[`core.graphql -> queries -> devices query by location 1`] = `
+Object {
+  "data": Object {
+    "devices": Array [
+      Object {
+        "id": "19a967d4-62cb-45ec-8938-8d590960266c",
+        "name": "Lorem Ipsum",
+      },
+    ],
+  },
+}
+`;
+
+exports[`core.graphql -> queries -> devices query by location with no results 1`] = `
+Object {
+  "data": Object {
+    "devices": null,
+  },
+}
+`;

@@ -38,8 +38,9 @@ export default {
     const { db } = context;
     const { input: { username } } = args;
     const User = db.model('core:user');
-    const user = User.findOne({ _id: username });
+    const user = await User.findOne({ _id: username });
     user.isDisabled = true;
-    return user.save();
+    await user.save();
+    return { result: true };
   },
 };
