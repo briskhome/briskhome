@@ -1,8 +1,9 @@
+/** @flow */
 import * as React from 'react';
-import Header from '../navigation';
+import Header from '../navigation/index';
 
 type WrapperProps = {
-  children: React.ReactChildren,
+  children: React.ChildrenArray<string>,
 };
 
 export const Wrapper = ({ children }: WrapperProps): React.Fragment => (

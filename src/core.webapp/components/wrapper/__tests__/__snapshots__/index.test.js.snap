@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.webapp -> components -> wrapper renders 1`] = `
+<React.Fragment>
+  <Component />
+  <section>
+    Lorem ispum
+  </section>
+</React.Fragment>
+`;
