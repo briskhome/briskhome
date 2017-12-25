@@ -22,8 +22,8 @@ export const Routes = () => (
           <ProtectedRoute exact path="/" component={Dashboard} />
           <ProtectedRoute path="/cameras" component={Example} />
           <ProtectedRoute path="/preferences" component={Preferences} />
+          <ProtectedRoute path="*" component={NotFound} />
         </Wrapper>
-        <Route path="*" component={NotFound} />
       </Switch>
     </Router>
   </ApolloProvider>
