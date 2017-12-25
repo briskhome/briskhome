@@ -1,21 +1,21 @@
 language: node_js
 cache: yarn
 node_js:
-  - '7'
+  - '8'
 branches:
   only:
     - 'master'
 jobs:
   include:
-    - stage: build
-      script: yarn babel
-    - script: yarn webpack
     - stage: check
       script: yarn lint
     - script: yarn flow
     - script: yarn test
       after_success:
         - yarn codecov
+    - stage: build
+      script: yarn babel
+    - script: yarn webpack
     - stage: run
       script: yarn start-stop
       services:
