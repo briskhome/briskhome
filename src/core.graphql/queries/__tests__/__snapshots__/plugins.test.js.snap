@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.graphql -> queries -> plugins query 1`] = `
+Object {
+  "data": Object {
+    "plugins": Array [
+      Object {
+        "author": "John Doe <jdoe@briskhome.com>",
+        "consumes": Array [],
+        "disabled": false,
+        "name": "briskhome-plugin",
+        "provides": Array [
+          "plugin",
+        ],
+        "version": "0.0.0",
+      },
+    ],
+  },
+}
+`;

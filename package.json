@@ -116,7 +116,7 @@
     "moduleNameMapper": {
       "\\.(css|styl)$": "<rootDir>/src/__mocks__/styl.js"
     },
-    "setupTestFrameworkScriptFile": "<rootDir>src/utilities/jest.js",
+    "setupTestFrameworkScriptFile": "<rootDir>src/utilities/jest/index.js",
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ]
