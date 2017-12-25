@@ -6,7 +6,7 @@ import Avatar from '../avatar';
 
 import './navigation.styl';
 
-export const Navigation = (): React.Element => (
+export const Navigation = (): React.Node => (
   <header>
     <nav role="navigation">
       <Link to="/">
