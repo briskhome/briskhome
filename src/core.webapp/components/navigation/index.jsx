@@ -1,12 +1,16 @@
+/** @flow */
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'react-apollo';
 import { Link, NavLink } from 'react-router-dom';
 import Menu from '../ui/menu';
 
 import Avatar from '../avatar';
+import type { BriskhomeState } from '../../types';
 
 import './navigation.styl';
 
-export const Navigation = (): React.Node => (
+const Navigation = ({ user }: BriskhomeState): React.Node => (
   <header>
     <nav role="navigation">
       <Link to="/">
@@ -20,7 +24,12 @@ export const Navigation = (): React.Node => (
       <div className="profile">
         <Menu
           arrow
-          trigger={<Avatar online name="EZ" />}
+          trigger={
+            <Avatar
+              online
+              name={`${user.firstName[0]}${user.lastName[0]}`.toUpperCase()}
+            />
+          }
           options={[<Link to="/preferences">Preferences</Link>]}
         />
       </div>
@@ -28,4 +37,6 @@ export const Navigation = (): React.Node => (
   </header>
 );
 
-export default Navigation;
+export default compose(connect((state: BriskhomeState): * => state))(
+  Navigation,
+);
