@@ -4,7 +4,9 @@ exports[`core.webapp -> components -> wrapper renders 1`] = `
 <React.Fragment>
   <Component />
   <section>
-    Lorem ispum
+    <Switch>
+      Lorem ispum
+    </Switch>
   </section>
 </React.Fragment>
 `;
