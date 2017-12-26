@@ -1,5 +1,6 @@
 /** @flow */
 import * as React from 'react';
+import { Switch } from 'react-router-dom';
 import Header from '../navigation/index';
 
 type WrapperProps = {
@@ -9,7 +10,9 @@ type WrapperProps = {
 export const Wrapper = ({ children }: WrapperProps): React.Fragment => (
   <React.Fragment>
     <Header />
-    <section>{children}</section>
+    <section>
+      <Switch>{children}</Switch>
+    </section>
   </React.Fragment>
 );
 

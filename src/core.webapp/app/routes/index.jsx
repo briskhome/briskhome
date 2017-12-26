@@ -17,12 +17,12 @@ export const Routes = () => (
   <ApolloProvider store={configureStore()} client={client}>
     <Router>
       <Switch>
-        <Route path="/login" component={Login} />
+        <Route exact path="/login" component={Login} />
         <Wrapper>
           <ProtectedRoute exact path="/" component={Dashboard} />
           <ProtectedRoute path="/cameras" component={Example} />
           <ProtectedRoute path="/preferences" component={Preferences} />
-          <ProtectedRoute path="*" component={NotFound} />
+          <ProtectedRoute component={NotFound} />
         </Wrapper>
       </Switch>
     </Router>
