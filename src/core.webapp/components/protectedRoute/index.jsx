@@ -1,6 +1,9 @@
+/** @flow */
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'react-apollo';
 import { Redirect, Route } from 'react-router-dom';
+import type { BriskhomeState } from '../../types';
 
 const ProtectedRoute = ({
   component: Component,
@@ -15,4 +18,6 @@ const ProtectedRoute = ({
   />
 );
 
-export default connect(state => state)(ProtectedRoute);
+export default compose(connect((state: BriskhomeState): * => state))(
+  ProtectedRoute,
+);
