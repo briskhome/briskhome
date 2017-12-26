@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 
 import './login.styl';
 import type { BriskhomeState, User } from '../../../types';
-import type { LoginAction } from '../../../app/redux/types';
+import type { LoginAction } from '../../../app/types';
 
 type LoginProps = {
   loginUser: User => void,

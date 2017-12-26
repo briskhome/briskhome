@@ -1,4 +1,4 @@
-import { userReducer } from '../reducers';
+import { userReducer } from '../';
 
 describe('core.webapp -> reducers', () => {
   describe('userReducer', () => {
