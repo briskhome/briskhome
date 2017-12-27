@@ -18,8 +18,7 @@ jobs:
     - script: yarn webpack
     - stage: run
       script: yarn start-stop
-    - stage: accept
-      script: yarn test-e2e
+    - script: yarn test-e2e
       services:
         - mongodb
       before_script:

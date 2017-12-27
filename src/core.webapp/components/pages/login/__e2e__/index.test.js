@@ -12,6 +12,23 @@ afterEach(async () => {
 });
 
 describe('core.webapp -> /login', () => {
+  describe('image snapshots', () => {
+    it('initial state', async () => {
+      await page.goto(uri);
+      await page.waitForSelector('form.briskhome-login');
+      // const element = await page.$('form.briskhome-login');
+      expect(await page.screenshot()).toMatchImageSnapshot();
+    });
+
+    it('invalid state', async () => {
+      await page.goto(uri);
+      await page.waitForSelector('form.briskhome-login');
+      await page.click('a[type=submit]');
+      // const element = await page.$('form.briskhome-login');
+      expect(await page.screenshot()).toMatchImageSnapshot();
+    });
+  });
+
   it('submit form with invalid username', async () => {
     await page.goto(uri);
     await page.waitForSelector('form.briskhome-login');
