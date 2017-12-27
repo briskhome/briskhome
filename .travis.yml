@@ -10,7 +10,7 @@ jobs:
     - stage: check
       script: yarn lint
     - script: yarn flow
-    - script: yarn test
+    - script: yarn test --coverage
       after_success:
         - yarn codecov
     - stage: build
@@ -18,11 +18,17 @@ jobs:
     - script: yarn webpack
     - stage: run
       script: yarn start-stop
+    - stage: accept
+      script: yarn test-e2e
       services:
         - mongodb
       before_script:
         - mongo briskhome --eval 'db.createUser({user:"briskhome",pwd:"briskhome",roles:["readWrite"]});'
+        - mongo briskhome --eval 'db.users.insert({username:"jdoe","lastName":"Doe","firstName":"John","password":"$2a$10$MTrhrVPe.8aib7b3nI2P3uoG7eDtQaWqTY5CLE3O5A9Z05bsIII0C","type":"regular","isDisabled":false,"subscriptions":[],"devices":[],"contacts":[],"__v":0});'
         - yarn babel
+        - yarn webpack
+        - yarn start &
+        - sleep 3
 addons:
   code_climate:
     repo_token: 71ee8424e2660dbc7dd88d81e0715f4434453db7fb57af35604d165d2db6203a
