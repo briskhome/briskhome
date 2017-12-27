@@ -19,7 +19,7 @@
     "postinstall": "npm config set briskhome_dir /opt/briskhome",
     "webpack": "node_modules/.bin/webpack --config ./src/core.webapp/webpack.config.js --context ./src/core.webapp",
     "webpack-watch": "node_modules/.bin/webpack --config ./src/core.webapp/webpack.config.js --context ./src/core.webapp --watch",
-    "storybook": "start-storybook -p 6006",
+    "start-storybook": "start-storybook -c ./src/core.webapp/.storybook -p 6006",
     "build-storybook": "build-storybook"
   },
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
