@@ -26,7 +26,6 @@ export default ({ db }: CoreImports) => {
     {
       _id: {
         type: String,
-        unique: true,
       },
       name: {
         type: String,
