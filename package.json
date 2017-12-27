@@ -114,7 +114,7 @@
       "<rootDir>/lib/"
     ],
     "moduleNameMapper": {
-      "\\.(css|styl)$": "<rootDir>/src/__mocks__/styl.js"
+      "\\.(css|styl)$": "<rootDir>/src/core.webapp/__mocks__/styl.js"
     },
     "setupTestFrameworkScriptFile": "<rootDir>src/utilities/jest/index.js",
     "snapshotSerializers": [
