@@ -8,8 +8,7 @@ import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
 
 import './login.styl';
-import type { BriskhomeState, User } from '../../../types';
-import type { LoginAction } from '../../../app/types';
+import type { BriskhomeState, LoginAction, User } from '../../../app/types';
 
 type LoginProps = {
   loginUser: User => void,

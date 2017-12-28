@@ -6,6 +6,8 @@ import { Redirect, Route } from 'react-router-dom';
 import { withWrapper } from '../wrapper';
 import { me as meQuery } from './graphql';
 
+import type { BriskhomeState, LogoutAction, User } from '../../app/types';
+
 type ProtectedRouteProps = {
   data: {
     error: boolean,
@@ -41,15 +43,15 @@ const ProtectedRoute = ({
 
 export default compose(
   connect(
-    ({ user }: BriskhomeState) => {
-      return { common: { user } };
-    },
+    ({ user }: BriskhomeState) => ({
+      common: { user },
+    }),
     dispatch => {
       return {
         actions: {
           logoutUser: (user: User) =>
             dispatch(
-              ({ type: '@@BRISKHOME/LOGOUT', value: user }: LoginAction),
+              ({ type: '@@BRISKHOME/LOGOUT', value: user }: LogoutAction),
             ),
         },
       };

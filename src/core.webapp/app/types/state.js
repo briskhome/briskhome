@@ -1,5 +1,4 @@
-// @flow
-
+/** @flow */
 export type BriskhomeState = {
   apollo: any,
   user: User,
