@@ -1,4 +1,4 @@
-import ApolloClient from 'apollo-client';
+import ApolloClient, { createNetworkInterface } from 'apollo-client';
 // createNetworkInterface,
 
 // when need token based authentication:
@@ -20,5 +20,12 @@ import ApolloClient from 'apollo-client';
 //   // queryTransformer: addTypename,
 // });
 
-export const apolloClient = new ApolloClient();
+const networkInterface = createNetworkInterface({
+  uri: '/graphql',
+  opts: {
+    credentials: 'same-origin',
+  },
+});
+
+export const apolloClient = new ApolloClient({ networkInterface });
 export default apolloClient;

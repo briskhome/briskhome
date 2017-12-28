@@ -46,22 +46,22 @@ export default (
   );
 
   passport.serializeUser((user, done) => {
-    done(null, { id: user._id, type: user.type });
+    done(null, { username: user.username, type: user.type });
   });
 
   passport.deserializeUser(
-    async ({ id, type }: { id: string, type: string }, done) => {
+    async ({ username, type }: { username: string, type: string }, done) => {
       const UserModel = db.model('core:user');
-      const user = await UserModel.fetchByUsername(id, { lean: true });
+      const user = await UserModel.fetchByUsername(username, { lean: true });
 
       if (!user) {
-        log.warn({ user: { id, type } }, 'User account not found in database');
-        return null;
+        log.warn({ user: { username, type } }, 'User account is not found');
+        return done(null);
       }
 
       if (user.isDisabled) {
-        log.warn({ user: { id, type } }, 'User account is disabled');
-        return null;
+        log.warn({ user: { username, type } }, 'User account is disabled');
+        return done(null);
       }
 
       return done(null, user);
