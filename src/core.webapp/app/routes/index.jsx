@@ -9,8 +9,8 @@ import configureStore, { apolloClient } from '../store';
 import Login from '../../components/pages/login';
 import ProtectedRoute from '../../components/protectedRoute';
 
-import '../app.styl';
-import '../stuff.styl';
+import '../styles/app.styl';
+import '../styles/stuff.styl';
 
 export const Routes = () => (
   <ApolloProvider store={configureStore()} client={apolloClient}>
