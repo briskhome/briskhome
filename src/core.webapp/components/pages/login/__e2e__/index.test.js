@@ -1,8 +1,6 @@
 let page;
 const uri = 'http://localhost:4000/login';
 
-jest.setTimeout(10000);
-
 beforeEach(async () => {
   page = await global.browser.newPage();
 });
@@ -12,20 +10,20 @@ afterEach(async () => {
 });
 
 describe('core.webapp -> /login', () => {
-  describe('image snapshots', () => {
+  xdescribe('image snapshots', () => {
     it('initial state', async () => {
       await page.goto(uri);
       await page.waitForSelector('form.briskhome-login');
-      // const element = await page.$('form.briskhome-login');
-      expect(await page.screenshot()).toMatchImageSnapshot();
+      const element = await page.$('form.briskhome-login');
+      expect(await element.screenshot()).toMatchImageSnapshot();
     });
 
     it('invalid state', async () => {
       await page.goto(uri);
       await page.waitForSelector('form.briskhome-login');
       await page.click('a[type=submit]');
-      // const element = await page.$('form.briskhome-login');
-      expect(await page.screenshot()).toMatchImageSnapshot();
+      const element = await page.$('form.briskhome-login');
+      expect(await element.screenshot()).toMatchImageSnapshot();
     });
   });
 
@@ -60,6 +58,7 @@ describe('core.webapp -> /login', () => {
   });
 
   it('submit', async () => {
+    expect((await page.cookies()).length).toBe(0);
     await page.goto(uri);
     await page.waitForSelector('form.briskhome-login');
     await page.click('input[name=username]');
@@ -68,5 +67,6 @@ describe('core.webapp -> /login', () => {
     await page.type('input[name=password]', '12345');
     await page.click('a[type=submit]');
     await page.waitForSelector('div.dashboard');
+    expect((await page.cookies()).length).toBe(1);
   });
 });

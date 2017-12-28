@@ -1,5 +1,8 @@
 language: node_js
-cache: yarn
+cache:
+  yarn: true
+  directories:
+    - node_modules
 node_js:
   - '8'
 branches:
@@ -17,8 +20,7 @@ jobs:
       script: yarn babel
     - script: yarn webpack
     - stage: run
-      script: yarn start-stop
-    - script: yarn test-e2e
+      script: yarn test-e2e
       services:
         - mongodb
       before_script:
@@ -27,7 +29,6 @@ jobs:
         - yarn babel
         - yarn webpack
         - yarn start &
-        - sleep 3
 addons:
   code_climate:
     repo_token: 71ee8424e2660dbc7dd88d81e0715f4434453db7fb57af35604d165d2db6203a
