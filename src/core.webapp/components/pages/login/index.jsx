@@ -40,6 +40,10 @@ export class Login extends React.Component<LoginProps, LoginState> {
     this.setState({ errors: [] });
   }
 
+  componentDidMount() {
+    if (this.props.user) this.props.history.replace('/');
+  }
+
   async submit(): Promise<void> {
     const { history, loginUser, mutate } = this.props;
     const { username, password } = this.state;
@@ -133,5 +137,11 @@ export default compose(
       };
     },
   ),
-  graphql(loginQuery),
+  graphql(loginQuery, {
+    options: () => ({
+      updateQueries: {
+        me: (state, { mutationResult }) => ({ ...state, ...mutationResult }),
+      },
+    }),
+  }),
 )(Login);

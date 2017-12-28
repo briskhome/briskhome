@@ -4,7 +4,7 @@ import { Switch } from 'react-router-dom';
 import Header from '../navigation/index';
 
 type WrapperProps = {
-  children: React.ChildrenArray<string>,
+  children: React.Node,
 };
 
 export const Wrapper = ({ children }: WrapperProps): React.Fragment => (
@@ -17,3 +17,6 @@ export const Wrapper = ({ children }: WrapperProps): React.Fragment => (
 );
 
 export default Wrapper;
+export const withWrapper = (children: React.Node): React.Fragment => (
+  <Wrapper children={children} />
+);

@@ -8,7 +8,6 @@ import { Dashboard } from '../../components/pages/dashboard';
 import { NotFound } from '../../components/notfound';
 import { Example } from '../../components/onboarding/example';
 import ProtectedRoute from '../../components/protectedRoute';
-import Wrapper from '../../components/wrapper';
 
 import '../app.styl';
 import '../stuff.styl';
@@ -18,12 +17,10 @@ export const Routes = () => (
     <Router>
       <Switch>
         <Route exact path="/login" component={Login} />
-        <Wrapper>
-          <ProtectedRoute exact path="/" component={Dashboard} />
-          <ProtectedRoute path="/cameras" component={Example} />
-          <ProtectedRoute path="/preferences" component={Preferences} />
-          <ProtectedRoute component={NotFound} />
-        </Wrapper>
+        <ProtectedRoute exact path="/" component={Dashboard} />
+        <ProtectedRoute path="/cameras" component={Example} />
+        <ProtectedRoute path="/preferences" component={Preferences} />
+        <ProtectedRoute component={NotFound} />
       </Switch>
     </Router>
   </ApolloProvider>
