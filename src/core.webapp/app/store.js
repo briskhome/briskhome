@@ -1,10 +1,19 @@
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { createLogger } from 'redux-logger';
-import thunkMiddleware from 'redux-thunk';
-import { routerReducer } from 'react-router-redux';
-import { apolloClient } from './apollo';
-import { userReducer } from './reducers';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { fetchState, storeState } from './utils/localStorage';
+import { routerReducer } from 'react-router-redux';
+import { userReducer } from './reducers';
+import ApolloClient, { createNetworkInterface } from 'apollo-client';
+import thunkMiddleware from 'redux-thunk';
+
+export const apolloClient = new ApolloClient({
+  networkInterface: createNetworkInterface({
+    uri: '/graphql',
+    opts: {
+      credentials: 'same-origin',
+    },
+  }),
+});
 
 const loggerMiddleware = createLogger({
   level: 'info',
@@ -26,5 +35,3 @@ export default function configureStore() {
   store.subscribe(() => storeState(store.getState()));
   return store;
 }
-
-export const client = apolloClient;

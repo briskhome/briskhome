@@ -5,7 +5,7 @@ import { Dashboard } from '../../components/pages/dashboard';
 import { Example } from '../../components/onboarding/example';
 import { NotFound } from '../../components/notfound';
 import { Preferences } from '../../components/pages/preferences';
-import configureStore, { client } from '../store';
+import configureStore, { apolloClient } from '../store';
 import Login from '../../components/pages/login';
 import ProtectedRoute from '../../components/protectedRoute';
 
@@ -13,7 +13,7 @@ import '../app.styl';
 import '../stuff.styl';
 
 export const Routes = () => (
-  <ApolloProvider store={configureStore()} client={client}>
+  <ApolloProvider store={configureStore()} client={apolloClient}>
     <Router>
       <Switch>
         <Route exact path="/login" component={Login} />
