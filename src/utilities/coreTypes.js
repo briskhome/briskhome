@@ -54,9 +54,11 @@ export type Context = CoreImports & {
   login: ({ id: string, type: string }) => Promise<void>,
   logout: () => Promise<void>,
 };
+
 export type Req = {
   headers: { [string]: string },
   session: any,
+  user: { username: string },
 };
 export type Res = {};
 

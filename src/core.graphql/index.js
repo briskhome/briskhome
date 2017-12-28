@@ -7,6 +7,7 @@ import { GraphQLSchema, GraphQLObjectType } from 'graphql';
 import devices from './queries/devices';
 import plugins from './queries/plugins';
 import users from './queries/users';
+import me from './queries/me';
 import login from './mutations/authorisation/login';
 import createUser from './mutations/users/createUser';
 import disableUser from './mutations/users/disableUser';
@@ -29,6 +30,7 @@ export default (
         devices,
         plugins,
         users,
+        me,
       },
     }),
     mutation: new GraphQLObjectType({

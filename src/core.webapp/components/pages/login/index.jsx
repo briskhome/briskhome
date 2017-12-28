@@ -8,8 +8,7 @@ import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
 
 import './login.styl';
-import type { BriskhomeState, User } from '../../../types';
-import type { LoginAction } from '../../../app/types';
+import type { BriskhomeState, LoginAction, User } from '../../../app/types';
 
 type LoginProps = {
   loginUser: User => void,
@@ -38,6 +37,10 @@ export class Login extends React.Component<LoginProps, LoginState> {
 
   resetErrors(): void {
     this.setState({ errors: [] });
+  }
+
+  componentDidMount() {
+    if (this.props.user) this.props.history.replace('/');
   }
 
   async submit(): Promise<void> {
@@ -133,5 +136,11 @@ export default compose(
       };
     },
   ),
-  graphql(loginQuery),
+  graphql(loginQuery, {
+    options: () => ({
+      updateQueries: {
+        me: (state, { mutationResult }) => ({ ...state, ...mutationResult }),
+      },
+    }),
+  }),
 )(Login);

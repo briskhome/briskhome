@@ -6,7 +6,7 @@ import { Link, NavLink } from 'react-router-dom';
 import Menu from '../ui/menu';
 
 import Avatar from '../avatar';
-import type { BriskhomeState } from '../../types';
+import type { BriskhomeState } from '../../app/types';
 
 import './navigation.styl';
 

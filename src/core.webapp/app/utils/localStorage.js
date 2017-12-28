@@ -1,5 +1,5 @@
 /** @flow */
-import type { BriskhomeState } from '../../types.js';
+import type { BriskhomeState } from '../../app/types';
 
 export const storeState = (state: BriskhomeState): void => {
   try {
