@@ -92,4 +92,14 @@ describe('core.graphql -> mutations -> authorisation -> login', () => {
       }),
     ).toMatchSnapshot();
   });
+
+  it('mutation with error during login', async () => {
+    context.login = jest.fn(() => Promise.reject());
+    expect(
+      await graphql(schema, mutation, null, context, {
+        username: 'username',
+        password: 'password',
+      }),
+    ).toMatchSnapshot();
+  });
 });

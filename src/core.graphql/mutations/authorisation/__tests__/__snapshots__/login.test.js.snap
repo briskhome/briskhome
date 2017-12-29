@@ -13,6 +13,19 @@ Object {
 }
 `;
 
+exports[`core.graphql -> mutations -> authorisation -> login mutation with error during login 1`] = `
+Object {
+  "data": Object {
+    "login": Object {
+      "firstName": "John",
+      "lastName": "Doe",
+      "type": "regular",
+      "username": "username",
+    },
+  },
+}
+`;
+
 exports[`core.graphql -> mutations -> authorisation -> login mutation with invalid password 1`] = `
 Object {
   "data": Object {
