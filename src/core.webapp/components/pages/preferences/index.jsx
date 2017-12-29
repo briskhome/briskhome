@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import General from './views/general';
 import Plugins from './views/plugins';
+import Security from './views/security';
 import './preferences.styl';
 
 export const Preferences = ({ match }: any): React.Node => (
@@ -17,6 +18,9 @@ export const Preferences = ({ match }: any): React.Node => (
         <Link to="/preferences/plugins" className="briskhome__sidenav-link">
           Installed Plugins
         </Link>
+        <Link to="/preferences/security" className="briskhome__sidenav-link">
+          Security
+        </Link>
       </nav>
 
       <nav className="briskhome__sidenav" />
@@ -24,6 +28,7 @@ export const Preferences = ({ match }: any): React.Node => (
 
     <div className="briskhome__content">
       <Switch>
+        <Route path={`${match.url}/security`} component={Security} />
         <Route path={`${match.url}/plugins`} component={Plugins} />
         <Route path={`${match.url}/`} component={General} />
       </Switch>
