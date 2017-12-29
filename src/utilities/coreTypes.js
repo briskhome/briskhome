@@ -59,8 +59,10 @@ export type Req = {
   headers: { [string]: string },
   ip: string,
   session: any,
-  user: { username: string },
+  sessionID: string,
+  user: { username: string, type: string },
 };
+
 export type Res = {};
 
 export type SubscriptionType = {
