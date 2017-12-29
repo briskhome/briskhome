@@ -106,6 +106,7 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
+    "typeface-roboto": "^0.0.45",
     "useragent": "^2.2.1",
     "uuid-1345": "^0.99.6"
   },
@@ -123,6 +124,8 @@
       "\\.(css|styl)$": "<rootDir>/core.webapp/__mocks__/styl.js"
     },
     "setupTestFrameworkScriptFile": "<rootDir>/utilities/jest/index.js",
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }
