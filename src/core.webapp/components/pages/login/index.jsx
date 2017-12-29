@@ -83,6 +83,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
           className="briskhome-login__image"
         />
         <Input
+          name="username"
           autoComplete="username"
           placeholder="Username"
           valid={!errors.includes('E_INVALID_USERNAME')}
@@ -92,6 +93,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
           }}
         />
         <Input
+          name="password"
           autoComplete="current-password"
           placeholder="Password"
           valid={!errors.includes('E_INVALID_PASSWORD')}

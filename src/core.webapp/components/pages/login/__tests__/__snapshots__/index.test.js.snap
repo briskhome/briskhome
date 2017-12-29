@@ -12,6 +12,7 @@ exports[`core.webapp / components / pages / login renders 1`] = `
     />
     <Component
       autoComplete="username"
+      name="username"
       onChange={[Function]}
       placeholder="Username"
       valid={true}
@@ -22,6 +23,7 @@ exports[`core.webapp / components / pages / login renders 1`] = `
         <input
           autoComplete="username"
           className="briskhome-input"
+          name="username"
           onChange={[Function]}
           placeholder="Username"
         />
@@ -29,6 +31,7 @@ exports[`core.webapp / components / pages / login renders 1`] = `
     </Component>
     <Component
       autoComplete="current-password"
+      name="password"
       onChange={[Function]}
       placeholder="Password"
       type="password"
@@ -40,6 +43,7 @@ exports[`core.webapp / components / pages / login renders 1`] = `
         <input
           autoComplete="current-password"
           className="briskhome-input"
+          name="password"
           onChange={[Function]}
           placeholder="Password"
           type="password"
