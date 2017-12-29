@@ -18,7 +18,9 @@ export default {
     const { db } = ctx;
     const UserModel = db.model('core:user');
     if (args.username)
-      return UserModel.fetchByUsername(args.username, { lean: true });
+      return [].concat(
+        await UserModel.fetchByUsername(args.username, { lean: true }),
+      );
     return UserModel.find({}).exec();
   },
 };

@@ -10,14 +10,14 @@ import {
   GraphQLInputObjectType,
 } from 'graphql';
 import bcrypt from 'bcrypt';
+import mongoose from 'mongoose';
 import { UserTypeEnum } from '../../types/User';
-import type Mongoose from 'mongoose';
 import type { Context } from '../../../utilities/coreTypes';
 
 type GenerateUsernameInput = {|
   lastName: string,
   firstName: string,
-  db: Mongoose,
+  db: typeof mongoose,
 |};
 
 const generateUsername = async ({
