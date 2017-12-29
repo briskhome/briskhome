@@ -3,7 +3,14 @@
  * └core.graphql <types/User.js>
  */
 
-import { GraphQLEnumType, GraphQLString, GraphQLObjectType } from 'graphql';
+import {
+  GraphQLEnumType,
+  GraphQLList,
+  GraphQLString,
+  GraphQLObjectType,
+} from 'graphql';
+import SessionType from './Session';
+import typeof { SessionModel } from 'core.webapp/models/SessionModel';
 
 export default new GraphQLObjectType({
   name: 'User',
@@ -23,6 +30,14 @@ export default new GraphQLObjectType({
     },
     type: {
       type: GraphQLString,
+    },
+    sessions: {
+      type: new GraphQLList(SessionType),
+      resolve: async (obj, args, ctx) => {
+        const { db } = ctx;
+        const Session: SessionModel = db.model('SessionModel');
+        return Session.fetchByUsername(obj.username);
+      },
     },
   },
 });

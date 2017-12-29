@@ -57,6 +57,7 @@ export type Context = CoreImports & {
 
 export type Req = {
   headers: { [string]: string },
+  ip: string,
   session: any,
   user: { username: string },
 };

@@ -55,7 +55,7 @@ export default {
     },
   },
   resolve: async (obj: Object, args: LoginInput, context: Context) => {
-    const { db, log, login, req, req: { headers } } = context;
+    const { db, log, login, req, req: { headers, ip } } = context;
     const { input: { username, password } } = args;
 
     log.info({ mutation: 'authorisation.login' });
@@ -69,13 +69,16 @@ export default {
 
     try {
       await login(user);
-      req.session.useragent = useragent.parse(headers['user-agent']).toJSON();
     } catch (e) {
       log.warn(
         { user: { username: user.username, type: user.type } },
         'Unable to log user in',
       );
     }
+
+    req.session.useragent = useragent.parse(headers['user-agent']).toJSON();
+    req.session.issued = new Date();
+    req.session.ip = ip;
 
     return user;
   },
