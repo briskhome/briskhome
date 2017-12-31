@@ -118,7 +118,6 @@ describe('utilities/architect', () => {
         'version',
         'main',
         'author',
-        'private',
         'plugin',
         'dependencies',
         'dirname',
