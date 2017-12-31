@@ -1,8 +1,8 @@
 {
-  "name": "briskhome",
+  "name": "@briskhome/core",
   "version": "0.3.0",
   "description": "",
-  "main": "briskhome.js",
+  "main": "lib/core.js",
   "scripts": {
     "babel": "node_modules/.bin/babel src -d lib --copy-files --ignore node_modules",
     "babel-watch": "vagrant up && node_modules/.bin/babel src --watch --out-dir lib --copy-files --ignore node_modules & yarn webpack-watch",
@@ -28,7 +28,6 @@
   "engines": {
     "node": ">=5.0.0"
   },
-  "private": true,
   "devDependencies": {
     "@storybook/react": "^3.2.5",
     "babel-cli": "^6.24.1",
