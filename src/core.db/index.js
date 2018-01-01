@@ -25,7 +25,7 @@ export default (
 
   mongoose.Promise = global.Promise;
   mongoose.set('debug', options.NODE_ENV !== 'production');
-  mongoose.connect(uri);
+  mongoose.connect(uri, { useMongoClient: true });
   mongoose.connection.on('error', err => {
     log.fatal(
       { err, uri },
