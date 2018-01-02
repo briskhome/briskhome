@@ -23,9 +23,13 @@ export default (
   let ready = false;
   bus.on('core:ready', () => (ready = true));
 
-  mongoose.Promise = global.Promise;
-  mongoose.set('debug', options.NODE_ENV !== 'production');
-  mongoose.connect(uri, { useMongoClient: true });
+  mongoose.Promise = Promise;
+  mongoose.connect(uri, {
+    useMongoClient: true,
+    reconnectTries: Number.MAX_VALUE,
+    keepAlive: 120,
+  });
+
   mongoose.connection.on('error', err => {
     log.fatal(
       { err, uri },
