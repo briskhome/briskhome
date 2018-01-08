@@ -33,13 +33,16 @@ export default (
   app.use(
     session({
       genid: () => uuid.v4(),
+      cookie: {
+        expires: 1000 * 30 * 24 * 60 * 60,
+      },
       name: 'session',
       resave: false,
       saveUninitialized: false,
       secret: options.secret,
       store: new MongoStore({
         uri: options.database,
-        expires: 30 * 24 * 60 * 60,
+        expires: 1000 * 30 * 24 * 60 * 60,
         collection: 'sessions',
       }),
     }),
