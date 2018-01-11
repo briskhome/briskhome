@@ -8,7 +8,9 @@ module.exports = class ChromeEnvironment extends NodeEnvironment {
 
   async setup() {
     await super.setup();
-    this.global.browser = await puppeteer.launch();
+    this.global.browser = await puppeteer.launch({
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
   }
 
   async teardown() {
