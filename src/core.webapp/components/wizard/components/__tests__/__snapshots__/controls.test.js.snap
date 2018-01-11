@@ -4,7 +4,7 @@ exports[`core.webapp -> components -> wizard -> controls does not render 1`] = `
 
 exports[`core.webapp -> components -> wizard -> controls renders 1`] = `
 <div
-  class="briskhome-wizard__footer-controls briskhome-wizard__footer-controls_left briskhome-wizard__footer-controls_right briskhome-wizard__footer-controls_justify"
+  class="briskhome-wizard__footer-controls briskhome-wizard__footer-controls_justify"
 >
   <a
     class="briskhome-button briskhome-button_inline-block briskhome-wizard__button-prev"

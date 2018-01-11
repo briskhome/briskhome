@@ -19,8 +19,8 @@ export const WizardControls = ({
       className={cn(
         'briskhome-wizard__footer-controls',
         {
-          'briskhome-wizard__footer-controls_left': prev,
-          'briskhome-wizard__footer-controls_right': next,
+          'briskhome-wizard__footer-controls_left': prev && !next,
+          'briskhome-wizard__footer-controls_right': !prev && next,
           'briskhome-wizard__footer-controls_justify': prev && next,
         },
         className,
