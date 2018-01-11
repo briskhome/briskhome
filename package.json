@@ -117,6 +117,7 @@
       "!**/__css__/*",
       "!**/__e2e__/*",
       "!**/__mocks__/*",
+      "!**/__stories__/*",
       "!**/__tests__/*",
       "!core.webapp/webpack.config.js",
       "!utilities/jest/*"
