@@ -122,6 +122,7 @@
       "!core.webapp/webpack.config.js",
       "!utilities/jest/*"
     ],
+    "coverageDirectory": "<rootDir>/../coverage",
     "moduleNameMapper": {
       "\\.(css|styl)$": "<rootDir>/core.webapp/__mocks__/styl.js"
     },
