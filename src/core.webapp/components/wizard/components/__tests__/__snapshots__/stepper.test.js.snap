@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.webapp -> components -> wizard -> stepper renders 1`] = `
+<ul
+  class="briskhome-wizard__stepper"
+>
+  <li
+    class="briskhome-wizard__step briskhome-wizard__step_active"
+  >
+    <span
+      class="briskhome-wizard__step-circle"
+    >
+      1
+    </span>
+  </li>
+</ul>
+`;

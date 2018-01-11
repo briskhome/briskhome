@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.webapp -> components -> wizard -> controls does not render 1`] = `null`;
+
+exports[`core.webapp -> components -> wizard -> controls renders 1`] = `
+<div
+  class="briskhome-wizard__footer-controls briskhome-wizard__footer-controls_left briskhome-wizard__footer-controls_right briskhome-wizard__footer-controls_justify"
+>
+  <a
+    class="briskhome-button briskhome-button_inline-block briskhome-wizard__button-prev"
+    href="#"
+    role="button"
+    target="_self"
+    type="button"
+  >
+    Go Back
+  </a>
+  <a
+    class="briskhome-button briskhome-button_yellow briskhome-button_caps briskhome-button_inline-block briskhome-wizard__button-next"
+    href="#"
+    role="button"
+    target="_self"
+    type="button"
+  >
+    Next
+  </a>
+</div>
+`;
+
+exports[`core.webapp -> components -> wizard -> controls renders without "next" button 1`] = `
+<div
+  class="briskhome-wizard__footer-controls briskhome-wizard__footer-controls_left"
+>
+  <a
+    class="briskhome-button briskhome-button_inline-block briskhome-wizard__button-prev"
+    href="#"
+    role="button"
+    target="_self"
+    type="button"
+  >
+    Go Back
+  </a>
+</div>
+`;
+
+exports[`core.webapp -> components -> wizard -> controls renders without "prev" button 1`] = `
+<div
+  class="briskhome-wizard__footer-controls briskhome-wizard__footer-controls_right"
+>
+  <a
+    class="briskhome-button briskhome-button_yellow briskhome-button_caps briskhome-button_inline-block briskhome-wizard__button-next"
+    href="#"
+    role="button"
+    target="_self"
+    type="button"
+  >
+    Next
+  </a>
+</div>
+`;
