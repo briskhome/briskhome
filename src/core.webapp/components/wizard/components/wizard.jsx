@@ -1,8 +1,16 @@
 /** @flow */
 import * as React from 'react';
+import { connect } from 'react-redux';
 import cn from 'classnames';
 import WizardStepper from './stepper';
-import type { WizardProps, WizardState } from '../types';
+import type {
+  Wizard as WizardStore,
+  WizardInitAction,
+  WizardPrevAction,
+  WizardNextAction,
+  WizardGotoAction,
+} from 'core.webapp/app/types';
+import type { WizardProps, WizardState, WizardSlideState } from '../types';
 import '../index.styl';
 
 /**
@@ -13,68 +21,45 @@ import '../index.styl';
 export class Wizard extends React.Component<WizardProps, WizardState> {
   constructor(props: WizardProps) {
     super(props);
-    this.state = {
-      currentStep: props.intro ? -1 : 0,
-      totalSteps: props.slides ? props.slides.length : 0,
-    };
-  }
-
-  /** prev() method changes slide to the previous one */
-  prev(): void {
-    const { intro } = this.props;
-    const { currentStep } = this.state;
-    if (currentStep - 1 >= 0 - Number(!!intro))
-      this.setState({ currentStep: currentStep - 1 });
-  }
-
-  /** next() method changes slide to the next one */
-  next(): void {
-    const { outro } = this.props;
-    const { currentStep, totalSteps } = this.state;
-    if (currentStep + 1 < totalSteps + Number(!!outro))
-      this.setState({ currentStep: currentStep + 1 });
-  }
-
-  /** goto() method changes slide to the slide with the passed in index */
-  goto(slide: number): void {
-    const { intro, outro } = this.props;
-    const { totalSteps } = this.state;
-    if (slide >= 0 - Number(!!intro) && slide < totalSteps + Number(!!outro))
-      this.setState({ currentStep: slide });
+    this.props.init({
+      currentSlide: props.intro ? -1 : 0,
+      totalSlides: (props.slides || []).length,
+      hasIntro: !!props.intro,
+      hasOutro: !!props.outro,
+      slides: {},
+    });
   }
 
   renderIntro(): React.Node {
-    const { intro: Intro } = this.props;
-    const { currentStep } = this.state;
-    if (currentStep >= 0 || !Intro) return null;
-    return <Intro next={this.next.bind(this)} />;
+    const { intro: Intro, wizard: { currentSlide } } = this.props;
+    if (currentSlide >= 0 || !Intro) return null;
+    return <Intro next={this.props.next} />;
   }
 
   renderChildren(): React.Node {
-    const { slides } = this.props;
-    const { currentStep } = this.state;
+    const { prev, next, goto, slides, wizard: { currentSlide } } = this.props;
+    const nav = { prev, next, goto };
     return slides.map(
-      (Slide, idx) =>
-        idx === currentStep ? (
-          <Slide prev={this.prev.bind(this)} next={this.next.bind(this)} />
-        ) : null,
+      (Slide, idx) => (idx === currentSlide ? <Slide {...nav} /> : null),
     );
   }
 
   renderOutro(): React.Node {
-    const { outro: Outro } = this.props;
-    const { currentStep, totalSteps } = this.state;
-    if (currentStep < totalSteps || !Outro) return null;
-    return <Outro prev={this.prev.bind(this)} />;
+    const { outro: Outro, wizard: { currentSlide, totalSlides } } = this.props;
+    if (currentSlide < totalSlides || !Outro) return null;
+    return <Outro prev={this.props.prev} />;
   }
 
   render() {
-    const { className, slides = [] } = this.props;
-    const { currentStep } = this.state;
+    const {
+      className,
+      slides = [],
+      wizard: { currentSlide, totalSlides },
+    } = this.props;
     if (!slides.length) return null;
     return (
       <div className={cn('briskhome-wizard', className)}>
-        <WizardStepper currentStep={currentStep} slides={slides} />
+        <WizardStepper currentSlide={currentSlide} totalSlides={totalSlides} />
         <div className="briskhome-wizard__content">
           {this.renderIntro()}
           {this.renderChildren()}
@@ -85,4 +70,23 @@ export class Wizard extends React.Component<WizardProps, WizardState> {
   }
 }
 
-export default Wizard;
+const mapStateToProps = state => state;
+const mapDispatchToProps = dispatch => {
+  return {
+    init: (state: WizardStore): void => {
+      dispatch(({ type: '@@WIZARD/INIT', value: { state } }: WizardInitAction));
+    },
+    prev: (state?: WizardSlideState = {}): void => {
+      dispatch(({ type: '@@WIZARD/PREV', value: { state } }: WizardPrevAction));
+    },
+    next: (state?: WizardSlideState = {}): void => {
+      dispatch(({ type: '@@WIZARD/NEXT', value: { state } }: WizardNextAction));
+    },
+    goto: (slide: number, state?: WizardSlideState = {}): void => {
+      dispatch(
+        ({ type: '@@WIZARD/GOTO', value: { slide, state } }: WizardGotoAction),
+      );
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Wizard);

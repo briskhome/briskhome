@@ -2,7 +2,7 @@ import { createLogger } from 'redux-logger';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { fetchState, storeState } from './utils/localStorage';
 import { routerReducer } from 'react-router-redux';
-import { userReducer } from './reducers';
+import { userReducer, wizardReducer } from './reducers';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import thunkMiddleware from 'redux-thunk';
 
@@ -28,6 +28,7 @@ const reducers = combineReducers({
   apollo: apolloClient.reducer(),
   routing: routerReducer,
   user: userReducer,
+  wizard: wizardReducer,
 });
 
 export default function configureStore() {
