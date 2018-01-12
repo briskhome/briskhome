@@ -1,28 +1,39 @@
 /** @flow */
 import type { ComponentType } from 'react';
+import type { Wizard } from 'core.webapp/app/types';
 
 /** Wizard */
 
-export type WizardProps = {
+export type WizardProps = WizardOwnProps & {
+  init: (state: Wizard) => void,
+  prev: WizardNavigate,
+  next: WizardNavigate,
+  goto: (slide: number & WizardNavigate) => void,
+
+  wizard: {
+    currentSlide: number,
+    totalSlides: number,
+  },
+};
+
+type WizardOwnProps = {
+  className?: string,
   intro?: ComponentType<WizardIntroProps>,
   outro?: ComponentType<WizardOutroProps>,
   slides: ComponentType<WizardSlideProps>[],
-  className?: string,
 };
 
-export type WizardState = {
-  currentStep: number,
-  totalSteps: number,
-};
+export type WizardState = {};
+export type WizardNavigate = (state?: WizardSlideState) => void;
 
 /** WizardControls */
 
 export type WizardControlsProps = {
   className?: ?string,
-  prev?: () => void,
+  prev?: WizardNavigate,
   prevLabel?: string,
   prevClassName?: ?string,
-  next?: () => void,
+  next?: WizardNavigate,
   nextLabel?: string,
   nextClassName?: ?string,
 };
@@ -30,22 +41,26 @@ export type WizardControlsProps = {
 /** WizardSlide */
 
 export type WizardIntroProps = {
-  next: () => void,
+  next?: WizardNavigate,
 };
 
 export type WizardOutroProps = {
-  prev: () => void,
+  prev?: WizardNavigate,
 };
 
 export type WizardSlideProps = {
-  next: () => void,
-  prev: () => void,
-  goto?: number => void,
+  next: WizardNavigate,
+  prev: WizardNavigate,
+  goto: (slide: number & WizardNavigate) => void,
+};
+
+export type WizardSlideState = {
+  [string]: mixed,
 };
 
 /** WizardStepper */
 
 export type WizardStepperProps = {
-  currentStep: number,
-  slides: ComponentType<WizardSlideProps>[],
+  currentSlide: number,
+  totalSlides: number,
 };
