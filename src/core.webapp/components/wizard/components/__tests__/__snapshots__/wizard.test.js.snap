@@ -18,3 +18,40 @@ exports[`core.webapp -> components -> wizard renders 1`] = `
   </div>
 </div>
 `;
+
+exports[`core.webapp -> components -> wizard renders with intro 1`] = `
+<div
+  class="briskhome-wizard"
+>
+  <div
+    data-mock="WizardStepper"
+  />
+  <div
+    class="briskhome-wizard__content"
+  >
+    <div
+      data-mock="MockIntro"
+    />
+  </div>
+</div>
+`;
+
+exports[`core.webapp -> components -> wizard renders with outro 1`] = `
+<div
+  class="briskhome-wizard"
+>
+  <div
+    data-mock="WizardStepper"
+  />
+  <div
+    class="briskhome-wizard__content"
+  >
+    <div
+      data-mock="MockSlide"
+    />
+    <div
+      data-mock="MockOutro"
+    />
+  </div>
+</div>
+`;
