@@ -10,6 +10,7 @@ export default {
   resolve: async (src: Object, args: Object, ctx: Object) => {
     const { db } = ctx;
     const UserModel = db.model('core:user');
-    return !UserModel.count();
+    const count = await UserModel.count();
+    return !count;
   },
 };

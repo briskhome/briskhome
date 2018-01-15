@@ -54,9 +54,7 @@ export type WizardSlideProps = {
   goto: (slide: number & WizardNavigate) => void,
 };
 
-export type WizardSlideState = {
-  [string]: mixed,
-};
+export type WizardSlideState = mixed;
 
 /** WizardStepper */
 
