@@ -9,21 +9,24 @@ branches:
   only:
     - 'master'
 jobs:
-  fast_finish: true
   allow_failures:
     - script: yarn test-css
+  fast_finish: true
   include:
     - stage: check
+      os: linux
       script: yarn lint
     - script: yarn flow
     - script: yarn test --coverage
       after_success:
         - yarn codecov
     - stage: build
+      os: linux
       script: yarn babel
     - script: yarn webpack
-    - stage: run
+    - stage: test
       script: yarn test-e2e
+      os: linux
       services:
         - mongodb
       before_script:
@@ -33,6 +36,7 @@ jobs:
         - yarn webpack
         - yarn start &
     - script: yarn test-css
+      os: osx
       services:
         - mongodb
       before_script:
