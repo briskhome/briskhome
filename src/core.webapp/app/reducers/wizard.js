@@ -25,10 +25,7 @@ export const wizardReducer = (
 ) => {
   switch (action.type) {
     case '@@WIZARD/INIT': {
-      const slides = new Array(action.value.state.totalSlides).reduce(
-        (slides, slide, idx) => (slides[idx] = {}) && slides,
-        {},
-      );
+      const slides = {};
       return {
         ...emptyWizard,
         ...action.value.state,
@@ -42,7 +39,7 @@ export const wizardReducer = (
         const slides = action.value
           ? {
               ...state.slides,
-              [state.currentSlide]: action.value.state,
+              ...action.value.state,
             }
           : { ...state.slides };
         return {
@@ -63,7 +60,7 @@ export const wizardReducer = (
         const slides = action.value
           ? {
               ...state.slides,
-              [state.currentSlide]: action.value.state,
+              ...action.value.state,
             }
           : { ...state.slides };
         return {
@@ -84,7 +81,7 @@ export const wizardReducer = (
         const slides = action.value.state
           ? {
               ...state.slides,
-              [state.currentSlide]: action.value.state,
+              ...action.value.state,
             }
           : { ...state.slides };
         return {
