@@ -9,6 +9,9 @@ branches:
   only:
     - 'master'
 jobs:
+  fast_finish: true
+  allow_failures:
+    - script: yarn test-css
   include:
     - stage: check
       script: yarn lint
@@ -21,6 +24,15 @@ jobs:
     - script: yarn webpack
     - stage: run
       script: yarn test-e2e
+      services:
+        - mongodb
+      before_script:
+        - mongo briskhome --eval 'db.createUser({user:"briskhome",pwd:"briskhome",roles:["readWrite"]});'
+        - mongo briskhome --eval 'db.users.insert({username:"jdoe","lastName":"Doe","firstName":"John","password":"$2a$10$MTrhrVPe.8aib7b3nI2P3uoG7eDtQaWqTY5CLE3O5A9Z05bsIII0C","type":"regular","isDisabled":false,"subscriptions":[],"devices":[],"contacts":[],"__v":0});'
+        - yarn babel
+        - yarn webpack
+        - yarn start &
+    - script: yarn test-css
       services:
         - mongodb
       before_script:
