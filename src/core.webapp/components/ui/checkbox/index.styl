@@ -1,0 +1,63 @@
+.briskhome-checkbox {
+  margin 9px 0 10px 11px
+  padding-left 30px
+  cursor pointer
+  position relative
+
+  &__content {
+    font-weight 300
+  }
+
+  &__input {
+    position absolute
+    left -999em
+    visibility hidden
+    overflow hidden
+    width 0
+    height 0
+    border 0
+    background none
+  }
+
+  &:before {
+    position absolute
+    top 0
+    left 0
+    display block
+    width 16px
+    height 20px
+    padding 0 2px
+    border 1px solid #efefef
+    border-radius 2px
+    background white
+    content ''
+    transition border-color 0.15s ease, box-shadow 0.15s ease
+  }
+
+  &_checked {
+    &:before {
+      border 1px solid #f9d21c
+      background #f9d21c
+      color white
+      content '✔'
+      text-transform none
+      font-weight normal
+      font-style normal
+      font-variant normal
+      font-size 16px
+      line-height 140%
+      speak none
+    }
+  }
+
+  &_disabled {
+    color #333
+    cursor not-allowed
+
+    &:before {
+      border 1px solid #efefef
+      background-color #efefef
+      cursor not-allowed
+    }
+  }
+}
