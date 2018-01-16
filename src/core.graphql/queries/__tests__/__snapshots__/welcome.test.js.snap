@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.graphql -> queries -> welcome failed query 1`] = `
+Object {
+  "data": Object {
+    "welcome": false,
+  },
+}
+`;
+
+exports[`core.graphql -> queries -> welcome query 1`] = `
+Object {
+  "data": Object {
+    "welcome": true,
+  },
+}
+`;
