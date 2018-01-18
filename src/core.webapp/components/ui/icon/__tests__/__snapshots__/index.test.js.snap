@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.webapp -> ui -> icon renders 1`] = `
+<span
+  class="briskhome-icon briskhome-icon__example example"
+/>
+`;

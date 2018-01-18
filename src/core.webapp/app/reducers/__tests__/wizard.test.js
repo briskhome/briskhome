@@ -16,7 +16,7 @@ describe('core.webapp -> reducers -> wizardReducer', () => {
           type: '@@WIZARD/INIT',
           value: { state: { hasIntro: true } },
         }),
-      ).toEqual({ ...emptyWizard, hasIntro: true, slides: { 0: {} } });
+      ).toEqual({ ...emptyWizard, hasIntro: true, slides: {} });
     });
   });
 
@@ -34,7 +34,7 @@ describe('core.webapp -> reducers -> wizardReducer', () => {
         ...emptyWizard,
         hasIntro: true,
         currentSlide: -1,
-        slides: { 0: { result: true } },
+        slides: { result: true },
       });
     });
 
@@ -73,7 +73,7 @@ describe('core.webapp -> reducers -> wizardReducer', () => {
         hasOutro: true,
         totalSlides: 1,
         currentSlide: 1,
-        slides: { 0: { result: true } },
+        slides: { result: true },
       });
     });
 
@@ -113,7 +113,7 @@ describe('core.webapp -> reducers -> wizardReducer', () => {
         hasOutro: true,
         totalSlides: 3,
         currentSlide: 2,
-        slides: { 0: { result: true } },
+        slides: { result: true },
       });
     });
 
