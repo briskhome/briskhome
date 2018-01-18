@@ -2,33 +2,39 @@ language: node_js
 cache:
   yarn: true
   directories:
-    - node_modules
+  - node_modules
 node_js:
-  - '8'
+- '8'
 branches:
   only:
-    - 'master'
+  - master
 jobs:
   include:
-    - stage: check
-      script: yarn lint
-    - script: yarn flow
-    - script: yarn test --coverage
-      after_success:
-        - yarn codecov
-    - stage: build
-      script: yarn babel
-    - script: yarn webpack
-    - stage: run
-      script: yarn test-e2e
-      services:
-        - mongodb
-      before_script:
-        - mongo briskhome --eval 'db.createUser({user:"briskhome",pwd:"briskhome",roles:["readWrite"]});'
-        - mongo briskhome --eval 'db.users.insert({username:"jdoe","lastName":"Doe","firstName":"John","password":"$2a$10$MTrhrVPe.8aib7b3nI2P3uoG7eDtQaWqTY5CLE3O5A9Z05bsIII0C","type":"regular","isDisabled":false,"subscriptions":[],"devices":[],"contacts":[],"__v":0});'
-        - yarn babel
-        - yarn webpack
-        - yarn start &
+  - stage: check
+    script: yarn lint
+  - script: yarn flow
+  - script: yarn test --coverage
+    after_success:
+    - yarn codecov
+  - stage: build
+    script: yarn babel
+  - script: yarn webpack
+  - stage: run
+    script: yarn test-e2e
+    services:
+    - mongodb
+    before_script:
+    - mongo briskhome --eval 'db.createUser({user:"briskhome",pwd:"briskhome",roles:["readWrite"]});'
+    - mongo briskhome --eval 'db.users.insert({username:"jdoe","lastName":"Doe","firstName":"John","password":"$2a$10$MTrhrVPe.8aib7b3nI2P3uoG7eDtQaWqTY5CLE3O5A9Z05bsIII0C","type":"regular","isDisabled":false,"subscriptions":[],"devices":[],"contacts":[],"__v":0});'
+    - yarn build
+    - yarn start &
+  - stage: deploy
+    before_deploy: "yarn build"
+    deploy:
+      provider: heroku
+      app: briskhome
+      api_key:
+        secure: P0+Y2PPmWvHn+50XGUyhRrwiIlL0JmAp149M6RqF+cTb+pY7ayCksegMU971VFptpsO5Bi5vZLp0KRIn3xhpUiaR8BqT5hImjtFpYdfVKaFlYSHxeCd5Pofdef5DEkoKic9kQyGkzXiv39EO5/8cznerTkYVW0Z64Gj6prH8PqjmVOUs3ZZgSUggOPMFtS0x8Pet4mC2j4iLqh9lI8vXMzsALNR5sWd/ED7uaEe+cdSV2EIsvwSiq9CNRhbACSEFDpX8uUgRaUA9y5MWBiq5JvzJjUGFq+WhHfhinG7XvKcjQqjfje0/5u67ZwxNr0WOpMZmXGgMQshpIycBQNQ+9mpvRDWcjQZDj9EvwjylQng66cTCo+ZYXAsV+JXViUqng0hVa/4p4V6FE1/esO8zGjOZG+vqhItakpFMG9iF3zFshGvhLUmeonEE+k5Qn4d4+mSk/vr+hrREuYQgm3FwEpnIf7JmRir1DZyyBNlTG8vz4UA9Uu6Ex+t4/pUb6wlfF2Y+XK6fjCVSnptxQZ3+91I9CoevtrmaXMjStcoMZB1x7wPc/i3klXCgdOr5V130SYECHoQ8kaL48W14psiveI7yLq9zhV3VQOIOjE599byzesC0SQabIxgrMnSY4fMRMTz6LA6CwJWOsBcT/k+XQ/qXk23yJdbc2x2KyJ0m0TM=
 addons:
   code_climate:
     repo_token: 71ee8424e2660dbc7dd88d81e0715f4434453db7fb57af35604d165d2db6203a
