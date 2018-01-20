@@ -1,0 +1,3 @@
+[submodule "docs/themes/hexo-theme-briskhome"]
+	path = docs/themes/hexo-theme-briskhome
+	url = https://github.com/heuels/hexo-theme-apollo
