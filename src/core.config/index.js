@@ -35,7 +35,11 @@ export default (
       unicode: true,
     });
 
-  nconf.env();
+  nconf.env({
+    separator: '_',
+    lowerCase: true,
+    parseValues: true,
+  });
   []
     .concat(
       path.resolve('etc', `${nconf.get('NODE_ENV') || 'briskhome'}.conf`),
