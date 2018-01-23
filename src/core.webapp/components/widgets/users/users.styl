@@ -1,26 +1,25 @@
 .link
   text-decoration none
+
   &_red
     color #CF4B5D !important
-
 
 .widget-table
   width 100%
 
   .profile-image
     display inline-block
-    border-radius 50px
-    border 1px solid #b9b9b9
     overflow hidden
-    height 42px
     width 42px
-    vertical-align middle
+    height 42px
+    border 1px solid #b9b9b9
+    border-radius 50px
     background-color #F9D21C
+    vertical-align middle
     a
     text-align center
     font-size x-large
     line-height 185%
-
 
   .profile-status
     width 4px
@@ -28,11 +27,12 @@
 
   &__row
     height 48px
+
     // &+&
-    //   border-top 1px solid #eaeaea
+    // border-top 1px solid #eaeaea
     &:hover
-      background-color #fafafa
       overflow hidden
+      background-color #fafafa
 
   &__cell
     vertical-align middle
@@ -55,16 +55,16 @@
       margin-bottom 4px
 
     &-subtitle
-      font-size 14px
       color gray
+      font-size 14px
 
     &-action
+      display inline-block
+      margin-right 4px
+      margin-bottom 2px
+      margin-left 8px
+      padding 3px
       border solid #b9b9b9
       border-width 0 2px 2px 0
-      display inline-block
-      padding 3px
-      transform rotate(45deg)
-      margin-right 4px
-      margin-left 8px
-      margin-bottom 2px
       cursor pointer
+      transform rotate(45deg)

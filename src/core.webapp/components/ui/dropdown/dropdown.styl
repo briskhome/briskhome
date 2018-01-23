@@ -1,11 +1,11 @@
 
 .briskhome-label
-  &_small 
+  &_small
     font-size 12px
-    
+
   &_gray
     color #b9b9b9
-    
+
   &_red
     color #cf4b5d
 
@@ -15,8 +15,9 @@
   text-align center
 
 .briskhome-dropdown-root
-  position: relative;
-  text-align: left
+  position relative
+  text-align left
+
   &.is-open
     &> .briskhome-dropdown-control
       border-color #b9b9b9
@@ -24,114 +25,103 @@
       border-bottom-left-radius 0
 
 .briskhome-dropdown-control
-  position: relative;
-  overflow: hidden
-  background-color: white;
-  border: 1px solid #eaeaea
-  border-radius: 8px;
-  box-sizing: border-box;
-  font-weight 200
-  color: #333;
-  cursor: default;
-  outline: none;
-  height 40px
+  position relative
+  overflow hidden
+  box-sizing border-box
   width 100%
-  padding: calc((40px - 16px)/2) 52px 0 20px;
-  transition: all 200ms ease;
+  height 40px
+  padding calc(((40px - 16px) / 2)) 52px 0 20px
+  outline none
+  border 1px solid #eaeaea
+  border-radius 8px
+  background-color white
+  color #333
+  font-weight 200
+  cursor default
+  transition all 200ms ease
+
   &:hover
     border-color #b9b9b9
 
-.briskhome-dropdown-control:hover {
+.briskhome-dropdown-control:hover
   // box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
-}
 
-.briskhome-dropdown-arrow {
-  border-color: #b9b9b9 transparent transparent;
-  border-style: solid;
-  border-width: 5px 5px 0;
-  content: ' ';
-  display: block;
-  height: 0;
-  margin-top: 4px;
-  position: absolute;
-  right: 10px;
-  top: 14px;
-  width: 0
-}
+.briskhome-dropdown-arrow
+  position absolute
+  top 14px
+  right 10px
+  display block
+  width 0
+  height 0
+  margin-top 4px
+  border-width 5px 5px 0
+  border-style solid
+  border-color #b9b9b9 transparent transparent
+  content ' '
 
-.is-open .briskhome-dropdown-arrow {
-  border-color: transparent transparent #b9b9b9;
-  border-width: 0 5px 5px;
-}
+.is-open .briskhome-dropdown-arrow
+  border-width 0 5px 5px
+  border-color transparent transparent #b9b9b9
 
-.briskhome-dropdown-menu {
-  background-color: white;
-  border: 1px solid #b9b9b9;
+.briskhome-dropdown-menu
+  position absolute
+  top 100%
+  z-index 1000
+  overflow-y auto
+  -webkit-overflow-scrolling touch
+  box-sizing border-box
+  max-height 200px
+  width 100%
+  margin-top -1px
+  border 1px solid #b9b9b9
   border-radius 0 0 8px 8px
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
-  box-sizing: border-box;
-  margin-top: -1px;
-  max-height: 200px;
-  overflow-y: auto;
-  position: absolute;
-  top: 100%;
-  width: 100%;
-  z-index: 1000;
-  -webkit-overflow-scrolling: touch;
-}
+  background-color white
+  box-shadow 0 1px 0 rgba(0, 0, 0, 0.06)
 
-.briskhome-dropdown-menu .briskhome-dropdown-group > .briskhome-dropdown-title{
-  padding: 8px 10px;
-  color: rgba(51, 51, 51, 1);
-  font-weight: bold;
-  text-transform: capitalize;
-}
+.briskhome-dropdown-menu .briskhome-dropdown-group > .briskhome-dropdown-title
+  padding 8px 10px
+  color rgba(51, 51, 51, 1)
+  text-transform capitalize
+  font-weight bold
 
-.briskhome-dropdown-option {
-  box-sizing: border-box;
-  color: rgba(51, 51, 51, 0.8);
-  cursor: pointer;
+.briskhome-dropdown-option
+  display block
+  box-sizing border-box
+  padding 12px 20px
+  color rgba(51, 51, 51, 0.8)
   font-weight 200
-  display: block;
-  padding: 12px 20px;
-  
-  &+& {
+  cursor pointer
+
+  &+&
     border-top 1px solid #eaeaea
-  }
-}
 
+.briskhome-dropdown-option:last-child
+  border-bottom-right-radius 2px
+  border-bottom-left-radius 2px
 
-.briskhome-dropdown-option:last-child {
-  border-bottom-right-radius: 2px;
-   border-bottom-left-radius: 2px;
-}
+.briskhome-dropdown-option:hover
+  background-color #fafafa
+  color #333
 
-.briskhome-dropdown-option:hover {
-  background-color: #fafafa;
-  color: #333;
-}
+.briskhome-dropdown-option.is-selected
+  background-color #eaeaea
+  color #333
 
-.briskhome-dropdown-option.is-selected {
-  background-color: #eaeaea;
-  color: #333;
-}
-
-.briskhome-dropdown-noresults {
-  box-sizing: border-box;
-  color: #ccc;
-  cursor: default;
-  display: block;
-  padding: 8px 10px;
-}
+.briskhome-dropdown-noresults
+  display block
+  box-sizing border-box
+  padding 8px 10px
+  color #ccc
+  cursor default
 
 .briskhome-dropdown-disabled
-  cursor not-allowed
-  background-color #efefef
   border-color #eaeaea
+  background-color #efefef
   color #b9b9b9
-  
+  cursor not-allowed
+
   &:hover
     border-color #eaeaea
-  
+
   .briskhome-dropdown-arrow
     border-color #b9b9b9 transparent transparent
