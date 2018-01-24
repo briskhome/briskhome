@@ -1,9 +1,9 @@
 .card
   display inline-block
   width 300px
-  background-color white
   border-radius 15px
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  background-color white
+  box-shadow 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)
 
   &__content
     border-top-left-radius 15px
@@ -13,29 +13,33 @@
     > img
       max-height 100%
       width 100%
-    
+
     &_empty
       display inline-block
       margin 16px
       // font-size 16px
 
   &__footer
-    border-bottom-left-radius 16px
-    border-bottom-right-radius 16px
-    padding 16px
     position relative
     overflow hidden
+    padding 16px
     border-top 1px solid #eaeaea
+    border-bottom-right-radius 16px
+    border-bottom-left-radius 16px
 
   &__title
     line-height 1.25
+
     // font-size 16px
     &+&
       margin-top 4px
+
     &_gray
       color #8E8E93
+
     &_small
       font-size 14px
+
     &_uppercase
       text-transform uppercase
 
@@ -48,14 +52,14 @@
     box-shadow -4px 0 4px 4px white
 
     &-link
+      overflow hidden
+      max-width 100px
+      padding 4px 16px
       border-radius 41px
-      cursor pointer
       background-color #F0F1F6
       color #007AFF
       text-transform uppercase
-      padding 4px 16px
-      max-width 100px
-      overflow hidden
+      cursor pointer
 
 .card + .card
   margin-left 20px
