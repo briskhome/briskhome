@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'react-apollo';
-import { Link, NavLink } from 'react-router-dom';
+import { Link /*, NavLink*/ } from 'react-router-dom';
 import Menu from '../ui/menu';
 
 import Avatar from '../avatar';
@@ -16,11 +16,7 @@ const Navigation = ({ user }: BriskhomeState): React.Node => (
       <Link to="/">
         <img src="/static/assets/img/logo@256w.png" alt="Briskhome" />
       </Link>
-      <ul>
-        <li>
-          <NavLink to="/cameras">Cameras</NavLink>
-        </li>
-      </ul>
+      <ul />
       <div className="profile">
         <Menu
           arrow

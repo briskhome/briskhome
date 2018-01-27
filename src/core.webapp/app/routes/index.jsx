@@ -2,7 +2,6 @@ import * as React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Dashboard } from '../../components/pages/dashboard';
-import { Example } from '../../components/onboarding/example';
 import { NotFound } from '../../components/notfound';
 import { Preferences } from '../../components/pages/preferences';
 import configureStore, { apolloClient } from '../store';
@@ -20,7 +19,6 @@ export const Routes = () => (
         <Route exact path="/login" component={Login} />
         <Route exact path="/welcome" component={Welcome} />
         <ProtectedRoute exact path="/" component={Dashboard} />
-        <ProtectedRoute path="/cameras" component={Example} />
         <ProtectedRoute path="/preferences" component={Preferences} />
         <ProtectedRoute component={NotFound} />
       </Switch>
