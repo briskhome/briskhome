@@ -21,10 +21,7 @@ const Navigation = ({ user }: BriskhomeState): React.Node => (
         <Menu
           arrow
           trigger={
-            <Avatar
-              online
-              name={`${user.firstName[0]}${user.lastName[0]}`.toUpperCase()}
-            />
+            <Avatar online name={`${user.firstName} ${user.lastName}`} />
           }
           options={[<Link to="/preferences">Preferences</Link>]}
         />
