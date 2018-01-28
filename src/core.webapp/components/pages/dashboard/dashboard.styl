@@ -1,3 +1,177 @@
-.container-fluid
-  display flex
-  padding 20px
+.dashboard
+  &-card
+    display inline-block
+    width 180px
+    height 114px
+    padding 16px
+    border 1px solid #efefef
+    border-radius 4px
+    box-shadow 0 0 10px 0 rgba(0, 0, 0, 0.05)
+    text-decoration none
+    white-space normal
+
+    & + &
+      margin-left 20px
+
+    &__caption
+      margin-top 8px
+      margin-bottom 8px
+      color #333333
+      font-size 14px
+
+    &__icon
+      float left
+      width 48px !important
+      height 48px !important
+      margin 0 16px 8px 0
+
+    &__title
+      height 48px
+      margin-bottom 8px
+      color #333333
+      text-transform capitalize
+      font-weight 300
+      font-size 16px !important
+      line-height 140%
+
+    &__status
+      color #B9B9B9
+      text-transform initial
+      font-size 14px
+      line-height 140%
+
+  &-content
+    position relative
+
+    &__edit-button
+      position absolute
+      top -16px
+      right 40px
+      padding 6px 10px
+      border 1px solid #efefef
+      border-radius 16px
+      background-color #fafafa
+      color #999
+      text-transform uppercase
+      letter-spacing 1px
+      font-weight 600
+      font-size 14px
+      cursor pointer
+
+  &-header
+    position relative
+    padding 20px 40px
+    border-bottom 1px solid #eeeeee
+    background-color white
+
+    &__card-container
+      overflow-x scroll
+      overflow-y hidden
+      margin-top 32px
+      white-space nowrap
+
+    &__title
+      margin-top 0 !important
+      margin-bottom 16px !important
+
+    &__status
+      position relative
+      margin-left 24px
+
+      &:before
+        position absolute
+        top -1px
+        left -24px
+        display inline-block
+        width 16px
+        height 16px
+        border 1px solid #efefef
+        border-radius 16px
+        background-color #fafafa
+        content ''
+
+      &_good
+        &:before
+          background-color #64d095
+
+      &-link
+        color #999
+        text-decoration none
+
+      &-text
+        display inline-block
+
+  &__widget-container
+    margin auto
+
+  &-widget__wrapper
+    border 1px solid #efefef
+    border-radius 4px
+    background-color white
+    box-shadow 0 0 10px 0 rgba(0, 0, 0, 0.05)
+
+.react-grid
+  &-layout
+    position relative
+    transition height 200ms ease
+
+  &-item
+    transition all 200ms ease
+    transition-property left, top
+
+    &.cssTransforms
+      transition-property transform
+
+    &.resizing
+      z-index 1
+      will-change width, height
+
+    &.react-draggable-dragging
+      z-index 3
+      transition none
+      will-change transform
+
+    &.react-grid-placeholder
+      box-shadow 0 0 10px 0 rgba(0, 0, 0, 0.05)
+      opacity 0.05
+      transition-duration 100ms
+      -webkit-user-select none
+      -moz-user-select none
+      -ms-user-select none
+      -o-user-select none
+      user-select none
+
+    &>.react-resizable-handle
+      position absolute
+      right 0
+      bottom 0
+      width 20px
+      height 20px
+      cursor se-resize
+
+    &>.react-resizable-handle::after
+      position absolute
+      right 8px
+      bottom 8px
+      width 5px
+      height 5px
+      border-right 2px solid #b9b9b9
+      border-bottom 2px solid #b9b9b9
+      content ''
+
+.react-resizable
+  position relative
+
+  &-handle
+    position absolute
+    right 0
+    bottom 0
+    box-sizing border-box
+    width 20px
+    height 20px
+    padding 0 8px 8px 0
+    background url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2IDYiIHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiNmZmZmZmYwMCIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI2cHgiIGhlaWdodD0iNnB4Ij48ZyBvcGFjaXR5PSIwLjMwMiI+PHBhdGggZD0iTSA2IDYgTCAwIDYgTCAwIDQuMiBMIDQgNC4yIEwgNC4yIDQuMiBMIDQuMiAwIEwgNiAwIEwgNiA2IEwgNiA2IFoiIGZpbGw9IiMwMDAwMDAiLz48L2c+PC9zdmc+')
+    background-position bottom right
+    background-origin content-box
+    background-repeat no-repeat
+    cursor se-resize
