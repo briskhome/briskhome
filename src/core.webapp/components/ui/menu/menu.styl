@@ -2,6 +2,30 @@
   position relative
   display inline-block
   height 100%
+  outline none
+  border none
+  background none
+  color #999
+  cursor pointer
+
+  &__item
+    width 100px
+    padding 8px 16px
+    font-size 14px
+    cursor pointer
+
+    &:hover
+      background-color #fafafa
+
+    &_red
+      color #cf4b5d
+
+      &:hover
+        background-color #CF4B5D + 95%
+
+  &__separator
+    margin 4px 8px
+    border 1px solid #efefef
 
   &__arrow
     display inline-block
