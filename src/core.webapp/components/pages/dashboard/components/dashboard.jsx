@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import { DashboardHeader } from '../';
+import { UserWidget } from '../widgets/userWidget';
 import '../dashboard.styl';
 
 const originalLayouts = {};
@@ -54,7 +55,9 @@ export class Dashboard extends React.Component<*, *> {
               className="dashboard-widget__wrapper"
               data-grid={{ w: 3, h: 6, x: 0, y: 0, minW: 2, minH: 3 }}
               key="1"
-            />
+            >
+              <UserWidget />
+            </div>
           </ResponsiveReactGridLayout>
         </div>
       </div>

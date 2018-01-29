@@ -1,0 +1,32 @@
+.briskhome-modal
+  &__content
+    position fixed
+    left calc(50% - 200px)
+    z-index 2
+    overflow auto
+    width 360px
+    margin-top 50px
+    padding 20px
+    outline none
+    border 1px solid #efefef
+    border-radius 4px
+    background-color #fff
+    box-shadow 0 2px 5px 0 rgba(0, 0, 0, 0.05)
+    text-align center
+
+  &__overlay
+    position fixed
+    top 0
+    right 0
+    bottom 0
+    left 0
+    background-color rgba(255, 255, 255, 0.5)
+    opacity 0
+    transition all 0.25
+    transform rotateX(-90deg)
+    perspective 1300px
+    transform-style preserve-3d
+
+    &_open
+      opacity 1
+      transform rotateX(0)
