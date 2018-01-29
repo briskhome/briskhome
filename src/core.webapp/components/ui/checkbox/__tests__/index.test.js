@@ -30,6 +30,13 @@ describe('core.webapp -> ui -> checkbox', () => {
       ),
     ).toMatchSnapshot();
   });
+  it('renders with display', () => {
+    expect(
+      toJson(
+        render(<Checkbox name="example" checked={true} display="block" />),
+      ),
+    ).toMatchSnapshot();
+  });
   it('renders with className', () => {
     expect(
       toJson(render(<Checkbox checked={false} className="example" />)),

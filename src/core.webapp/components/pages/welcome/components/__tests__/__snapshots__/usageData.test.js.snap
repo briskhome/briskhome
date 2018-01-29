@@ -26,7 +26,7 @@ exports[`core.webapp -> components -> pages -> welcome -> usageData renders 1`] 
     onChange={[Function]}
   >
     <label
-      className="briskhome-checkbox briskhome-checkbox_checked"
+      className="briskhome-checkbox briskhome-checkbox_inline-block briskhome-checkbox_checked"
     >
       <input
         className="briskhome-checkbox__input"
