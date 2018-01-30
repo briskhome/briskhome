@@ -9,22 +9,24 @@ type SelectOption = {
 };
 
 type SelectProps = {
-  extraClassName?: string,
+  className?: string,
   placeholder?: string,
   disabled?: boolean,
   onChange?: Function,
   options?: Array<SelectOption>,
   caption?: string,
   value?: string,
+  name?: string,
 };
 
 export const Select = ({
   className = '',
   placeholder,
   disabled,
-  onChange,
-  options,
+  options = [],
   value,
+  name,
+  onChange = () => null,
 }: SelectProps) => {
   return (
     <select

@@ -7,6 +7,7 @@ import './button.styl';
 type ButtonProps = {
   className?: string,
   display?: 'inline' | 'inline-block' | 'block',
+  grey?: boolean,
   yellow?: boolean,
   loading?: boolean,
   disabled?: boolean,
