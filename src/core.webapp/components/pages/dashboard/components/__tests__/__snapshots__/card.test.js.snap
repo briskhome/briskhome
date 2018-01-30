@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.webapp -> components -> pages -> dashboard -> card renders 1`] = `
+<a
+  class="dashboard-card"
+  href="#"
+>
+  <span
+    class="briskhome-icon briskhome-icon__example dashboard-card__icon"
+  />
+  <h3
+    class="briskhome-title briskhome-title_small dashboard-card__title"
+  >
+    example
+  </h3>
+  <p
+    class="dashboard-card__caption"
+  >
+    1 accessories installed.
+  </p>
+  <p
+    class="dashboard-card__status"
+  >
+    example
+  </p>
+</a>
+`;

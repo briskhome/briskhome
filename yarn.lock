@@ -431,6 +431,10 @@ array-equal@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/array-equal/-/array-equal-1.0.0.tgz#8c2a5ef2472fd9ea742b04c77a75093ba2757c93"
 
+array-find-index@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/array-find-index/-/array-find-index-1.0.2.tgz#df010aa1287e164bbda6f9723b0a96a1ec4187a1"
+
 array-find@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/array-find/-/array-find-1.0.0.tgz#6c8e286d11ed768327f8e62ecee87353ca3e78b8"
@@ -2131,6 +2135,14 @@ constants-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/constants-browserify/-/constants-browserify-1.0.0.tgz#c20b96d8c617748aaf1c16021760cd27fcb8cb75"
 
+contain-by-screen@^1.0.4:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/contain-by-screen/-/contain-by-screen-1.2.0.tgz#618f34b547781f4c59f103e7506abfbc141f6136"
+  dependencies:
+    babel-runtime "^6.23.0"
+    envify "^4.1.0"
+    lodash "^4.6.1"
+
 contains-path@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/contains-path/-/contains-path-0.1.0.tgz#fe8cf184ff6670b6baef01a9d4861a5cbec4120a"
@@ -2701,6 +2713,13 @@ entities@^1.1.1, entities@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
 
+envify@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/envify/-/envify-4.1.0.tgz#f39ad3db9d6801b4e6b478b61028d3f0b6819f7e"
+  dependencies:
+    esprima "^4.0.0"
+    through "~2.3.4"
+
 enzyme-adapter-react-16@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.1.1.tgz#a8f4278b47e082fbca14f5bfb1ee50ee650717b4"
@@ -3027,6 +3046,10 @@ event-emitter@~0.3.5:
   dependencies:
     d "1"
     es5-ext "~0.10.14"
+
+event-listener-with-options@^1.0.2:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/event-listener-with-options/-/event-listener-with-options-1.0.3.tgz#e8e80cae4f69ef86c18cdeda2c9f162b680d0577"
 
 event-stream@~3.3.0:
   version "3.3.4"
@@ -4652,6 +4675,20 @@ kareem@1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/kareem/-/kareem-1.5.0.tgz#e3e4101d9dcfde299769daf4b4db64d895d17448"
 
+kefir-bus@^2.2.0:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/kefir-bus/-/kefir-bus-2.2.1.tgz#481f18ba274fc5580175db5cc67ce7a8228ea250"
+
+kefir-stopper@^2.1.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/kefir-stopper/-/kefir-stopper-2.1.1.tgz#9bb4504371b90beeb0b654b009317e7f8ee6dc38"
+
+kefir@^3.5.1:
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/kefir/-/kefir-3.8.1.tgz#6b202bc78c01ed4aa1c329e885b43631bf62ec0c"
+  dependencies:
+    symbol-observable "1.0.4"
+
 keycode@^2.1.9:
   version "2.1.9"
   resolved "https://registry.yarnpkg.com/keycode/-/keycode-2.1.9.tgz#964a23c54e4889405b4861a5c9f0480d45141dfa"
@@ -4787,6 +4824,10 @@ lodash.isarray@^3.0.0:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
 
+lodash.isequal@^4.0.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+
 lodash.isplainobject@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
@@ -4819,7 +4860,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-lodash@4.x.x, lodash@^4.0.0, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
+lodash@4.x.x, lodash@^4.0.0, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.6.1:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -6298,6 +6339,13 @@ react-dom@16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
+"react-draggable@^2.2.6 || ^3.0.3", react-draggable@^3.0.3:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-3.0.5.tgz#c031e0ed4313531f9409d6cd84c8ebcec0ddfe2d"
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.6.0"
+
 react-dropdown@heuels/react-dropdown#disabled_classname:
   version "1.3.0"
   resolved "https://codeload.github.com/heuels/react-dropdown/tar.gz/62c5682a8bbcd550903c40c31678e8eb746edc5e"
@@ -6310,6 +6358,28 @@ react-flexbox-grid@^1.1.3:
   dependencies:
     flexboxgrid "^6.3.0"
     prop-types "^15.5.8"
+
+react-float-anchor@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-float-anchor/-/react-float-anchor-2.0.1.tgz#b52c17ad448ba8e8506ce066605c94471246b80a"
+  dependencies:
+    babel-runtime "^6.23.0"
+    contain-by-screen "^1.0.4"
+    event-listener-with-options "^1.0.2"
+    kefir "^3.5.1"
+    kefir-bus "^2.2.0"
+    lodash "^4.6.1"
+    prop-types "^15.6.0"
+
+react-grid-layout@^0.16.2:
+  version "0.16.2"
+  resolved "https://registry.yarnpkg.com/react-grid-layout/-/react-grid-layout-0.16.2.tgz#ef09b0b6db4a9635799663658277ee2d26fa2994"
+  dependencies:
+    classnames "2.x"
+    lodash.isequal "^4.0.0"
+    prop-types "15.x"
+    react-draggable "^3.0.3"
+    react-resizable "^1.7.5"
 
 react-html-attributes@^1.3.0:
   version "1.4.1"
@@ -6346,16 +6416,29 @@ react-json-tree@^0.11.0:
     prop-types "^15.5.8"
     react-base16-styling "^0.5.1"
 
+react-menu-list@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-menu-list/-/react-menu-list-5.0.0.tgz#896b3e8070b8b16e37a22a8a8e07237da89defb7"
+  dependencies:
+    array-find-index "1.0.2"
+    babel-runtime "^6.23.0"
+    kefir "^3.5.1"
+    kefir-bus "^2.2.0"
+    kefir-stopper "^2.1.0"
+    prop-types "^15.6.0"
+    react-float-anchor "^2.0.1"
+
 react-minimal-dropdown@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-minimal-dropdown/-/react-minimal-dropdown-1.1.1.tgz#68746a175b5066be6a02153b468ec5072180b79e"
 
-react-modal@^2.2.4:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-2.4.1.tgz#cb09b26711b148eb9f59cb180e1b7d82980ded05"
+react-modal@3.1.11:
+  version "3.1.11"
+  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-3.1.11.tgz#95c8223fcee7013258ad2d149c38c9f870c89958"
   dependencies:
     exenv "^1.2.0"
     prop-types "^15.5.10"
+    warning "^3.0.0"
 
 react-modal@^3.1.10:
   version "3.1.10"
@@ -6388,6 +6471,13 @@ react-redux@^5.0.5:
     lodash-es "^4.2.0"
     loose-envify "^1.1.0"
     prop-types "^15.5.10"
+
+react-resizable@^1.7.5:
+  version "1.7.5"
+  resolved "https://registry.yarnpkg.com/react-resizable/-/react-resizable-1.7.5.tgz#83eb75bb3684da6989bbbf4f826e1470f0af902e"
+  dependencies:
+    prop-types "15.x"
+    react-draggable "^2.2.6 || ^3.0.3"
 
 react-router-dom@^4.1.2:
   version "4.2.2"
@@ -7353,6 +7443,10 @@ svgo@^0.7.0:
     sax "~1.2.1"
     whet.extend "~0.9.9"
 
+symbol-observable@1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.4.tgz#29bf615d4aa7121bdd898b22d4b3f9bc4e2aa03d"
+
 symbol-observable@^1.0.2, symbol-observable@^1.0.3:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.1.0.tgz#5c68fd8d54115d9dfb72a84720549222e8db9b32"
@@ -7425,7 +7519,7 @@ throat@^4.0.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/throat/-/throat-4.1.0.tgz#89037cbc92c56ab18926e6ba4cbb200e15672a6a"
 
-through@2, through@^2.3.6, through@^2.3.8, through@~2.3, through@~2.3.1:
+through@2, through@^2.3.6, through@^2.3.8, through@~2.3, through@~2.3.1, through@~2.3.4:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
 
