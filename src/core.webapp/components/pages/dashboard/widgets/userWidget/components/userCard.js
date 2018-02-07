@@ -46,7 +46,6 @@ class UserCard extends React.Component<*, *, *> {
             display="inline-block"
             placeholder="First name"
             onChange={({ target: { value } }) => {
-              // this.resetErrors();
               this.setState({ firstName: value });
             }}
           />
@@ -55,24 +54,18 @@ class UserCard extends React.Component<*, *, *> {
             display="inline-block"
             placeholder="Last name"
             onChange={({ target: { value } }) => {
-              // this.resetErrors();
               this.setState({ lastName: value });
             }}
           />
-          {user.type === 'superuser' && (
-            <React.Fragment>
-              <p className="user-widget__modal-caption">
-                Choose a type for the new user:
-              </p>
-              <Select
-                options={[
-                  { value: 'VISITOR', label: 'Visitor' },
-                  { value: 'MEMBER', label: 'Member' },
-                  { value: 'OWNER', label: 'Owner' },
-                ]}
-              />
-            </React.Fragment>
-          )}
+          <p className="user-widget__modal-caption">Select a role:</p>
+          {/* TODO: Replace this with Permissions API result */}
+          <Select
+            options={[
+              { value: 'VISITOR', label: 'Visitor' },
+              { value: 'MEMBER', label: 'Member' },
+              { value: 'OWNER', label: 'Owner' },
+            ]}
+          />
           <div className="user-widget__modal-controls">
             <Button
               caps

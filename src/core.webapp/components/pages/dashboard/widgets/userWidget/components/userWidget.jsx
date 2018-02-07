@@ -18,8 +18,27 @@ export class UserWidget extends React.Component<
     super();
     this.state = {
       isUserModalOpen: false,
+      showInactive: false,
     };
   }
+
+  composeMenu = (): Object => {
+    const { showInactive } = this.state;
+    return [
+      {
+        title: 'Create a user',
+        onItemChosen: this.toggleUserModal,
+      },
+      {
+        title: `${showInactive ? 'Hide' : 'Show'} inactive`,
+        onItemChosen: this.toggleShowInactive,
+      },
+    ];
+  };
+
+  toggleShowInactive = (): void => {
+    this.setState({ showInactive: !this.state.showInactive });
+  };
 
   toggleUserModal = (): void => {
     this.setState({ isUserModalOpen: !this.state.isUserModalOpen });
@@ -27,14 +46,15 @@ export class UserWidget extends React.Component<
 
   render() {
     const { data: { users = [] }, mutate } = this.props;
-    const { isUserModalOpen } = this.state;
+    const { isUserModalOpen, showInactive } = this.state;
     return (
-      <DashboardWidget
-        title="Users and guests"
-        menu={[{ title: 'Add new user', onItemChosen: this.toggleUserModal }]}
-      >
+      <DashboardWidget title="Users and guests" menu={this.composeMenu()}>
         <table className="user-widget__table">
-          <tbody>{users && users.map(user => <UserRow {...user} />)}</tbody>
+          <tbody>
+            {users
+              .filter(user => showInactive || user.isActive)
+              .map(user => <UserRow {...user} />)}
+          </tbody>
         </table>
         <UserModal isOpen={isUserModalOpen} onToggle={this.toggleUserModal} />
       </DashboardWidget>

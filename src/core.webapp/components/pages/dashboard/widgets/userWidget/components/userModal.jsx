@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'react-apollo';
 import Modal from 'react-modal';
 import Avatar from '../../../../../avatar';
+import { Icon } from '../../../../../ui';
 import Input from '../../../../../ui/input';
 import Title from '../../../../../ui/title';
 import Button from '../../../../../ui/button';
@@ -17,11 +18,18 @@ class UserModal extends React.Component<*, *, *> {
       password: '',
       type: '',
       username: '',
+      contacts: [
+        {
+          value: '',
+          type: '',
+        },
+      ],
     };
   }
   render() {
     const { isOpen, user, onToggle } = this.props;
-    const { firstName, lastName } = this.state;
+    const { firstName, lastName, contacts } = this.state;
+    console.log({ contacts: this.state });
     return (
       <Modal
         isOpen={isOpen}
@@ -40,14 +48,19 @@ class UserModal extends React.Component<*, *, *> {
         }}
         portalClassName="briskhome-modal"
       >
-        <Avatar name={`${firstName} ${lastName}`} />
-        <Title medium className="user-widget__modal-title">
-          Create a new user
-        </Title>
+        <div className="user-widget__modal-header">
+          {/* <Avatar name={`${firstName} ${lastName}`} /> */}
+          <Icon name="add-profiles" className="user-widget__modal-icon" />
+          <Title medium className="user-widget__modal-title">
+            Create a new user
+          </Title>
+        </div>
         <form className="user-widget__modal-form">
           <Input
             name="first-name"
+            display="inline-block"
             placeholder="First name"
+            className="user-widget__modal-input"
             onChange={({ target: { value } }) => {
               // this.resetErrors();
               this.setState({ firstName: value });
@@ -55,12 +68,17 @@ class UserModal extends React.Component<*, *, *> {
           />
           <Input
             name="last-name"
+            display="inline-block"
             placeholder="Last name"
+            className="user-widget__modal-input"
             onChange={({ target: { value } }) => {
               // this.resetErrors();
               this.setState({ lastName: value });
             }}
           />
+          <Title small className="user-widget__modal-subtitle">
+            Role and permissions
+          </Title>
           <Checkbox checked={true} onChange={() => null}>
             Visitor
           </Checkbox>
@@ -70,7 +88,42 @@ class UserModal extends React.Component<*, *, *> {
           <Checkbox checked={false} onChange={() => null} disabled>
             Owner
           </Checkbox>
-          <hr className="user-widget__modal-hr" />
+          <Title small className="user-widget__modal-subtitle">
+            Contacts
+          </Title>
+          {contacts.map(contact => (
+            <React.Fragment>
+              <Input
+                name="first-name"
+                value={contact.value}
+                display="inline-block"
+                placeholder="Value"
+                className="user-widget__modal-input"
+                onChange={({ target: { value } }) => {
+                  // this.resetErrors();
+                  this.setState({ firstName: value });
+                }}
+              />
+              <Input
+                name="last-name"
+                value={contact.type}
+                display="inline-block"
+                placeholder="Type"
+                className="user-widget__modal-input"
+                onChange={({ target: { value } }) => {
+                  // this.resetErrors();
+                  this.setState({ lastName: value });
+                }}
+              />
+            </React.Fragment>
+          ))}
+          {!!contacts.length &&
+            contacts.pop().value !== '' &&
+            contacts.pop().type !== '' && (
+              <a href="#" onClick={() => null}>
+                Add another one ->
+              </a>
+            )}
           <div className="user-widget__modal-controls">
             <Button
               caps

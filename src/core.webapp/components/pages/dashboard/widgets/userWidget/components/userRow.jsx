@@ -7,6 +7,8 @@ export const UserRow = ({
   name,
   type,
   username,
+  isActive,
+  isOnline = false,
   user: currentUser,
   onRevoke = () => null,
 }) => {
@@ -21,28 +23,23 @@ export const UserRow = ({
     },
   };
   const className = 'briskhome-menu';
-  const menu = [];
-  const operations = [{ title: 'View' }, { title: 'Edit' }];
-  console.log({ type });
-  if (type === 'VISITOR') {
-    menu.push(...operations, { title: 'Suspend' });
-  }
+  const operations = [{ title: 'View details' }, { title: 'Edit account' }];
 
-  if (type === 'MEMBER') {
-    menu.push({ title: 'View' });
-  }
-
-  if (type === 'superuser') {
-    menu.push(...operations, { title: 'Suspend' });
-  }
   return (
-    <tr className="user-widget__row">
+    <tr
+      className={cn('user-widget__row', {
+        'user-widget__row_inactive': !isActive,
+      })}
+    >
       <td className="user-widget__cell">
-        <Avatar name={name} online />
+        <Avatar name={name} online={isActive && isOnline} />
       </td>
       <td className="user-widget__cell">
         <span className="user-widget__cell-title">{name}</span>
-        <span className="user-widget__cell-subtitle">{username}</span>
+        <span className="user-widget__cell-subtitle">
+          {username}
+          {!isActive && ' — inactive'}
+        </span>
       </td>
       <td className="user-widget__cell">
         <MenuButton
@@ -50,7 +47,7 @@ export const UserRow = ({
           menu={
             <Dropdown>
               <MenuList className={`${className}__list`}>
-                {menu.map(item => (
+                {operations.map(item => (
                   <MenuItem className={`${className}__item`} {...item}>
                     {item.title}
                   </MenuItem>
@@ -59,7 +56,7 @@ export const UserRow = ({
                 <MenuItem
                   className={cn(`${className}__item`, `${className}__item_red`)}
                 >
-                  Hide widget
+                  Deactivate
                 </MenuItem>
               </MenuList>
             </Dropdown>

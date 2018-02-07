@@ -4,6 +4,7 @@
  */
 
 import {
+  GraphQLBoolean,
   GraphQLEnumType,
   GraphQLList,
   GraphQLString,
@@ -30,6 +31,9 @@ export default new GraphQLObjectType({
     },
     type: {
       type: GraphQLString,
+    },
+    isActive: {
+      type: GraphQLBoolean,
     },
     sessions: {
       type: new GraphQLList(SessionType),

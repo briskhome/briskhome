@@ -46,9 +46,9 @@ export default ({ db }: CoreImports) => {
         long: String,
         lat: String,
       },
-      isDisabled: {
+      isActive: {
         type: Boolean,
-        default: false,
+        default: true,
       },
     },
     {

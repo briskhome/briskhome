@@ -3,6 +3,14 @@
     &:hover
       background-color #fafafa
 
+    &_inactive
+      & ^[0]__cell
+        &-title
+          color #999
+
+      & .briskhome-avatar__name
+        color #999
+
   &__cell
     vertical-align middle
 
@@ -37,12 +45,40 @@
 
   &__modal
     &-title
-      margin-bottom 24px !important
+      display block
+      margin-right -20px
+      margin-left -20px
+      padding 8px 16px
+      border-top 1px dashed #efefef
+      border-bottom 1px dashed #efefef
+      background-color #fafafa
+      color #999
+      text-align left
+      text-transform uppercase
+      letter-spacing 1px
+      font-weight 500
+      font-size 14px !important
 
     &-caption
       margin-bottom 16px
       text-align left
       font-weight 300
+
+    &-header
+      margin-bottom 32px
+
+    &-icon
+      float left
+      width 64px !important
+      height 64px !important
+      margin -16px 16px 8px 0
+
+    &-input
+      display inline-block !important
+      width calc(50% - 8px)
+
+      & + &
+        margin-left 16px
 
     &-form
       font-size 14px
@@ -54,6 +90,10 @@
     &-controls
       margin-top 16px
       text-align right
+
+    &-subtitle
+      margin-top 16px
+      margin-bottom 8px
 
 .link
   text-decoration none
