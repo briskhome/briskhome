@@ -17,10 +17,10 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn test
-workflows:
-  version: 2
-  test:
-    jobs:
-      - lint: yarn lint
-      - flow: yarn flow
-      - test: yarn test --coverage
+# workflows:
+#   version: 2
+#   test:
+#     jobs:
+#       - lint: yarn lint
+#       - flow: yarn flow
+#       - test: yarn test --coverage
