@@ -15,9 +15,9 @@ workflows:
             - build
 jobs:
   build:
-    docker:
+    docker: &node
       - image: 'node:8'
-    steps: &steps
+    steps:
       - checkout
       - restore_cache: &restore_cache
           name: Restore Yarn Package Cache
@@ -34,11 +34,15 @@ jobs:
           paths:
             - node_modules/
   lint:
-    docker:
-      - image: 'node:8'
-    steps: *steps
+    docker: *node
+    steps:
       - checkout
-      - restore_cache: *restore_cache
+      - restore_cache: &restore_cache
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}
+            - yarn-packages-master
       - run: yarn lint
   flow:
     docker:
@@ -48,9 +52,9 @@ jobs:
       - restore_cache: *restore_cache
       - run: yarn flow
   test:
-    docker:
-      - image: 'node:8'
+    docker: *node
     steps:
       - checkout
       - restore_cache: *restore_cache
       - run: yarn test --coverage
+      - run: yarn codecov
