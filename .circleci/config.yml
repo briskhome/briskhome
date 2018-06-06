@@ -71,6 +71,6 @@ jobs:
       - run: yarn webpack
       - save_cache:
           name: Save build artifacts
-          key: build-{{ .Branch }}
+          key: build-{{ .Revision }}
           paths:
             - lib/
