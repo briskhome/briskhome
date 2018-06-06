@@ -1,25 +1,56 @@
 version: 2
+workflows:
+  version: 2
+  tests:
+    jobs: 
+      - build
+      - lint:
+          requires:
+            - build
+      - flow:
+          requires:
+            - build
+      - test:
+          requires:
+            - build
 jobs:
   build:
     docker:
-      - image: circleci/node:8.11
-    working_directory: ~/repo
+      - image: 'node:8'
+    steps: &steps
+      - checkout
+      - restore_cache: &restore_cache
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}
+            - yarn-packages-master
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules/
+  lint:
+    docker:
+      - image: 'node:8'
+    steps: *steps
+      - checkout
+      - restore_cache: *restore_cache
+      - run: yarn lint
+  flow:
+    docker:
+      - image: 'node:8'
     steps:
       - checkout
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
-      - run: yarn install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run: yarn test
-workflows:
-  version: 2
+      - restore_cache: *restore_cache
+      - run: yarn flow
   test:
-    jobs:
-      - lint: yarn lint
-      - flow: yarn flow
-      - test: yarn test --coverage
+    docker:
+      - image: 'node:8'
+    steps:
+      - checkout
+      - restore_cache: *restore_cache
+      - run: yarn test --coverage
