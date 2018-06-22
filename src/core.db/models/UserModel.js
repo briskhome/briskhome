@@ -5,7 +5,7 @@
 
 import type { CoreImports } from '../../utilities/coreTypes';
 
-export default ({ db }: CoreImports) => {
+export const UserModel = ({ db }: CoreImports) => {
   const Schema = db.Schema;
   const userSchema = new Schema(
     {

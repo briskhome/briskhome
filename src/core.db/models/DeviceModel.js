@@ -6,7 +6,7 @@
 import uuid from 'uuid-1345';
 import type { CoreImports } from '../../utilities/coreTypes';
 
-export default ({ db }: CoreImports) => {
+export const DeviceModel = ({ db }: CoreImports) => {
   const Schema = db.Schema;
   const DeviceSchema = new Schema(
     {

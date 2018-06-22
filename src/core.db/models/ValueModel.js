@@ -30,7 +30,7 @@ const operators = {
   eq: (boundary: any, value: any) => boundary === value,
 };
 
-export default ({ bus, db }: CoreImports) => {
+export const ValueModel = ({ bus, db }: CoreImports) => {
   const Schema = db.Schema;
   const SensorModel = db.model('core:sensor');
   const ValueSchema = new Schema(

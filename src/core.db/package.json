@@ -1,13 +1,22 @@
 {
   "name": "@briskhome/core.db",
-  "version": "0.3.0-alpha.1",
+  "version": "0.4.0",
   "main": "index.js",
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
-  "plugin": {
-    "consumes": ["bus", "log"],
-    "provides": ["db"]
-  },
   "dependencies": {
     "mongoose": "^4.9.6"
+  },
+  "peerDependencies": {
+    "@briskhome/core": "0.4.0"
+  },
+  "extensions": {
+    "com.briskhome.module": [{ "dependencies": ["bus", "log"] }],
+    "briskhome:db:model": [
+      { "name": "DeviceModel", "main": "./models/DeviceModel.js" },
+      { "name": "LocationModel", "main": "./models/LocationModel.js" },
+      { "name": "SensorModel", "main": "./models/SensorModel.js" },
+      { "name": "UserModel", "main": "./models/UserModel.js" },
+      { "name": "ValueModel", "main": "./models/ValueModel.js" }
+    ]
   }
 }

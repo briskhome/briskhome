@@ -4,19 +4,11 @@
  */
 
 import mongoose from 'mongoose';
-import { resources } from '../utilities/resources';
-import type {
-  CoreOptions,
-  CoreImports,
-  CoreRegister,
-} from '../utilities/coreTypes';
+import type { CoreOptions, CoreImports } from '../utilities/coreTypes';
 
-export default (
-  options: CoreOptions,
-  imports: CoreImports,
-  register: CoreRegister,
-) => {
+export default (options: CoreOptions, imports: CoreImports) => {
   const { uri } = options;
+  const app = imports.app;
   const bus = imports.bus;
   const log = imports.log();
 
@@ -33,34 +25,36 @@ export default (
     },
   );
 
-  mongoose.connection.on('error', err => {
-    log.fatal(
-      { err, uri },
-      'Error establishing connection to MongoDB instance',
-    );
-    if (ready) bus.emit('core:error', err);
-    return register(err);
-  });
+  return new Promise((resolve, reject) => {
+    mongoose.connection.on('error', err => {
+      log.fatal(
+        { err, uri },
+        'Error establishing connection to MongoDB instance',
+      );
+      if (ready) bus.emit('core:error', err);
+      reject(err);
+    });
 
-  mongoose.connection.on('connecting', () => {
-    log.debug({ uri }, 'Trying to connect to MongoDB instance');
-  });
+    mongoose.connection.on('connecting', () => {
+      log.debug({ uri }, 'Trying to connect to MongoDB instance');
+    });
 
-  mongoose.connection.once('connected', () => {
-    log.info({ uri }, 'Database connection established');
-    resources('models', [{ ...imports, db: mongoose }]);
-    return register(null, { db: mongoose });
-  });
+    mongoose.connection.once('connected', async () => {
+      log.info({ uri }, 'Database connection established');
+      await app.load('briskhome:db:model', { args: [{ db: mongoose }] });
+      resolve(mongoose);
+    });
 
-  mongoose.connection.on('disconnecting', () => {
-    log.debug({ uri }, 'Disconnecting from MongoDB instance');
-  });
+    mongoose.connection.on('disconnecting', () => {
+      log.debug({ uri }, 'Disconnecting from MongoDB instance');
+    });
 
-  mongoose.connection.on('disconnected', () => {
-    log.warn({ uri }, 'Disconnected from MongoDB instance');
-  });
+    mongoose.connection.on('disconnected', () => {
+      log.warn({ uri }, 'Disconnected from MongoDB instance');
+    });
 
-  mongoose.connection.on('reconnected', () => {
-    log.info({ uri }, 'Reconnected to MongoDB instance');
+    mongoose.connection.on('reconnected', () => {
+      log.info({ uri }, 'Reconnected to MongoDB instance');
+    });
   });
 };

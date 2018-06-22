@@ -35,7 +35,7 @@ export type LocationType = {
 
 // } & LocationType & ModelType<LocationModelType>
 
-export default ({ db }: CoreImports) => {
+export const LocationModel = ({ db }: CoreImports) => {
   const Schema = db.Schema;
   const RoomSchema = new Schema({
     _id: {

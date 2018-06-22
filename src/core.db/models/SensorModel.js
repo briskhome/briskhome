@@ -20,7 +20,7 @@ export type SensorType = {
 //   setOnline: (state: boolean) => SensorModelType
 // } & SensorType & ModelType<SensorModelType>
 
-export default ({ db }: CoreImports) => {
+export const SensorModel = ({ db }: CoreImports) => {
   const Schema = db.Schema;
   const SensorSchema = new Schema(
     {
