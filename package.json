@@ -1,8 +1,8 @@
 {
   "name": "@briskhome/core",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "",
-  "main": "lib/core.js",
+  "main": "lib/core/index.js",
   "scripts": {
     "babel": "node_modules/.bin/babel src -d lib --copy-files --ignore node_modules",
     "babel-watch": "vagrant up && node_modules/.bin/babel src --watch --out-dir lib --copy-files --ignore node_modules & yarn webpack-watch",
