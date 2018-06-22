@@ -8,17 +8,8 @@ import nconf from 'nconf';
 import properties from 'properties';
 import { getCallee } from '../utilities/helpers';
 import { resources } from '../utilities/resources';
-import type {
-  CoreOptions,
-  CoreImports,
-  CoreRegister,
-} from '../utilities/coreTypes';
 
-export default (
-  options: CoreOptions,
-  imports: CoreImports,
-  register: CoreRegister,
-) => {
+export default () => {
   const parse = (dir: string): Function =>
     properties.parse(dir, {
       comments: '#',
@@ -60,10 +51,8 @@ export default (
       }),
     );
 
-  register(null, {
-    config: (name?: string) =>
-      name
-        ? nconf.get(name.replace('.', ':'))
-        : nconf.get(getCallee().replace('.', ':')),
-  });
+  return (name?: string) =>
+    name
+      ? nconf.get(name.replace('.', ':'))
+      : nconf.get(getCallee().replace('.', ':'));
 };
