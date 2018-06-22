@@ -1,12 +1,11 @@
 {
   "presets": ["flow", "react"],
   "plugins": [
+    "babel-plugin-idx",
     "transform-class-properties",
     "transform-inline-imports-commonjs",
     "transform-object-rest-spread",
     ["module-resolver", { "root": ["./src"] }]
   ],
-  "ignore": [
-      "./**/**/__mocks__"
-  ]
+  "ignore": ["./**/**/__mocks__"]
 }
