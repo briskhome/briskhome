@@ -4,17 +4,9 @@
  */
 
 import Dataloader from './dataloader';
-import type {
-  CoreOptions,
-  CoreImports,
-  CoreRegister,
-} from '../utilities/coreTypes';
+import type { CoreOptions, CoreImports } from '../utilities/coreTypes';
 
-export default (
-  options: CoreOptions,
-  imports: CoreImports,
-  register: CoreRegister,
-) => {
+export default (options: CoreOptions, imports: CoreImports) => {
   const db = imports.db;
   const log = imports.log();
 
@@ -79,5 +71,5 @@ export default (
     };
   };
 
-  register(null, { dataloader: createDataloaders });
+  return createDataloaders;
 };
