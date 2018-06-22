@@ -24,16 +24,11 @@ import {
 import type {
   CoreOptions,
   CoreImports,
-  CoreRegister,
   SubscriptionType,
 } from '../utilities/coreTypes';
 import type { EventType } from './models/EventModel';
 
-export default (
-  options: CoreOptions,
-  imports: CoreImports,
-  register: CoreRegister,
-) => {
+export default (options: CoreOptions, imports: CoreImports) => {
   const db = imports.db;
   const bus = imports.bus;
   const log = imports.log();
@@ -327,5 +322,5 @@ export default (
     FATAL: 60,
   };
 
-  register(null, { notifications: new Notifications() });
+  return new Notifications();
 };

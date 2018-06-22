@@ -20,7 +20,7 @@ export type EventType = {
 //   fetchById(id: string): EventModelType,
 // } & EventType & ModelType<EventModelType>;
 
-export default ({ db }: CoreImports) => {
+export const EventModel = ({ db }: CoreImports) => {
   const Schema = db.Schema;
   const eventSchema = new Schema(
     {

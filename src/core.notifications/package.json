@@ -1,16 +1,18 @@
 {
   "name": "@briskhome/core.notifications",
-  "version": "0.3.0-alpha.1",
+  "version": "0.4.0",
   "main": "index.js",
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
-  "plugin": {
-    "consumes": [
-      "db",
-      "log",
-      "bus"
+  "peerDependencies": {
+    "@briskhome/core": "0.4.0"
+  },
+  "extensions": {
+    "com.briskhome.module": [{ "dependencies": ["bus", "db", "log"] }],
+    "briskhome:db:model": [
+      { "name": "EventModel", "main": "./models/EventModel.js" }
     ],
-    "provides": [
-      "notifications"
+    "briskhome:notifications:provider": [
+      { "name": "Telegram", "main": "./providers/telegram.js" }
     ]
   }
 }
