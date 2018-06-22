@@ -12,19 +12,11 @@ import mongoStore from 'connect-mongodb-session';
 import graphqlHTTP from 'express-graphql';
 import cookieParser from 'cookie-parser';
 import { promisify } from 'util';
-import type {
-  CoreOptions,
-  CoreImports,
-  CoreRegister,
-} from '../utilities/coreTypes';
+import type { CoreOptions, CoreImports } from '../utilities/coreTypes';
 
 const MongoStore = mongoStore(session);
 
-export default (
-  options: CoreOptions,
-  imports: CoreImports,
-  register: CoreRegister,
-) => {
+export default (options: CoreOptions, imports: CoreImports) => {
   const {
     db,
     graphql: { root, schema },
@@ -103,5 +95,5 @@ export default (
 
   app.listen(process.env.PORT || 4000, '0.0.0.0');
 
-  return register(null, { webapp: app });
+  return app;
 };

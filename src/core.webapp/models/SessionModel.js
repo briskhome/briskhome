@@ -27,12 +27,12 @@ export class SessionModel /* :: extends Mongoose$Document */ {
     return this.session.issued;
   }
 
-  static async fetchByUsername(username: string): Promise<SessionModel[]> {
+  static async fetchByUsername(username: string): Promise<Session[]> {
     return this.find({ 'session.passport.user.username': username });
   }
 }
 
-export default ({ db }: CoreImports) => {
+export const Session = ({ db }: CoreImports) => {
   const Schema = db.Schema;
   const SessionSchema = new Schema(
     {
@@ -55,7 +55,7 @@ export default ({ db }: CoreImports) => {
   return db.model('SessionModel', SessionSchema);
 };
 
-type Session = {
+type SessionType = {
   cookie: SessionCookie,
   passport: SessionPassport,
   useragent: SessionUseragent,
