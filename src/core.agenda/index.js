@@ -4,17 +4,9 @@
  */
 
 import Agenda from 'agenda';
-import type {
-  CoreOptions,
-  CoreImports,
-  CoreRegister,
-} from '../utilities/coreTypes';
+import type { CoreOptions, CoreImports } from '../utilities/coreTypes';
 
-export default (
-  options: CoreOptions,
-  imports: CoreImports,
-  register: CoreRegister,
-) => {
+export default (options: CoreOptions, imports: CoreImports) => {
   const { bus } = imports;
   const log = imports.log();
   const agenda = new Agenda({
@@ -27,18 +19,20 @@ export default (
     return done();
   });
 
-  agenda.on('start', job => {
-    log.debug({ job: job.attrs.name }, 'Starting job');
-    log.trace({ job });
-  });
+  return new Promise((resolve, reject) => {
+    agenda.on('start', job => {
+      log.debug({ job: job.attrs.name }, 'Starting job');
+      log.trace({ job });
+    });
 
-  agenda.on('error', err => {
-    return register(err);
-  });
+    agenda.on('error', err => {
+      return reject(err);
+    });
 
-  agenda.on('ready', () => {
-    agenda.every('1 minute', 'com.briskhome.job.poll');
-    bus.on('core:ready', () => agenda.start());
-    return register(null, { agenda });
+    agenda.on('ready', () => {
+      agenda.every('1 minute', 'com.briskhome.job.poll');
+      bus.on('core:ready', () => agenda.start());
+      return resolve(agenda);
+    });
   });
 };
