@@ -2,9 +2,6 @@
 .idea
 .vagrant
 coverage
-lib
 node_modules
-specs/coverage
-src/**/node_modules
-src/**/specs/.eslintrc.json
-src/**/specs/coverage
+lib/*
+!/src/**/lib/*
