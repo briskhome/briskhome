@@ -7,17 +7,9 @@ import fs from 'fs';
 import forge from 'node-forge';
 import { spawn } from 'child_process';
 
-import type {
-  CoreOptions,
-  CoreImports,
-  CoreRegister,
-} from '../utilities/coreTypes';
+import type { CoreOptions, CoreImports } from '../utilities/coreTypes';
 
-export default (
-  options: CoreOptions,
-  imports: CoreImports,
-  register: CoreRegister,
-) => {
+export default (options: CoreOptions, imports: CoreImports) => {
   const log = imports.log();
 
   /**
@@ -279,5 +271,5 @@ export default (
     });
   };
 
-  register(null, { pki: new PKI() });
+  return new PKI();
 };

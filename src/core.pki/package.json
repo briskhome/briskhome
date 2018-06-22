@@ -1,16 +1,8 @@
 {
   "name": "@briskhome/core.pki",
-  "version": "0.3.0-alpha.1",
+  "version": "0.4.0",
   "main": "index.js",
   "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
-  "plugin": {
-    "consumes": [
-      "log"
-    ],
-    "provides": [
-      "pki"
-    ]
-  },
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint": "^3.2.2",
@@ -25,9 +17,16 @@
   "scripts": {
     "lint": "node_modules/eslint/bin/eslint.js --quiet -c .eslintrc index.js",
     "test": "node_modules/mocha/bin/mocha specs/index.spec.js",
-    "coverage": "node_modules/istanbul/lib/cli.js cover -x \"**/models/**\" -x \"**/specs/**\" --dir ./specs/coverage --report html node_modules/mocha/bin/_mocha -- -R spec specs/index.spec.js"
+    "coverage":
+      "node_modules/istanbul/lib/cli.js cover -x \"**/models/**\" -x \"**/specs/**\" --dir ./specs/coverage --report html node_modules/mocha/bin/_mocha -- -R spec specs/index.spec.js"
   },
   "dependencies": {
     "node-forge": "^0.6.48"
+  },
+  "peerDependencies": {
+    "@briskhome/core": "0.4.0"
+  },
+  "extensions": {
+    "com.briskhome.module": [{ "dependencies": ["log"] }]
   }
 }
