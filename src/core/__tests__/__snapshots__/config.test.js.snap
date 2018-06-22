@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core -> config parseExtensions() invalid extension 1`] = `Array []`;
+
+exports[`core -> config parseExtensions() multiple extensions (different types) 1`] = `
+Array [
+  Object {
+    "dependencies": Array [],
+    "isDefault": true,
+    "main": undefined,
+    "metadata": Object {
+      "briskhome:extension-two": Array [
+        "two",
+      ],
+    },
+    "name": "one",
+    "type": "briskhome:extension-one",
+  },
+]
+`;
+
+exports[`core -> config parseExtensions() multiple extensions (same type) 1`] = `
+Array [
+  Object {
+    "dependencies": Array [],
+    "isDefault": false,
+    "main": "/tmp/briskhome/index.js",
+    "metadata": Object {
+      "dir": "/tmp/briskhome",
+      "main": "/tmp/briskhome/index.js",
+      "name": "package-name",
+    },
+    "name": "one",
+    "type": "briskhome:extension",
+  },
+  Object {
+    "dependencies": Array [],
+    "isDefault": false,
+    "main": "/tmp/briskhome/index.js",
+    "metadata": Object {
+      "dir": "/tmp/briskhome",
+      "main": "/tmp/briskhome/index.js",
+      "name": "package-name",
+    },
+    "name": "two",
+    "type": "briskhome:extension",
+  },
+]
+`;
+
+exports[`core -> config parseExtensions() single extension (short notation) 1`] = `
+Array [
+  Object {
+    "dependencies": Array [],
+    "isDefault": true,
+    "main": "/tmp/briskhome/index.js",
+    "metadata": Object {
+      "dir": "/tmp/briskhome",
+      "main": "/tmp/briskhome/index.js",
+      "name": "package-name",
+    },
+    "name": "default",
+    "type": "briskhome:extension",
+  },
+]
+`;
+
+exports[`core -> config parseExtensions() single extension (verbose notation / no overrides) 1`] = `
+Array [
+  Object {
+    "dependencies": Array [],
+    "isDefault": true,
+    "main": "/tmp/briskhome/index.js",
+    "metadata": Object {
+      "dir": "/tmp/briskhome",
+      "main": "/tmp/briskhome/index.js",
+      "name": "package-name",
+    },
+    "name": "package-name",
+    "type": "briskhome:extension",
+  },
+]
+`;
+
+exports[`core -> config parseExtensions() single extension (verbose notation) 1`] = `
+Array [
+  Object {
+    "dependencies": Array [
+      "dependency-name",
+    ],
+    "isDefault": true,
+    "main": "/tmp/briskhome/default.js",
+    "metadata": Object {
+      "dir": "/tmp/briskhome",
+      "main": "/tmp/briskhome/index.js",
+      "name": "package-name",
+    },
+    "name": "default",
+    "type": "briskhome:extension",
+  },
+]
+`;
