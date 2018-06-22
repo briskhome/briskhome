@@ -4,17 +4,9 @@
  */
 
 import EventEmitter from 'eventemitter2';
-import type {
-  CoreOptions,
-  CoreImports,
-  CoreRegister,
-} from '../utilities/coreTypes';
+import type { CoreOptions, CoreImports } from '../utilities/coreTypes';
 
-export default (
-  options: CoreOptions,
-  imports: CoreImports,
-  register: CoreRegister,
-) => {
+export default (options: CoreOptions, imports: CoreImports) => {
   const log = imports.log();
   const bus = new EventEmitter({
     delimiter: ':',
@@ -31,5 +23,5 @@ export default (
     log.trace({ event: this.event }, data);
   });
 
-  register(null, { bus });
+  return bus;
 };
