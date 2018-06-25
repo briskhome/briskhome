@@ -68,40 +68,6 @@ export const maybeExtension = async (dir: string): Promise<boolean> => {
   );
 };
 
-export const plugins = (
-  directories?: Array<string> = ['./lib', './node_modules'],
-): Array<string> =>
-  [].concat(
-    ...directories.map(directory =>
-      fs
-        .readdirSync(directory)
-        .filter(
-          subdirectory =>
-            directory === './lib'
-              ? fs
-                  .statSync(path.resolve(directory, subdirectory))
-                  .isDirectory() && subdirectory.indexOf('core.') === 0
-              : fs
-                  .statSync(path.resolve(directory, subdirectory))
-                  .isDirectory() && subdirectory.indexOf('briskhome-') === 0,
-        )
-        .map(subdirectory => path.resolve(directory, subdirectory)),
-    ),
-  );
-
-export const inspectPlugin = (directory: string) => {
-  return JSON.parse(
-    fs.readFileSync(path.resolve(directory, 'package.json')).toString(),
-  );
-};
-
-export const enabledPlugins = (directories?: Array<string>): Array<string> =>
-  plugins(directories).filter(
-    directory =>
-      inspectPlugin(directory).plugin &&
-      !inspectPlugin(directory).plugin.disabled,
-  );
-
 export const write = (err: Error) => {
   const writeln = (message, data = {}) =>
     process.stdout.write(
