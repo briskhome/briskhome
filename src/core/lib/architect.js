@@ -78,7 +78,7 @@ class Architect extends events.EventEmitter {
     extension: any,
     { args = [], exec = true }: { args: Array<any>, exec: boolean } = {},
   ) {
-    const config = this.get('com.briskhome.module', 'config');
+    const config = this.get('com.briskhome.module', 'core.config');
     const options = config ? config(extension.name) : {};
     const imports = { app: this };
     if (extension.dependencies.length) {

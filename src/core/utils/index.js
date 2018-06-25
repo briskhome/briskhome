@@ -38,9 +38,9 @@ export const timeout = (t: number = 1000) => {
 export const normalize = (name: string): string => {
   let normalizedName: string = name;
 
-  if (name.indexOf('core.') >= 0) {
-    return name.substr(name.indexOf('core.') + 5);
-  }
+  // if (name.indexOf('core.') >= 0) {
+  //   return name.substr(name.indexOf('core.') + 5);
+  // }
 
   if (normalizedName.indexOf('/') >= 0) {
     normalizedName = normalizedName.substr(normalizedName.indexOf('/') + 1);

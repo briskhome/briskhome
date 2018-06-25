@@ -23,8 +23,8 @@ process.on('unhandledRejection', err => dump(err));
     return dump(err);
   }
 
-  const bus = app.get(MODULE_EXTENSIONS, 'bus');
-  const log = app.get(MODULE_EXTENSIONS, 'log')('core');
+  const bus = app.get(MODULE_EXTENSIONS, 'core.bus');
+  const log = app.get(MODULE_EXTENSIONS, 'core.log')('core');
 
   log.info('Briskhome initialization successful');
   bus.emit('core:ready', app);
