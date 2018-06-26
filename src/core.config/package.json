@@ -10,7 +10,7 @@
     ]
   },
   "dependencies": {
-    "nconf": "^0.8.4",
+    "nconf": "^0.10.0",
     "properties": "^1.2.1"
   }
 }
