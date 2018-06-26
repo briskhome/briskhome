@@ -12,15 +12,15 @@
     ]
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "eslint": "^3.2.2",
-    "eslint-config-airbnb-base": "^5.0.1",
-    "eslint-plugin-import": "^1.12.0",
+    "chai": "^4.1.2",
+    "eslint": "^5.0.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
     "istanbul": "^0.4.4",
-    "mocha": "^3.0.2",
-    "mockgoose": "^6.0.6",
-    "nock": "^8.0.0",
-    "sinon": "^1.17.5"
+    "mocha": "^5.2.0",
+    "mockgoose": "^7.3.5",
+    "nock": "^9.3.3",
+    "sinon": "^6.0.1"
   },
   "scripts": {
     "lint": "node_modules/eslint/bin/eslint.js --quiet -c .eslintrc index.js",
@@ -28,6 +28,6 @@
     "coverage": "node_modules/istanbul/lib/cli.js cover -x \"**/models/**\" -x \"**/specs/**\" --dir ./specs/coverage --report html node_modules/mocha/bin/_mocha -- -R spec specs/index.spec.js"
   },
   "dependencies": {
-    "node-forge": "^0.6.48"
+    "node-forge": "^0.7.5"
   }
 }
