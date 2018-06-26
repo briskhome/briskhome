@@ -6,83 +6,67 @@
 import plugin from '../';
 import Agenda from 'agenda';
 import { EventEmitter } from 'events';
+import { mockJob } from '../__mocks__/agenda';
 
 jest.mock('agenda');
 
+const options = {};
+const imports = {
+  db: { connections: [{}] },
+  bus: new EventEmitter(),
+  log: () => log,
+};
+
+const log = {
+  trace: jest.fn(),
+  debug: jest.fn(),
+  info: jest.fn(),
+  warn: jest.fn(),
+  error: jest.fn(),
+  fatal: jest.fn(),
+};
+
 describe('core.agenda', () => {
-  let sut;
-  let options;
-  let imports;
-
-  const log = {
-    trace: jest.fn(),
-    debug: jest.fn(),
-    info: jest.fn(),
-    warn: jest.fn(),
-    error: jest.fn(),
-    fatal: jest.fn(),
-  };
-
-  const mockCb = jest.fn();
-  const mockJob = { attrs: { name: 'mockJob' } };
-  const mockError = new Error('mockError');
-
   beforeEach(() => {
-    jest.resetAllMocks();
-
-    options = {};
-    imports = {
-      db: { connections: [{}] },
-      bus: new EventEmitter(),
-      log: () => log,
-    };
+    jest.clearAllMocks();
   });
 
-  it('should register a service', async done => {
-    plugin(options, imports, (...result) => {
-      const [error, services] = result;
-      imports.bus.emit('core:ready');
-      expect(error).toBeNull();
-      expect(services.agenda).toBeInstanceOf(Agenda);
-      expect(Agenda.mock.instances[0].start).toHaveBeenCalled();
-      return done();
-    });
-
-    expect(Agenda.mock.instances[0].on.mock.calls.length).toBe(3);
-    Agenda.mock.instances[0].on.mock.calls[2][1]();
+  it('should register event handlers', async () => {
+    const result = await plugin(options, imports);
+    expect(result).toBeInstanceOf(Agenda);
+    expect(result).toBe(Agenda.mock.instances[0]);
+    expect(Agenda.mock.instances[0].on.mock.calls).toHaveLength(3);
   });
 
-  it('should register an error', async done => {
-    plugin(options, imports, (...result) => {
-      const [error, services] = result;
-      expect(error).toEqual(mockError);
-      expect(services).toBeUndefined();
-      return done();
-    });
-
-    expect(Agenda.mock.instances[0].on.mock.calls.length).toBe(3);
-    Agenda.mock.instances[0].on.mock.calls[1][1](mockError);
+  xit('should register error callback', async () => {
+    await plugin(options, imports);
+    Agenda.mock.instances[0].listeners['error'][0](new Error());
+    // TODO: Assertion on error callback
   });
 
-  it('should log events when job starts', async done => {
-    plugin(options, imports, () => null);
-
-    expect(Agenda.mock.instances[0].on.mock.calls.length).toBe(3);
-    Agenda.mock.instances[0].on.mock.calls[0][1](mockJob);
-    expect(log.debug).toHaveBeenCalledWith(
-      { job: mockJob.attrs.name },
-      'Starting job',
-    );
-    expect(log.trace).toHaveBeenCalledWith({ job: mockJob });
-    return done();
+  it('should define a job', async () => {
+    await plugin(options, imports);
+    expect(Agenda.mock.instances[0].define.mock.calls).toHaveLength(1);
   });
 
-  it('should process poll job definition', async done => {
-    plugin(options, imports, () => null);
+  it('should schedule a job', async () => {
+    await plugin(options, imports);
+    expect(Agenda.mock.instances[0].every.mock.calls).toHaveLength(1);
+  });
 
-    expect(Agenda.mock.instances[0].define.mock.calls.length).toBe(1);
-    Agenda.mock.instances[0].define.mock.calls[0][1](mockJob, mockCb);
-    expect(mockCb).toHaveBeenCalled();
-    return done();
+  it('should start when the app is ready', async () => {
+    await plugin(options, imports);
+    imports.bus.emit('core:ready');
+    expect(Agenda.mock.instances[0].start).toHaveBeenCalled();
+    expect(log.debug).toHaveBeenCalled();
+    expect(log.trace).toHaveBeenCalled();
+  });
+
+  it('should run a job', async () => {
+    await plugin(options, imports);
+    const mockDone = jest.fn();
+    const [unused, job] = Agenda.mock.instances[0].define.mock.calls[0];
+    job(mockJob, mockDone);
+    expect(mockDone).toHaveBeenCalled();
   });
 });
