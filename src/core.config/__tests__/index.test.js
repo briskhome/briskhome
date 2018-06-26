@@ -2,46 +2,30 @@
  * @briskhome
  * └core.config <specs/index.spec.js>
  */
-import nconf from 'nconf';
-import properties from 'properties';
-import { getCallee } from '../../utilities/helpers';
-import { resources } from '../../utilities/resources';
-
 import plugin from '../';
+import nconf from 'nconf';
 
 jest.mock('nconf');
-jest.mock('../../utilities/resources');
 
-describe('core.bus', () => {
-  let sut;
-  let options;
-  let imports;
+const options = {};
+const imports = {};
 
+describe('core.config', () => {
   const fakeConfig = { test: 'test' };
 
   beforeEach(() => {
-    options = {};
-    imports = {};
-    jest.resetAllMocks();
-    resources.mockReturnValue(['test']);
-    // getCallee.mockReturnValue('core.config');
-  });
-
-  beforeEach(() => {
-    plugin(options, imports, (error, exports) => {
-      expect(error).toBe(null);
-      sut = exports.config;
-    });
+    jest.clearAllMocks();
   });
 
   it('should return configuration provided by nconf', async () => {
     nconf.get.mockReturnValue(fakeConfig);
-    const res = sut();
-    expect(res).toEqual(fakeConfig);
+    const result = await plugin(imports, options);
+    expect(result).toBeInstanceOf(Function);
+    expect(result()).toEqual(fakeConfig);
   });
 
-  it('should automatically determine plugin name', () => {
-    sut();
-    expect(nconf.get).toHaveBeenCalledTimes(2);
+  it('should automatically determine plugin name', async () => {
+    await plugin(imports, options);
+    expect(nconf.get).toHaveBeenCalled();
   });
 });

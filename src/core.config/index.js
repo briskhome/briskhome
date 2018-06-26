@@ -7,7 +7,6 @@ import path from 'path';
 import nconf from 'nconf';
 import properties from 'properties';
 import { getCallee } from '../utilities/helpers';
-import { resources } from '../utilities/resources';
 
 export default () => {
   const parse = (dir: string): Function =>
@@ -36,10 +35,7 @@ export default () => {
         : { key, value },
   });
   []
-    .concat(
-      path.resolve('etc', `${nconf.get('NODE_ENV') || 'briskhome'}.conf`),
-      resources('etc'),
-    )
+    .concat(path.resolve('etc', `${nconf.get('NODE_ENV') || 'briskhome'}.conf`))
     .map(config =>
       nconf.use(config, {
         type: 'file',
