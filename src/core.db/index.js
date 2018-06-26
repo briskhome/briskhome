@@ -32,7 +32,7 @@ export default (imports: CoreImports, options: CoreOptions) => {
         'Error establishing connection to MongoDB instance',
       );
       if (ready) bus.emit('core:error', err);
-      reject(err);
+      return reject(err);
     });
 
     mongoose.connection.on('connecting', () => {
@@ -42,7 +42,7 @@ export default (imports: CoreImports, options: CoreOptions) => {
     mongoose.connection.once('connected', async () => {
       log.info({ uri }, 'Database connection established');
       await app.load('briskhome:db:model', { args: [{ db: mongoose }] });
-      resolve(mongoose);
+      return resolve(mongoose);
     });
 
     mongoose.connection.on('disconnecting', () => {

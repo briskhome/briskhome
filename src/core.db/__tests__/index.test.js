@@ -5,133 +5,66 @@
 
 import plugin from '../';
 import mongoose from 'mongoose';
-import mockLog from 'core.log/__mocks__/index.mock.js';
+import log from 'core.log/__mocks__/index.mock.js';
 
-jest.unmock('../');
-jest.mock('mongoose', () => ({
-  connect: jest.fn(),
-  connection: {
-    on: jest.fn(),
-    once: jest.fn(),
-  },
-}));
-jest.mock('utilities/resources', () => ({ resources: () => [] }));
+jest.mock('mongoose');
+
+const options = { uri: 'mongodb://localhost:27017/' };
+const imports = {
+  app: { load: jest.fn() },
+  bus: { on: jest.fn(), emit: jest.fn() },
+  config: jest.fn(),
+  log,
+};
+
+const mockError = new Error('MockError');
 
 describe('core.db', () => {
-  let options;
-  let imports;
-
-  const mockBus = { on: jest.fn(), emit: jest.fn() };
-  const loader = { load: jest.fn() };
-  const config = jest.fn();
-
-  const mockError = new Error('MockError');
-
   beforeEach(() => {
     jest.clearAllMocks();
-    options = { uri: 'mongodb://localhost:27017/' };
-    imports = { bus: mockBus, config, loader, log: mockLog };
   });
 
-  it('connected', async done => {
-    plugin(options, imports, (...data) => {
-      const [error, db] = data;
-      expect(error).toBeNull();
-      expect(db).toBeTruthy();
-      done();
-    });
-
-    mongoose.connection.once.mock.calls.filter(
-      ([name]) => name === 'connected',
-    )[0][1]();
+  it('connected', async () => {
+    const result = await plugin(imports, options);
+    expect(mongoose.connect).toHaveBeenCalled();
+    expect(mongoose.connection.on).toHaveBeenCalledTimes(6);
+    expect(imports.app.load).toHaveBeenCalled();
   });
 
-  it('error', async done => {
-    plugin(options, imports, (...data) => {
-      const [error] = data;
-      expect(error).toEqual(mockError);
-      done();
-    });
-
-    mongoose.connection.on.mock.calls.filter(
-      ([name]) => name === 'error',
-    )[0][1](mockError);
+  it('error', async () => {
+    const result = plugin(imports, options);
+    mongoose.listeners['error'][0](mockError);
+    expect(mongoose.connect).toHaveBeenCalled();
   });
 
-  it('error when ready', async done => {
-    plugin(options, imports, (...data) => {
-      const [error] = data;
-      expect(error).toEqual(mockError);
-      done();
-    });
-
-    mockBus.on.mock.calls[0][1]();
-    mongoose.connection.on.mock.calls.filter(
-      ([name]) => name === 'error',
-    )[0][1](mockError);
+  it('error when ready', async () => {
+    const result = plugin(imports, options);
+    imports.bus.on.mock.calls[0][1]();
+    mongoose.listeners['error'][0](mockError);
+    expect(mongoose.connect).toHaveBeenCalled();
   });
 
-  it('connecting', async done => {
-    plugin(options, imports, (...data) => {
-      const [error, db] = data;
-      expect(error).toBeNull();
-      expect(db).toBeDefined();
-      done();
-    });
-
-    mongoose.connection.on.mock.calls.filter(
-      ([name]) => name === 'connecting',
-    )[0][1]();
-    mongoose.connection.once.mock.calls.filter(
-      ([name]) => name === 'connected',
-    )[0][1]();
+  it('connecting', async () => {
+    const result = plugin(imports, options);
+    mongoose.listeners['connecting'][0]();
+    expect(mongoose.connect).toHaveBeenCalled();
   });
 
-  it('disconnecting', async done => {
-    plugin(options, imports, (...data) => {
-      const [error, db] = data;
-      expect(error).toBeNull();
-      expect(db).toBeDefined();
-      done();
-    });
-
-    mongoose.connection.on.mock.calls.filter(
-      ([name]) => name === 'disconnecting',
-    )[0][1]();
-    mongoose.connection.once.mock.calls.filter(
-      ([name]) => name === 'connected',
-    )[0][1]();
+  it('disconnecting', async () => {
+    const result = plugin(imports, options);
+    mongoose.listeners['disconnecting'][0]();
+    expect(mongoose.connect).toHaveBeenCalled();
   });
 
-  it('disconnected', async done => {
-    plugin(options, imports, (...data) => {
-      const [error, db] = data;
-      expect(error).toBeNull();
-      expect(db).toBeDefined();
-      done();
-    });
-
-    mongoose.connection.on.mock.calls.filter(
-      ([name]) => name === 'disconnected',
-    )[0][1]();
-    mongoose.connection.once.mock.calls.filter(
-      ([name]) => name === 'connected',
-    )[0][1]();
+  it('disconnected', async () => {
+    const result = plugin(imports, options);
+    mongoose.listeners['disconnected'][0]();
+    expect(mongoose.connect).toHaveBeenCalled();
   });
 
-  it('reconnected', async done => {
-    plugin(options, imports, (...data) => {
-      const [error, db] = data;
-      expect(error).toBeNull();
-      expect(db).toBeDefined();
-      done();
-    });
-
-    mongoose.connection.on.mock.calls.filter(
-      ([name]) => name === 'reconnected',
-    )[0][1]();
-    mongoose.connection.once.mock.calls.filter(
-      ([name]) => name === 'connected',
-    )[0][1]();
+  it('reconnected', async () => {
+    const result = plugin(imports, options);
+    mongoose.listeners['reconnected'][0]();
+    expect(mongoose.connect).toHaveBeenCalled();
   });
 });
