@@ -39,6 +39,10 @@ export default (
     separator: '_',
     lowerCase: true,
     parseValues: true,
+    transform: ({ key, value }) =>
+      key.toUpperCase().startsWith('BRISKHOME_')
+        ? { key: key.substr(10), value }
+        : { key, value },
   });
   []
     .concat(

@@ -1,0 +1,102 @@
+version: 2
+workflows:
+  version: 2
+  tests:
+    jobs: 
+      - init
+      - lint:
+          requires:
+            - init
+      - flow:
+          requires:
+            - init
+      - test:
+          requires:
+            - init
+      - babel:
+          requires:
+            - lint
+            - flow
+            - test
+      - webpack:
+          requires:
+            - lint
+            - flow
+            - test
+      - run:
+          requires:
+            - babel
+            - webpack
+
+jobs:
+  init:
+    docker: &node
+      - image: 'node:8'
+    steps:
+      - checkout
+      - restore_cache: &restore_yarn_cache
+          name: Restore yarn cache
+          key: v1-briskhome-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install dependencies
+          command: yarn install
+      - save_cache:
+          name: Save yarn cache
+          key: v1-briskhome-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules/
+  lint:
+    docker: *node
+    steps:
+      - checkout
+      - restore_cache: *restore_yarn_cache
+      - run:
+          name: Lint
+          command: yarn lint
+  flow:
+    docker: *node
+    steps:
+      - checkout
+      - restore_cache: *restore_yarn_cache
+      - run: yarn flow
+  test:
+    docker: *node
+    steps:
+      - checkout
+      - restore_cache: *restore_yarn_cache
+      - run: yarn test --coverage
+      - run: yarn codecov
+  babel:
+    docker: *node
+    steps:
+      - checkout
+      - restore_cache: *restore_yarn_cache
+      - run: yarn babel
+      - save_cache:
+          name: Save compiled backend sources
+          key: v1-briskhome-babel-{{ .Revision }}
+          paths:
+            - lib/
+  webpack:
+    docker: *node
+    steps:
+      - checkout
+      - restore_cache: *restore_yarn_cache
+      - run: yarn webpack
+      - save_cache:
+          name: Save compiled frontend sources
+          key: v1-briskhome-webpack-{{ .Revision }}
+          paths:
+            - lib/core.webapp/public/assets/js
+  run:
+    docker: *node
+    steps:
+      - checkout
+      - restore_cache: *restore_yarn_cache
+      - restore_cache: &restore_babel_cache
+          name: Restore babel cache
+          key: v1-briskhome-babel-{{ .Revision }}
+      - restore_cache: &restore_webpack_cache
+          name: Restore webpack cache
+          key: v1-briskhome-webpack-{{ .Revision }}
+      - run: node lib/core.js --stop
