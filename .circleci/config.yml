@@ -23,18 +23,14 @@ workflows:
             - lint
             - flow
             - test
-      - run-lts:
-          requires:
-            - babel
-            - webpack
-      - run-current:
+      - run:
           requires:
             - babel
             - webpack
 
 jobs:
   init:
-    docker: &node-lts
+    docker: &node
       - image: 'node:8'
     steps:
       - checkout
@@ -50,7 +46,7 @@ jobs:
           paths:
             - node_modules/
   lint:
-    docker: *node-lts
+    docker: *node
     steps:
       - checkout
       - restore_cache: *restore_yarn_cache
@@ -58,20 +54,20 @@ jobs:
           name: Lint
           command: yarn lint
   flow:
-    docker: *node-lts
+    docker: *node
     steps:
       - checkout
       - restore_cache: *restore_yarn_cache
       - run: yarn flow
   test:
-    docker: *node-lts
+    docker: *node
     steps:
       - checkout
       - restore_cache: *restore_yarn_cache
       - run: yarn test --coverage
       - run: yarn codecov
   babel:
-    docker: *node-lts
+    docker: *node
     steps:
       - checkout
       - restore_cache: *restore_yarn_cache
@@ -82,7 +78,7 @@ jobs:
           paths:
             - lib/
   webpack:
-    docker: *node-lts
+    docker: *node
     steps:
       - checkout
       - restore_cache: *restore_yarn_cache
@@ -93,9 +89,8 @@ jobs:
           paths:
             - lib/core.webapp/public/assets/js
   run:
-    docker: &node-current
-      - image: 'node:10'
-    steps: &run-steps
+    docker: *node
+    steps:
       - checkout
       - restore_cache: *restore_yarn_cache
       - restore_cache: &restore_babel_cache
@@ -105,9 +100,3 @@ jobs:
           name: Restore webpack cache
           key: v1-briskhome-webpack-{{ .Revision }}
       - run: node lib/core.js --stop
-  run-lts:
-    docker: *node-lts
-    steps: *run-steps
-  run-current:
-    docker: *node-current
-    steps: *run-steps
