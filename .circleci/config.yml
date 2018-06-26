@@ -104,7 +104,7 @@ jobs:
       - restore_cache: &restore_webpack_cache
           name: Restore webpack cache
           key: v1-briskhome-webpack-{{ .Revision }}
-      - run: node lib/core.js
+      - run: node lib/core.js --stop
   run-lts:
     docker: *node-lts
     steps: *run-steps
