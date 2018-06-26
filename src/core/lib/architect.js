@@ -96,7 +96,7 @@ class Architect extends events.EventEmitter {
         if (args.length) {
           instance = await instance(...args);
         } else {
-          instance = await instance(options, imports);
+          instance = await instance(imports, options);
         }
       }
       if (!this.extensions[extension.type]) {

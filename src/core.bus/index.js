@@ -6,7 +6,7 @@
 import EventEmitter from 'eventemitter2';
 import type { CoreOptions, CoreImports } from '../utilities/coreTypes';
 
-export default (options: CoreOptions, imports: CoreImports) => {
+export default (imports: CoreImports, options: CoreOptions) => {
   const log = imports.log();
   const bus = new EventEmitter({
     delimiter: ':',

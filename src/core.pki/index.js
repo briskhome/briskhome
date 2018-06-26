@@ -9,7 +9,7 @@ import { spawn } from 'child_process';
 
 import type { CoreOptions, CoreImports } from '../utilities/coreTypes';
 
-export default (options: CoreOptions, imports: CoreImports) => {
+export default (imports: CoreImports, options: CoreOptions) => {
   const log = imports.log();
 
   /**

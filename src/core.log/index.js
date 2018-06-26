@@ -7,7 +7,7 @@ import bunyan from 'bunyan';
 import { getCallee, normalizeName } from '../utilities/helpers';
 import type { CoreOptions, CoreImports } from '../utilities/coreTypes';
 
-export default (options: CoreOptions, imports: CoreImports) => {
+export default (imports: CoreImports, options: CoreOptions) => {
   const log = bunyan.createLogger({
     name: 'briskhome',
     streams: [

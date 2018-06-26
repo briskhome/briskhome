@@ -28,7 +28,7 @@ import type {
 } from '../utilities/coreTypes';
 import type { EventType } from './models/EventModel';
 
-export default (options: CoreOptions, imports: CoreImports) => {
+export default (imports: CoreImports, options: CoreOptions) => {
   const db = imports.db;
   const bus = imports.bus;
   const log = imports.log();

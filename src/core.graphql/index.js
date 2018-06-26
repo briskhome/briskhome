@@ -15,7 +15,7 @@ import disableUser from './mutations/users/disableUser';
 import removeUser from './mutations/users/removeUser';
 import type { CoreOptions, CoreImports } from '../utilities/coreTypes';
 
-export default (options: CoreOptions, imports: CoreImports) => {
+export default (imports: CoreImports, options: CoreOptions) => {
   const schema = new GraphQLSchema({
     query: new GraphQLObjectType({
       name: 'RootQueryType',

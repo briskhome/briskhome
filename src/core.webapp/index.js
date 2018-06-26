@@ -16,7 +16,7 @@ import type { CoreOptions, CoreImports } from '../utilities/coreTypes';
 
 const MongoStore = mongoStore(session);
 
-export default (options: CoreOptions, imports: CoreImports) => {
+export default (imports: CoreImports, options: CoreOptions) => {
   const {
     db,
     graphql: { root, schema },
