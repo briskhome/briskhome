@@ -7,9 +7,9 @@ import fs from 'fs';
 import forge from 'node-forge';
 import { spawn } from 'child_process';
 
-import type { CoreOptions, CoreImports } from '../utilities/coreTypes';
+import type { CoreImports } from '../utilities/coreTypes';
 
-export default (imports: CoreImports, options: CoreOptions) => {
+export default (imports: CoreImports) => {
   const log = imports.log();
 
   /**

@@ -4,9 +4,9 @@
  */
 
 import Agenda from 'agenda';
-import type { CoreOptions, CoreImports } from '../utilities/coreTypes';
+import type { CoreImports } from '../utilities/coreTypes';
 
-export default (imports: CoreImports, options: CoreOptions) => {
+export default (imports: CoreImports) => {
   const { bus } = imports;
   const log = imports.log();
   const agenda = new Agenda({

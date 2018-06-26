@@ -55,46 +55,46 @@ export const Session = ({ db }: CoreImports) => {
   return db.model('SessionModel', SessionSchema);
 };
 
-type SessionType = {
-  cookie: SessionCookie,
-  passport: SessionPassport,
-  useragent: SessionUseragent,
-  issued: Date,
-  ip: string,
-};
+// type SessionType = {
+//   cookie: SessionCookie,
+//   passport: SessionPassport,
+//   useragent: SessionUseragent,
+//   issued: Date,
+//   ip: string,
+// };
 
-type SessionCookie = {
-  originalMaxAge: number,
-  expires: number,
-  secure: boolean,
-  httpOnly: boolean,
-  domain: string,
-  path: string,
-  sameSite: true,
-};
+// type SessionCookie = {
+//   originalMaxAge: number,
+//   expires: number,
+//   secure: boolean,
+//   httpOnly: boolean,
+//   domain: string,
+//   path: string,
+//   sameSite: true,
+// };
 
-type SessionPassport = {
-  user: {
-    username: string,
-    type: string,
-  },
-};
+// type SessionPassport = {
+//   user: {
+//     username: string,
+//     type: string,
+//   },
+// };
 
-type SessionUseragent = {
-  family: string,
-  major: string,
-  minor: string,
-  patch: string,
-  device: {
-    family: string,
-    major: string,
-    minor: string,
-    patch: string,
-  },
-  os: {
-    family: string,
-    major: string,
-    minor: string,
-    patch: string,
-  },
-};
+// type SessionUseragent = {
+//   family: string,
+//   major: string,
+//   minor: string,
+//   patch: string,
+//   device: {
+//     family: string,
+//     major: string,
+//     minor: string,
+//     patch: string,
+//   },
+//   os: {
+//     family: string,
+//     major: string,
+//     minor: string,
+//     patch: string,
+//   },
+// };

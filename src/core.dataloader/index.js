@@ -4,9 +4,9 @@
  */
 
 import Dataloader from './dataloader';
-import type { CoreOptions, CoreImports } from '../utilities/coreTypes';
+import type { CoreImports } from '../utilities/coreTypes';
 
-export default (imports: CoreImports, options: CoreOptions) => {
+export default (imports: CoreImports) => {
   const db = imports.db;
   const log = imports.log();
 

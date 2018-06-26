@@ -20,14 +20,10 @@ import {
   EVENT_UPDATE_SUCCESS,
 } from './constants';
 
-import type {
-  CoreOptions,
-  CoreImports,
-  SubscriptionType,
-} from '../utilities/coreTypes';
+import type { CoreImports, SubscriptionType } from '../utilities/coreTypes';
 import type { EventType } from './models/EventModel';
 
-export default (imports: CoreImports, options: CoreOptions) => {
+export default (imports: CoreImports) => {
   const db = imports.db;
   const bus = imports.bus;
   const log = imports.log();
