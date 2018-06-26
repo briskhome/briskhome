@@ -9,7 +9,6 @@ import {
   GraphQLObjectType,
   GraphQLList,
 } from 'graphql';
-import {} from '../../utilities/plugins';
 
 export default new GraphQLObjectType({
   name: 'Plugin',
