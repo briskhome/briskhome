@@ -20,9 +20,25 @@ class Architect extends events.EventEmitter {
   async load(type: string, options: { args: Array<any>, exec: boolean }) {
     const extensions = await this.resolve(type);
     log.debug(`Resolved ${extensions.length} extensions of type '${type}'`);
+
+    const failed = [];
     for (const extension of extensions) {
-      log.trace({ extension: extension.name, type }, `Will register extension`);
-      await this.register(extension, options);
+      try {
+        if (extension.dependencies.every(d => !failed.includes(d))) {
+          log.trace(
+            { extension: extension.name, type: extension.type },
+            `Trying to register an extension`,
+          );
+          await this.register(extension, options);
+        } else {
+          log.info(
+            { extension: extension.name, type: extension.type },
+            'Skipping the extension because a dependecy has failed',
+          );
+        }
+      } catch (err) {
+        failed.push(extension.name);
+      }
     }
 
     return this.extensions[type];
@@ -132,15 +148,27 @@ class Architect extends events.EventEmitter {
 
       this.extensions[extension.type][extension.name] = instance;
       this.emit(extension.type, instance);
-    } catch (e) {
+
+      log.info(
+        { extension: extension.name, type: extension.type },
+        'Registered a new extension',
+      );
+    } catch (err) {
+      log.warn(
+        { extension: extension.name, type: extension.type },
+        `Could not load extension, skipping dependents`,
+      );
+      log.debug(
+        { extension: extension.name, type: extension.type, err },
+        'An unhandled exception prevented extension from loading',
+      );
+
+      this.ex;
+
       const { name: id, type, metadata: { name: source } } = extension;
       const msg = `Failed to load extension '${id}'. All dependencies will be skipped as well.`;
       const code = 'ERR_REGISTER_FAILED';
-      console.log(e);
-      this.emit(
-        'error',
-        new ArchitectError(msg, code, { id, type, source, err: e }),
-      );
+      throw new ArchitectError(msg, code, { id, type, source, err: err });
     }
   }
 
