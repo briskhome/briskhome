@@ -18,7 +18,7 @@ import {
 import type { Extensions, PackageJson } from '../types';
 
 const readdirAsync = promisify(fs.readdir);
-const realpathAsync = promisify(fs.realpath.native);
+const realpathAsync = promisify(fs.realpath);
 
 class Config {
   directories: string[];
