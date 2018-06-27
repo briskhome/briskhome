@@ -1,4 +1,4 @@
-import SessionSchema, { SessionModel } from '../SessionModel';
+import { Session, SessionModel } from '../SessionModel';
 
 const data = {
   cookie: {},
@@ -77,7 +77,7 @@ describe('core.webapp -> models', () => {
     });
 
     it('compiles', () => {
-      SessionSchema({ db: mockDb });
+      Session({ db: mockDb });
       expect(mockDb.model).toHaveBeenCalled();
     });
   });
