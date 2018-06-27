@@ -96,9 +96,7 @@ describe('core.notifications', () => {
     db.model.mockReturnValueOnce(UserModel);
     getCallee.mockReturnValueOnce('core.notifications');
 
-    sut(options, imports, (...result) => {
-      component = result[1].notifications;
-    });
+    component = sut(imports, options);
   });
 
   beforeEach(() => {
