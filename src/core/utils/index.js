@@ -27,7 +27,7 @@ export const isExtension = (obj: Object) => {
 
 //
 const EXT_TIMEOUT = 'Extension failed to load within 1000ms timeout';
-export const timeout = (t: number = 1000) => {
+export const timeout = (t: number = 1000): Promise<any> => {
   return new Promise((unused, reject) =>
     setTimeout(() => reject(new ArchitectError(EXT_TIMEOUT, 'EXT_TIMEOUT')), t),
   );
@@ -67,7 +67,7 @@ export const maybeExtension = async (dir: string): Promise<boolean> => {
   );
 };
 
-export const write = (err: Error) => {
+export const write = (err: string) => {
   const writeln = (message, data = {}) =>
     process.stdout.write(
       JSON.stringify({

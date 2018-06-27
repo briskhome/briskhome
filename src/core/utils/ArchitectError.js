@@ -1,7 +1,11 @@
 /* @flow */
 
 class ArchitectError extends Error {
-  constructor(message: string, code: string, data: Object) {
+  code: string;
+  message: string;
+  data: ?Object;
+
+  constructor(message: string, code: string, data: ?Object = null) {
     super(message);
     this.message = message;
     this.code = code;

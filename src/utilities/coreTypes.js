@@ -27,6 +27,7 @@ export type CoreOptions = {
 };
 
 export type CoreImports = {
+  app: { load: Function },
   bus: Object,
   config: () => Object,
   dataloader: Function,

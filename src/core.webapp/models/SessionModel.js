@@ -27,7 +27,7 @@ export class SessionModel /* :: extends Mongoose$Document */ {
     return this.session.issued;
   }
 
-  static async fetchByUsername(username: string): Promise<Session[]> {
+  static async fetchByUsername(username: string): Promise<SessionModel[]> {
     return this.find({ 'session.passport.user.username': username });
   }
 }

@@ -6,10 +6,12 @@
  *  <index.js>
  */
 
+// $FlowFixMe
 import Architect from './lib/architect';
 import * as briskhome from './package.json';
 import { briskhomeAsciiLogo } from '../utilities/constants';
 import { dump, write } from './utils';
+// $FlowFixMe
 import { MODULE_EXTENSIONS } from './lib/constants';
 
 process.on('unhandledRejection', err => dump(err));

@@ -6,7 +6,7 @@
 import mongoose from 'mongoose';
 import type { CoreOptions, CoreImports } from '../utilities/coreTypes';
 
-export default (imports: CoreImports, options: CoreOptions) => {
+export default (imports: CoreImports, options: CoreOptions): any => {
   const { uri } = options;
   const app = imports.app;
   const bus = imports.bus;
