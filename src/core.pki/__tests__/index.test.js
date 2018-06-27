@@ -35,9 +35,7 @@ describe('core.pki', () => {
   });
 
   beforeEach(() => {
-    plugin(options, imports, (...exports) => {
-      sut = exports[1].pki;
-    });
+    sut = plugin(imports, options);
   });
 
   describe('#generateRequest()', () => {
