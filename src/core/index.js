@@ -14,6 +14,14 @@ import { dump, write } from './utils';
 // $FlowFixMe
 import { MODULE_EXTENSIONS } from './lib/constants';
 
+if (!process.argv.includes('--ugly')) {
+  process.stdout.write('\u001b[2J\u001b[0;0H');
+  process.stdout.write(briskhomeAsciiLogo);
+  process.title = 'briskhome';
+}
+
+write(`Initializing Briskhome v${briskhome.version}`);
+
 process.on('unhandledRejection', err => dump(err));
 
 (async () => {
@@ -37,11 +45,3 @@ process.on('unhandledRejection', err => dump(err));
 
   bus.on('core:error', (err: Error) => dump(err));
 })();
-
-if (!process.argv.includes('--ugly')) {
-  process.stdout.write('\u001b[2J\u001b[0;0H');
-  process.stdout.write(briskhomeAsciiLogo);
-  process.title = 'briskhome';
-}
-
-write(`Initializing Briskhome v${briskhome.version}`);

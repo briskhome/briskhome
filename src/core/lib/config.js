@@ -6,6 +6,7 @@
 import fs from 'fs';
 import path from 'path';
 import { promisify } from 'util';
+import logger from './logger';
 import ArchitectError from '../utils/ArchitectError';
 import {
   flatten,
@@ -17,6 +18,7 @@ import {
 } from '../utils';
 import type { Extensions, PackageJson } from '../types';
 
+const log = logger('core');
 const readdirAsync = promisify(fs.readdir);
 const realpathAsync = promisify(fs.realpath);
 
@@ -35,15 +37,20 @@ class Config {
   }
 
   async discover() {
+    log.debug(`Scanning ['${this.directories.join(', ')}'] for extensions`);
     const buckets = await Promise.all(
       this.directories.map(directory => readdirAsync(directory)),
     );
 
-    return flatten(
+    const packages = flatten(
       buckets.map((directories, index) =>
         directories.map(dir => path.resolve(this.directories[index], dir)),
       ),
     );
+
+    log.trace(`Found ${packages.length} packages in target directories`);
+
+    return packages;
   }
 
   async prepareExtensions(directories: Array<string>, base: string) {
@@ -55,6 +62,7 @@ class Config {
     const extensions = flatten(
       modules.filter(extension => !(extension instanceof ArchitectError)),
     );
+    log.debug(`Found ${extensions.length} packages that contain extensions`);
     return extensions.reduce((extensions, extension) => {
       if (!extensions[extension.type]) extensions[extension.type] = [];
       extensions[extension.type].push(extension);

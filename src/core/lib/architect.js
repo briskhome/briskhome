@@ -18,8 +18,9 @@ class Architect extends events.EventEmitter {
   }
 
   async load(type: string, options: { args: Array<any>, exec: boolean }) {
+    log.debug({ type }, `Resolving extensions from config`);
     const extensions = await this.resolve(type);
-    log.debug(`Resolved ${extensions.length} extensions of type '${type}'`);
+    log.debug({ type }, `Resolved ${extensions.length} extensions`);
 
     const failed = [];
     for (const extension of extensions) {
@@ -46,7 +47,7 @@ class Architect extends events.EventEmitter {
 
   async resolve(type: string) {
     const extensions = [...(type in this.config ? this.config[type] : [])];
-    if (!extensions.length) return [];
+    if (!extensions.length) return extensions;
 
     const sorted = [];
     const resolved = [];
@@ -54,38 +55,35 @@ class Architect extends events.EventEmitter {
     let shouldRetry = true;
     while (extensions.length && shouldRetry) {
       shouldRetry = false;
-      extensions.forEach(extension => {
-        log.trace(
-          { extension: extension.name, type },
-          `Will resolve extension`,
-        );
-        const consumes = [...extension.dependencies];
+      for (const extension of extensions) {
+        log.trace({ extension: extension.name, type }, `Resolving extension`);
+        const dependencies = [...extension.dependencies];
 
         let didResolve = true;
-        for (let i = 0; i < consumes.length; i += 1) {
-          const service = consumes[i];
+        for (let i = 0; i < dependencies.length; i += 1) {
+          const service = dependencies[i];
           if (!resolved.includes(service)) {
             didResolve = false;
           } else {
-            consumes.splice(consumes.indexOf(service));
+            dependencies.splice(dependencies.indexOf(service));
           }
         }
 
         if (!didResolve) {
           log.trace(
             { extension: extension.name, type },
-            `Skipping because of unmet dependencies '${consumes.join("', '")}'`,
+            `Unmet dependencies: ['${dependencies.join("', '")}']`,
           );
-          return;
+          continue;
         }
 
-        log.trace({ extension: extension.name, type }, `Dependencies are met`);
+        log.trace({ extension: extension.name, type }, `Dependencies OK`);
 
         extensions.splice(extensions.indexOf(extension), 1);
         resolved.push(extension.name);
         sorted.push(extension);
         shouldRetry = true;
-      });
+      }
     }
 
     if (extensions.length) {
@@ -155,15 +153,9 @@ class Architect extends events.EventEmitter {
       );
     } catch (err) {
       log.warn(
-        { extension: extension.name, type: extension.type },
-        `Could not load extension, skipping dependents`,
-      );
-      log.debug(
         { extension: extension.name, type: extension.type, err },
-        'An unhandled exception prevented extension from loading',
+        `Failed to load extension`,
       );
-
-      this.ex;
 
       const { name: id, type, metadata: { name: source } } = extension;
       const msg = `Failed to load extension '${id}'. All dependencies will be skipped as well.`;
