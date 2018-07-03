@@ -34,7 +34,7 @@ class Architect extends events.EventEmitter {
         } else {
           log.info(
             { extension: extension.name, type: extension.type },
-            'Skipping the extension because a dependecy has failed',
+            'Skipping the extension because a dependency has failed',
           );
         }
       } catch (err) {
