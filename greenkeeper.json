@@ -1,0 +1,19 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "package.json",
+        "src/core.agenda/package.json",
+        "src/core.bus/package.json",
+        "src/core.config/package.json",
+        "src/core.dataloader/package.json",
+        "src/core.db/package.json",
+        "src/core.graphql/package.json",
+        "src/core.log/package.json",
+        "src/core.notifications/package.json",
+        "src/core.pki/package.json",
+        "src/core.webapp/package.json"
+      ]
+    }
+  }
+}

@@ -8,6 +8,6 @@
     "provides": ["agenda"]
   },
   "dependencies": {
-    "agenda": "^0.9.1"
+    "agenda": "^1.0.3"
   }
 }
