@@ -92,7 +92,7 @@
     "react": "16.2.0",
     "react-apollo": "1.4.15",
     "react-aria-menubutton": "^5.0.2",
-    "react-dom": "16.2.0",
+    "react-dom": "16.2.1",
     "react-dropdown": "heuels/react-dropdown#disabled_classname",
     "react-flexbox-grid": "^1.1.3",
     "react-grid-layout": "^0.16.2",
