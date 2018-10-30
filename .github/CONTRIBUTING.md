@@ -1,30 +1,25 @@
-First off, let me thank you for your interest in contributing to this project! **Briskhome** is free open-source software and I strongly believe that together we can create a better experience for developers and users alike.
+First off, let me thank you for your interest in contributing to this project! **BRISKHOME** is free open-source software and I strongly believe that together we can create a better experience for developers and users alike.
 
 Here are several ways you can get involved:
-1. **Coding**. If you speak fluent JavaScript and are not afraid of words *flow*, *babel*, *dataloader* and *jest* then bravely step onboard! Take a look at currently open issues and pick something you fancy.
+
+1. **Coding**. If you speak fluent JavaScript and are not afraid of words _Babel_, _Flow_ and _Webpack_ then bravely step onboard! Take a look at currently open issues and pick something you fancy.
 2. **Documenting**. If you don't want to code new features but still want to be a part of the team we invite you to try documenting the application. We have a separate repository dedicated to documentation, feel free to jump onboard!
 3. **Envisioning**. One word – **suggest**! From a one-sentence issue to a complitated tech story – every piece helps. Your ideas help us create our dreams.
 
+### Workflow
 
-### Setup and workflow
-We impose several restrictions that are aimed at keeping our code base nice and clean. First, `master` and `develop` branches are protected. It means that only they cannot be pushed to directly and their history cannot be rewritten. You can rely on them in your workflow.
-* `master` branch always contains a stable tagged version of the package that ready for deploying. For your convenience up-to-date `deb` and `rpm` packages are available from **[releases](https://github.com/briskhome/briskhome/releases)** page.
-* `develop` branch contains more-or-less stable code that is usually ahead of `master`. Pull requests should be opened against `develop`.
+We impose several restrictions that are aimed at keeping our code base nice and clean. First, `master` branch is protected – meaning that it cannot be pushed to directly and its history will never be rewritten. You can rely on it in your workflow.
 
-#### Coding.
-When you have chosen the issue you want to jump on you need to fork the project, create a new branch and immediately open a pull-request. Why? To let us know that you are working on this issue and to make use of our awesome status checks.  
-> **Naming conventions**: Prefix you pull request title with a number of the issue it resolves in square brackets. Then include a one-sentence description of what it does. It's that simple! Here are some examples:  
-> - `[#51] Add CONTRIBUTING.markdown`  
-> - `[#62] Fix colons in 'getCallee()' output`  
+### Coding
 
-By the way, do not be afraid to rewrite history of your branch. In fact, we even prefer rebasing to other means of bringing the branch up to date and making commits more senseful.
+When you have chosen the issue you want to jump on and forked the project we suggest you immediately open a new pull request. It will let us know that you're working the issue and will automatically run status checks for your code.
 
-#### Status checks.
-Every time you push new commits to your pull request they are automatically checked by several code quality tools. This includes linting your code, testing it and calculating code coverage. We also collect code quality information with CodeClimate, but this is purely informational – you choose whether to listen to it or not. But all other status checks are required and must pass in order for pull request to be merged.  
+Do not be afraid to rewrite history of your branch. In fact, merge commits are prohibited in this repository – please use `git rebase` to bring your branch up to date. It you ever need help rebasing feel free to mention the `@briskhome/core` team in a comment asking for help!
 
-#### Merging.
-When you will have finished implementing your awesome feature and all status checks pass you need to request a review from any **Briskhome** team member. You can ping @briskhome/core in your PR or just assign someone directly. Note that we may ask you to rebase it onto `develop` branch – this is our preferred way of bringing branches up to date.
+### Status checks
 
-#### Pull requests
-Pull requests are the only way to get code into `develop` branch and then to `master`. Each pull request has to be approved by a @briskhome/core team member in order to be merged. If after you began implementing your feature someone managed to slip a new commit into `develop` you would need to rebase your branch onto the updated `develop` branch.  
-If you ever need help with rebasing and/or your pull request feel free to mention us in your pull request – we would be happy to help!
+Every time you push new commits to your branch (provided you've opened a pull request) they will automatically be checked by several code quality tools. This includes linting your code, testing it and calculating code coverage. Some of the checks are required — your pull request could not be merged unless they pass.
+
+### Merging
+
+When you will have finished implementing your awesome feature and all status checks pass, request a review from `@briskhome/core` team by mentioning them in a comment. Note that we may ask you to rebase it onto `master` branch – this is our preferred way of bringing branches up to date.
