@@ -34,7 +34,6 @@ workflows:
             branches:
               only:
                 - master
-                - deploy
 
 jobs:
   init:
