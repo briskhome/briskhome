@@ -18,7 +18,7 @@
     "test": "node_modules/.bin/jest --testPathPattern='__tests__'",
     "test-css": "node_modules/.bin/jest --testPathPattern='__css__' --env='./utilities/jest/chromeEnvironment.js'",
     "test-e2e": "node_modules/.bin/jest --testPathPattern='__e2e__' --env='./utilities/jest/chromeEnvironment.js'",
-    "postinstall": "npm config set briskhome_dir /opt/briskhome",
+    "heroku-postbuild": "yarn build",
     "webpack": "node_modules/.bin/webpack --config ./src/core.webapp/webpack.config.js --context ./src/core.webapp",
     "webpack-watch": "node_modules/.bin/webpack --config ./src/core.webapp/webpack.config.js --context ./src/core.webapp --watch",
     "start-storybook": "start-storybook -c ./src/core.webapp/.storybook -p 6006",
