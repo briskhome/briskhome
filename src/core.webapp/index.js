@@ -98,7 +98,7 @@ export default (
     res.sendFile(path.resolve(__dirname, 'index.html'));
   });
 
-  app.listen(4000, '0.0.0.0');
+  app.listen(process.env.PORT || 4000, '0.0.0.0');
 
   return register(null, { webapp: app });
 };
