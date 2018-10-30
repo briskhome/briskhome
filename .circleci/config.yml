@@ -2,7 +2,7 @@ version: 2
 workflows:
   version: 2
   tests:
-    jobs: 
+    jobs:
       - init
       - lint:
           requires:
@@ -27,6 +27,13 @@ workflows:
           requires:
             - babel
             - webpack
+      - deploy:
+          requires:
+            - run
+          filters:
+            branches:
+              only:
+                - master
 
 jobs:
   init:
@@ -100,3 +107,10 @@ jobs:
           name: Restore webpack cache
           key: v1-briskhome-webpack-{{ .Revision }}
       - run: node lib/core.js --stop
+  deploy:
+    docker: *node
+    steps:
+      - checkout
+      - run:
+          name: Deploy to Heroku
+          command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
