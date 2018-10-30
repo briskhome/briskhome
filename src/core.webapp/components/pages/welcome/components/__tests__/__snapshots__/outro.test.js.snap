@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.webapp -> components -> pages -> welcome -> outro renders 1`] = `
+Array [
+  <span
+    class="briskhome-icon briskhome-icon__party briskhome-welcome__image"
+  />,
+  <h2
+    class="briskhome-title briskhome-title_medium"
+  >
+    Thank you!
+  </h2>,
+  <p
+    class="briskhome-welcome__text"
+  >
+    Thank you, your Briskhome installation is now complete.
+  </p>,
+  <a
+    class="briskhome-button briskhome-button_yellow briskhome-button_caps briskhome-button_inline-block briskhome-wizard__button-next"
+    href="#"
+    role="button"
+    target="_self"
+    type="button"
+  >
+    Begin your journey
+  </a>,
+]
+`;
+
+exports[`core.webapp -> components -> pages -> welcome -> outro renders 2`] = `
+Array [
+  <span
+    class="briskhome-icon briskhome-icon__party briskhome-welcome__image"
+  />,
+  <h2
+    class="briskhome-title briskhome-title_medium"
+  >
+    Thank you!
+  </h2>,
+  <p
+    class="briskhome-welcome__text"
+  >
+    Preparing Briskhome for its first visitor...
+  </p>,
+]
+`;

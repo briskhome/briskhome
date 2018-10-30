@@ -1,120 +1,132 @@
 .briskhome-page
   padding-top 40px
-  
+
 .preferences
   padding-bottom 16px
+
   &__list-item
     display block
     padding 16px
     border 1px solid #efefef
     background-color white
-    // & + &
-      // border-top 1px dashed #efefef
+
     &:first-child
-      border-top-right-radius 8px
       border-top-left-radius 8px
+      border-top-right-radius 8px
+
     &:last-child
       border-bottom-right-radius 8px
       border-bottom-left-radius 8px
-    
+
   &-pane__subtitle
-    color #b9b9b9
     padding 16px
     border-bottom 1px solid #efefef
+    color #b9b9b9
     text-transform uppercase
+
   &-pane__content
-    border-radius 8px
-    border 1px solid #efefef
-    background-color white
     min-height 460px
     padding 16px
+    border 1px solid #efefef
+    border-radius 8px
+    background-color white
+
     h3
-      color #b9b9b9
-      font-size 14px
-      text-transform uppercase
       margin-bottom 16px
       padding 16px
       border-bottom 1px solid #efefef
+      color #b9b9b9
+      text-transform uppercase
+      font-size 14px
+
     &-input
       width 300px
-    
+
 .plugin
   &__name
     display inline-block
     font-weight 500
+
   &__disabled
     display inline-block
     float right
+
   &__description
     margin 16px 0
-    font-size 14px
     color #b9b9b9
-  &__provides, &__consumes
+    font-size 14px
+
+  &__provides,
+  &__consumes
     margin-top 8px
     font-size 14px
+
     &-title
-      text-transform uppercase
       margin-right 8px
+      text-transform uppercase
+
     &-item
       margin 8px 0 8px 2px
       padding 2px 4px
       border-radius 4px
       background #2766A8 + 90%
-  // &-service
-      
 
 .briskhome__sidenav
   border 1px solid #efefef
   border-radius 4px
-  & + &  
+
+  & + &
     margin-top 20px
+
   &-link
-    position: relative;
-    display: block;
-    padding: 8px 16px;
-    border-bottom: 1px solid #efefef;
-    color: #2766A8//0366d6;
+    position relative
+    display block
+    padding 8px 16px
+    border-bottom 1px solid #efefef
     background-color white
-    text-decoration: none;
+    color #2766A8 // 0366d6;
+    text-decoration none
+
   &-title
-    display: block;
-    padding: 8px 16px;
-    margin-top: 0;
-    margin-bottom: 0;
+    display block
+    margin-top 0
+    margin-bottom 0
+    padding 8px 16px
+    background-color #efefef
+    color black
     // font-size: 16px;
-    font-weight: 600;
-    line-height: 24px;
-    color: black;
-    background-color: #efefef;
+    font-weight 600
+    line-height 24px
     // border-bottom: 1px solid #e1e4e8;
 
 .briskhome__sidebar
-  width 290px
   float left
-  
+  width 290px
+
   table + table
     margin-top 32px
-  
+
   table
-    width 100%
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    border-radius 16px
     overflow hidden
-      
+    width 100%
+    border-radius 16px
+    box-shadow 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)
+
     td
       padding 16px 20px
 
     thead
       border-bottom 1px solid #eaeaea
+
       td
-        font-weight bold
         background-color #efefef
+        font-weight bold
 
     tbody
       td
         padding
 
 .briskhome__content
-  margin-left 310px
   // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   height 100%
+  margin-left 310px

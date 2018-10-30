@@ -7,7 +7,6 @@ import { graphql, compose } from 'react-apollo';
 import Avatar from '../../avatar';
 import Card from '../../card';
 import Menu from '../../ui/menu';
-import AddUserSheet from '../../onboarding/addUserSheet';
 import { users as UsersQuery, removeUser } from './graphql';
 import './users.styl';
 import './modal.styl';
@@ -105,7 +104,7 @@ export class UserCard extends React.Component<UserCardProps, UserCardState> {
           }}
           portalClassName="briskhome-modal"
         >
-          <AddUserSheet />
+          <div>AddUserSheet</div>
         </Modal>
       </div>
     );

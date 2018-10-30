@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.webapp -> components -> pages -> welcome -> createAccount renders 1`] = `
+<CreateAccountSlide>
+  <Icon
+    className="briskhome-welcome__image"
+    name="head"
+  >
+    <span
+      className="briskhome-icon briskhome-icon__head briskhome-welcome__image"
+    />
+  </Icon>
+  <Component
+    medium={true}
+  >
+    <h2
+      className="briskhome-title briskhome-title_medium"
+    >
+      How can we call you?
+    </h2>
+  </Component>
+  <p
+    className="briskhome-welcome__text"
+  >
+    Just trying to get to know you better.
+    <br />
+    Cross my silicone heart!
+  </p>
+  <Component
+    autoComplete="given-name"
+    name="first-name"
+    onChange={[Function]}
+    onFocus={[Function]}
+    placeholder="First name"
+    valid={true}
+  >
+    <label
+      className="briskhome-label briskhome-label_input"
+    >
+      <input
+        autoComplete="given-name"
+        className="briskhome-input"
+        name="first-name"
+        onChange={[Function]}
+        onFocus={[Function]}
+        placeholder="First name"
+      />
+    </label>
+  </Component>
+  <Component
+    autoComplete="family-name"
+    name="last-name"
+    onChange={[Function]}
+    onFocus={[Function]}
+    placeholder="Last name"
+    valid={true}
+  >
+    <label
+      className="briskhome-label briskhome-label_input"
+    >
+      <input
+        autoComplete="family-name"
+        className="briskhome-input"
+        name="last-name"
+        onChange={[Function]}
+        onFocus={[Function]}
+        placeholder="Last name"
+      />
+    </label>
+  </Component>
+  <Component
+    next={[Function]}
+  >
+    <div
+      className="briskhome-wizard__footer-controls briskhome-wizard__footer-controls_right"
+    >
+      <Component
+        caps={true}
+        className="briskhome-wizard__button-next"
+        display="inline-block"
+        large={true}
+        link=""
+        loading={false}
+        onClick={[Function]}
+        yellow={true}
+      >
+        <a
+          className="briskhome-button briskhome-button_yellow briskhome-button_caps briskhome-button_inline-block briskhome-wizard__button-next"
+          href="#"
+          onClick={[Function]}
+          role="button"
+          target="_self"
+          type="button"
+        >
+          Next
+        </a>
+      </Component>
+    </div>
+  </Component>
+</CreateAccountSlide>
+`;

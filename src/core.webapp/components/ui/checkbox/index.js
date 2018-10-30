@@ -6,6 +6,7 @@ type CheckboxProps = {
   name?: string,
   checked: boolean,
   disabled?: boolean,
+  display?: 'inline' | 'inline-block' | 'block',
   className?: string,
   onChange: () => void,
   children: React.Node,
@@ -14,6 +15,7 @@ type CheckboxProps = {
 export const Checkbox = ({
   name = '',
   checked,
+  display = 'inline-block',
   disabled = false,
   className,
   onChange,
@@ -21,10 +23,15 @@ export const Checkbox = ({
 }: CheckboxProps) => {
   return (
     <label
-      className={cn('briskhome-checkbox', className, {
-        'briskhome-checkbox_checked': checked,
-        'briskhome-checkbox_disabled': disabled,
-      })}
+      className={cn(
+        'briskhome-checkbox',
+        `briskhome-checkbox_${display}`,
+        className,
+        {
+          'briskhome-checkbox_checked': checked,
+          'briskhome-checkbox_disabled': disabled,
+        },
+      )}
     >
       <input
         className={cn('briskhome-checkbox__input', {

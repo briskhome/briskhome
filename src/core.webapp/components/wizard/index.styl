@@ -1,102 +1,81 @@
-.briskhome-wizard {
+.briskhome-wizard
   position relative
 
-  &__footer {
-    margin 20px -20px 0
-    padding 20px 20px 20px
+  &__footer
     width 100%
-    
-    &-controls {
+    margin 20px -20px 0
+    padding 20px
+
+    &-controls
       display flex
       margin-top 20px
 
-      &_left {
+      &_left
         justify-content flex-start
-      }
 
-      &_justify {
+      &_justify
         justify-content space-between
-      }
 
-      &_right {
+      &_right
         justify-content flex-end
-      }
-    }
-  }
 
-  &__button {
-    &-prev {
-      font-size 14px !important
-      font-weight 300 !important
+  &__button
+    &-prev
       color #999999 !important
+      font-weight 300 !important
+      font-size 14px !important
       justify-self left
-    }
 
-    &_hidden {
+    &_hidden
       visibility hidden
-    }
-  }
 
-  &__stepper {
+  &__stepper
     display flex
     justify-content space-between
     margin 0 -20px 20px
     padding 0 20px 20px
 
-    ../__step {
-      &:not(:last-of-type) {
-        display flex
+    ../__step
+      &:not(:last-of-type)
         position relative
+        display flex
         width 100%
 
-        &:after {
-          @media only screen and (min-width: 993px) {
-            content ''
+        &:after
+          @media only screen and (min-width: 993px)
             position absolute
-            display inline-block
-            height 1px
-            background-color #efefef
+            top 50%
             right 0
             left 20px
+            display inline-block
             width calc(100% - 40px)
-            top 50%
+            height 1px
             margin-left 16px
-          }
-        }
-      }
+            background-color #efefef
+            content ''
 
-      &>&-circle {
-        height 15px
-        width 15px
+      &>&-circle
         display inline-block
-        font-weight 300
-        border 1px solid #fafafa
-        background-color #fafafa
+        width 15px
+        height 15px
         padding 8px
+        border 1px solid #fafafa
         border-radius 16px
+        background-color #fafafa
         color #999
-      }
+        font-weight 300
 
-      &_active {
-        &>^[-1]-circle {
+      &_active
+        &>^[-1]-circle
           border 1px solid #F9D21C
           color #F9D21C
-        }
-      }
 
-      &_complete {
-        &>^[-1]-circle {
+      &_complete
+        &>^[-1]-circle
           border 1px solid #F9D21C
           background-color #F9D21C
           color white
-        }
 
-        &:after {
-          @media only screen and (min-width: 993px) {
+        &:after
+          @media only screen and (min-width: 993px)
             background-color #F9D21C !important
-          }
-        }
-      }
-    }
-  }
-}
