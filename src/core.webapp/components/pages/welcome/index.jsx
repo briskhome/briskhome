@@ -43,6 +43,9 @@ export class Welcome extends React.Component<WelcomeProps, {}> {
 }
 
 export default compose(
-  connect((state: BriskhomeState) => state, () => ({})),
+  connect(
+    (state: BriskhomeState) => state,
+    () => ({}),
+  ),
   graphql(welcomeQuery),
 )(Welcome);

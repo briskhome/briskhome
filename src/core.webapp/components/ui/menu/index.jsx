@@ -21,7 +21,11 @@ export default ({ className, trigger, options, arrow }: MenuProps) => {
         {trigger} {arrow && <div className="briskhome-menu__arrow" />}
       </DropdownTrigger>
       <DropdownContent className="briskhome-menu__content">
-        <ul>{options.map(option => <li>{option}</li>)}</ul>
+        <ul>
+          {options.map(option => (
+            <li>{option}</li>
+          ))}
+        </ul>
       </DropdownContent>
     </Dropdown>
   );

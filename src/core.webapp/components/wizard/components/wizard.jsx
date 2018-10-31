@@ -31,13 +31,22 @@ export class Wizard extends React.Component<WizardProps, WizardState> {
   }
 
   renderIntro(): React.Node {
-    const { intro: Intro, wizard: { currentSlide } } = this.props;
+    const {
+      intro: Intro,
+      wizard: { currentSlide },
+    } = this.props;
     if (currentSlide >= 0 || !Intro) return null;
     return <Intro next={this.props.next} />;
   }
 
   renderChildren(): React.Node {
-    const { prev, next, goto, slides, wizard: { currentSlide } } = this.props;
+    const {
+      prev,
+      next,
+      goto,
+      slides,
+      wizard: { currentSlide },
+    } = this.props;
     const nav = { prev, next, goto };
     return slides.map(
       (Slide, idx) => (idx === currentSlide ? <Slide {...nav} /> : null),
@@ -45,7 +54,10 @@ export class Wizard extends React.Component<WizardProps, WizardState> {
   }
 
   renderOutro(): React.Node {
-    const { outro: Outro, wizard: { currentSlide, totalSlides } } = this.props;
+    const {
+      outro: Outro,
+      wizard: { currentSlide, totalSlides },
+    } = this.props;
     if (currentSlide < totalSlides || !Outro) return null;
     return <Outro prev={this.props.prev} />;
   }
@@ -89,4 +101,7 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Wizard);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Wizard);

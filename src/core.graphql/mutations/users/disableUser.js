@@ -36,7 +36,9 @@ export default {
   },
   resolve: async (obj: Object, args: Object, context: Context) => {
     const { db } = context;
-    const { input: { username } } = args;
+    const {
+      input: { username },
+    } = args;
     const User = db.model('core:user');
     const user = await User.findOne({ _id: username });
     user.isDisabled = true;

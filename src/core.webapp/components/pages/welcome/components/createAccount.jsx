@@ -36,7 +36,10 @@ export class CreateAccountSlide extends React.Component<
 
   next(): void {
     const errors = [];
-    const { data, data: { firstName, lastName } } = this.state;
+    const {
+      data,
+      data: { firstName, lastName },
+    } = this.state;
     if (!firstName || !firstName.length) errors.push('E_INVALID_FIRSTNAME');
     if (!lastName || !lastName.length) errors.push('E_INVALID_LASTNAME');
     if (errors.length) return this.setState({ errors });
@@ -50,7 +53,9 @@ export class CreateAccountSlide extends React.Component<
         <Icon name="head" className="briskhome-welcome__image" />
         <Title medium>How can we call you?</Title>
         <p className="briskhome-welcome__text">
-          Just trying to get to know you better.<br />Cross my silicone heart!
+          Just trying to get to know you better.
+          <br />
+          Cross my silicone heart!
         </p>
         <Input
           name="first-name"

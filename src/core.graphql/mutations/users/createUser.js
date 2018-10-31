@@ -79,7 +79,9 @@ export default {
   resolve: async (obj: Object, args: Object, context: Context) => {
     const { db, log } = context;
     log.info({ mutation: 'createUser' }, { args });
-    const { input: { lastName, firstName, password, type } } = args;
+    const {
+      input: { lastName, firstName, password, type },
+    } = args;
     const User = db.model('core:user');
     const user = new User({
       username: await generateUsername({ db, lastName, firstName }),

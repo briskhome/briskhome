@@ -374,8 +374,9 @@ describe('utilities/architect', () => {
         app.on('error', e => {
           expect(e).toBeInstanceOf(Error);
           expect(e.message).toBe(
-            `Plugin failed to provide ${config[1]
-              .provides[0]} service. ${JSON.stringify(config[1])}`,
+            `Plugin failed to provide ${
+              config[1].provides[0]
+            } service. ${JSON.stringify(config[1])}`,
           );
         });
         process.nextTick(async () => app.loadPlugins(config));
