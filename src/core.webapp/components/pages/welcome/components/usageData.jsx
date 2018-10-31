@@ -33,7 +33,9 @@ export class UsageDataSlide extends React.Component<
   }
 
   render() {
-    const { data: { checked } } = this.state;
+    const {
+      data: { checked },
+    } = this.state;
     return (
       <React.Fragment>
         <img

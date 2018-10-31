@@ -24,7 +24,9 @@ export class OutroSlide extends React.Component<
 > {
   async componentDidMount() {
     const {
-      wizard: { slides: { firstName, lastName, password } },
+      wizard: {
+        slides: { firstName, lastName, password },
+      },
     } = this.props;
     await this.props.mutate({
       variables: {
@@ -72,7 +74,10 @@ export class OutroSlide extends React.Component<
 
 export default withRouter(
   compose(
-    connect((state: BriskhomeState) => state, () => ({})),
+    connect(
+      (state: BriskhomeState) => state,
+      () => ({}),
+    ),
     graphql(createUser),
   )(OutroSlide),
 );

@@ -57,7 +57,9 @@ export class Login extends React.Component<LoginProps, LoginState> {
 
     let user: ?User;
     try {
-      ({ data: { login: user } } = await mutate({
+      ({
+        data: { login: user },
+      } = await mutate({
         variables: {
           username,
           password,

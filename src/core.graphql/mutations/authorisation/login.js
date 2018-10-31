@@ -55,8 +55,16 @@ export default {
     },
   },
   resolve: async (obj: Object, args: LoginInput, context: Context) => {
-    const { db, log, login, req, req: { headers, ip } } = context;
-    const { input: { username, password } } = args;
+    const {
+      db,
+      log,
+      login,
+      req,
+      req: { headers, ip },
+    } = context;
+    const {
+      input: { username, password },
+    } = args;
 
     log.info({ mutation: 'authorisation.login' });
 
@@ -64,7 +72,7 @@ export default {
     const user = await UserModel.fetchByUsername(username, { lean: true });
 
     if (!user) throw new Error('E_INVALID_USERNAME');
-    if (!await bcrypt.compare(password, user.password))
+    if (!(await bcrypt.compare(password, user.password)))
       throw new Error('E_INVALID_PASSWORD');
 
     try {

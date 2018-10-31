@@ -41,7 +41,9 @@ export class CreatePasswordSlide extends React.Component<
 
   next(): void {
     const errors = [];
-    const { data: { password, repeat } } = this.state;
+    const {
+      data: { password, repeat },
+    } = this.state;
     if (!password || !password.length) errors.push('E_INVALID_PASSWORD');
     if (!repeat || !repeat.length || (repeat.length && repeat !== password))
       errors.push('E_INVALID_REPEAT');

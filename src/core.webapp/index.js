@@ -25,7 +25,10 @@ export default (
   imports: CoreImports,
   register: CoreRegister,
 ) => {
-  const { db, graphql: { root, schema } } = imports;
+  const {
+    db,
+    graphql: { root, schema },
+  } = imports;
   const log = imports.log();
 
   const app = express();

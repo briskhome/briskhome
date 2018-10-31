@@ -44,4 +44,9 @@ export const DashboardHeader = ({ user }: DashboardHeaderProps) => {
   );
 };
 
-export default compose(connect(state => state, () => ({})))(DashboardHeader);
+export default compose(
+  connect(
+    state => state,
+    () => ({}),
+  ),
+)(DashboardHeader);

@@ -32,7 +32,10 @@ export class UserCard extends React.Component<UserCardProps, UserCardState> {
   };
 
   renderContent: Function = () => {
-    const { data: { users = [] }, mutate } = this.props;
+    const {
+      data: { users = [] },
+      mutate,
+    } = this.props;
     if (!users.length) {
       return (
         <span className="card__content_empty">No users are registered.</span>
@@ -111,7 +114,9 @@ export class UserCard extends React.Component<UserCardProps, UserCardState> {
   };
 
   render() {
-    const { data: { error, loading } } = this.props;
+    const {
+      data: { error, loading },
+    } = this.props;
     return (
       <Card
         error={error}
@@ -127,4 +132,7 @@ export class UserCard extends React.Component<UserCardProps, UserCardState> {
   }
 }
 
-export default compose(graphql(UsersQuery), graphql(removeUser))(UserCard);
+export default compose(
+  graphql(UsersQuery),
+  graphql(removeUser),
+)(UserCard);

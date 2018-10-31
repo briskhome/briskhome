@@ -40,8 +40,15 @@ export default {
     },
   },
   resolve: async (obj: Object, args: LogoutInput, context: Context) => {
-    const { db, log, logout, req: { sessionID, user } } = context;
-    const { input: { id = sessionID } } = args;
+    const {
+      db,
+      log,
+      logout,
+      req: { sessionID, user },
+    } = context;
+    const {
+      input: { id = sessionID },
+    } = args;
 
     log.info({ mutation: 'authorisation.logout' });
     const Session: SessionModel = db.model('SessionModel');
