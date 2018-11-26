@@ -157,7 +157,11 @@ class Architect extends events.EventEmitter {
         `Failed to load extension`,
       );
 
-      const { name: id, type, metadata: { name: source } } = extension;
+      const {
+        name: id,
+        type,
+        metadata: { name: source },
+      } = extension;
       const msg = `Failed to load extension '${id}'. All dependencies will be skipped as well.`;
       const code = 'ERR_REGISTER_FAILED';
       throw new ArchitectError(msg, code, { id, type, source, err: err });
