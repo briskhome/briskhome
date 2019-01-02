@@ -85,7 +85,7 @@
     "nconf": "0.10.0",
     "node-forge": "^0.7.4",
     "node-telegram-bot-api": "^0.21.1",
-    "nodemon": "^1.11.0",
+    "nodemon": "^1.14.3",
     "passport": "^0.4.0",
     "properties": "1.2.1",
     "rc-menu": "^5.0.10",
