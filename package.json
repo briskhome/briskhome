@@ -70,7 +70,7 @@
   "dependencies": {
     "agenda": "1.0.0",
     "async": "^2.1.4",
-    "bcrypt": "^1.0.3",
+    "bcrypt": "^2.0.0",
     "bunyan": "^1.8.1",
     "connect-mongodb-session": "^1.4.0",
     "cookie-parser": "^1.4.3",
