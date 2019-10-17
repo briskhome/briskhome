@@ -81,7 +81,7 @@
     "express-session": "^1.15.6",
     "graphql": "0.11.7",
     "graphql-tools": "^1.0.0",
-    "mongoose": "4.11.14",
+    "mongoose": "5.7.5",
     "nconf": "0.10.0",
     "node-forge": "^0.7.4",
     "node-telegram-bot-api": "^0.21.1",
