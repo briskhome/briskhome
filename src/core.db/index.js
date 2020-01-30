@@ -8,9 +8,10 @@ import type { CoreOptions, CoreImports } from '../utilities/coreTypes';
 
 export default (imports: CoreImports, options: CoreOptions): any => {
   const { uri } = options;
-  const app = imports.app;
-  const bus = imports.bus;
-  const log = imports.log();
+  const {
+    core: { app, bus },
+  } = imports;
+  const log = imports.core.log();
 
   let ready = false;
   bus.on('core:ready', () => (ready = true));

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.graphql -> mutations -> authorisation -> logout mutation 1`] = `
+Object {
+  "data": Object {
+    "logout": Object {
+      "result": true,
+    },
+  },
+}
+`;
+
+exports[`core.graphql -> mutations -> authorisation -> logout mutation with error during logout 1`] = `
+Object {
+  "data": Object {
+    "logout": Object {
+      "result": true,
+    },
+  },
+}
+`;
+
+exports[`core.graphql -> mutations -> authorisation -> logout mutation with invalid session 1`] = `
+Object {
+  "data": Object {
+    "logout": null,
+  },
+  "errors": Array [
+    [GraphQLError: ACCESS_DENIED],
+  ],
+}
+`;
+
+exports[`core.graphql -> mutations -> authorisation -> logout mutation with valid session 1`] = `
+Object {
+  "data": Object {
+    "logout": Object {
+      "result": true,
+    },
+  },
+}
+`;

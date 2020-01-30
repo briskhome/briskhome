@@ -7,11 +7,13 @@ import Agenda from 'agenda';
 import type { CoreImports } from '../utilities/coreTypes';
 
 export default (imports: CoreImports): Agenda => {
-  const { bus } = imports;
-  const log = imports.log();
+  const {
+    core: { bus },
+  } = imports;
+  const log = imports.core.log();
   const agenda = new Agenda({
     db: { collection: 'jobs' },
-    mongo: imports.db.connections[0],
+    mongo: imports.core.db.connections[0],
   });
 
   agenda.define('com.briskhome.job.poll', function(job, done) {

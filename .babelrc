@@ -1,11 +1,13 @@
 {
-  "presets": ["flow", "react"],
+  "presets": [],
   "plugins": [
-    "babel-plugin-idx",
-    "transform-class-properties",
-    "transform-inline-imports-commonjs",
-    "transform-object-rest-spread",
-    ["module-resolver", { "root": ["./src"] }]
+    // "babel-plugin-idx",
+    // "@babel/plugin-proposal-class-properties",
+    // "@babel/plugin-transform-modules-commonjs",
+    // "@babel/plugin-proposal-object-rest-spread",
+    // "@babel/plugin-transform-member-expression-literals",
+    ["module-resolver", { "root": ["./src"] }],
+    "babel-plugin-flow-to-typescript"
   ],
   "ignore": ["./**/**/__mocks__"]
 }

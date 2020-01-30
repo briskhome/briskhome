@@ -47,8 +47,12 @@ export default () => {
       }),
     );
 
-  return (name?: string) =>
-    name
+  console.log('==>', nconf.get('core:db'));
+
+  return (name?: string) => {
+    console.log({ name, res: nconf.get(name.replace('.', ':')) });
+    return name
       ? nconf.get(name.replace('.', ':'))
       : nconf.get(getCallee().replace('.', ':'));
+  };
 };

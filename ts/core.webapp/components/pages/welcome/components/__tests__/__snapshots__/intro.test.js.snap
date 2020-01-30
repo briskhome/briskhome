@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.webapp -> components -> pages -> welcome -> intro renders 1`] = `
+<IntroSlide>
+  <Icon
+    className="briskhome-welcome__image"
+    name="love"
+  >
+    <span
+      className="briskhome-icon briskhome-icon__love briskhome-welcome__image"
+    />
+  </Icon>
+  <Component
+    medium={true}
+  >
+    <h2
+      className="briskhome-title briskhome-title_medium"
+    >
+      Nice to meet you!
+    </h2>
+  </Component>
+  <p
+    className="briskhome-welcome__text"
+  >
+    We are thrilled to have you on board and looking forward to a great journey together!
+  </p>
+  <p
+    className="briskhome-welcome__text"
+  >
+    Shall we begin?
+  </p>
+  <Component
+    next={[Function]}
+  >
+    <div
+      className="briskhome-wizard__footer-controls briskhome-wizard__footer-controls_right"
+    >
+      <Component
+        caps={true}
+        className="briskhome-wizard__button-next"
+        display="inline-block"
+        large={true}
+        link=""
+        loading={false}
+        onClick={[Function]}
+        yellow={true}
+      >
+        <a
+          className="briskhome-button briskhome-button_yellow briskhome-button_caps briskhome-button_inline-block briskhome-wizard__button-next"
+          href="#"
+          onClick={[Function]}
+          role="button"
+          target="_self"
+          type="button"
+        >
+          Next
+        </a>
+      </Component>
+    </div>
+  </Component>
+</IntroSlide>
+`;

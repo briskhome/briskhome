@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.webapp -> components -> pages -> welcome -> usageData renders 1`] = `
+<UsageDataSlide>
+  <img
+    alt="Briskhome"
+    className="briskhome-welcome__image"
+    src="/static/assets/img/bigcc1f7840d4786edfdb97196e7aa8fd5e.png"
+  />
+  <Component
+    medium={true}
+  >
+    <h2
+      className="briskhome-title briskhome-title_medium"
+    >
+      One last thing
+    </h2>
+  </Component>
+  <p
+    className="briskhome-welcome__text"
+  >
+    Do you mind sharing anonymous statistics about the way you use Briskhome?
+  </p>
+  <Component
+    checked={true}
+    onChange={[Function]}
+  >
+    <label
+      className="briskhome-checkbox briskhome-checkbox_inline-block briskhome-checkbox_checked"
+    >
+      <input
+        className="briskhome-checkbox__input"
+        name=""
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="briskhome-checkbox__content"
+      >
+        Sharing is caring, sign me up
+      </span>
+    </label>
+  </Component>
+  <Component
+    next={[Function]}
+    prev={[Function]}
+  >
+    <div
+      className="briskhome-wizard__footer-controls briskhome-wizard__footer-controls_justify"
+    >
+      <Component
+        className="briskhome-wizard__button-prev"
+        display="inline-block"
+        link=""
+        onClick={[Function]}
+      >
+        <a
+          className="briskhome-button briskhome-button_inline-block briskhome-wizard__button-prev"
+          href="#"
+          onClick={[Function]}
+          role="button"
+          target="_self"
+          type="button"
+        >
+          Go Back
+        </a>
+      </Component>
+      <Component
+        caps={true}
+        className="briskhome-wizard__button-next"
+        display="inline-block"
+        large={true}
+        link=""
+        loading={false}
+        onClick={[Function]}
+        yellow={true}
+      >
+        <a
+          className="briskhome-button briskhome-button_yellow briskhome-button_caps briskhome-button_inline-block briskhome-wizard__button-next"
+          href="#"
+          onClick={[Function]}
+          role="button"
+          target="_self"
+          type="button"
+        >
+          Next
+        </a>
+      </Component>
+    </div>
+  </Component>
+</UsageDataSlide>
+`;

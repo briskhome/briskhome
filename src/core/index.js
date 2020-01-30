@@ -26,9 +26,11 @@ process.on('unhandledRejection', err => dump(err));
 
 (async () => {
   const app = await Architect.create();
+  console.log(JSON.stringify(app.config, null, '  '));
   app.on('error', err => write(err));
   try {
-    await app.load(MODULE_EXTENSIONS);
+    const res = await app.load(MODULE_EXTENSIONS);
+    console.log({ res });
   } catch (err) {
     return dump(err);
   }

@@ -1,0 +1,17 @@
+{
+  "name": "@briskhome/core.log",
+  "version": "0.4.0",
+  "main": "index.js",
+  "author": "Egor Zaitsev <ezaitsev@briskhome.com>",
+  "dependencies": {
+    "bunyan": "^1.8.10",
+    "bunyan-syslog":
+      "github:mcavage/node-bunyan-syslog#9bdb9eb62a763c7d30e032a619138032d5ff8771"
+  },
+  "peerDependencies": {
+    "@briskhome/core": "0.4.0"
+  },
+  "extensions": {
+    "com.briskhome.module": [{}]
+  }
+}

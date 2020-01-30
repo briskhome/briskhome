@@ -37,7 +37,7 @@ class Config {
   }
 
   async discover() {
-    log.debug(`Scanning ['${this.directories.join(', ')}'] for extensions`);
+    log.debug(`Scanning ['${this.directories.join("', '")}'] for extensions`);
     const buckets = await Promise.all(
       this.directories.map(directory => readdirAsync(directory)),
     );

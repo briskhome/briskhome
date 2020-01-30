@@ -24,9 +24,9 @@ import type { CoreImports, SubscriptionType } from '../utilities/coreTypes';
 import type { EventType } from './models/EventModel';
 
 export default (imports: CoreImports) => {
-  const db = imports.db;
-  const bus = imports.bus;
-  const log = imports.log();
+  const db = imports.core.db;
+  const bus = imports.core.bus;
+  const log = imports.core.log();
 
   const EventModel = db.model('core:event');
   const UserModel = db.model('core:user');

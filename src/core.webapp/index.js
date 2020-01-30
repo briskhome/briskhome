@@ -18,10 +18,12 @@ const MongoStore = mongoStore(session);
 
 export default (imports: CoreImports, options: CoreOptions) => {
   const {
-    db,
-    graphql: { root, schema },
+    core: {
+      db,
+      graphql: { root, schema },
+    },
   } = imports;
-  const log = imports.log();
+  const log = imports.core.log();
 
   const app = express();
   app.use(cookieParser());
@@ -76,8 +78,8 @@ export default (imports: CoreImports, options: CoreOptions) => {
       schema,
       context: {
         ...imports,
-        dataloader: imports.dataloader(),
-        log: imports.log('core.graphql'),
+        dataloader: imports.core.dataloader(),
+        log: imports.core.log('core.graphql'),
         req,
         res,
         login: promisify(req.login).bind(req),

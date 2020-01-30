@@ -1,0 +1,94 @@
+// Settings
+// ==================================================
+hamburger-padding-x = 16px
+hamburger-padding-y = 16px
+hamburger-layer-width = 24px
+hamburger-layer-height = 3px
+hamburger-layer-spacing = 4px // 6
+hamburger-layer-color = #f9d21d
+hamburger-layer-border-radius = 2px // 4px
+hamburger-hover-opacity = 0.7
+hamburger-hover-transition-duration = 0.15s
+
+hamburger-hover-transition-timing-function: linear,
+hamburger-hover-use-filter= false,
+hamburger-hover-filter = opacity(50%),
+.hamburger
+  display block
+  overflow visible
+  margin 0
+  padding hamburger-padding-y hamburger-padding-x
+  border 0
+  background-color transparent
+  color inherit
+  text-transform none
+  // Normalize (<button>)
+  font inherit
+  cursor pointer
+  transition-timing-function hamburger-hover-transition-timing-function
+  transition-duration hamburger-hover-transition-duration
+  transition-property opacity, filter
+
+  &:hover
+    // if hamburger-hover-use-filter is true
+    filter hamburger-hover-filter
+    // opacity: hamburger-hover-opacity
+
+.hamburger-box
+  position relative
+  display inline-block
+  width hamburger-layer-width
+  height hamburger-layer-height * 3 + hamburger-layer-spacing * 2
+
+.hamburger-inner
+  display block
+  // top: 50%
+  margin-top hamburger-layer-height / -2
+
+  &,
+  &::before,
+  &::after
+    position absolute
+    width hamburger-layer-width
+    height hamburger-layer-height
+    border-radius hamburger-layer-border-radius
+    background-color hamburger-layer-color
+    transition-timing-function ease
+    transition-duration 0.15s
+    transition-property transform
+
+  &::before,
+  &::after
+    display block
+    content ''
+
+  &::before
+    top (hamburger-layer-spacing + hamburger-layer-height) * -1
+
+  &::after
+    bottom (hamburger-layer-spacing + hamburger-layer-height) * -1
+
+/*
+ * 3DX
+ */
+.hamburger--3dx
+  .hamburger-box
+    perspective hamburger-layer-width * 2
+
+  .hamburger-inner
+    transition transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1), background-color 0 0.1s cubic-bezier(0.645, 0.045, 0.355, 1)
+
+    &::before,
+    &::after
+      transition transform 0 0.1s cubic-bezier(0.645, 0.045, 0.355, 1)
+
+  &.is-active
+    .hamburger-inner
+      background-color transparent
+      transform rotateY(180deg)
+
+      &::before
+        transform translate3d(0, hamburger-layer-height + hamburger-layer-spacing, 0) rotate(45deg)
+
+      &::after
+        transform translate3d(0, (hamburger-layer-height + hamburger-layer-spacing) * -1, 0) rotate(-45deg)

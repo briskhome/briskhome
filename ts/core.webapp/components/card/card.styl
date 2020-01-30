@@ -1,0 +1,65 @@
+.card
+  display inline-block
+  width 300px
+  border-radius 15px
+  background-color white
+  box-shadow 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)
+
+  &__content
+    border-top-left-radius 15px
+    border-top-right-radius 15px
+    transition max-height 1s ease
+
+    > img
+      max-height 100%
+      width 100%
+
+    &_empty
+      display inline-block
+      margin 16px
+      // font-size 16px
+
+  &__footer
+    position relative
+    overflow hidden
+    padding 16px
+    border-top 1px solid #eaeaea
+    border-bottom-right-radius 16px
+    border-bottom-left-radius 16px
+
+  &__title
+    line-height 1.25
+
+    // font-size 16px
+    &+&
+      margin-top 4px
+
+    &_gray
+      color #8E8E93
+
+    &_small
+      font-size 14px
+
+    &_uppercase
+      text-transform uppercase
+
+  &__action
+    position absolute
+    top 0
+    right 0
+    padding 28px 16px 28px 0
+    // background-color white
+    box-shadow -4px 0 4px 4px white
+
+    &-link
+      overflow hidden
+      max-width 100px
+      padding 4px 16px
+      border-radius 41px
+      background-color #F0F1F6
+      color #007AFF
+      text-transform uppercase
+      cursor pointer
+
+.card + .card
+  margin-left 20px

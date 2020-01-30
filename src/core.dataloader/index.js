@@ -7,8 +7,8 @@ import Dataloader from './dataloader';
 import type { CoreImports } from '../utilities/coreTypes';
 
 export default (imports: CoreImports) => {
-  const db = imports.db;
-  const log = imports.log();
+  const db = imports.core.db;
+  const log = imports.core.log();
 
   const Device = db.model('core:device');
   const Sensor = db.model('core:sensor');

@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.graphql -> mutations -> users -> createUser mutation 1`] = `
+Object {
+  "data": Object {
+    "createUser": Object {
+      "firstName": "john",
+      "lastName": "doe",
+      "type": "regular",
+      "username": "jdoe",
+    },
+  },
+}
+`;
+
+exports[`core.graphql -> mutations -> users -> createUser mutation with existing username 1`] = `
+Object {
+  "data": Object {
+    "createUser": Object {
+      "firstName": "john",
+      "lastName": "doe",
+      "type": "regular",
+      "username": "jdoe",
+    },
+  },
+}
+`;

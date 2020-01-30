@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.graphql -> queries -> users query 1`] = `
+Object {
+  "data": Object {
+    "users": Array [
+      Object {
+        "name": "John Doe",
+        "type": "regular",
+        "username": "jdoe",
+      },
+    ],
+  },
+}
+`;
+
+exports[`core.graphql -> queries -> users query by username 1`] = `
+Object {
+  "data": Object {
+    "users": Array [
+      Object {
+        "name": "John Doe",
+        "type": "regular",
+        "username": "jdoe",
+      },
+    ],
+  },
+}
+`;

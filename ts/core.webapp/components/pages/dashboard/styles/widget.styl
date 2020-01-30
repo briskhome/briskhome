@@ -1,0 +1,46 @@
+.dashboard-widget
+  height 100%
+
+  &__header
+    position relative
+    height 32px
+    padding 8px
+
+    &-button
+      position absolute
+      top 16px
+      right 8px
+      display inline-block
+      float right
+      color #999
+      text-decoration none
+      font-size 10px
+
+      &_dots
+        width 16px
+        height 36px
+        word-wrap break-word
+        font-size 6px !important
+
+    &-menu
+      padding 2px 4px
+      letter-spacing 2px
+      font-size 10px
+
+    &-title
+      display block
+      margin-right -8px
+      margin-left -8px
+      padding 8px 16px
+      border-top 1px dashed #efefef
+      border-bottom 1px dashed #efefef
+      background-color #fafafa
+      color #999
+      text-transform uppercase
+      letter-spacing 1px
+      font-weight 500
+      font-size 14px !important
+
+  &__content
+    overflow scroll
+    height calc(100% - 48px)

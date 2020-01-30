@@ -1,0 +1,68 @@
+header
+  border-bottom 1px solid #eeeeee
+  background-color white
+
+  nav
+    display flex
+    max-height 64px
+    margin auto
+    padding 0 40px
+
+    > button
+      flex 1 auto
+      height 24px
+      margin 16px
+
+    > a > img
+      height 32px
+      margin-top 16px
+      margin-right 16px
+      margin-bottom 16px
+
+    > ul
+      display flex
+      list-style none
+
+      > li
+        display inline-flex
+
+        > a
+          padding 24px 16px
+          color black
+          text-decoration none
+          font-weight 500
+
+          &.active
+            border-bottom 3px solid #F9D21C
+
+    .briskhome-menu__content
+      top 50px
+      right -10px
+
+    .profile
+      display flex
+      margin-left auto
+      font-weight 500
+      cursor pointer
+
+      &__arrow
+        display inline-block
+        margin-bottom 2px
+        margin-left 8px
+        padding 3px
+        border solid #b9b9b9
+        border-width 0 2px 2px 0
+        transform rotate(45deg)
+
+      .briskhome-avatar
+        display inline-block
+        width 42px
+        height 42px
+        border 1px solid #b9b9b9
+        border-radius 50px
+        vertical-align middle
+
+      &__title
+        display inline-block
+        margin 24px 16px
+        vertical-align middle

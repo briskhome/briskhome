@@ -1,0 +1,201 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.webapp -> components -> pages -> dashboard -> header renders in the afternoon 1`] = `
+<div
+  class="dashboard-header"
+>
+  <h1
+    class="briskhome-title briskhome-title_large dashboard-header__title"
+  >
+    Have a good afternoon, Example
+  </h1>
+  <div
+    class="dashboard-header__status dashboard-header__status_good"
+  >
+    <p
+      class="dashboard-header__status-text"
+    >
+      Everything is doing great. 
+      <a
+        class="dashboard-header__status-link"
+        href="#"
+      >
+        See status.
+      </a>
+    </p>
+  </div>
+  <div
+    class="dashboard-header__card-container"
+  >
+    <div
+      class="dashboard-header__card-container-fade_left"
+    />
+    <a
+      class="dashboard-card"
+      href="#"
+    >
+      <span
+        class="briskhome-icon briskhome-icon__add dashboard-card__icon"
+      />
+      <p
+        class="dashboard-card__status"
+      >
+        Click here to add a new room to your house.
+      </p>
+    </a>
+    <div
+      class="dashboard-header__card-container-fade_right"
+    />
+  </div>
+</div>
+`;
+
+exports[`core.webapp -> components -> pages -> dashboard -> header renders in the evening 1`] = `
+<div
+  class="dashboard-header"
+>
+  <h1
+    class="briskhome-title briskhome-title_large dashboard-header__title"
+  >
+    Have a good evening, Example
+  </h1>
+  <div
+    class="dashboard-header__status dashboard-header__status_good"
+  >
+    <p
+      class="dashboard-header__status-text"
+    >
+      Everything is doing great. 
+      <a
+        class="dashboard-header__status-link"
+        href="#"
+      >
+        See status.
+      </a>
+    </p>
+  </div>
+  <div
+    class="dashboard-header__card-container"
+  >
+    <div
+      class="dashboard-header__card-container-fade_left"
+    />
+    <a
+      class="dashboard-card"
+      href="#"
+    >
+      <span
+        class="briskhome-icon briskhome-icon__add dashboard-card__icon"
+      />
+      <p
+        class="dashboard-card__status"
+      >
+        Click here to add a new room to your house.
+      </p>
+    </a>
+    <div
+      class="dashboard-header__card-container-fade_right"
+    />
+  </div>
+</div>
+`;
+
+exports[`core.webapp -> components -> pages -> dashboard -> header renders in the morning 1`] = `
+<div
+  class="dashboard-header"
+>
+  <h1
+    class="briskhome-title briskhome-title_large dashboard-header__title"
+  >
+    Have a good morning, Example
+  </h1>
+  <div
+    class="dashboard-header__status dashboard-header__status_good"
+  >
+    <p
+      class="dashboard-header__status-text"
+    >
+      Everything is doing great. 
+      <a
+        class="dashboard-header__status-link"
+        href="#"
+      >
+        See status.
+      </a>
+    </p>
+  </div>
+  <div
+    class="dashboard-header__card-container"
+  >
+    <div
+      class="dashboard-header__card-container-fade_left"
+    />
+    <a
+      class="dashboard-card"
+      href="#"
+    >
+      <span
+        class="briskhome-icon briskhome-icon__add dashboard-card__icon"
+      />
+      <p
+        class="dashboard-card__status"
+      >
+        Click here to add a new room to your house.
+      </p>
+    </a>
+    <div
+      class="dashboard-header__card-container-fade_right"
+    />
+  </div>
+</div>
+`;
+
+exports[`core.webapp -> components -> pages -> dashboard -> header renders in the night 1`] = `
+<div
+  class="dashboard-header"
+>
+  <h1
+    class="briskhome-title briskhome-title_large dashboard-header__title"
+  >
+    Have a good night, Example
+  </h1>
+  <div
+    class="dashboard-header__status dashboard-header__status_good"
+  >
+    <p
+      class="dashboard-header__status-text"
+    >
+      Everything is doing great. 
+      <a
+        class="dashboard-header__status-link"
+        href="#"
+      >
+        See status.
+      </a>
+    </p>
+  </div>
+  <div
+    class="dashboard-header__card-container"
+  >
+    <div
+      class="dashboard-header__card-container-fade_left"
+    />
+    <a
+      class="dashboard-card"
+      href="#"
+    >
+      <span
+        class="briskhome-icon briskhome-icon__add dashboard-card__icon"
+      />
+      <p
+        class="dashboard-card__status"
+      >
+        Click here to add a new room to your house.
+      </p>
+    </a>
+    <div
+      class="dashboard-header__card-container-fade_right"
+    />
+  </div>
+</div>
+`;

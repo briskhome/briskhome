@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.webapp -> ui -> Input renders 1`] = `
+<Component>
+  <label
+    className="briskhome-label briskhome-label_input"
+  >
+    <input
+      className="briskhome-input"
+    />
+  </label>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> Input renders in disabled state  1`] = `
+<Component
+  disabled={true}
+>
+  <label
+    className="briskhome-label briskhome-label_input"
+  >
+    <input
+      className="briskhome-input briskhome-input_disabled"
+      disabled={true}
+    />
+  </label>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> Input renders in valid state  1`] = `
+<Component
+  valid={true}
+>
+  <label
+    className="briskhome-label briskhome-label_input"
+  >
+    <input
+      className="briskhome-input"
+    />
+  </label>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> Input renders with provided autoComplete 1`] = `
+<Component
+  autoComplete="username"
+>
+  <label
+    className="briskhome-label briskhome-label_input"
+  >
+    <input
+      autoComplete="username"
+      className="briskhome-input"
+    />
+  </label>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> Input renders with provided caption 1`] = `
+<Component
+  caption="Lorem ipsum"
+>
+  <label
+    className="briskhome-label briskhome-label_input"
+  >
+    <input
+      className="briskhome-input"
+    />
+    <span
+      className="anim_show_block briskhome-label briskhome-label_gray briskhome-label_small briskhome-label__caption"
+    >
+      Lorem ipsum
+    </span>
+  </label>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> Input renders with provided className 1`] = `
+<Component
+  className="lorem-ipsum"
+>
+  <label
+    className="lorem-ipsum briskhome-label briskhome-label_input"
+  >
+    <input
+      className="lorem-ipsum briskhome-input"
+    />
+  </label>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> Input renders with provided label 1`] = `
+<Component
+  label="Lorem ipsum"
+>
+  <label
+    className="briskhome-label briskhome-label_input"
+  >
+    <span
+      className="briskhome-label briskhome-label__text _label"
+    >
+      Lorem ipsum
+    </span>
+    <input
+      className="briskhome-input"
+    />
+  </label>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> Input renders with provided name 1`] = `
+<Component
+  name="lorem"
+>
+  <label
+    className="briskhome-label briskhome-label_input"
+  >
+    <input
+      className="briskhome-input"
+      name="lorem"
+    />
+  </label>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> Input renders with provided onBlur event handler 1`] = `
+<Component
+  onBlur={[Function]}
+>
+  <label
+    className="briskhome-label briskhome-label_input"
+  >
+    <input
+      className="briskhome-input"
+      onBlur={[Function]}
+    />
+  </label>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> Input renders with provided onChange event handler 1`] = `
+<Component
+  onChange={[Function]}
+>
+  <label
+    className="briskhome-label briskhome-label_input"
+  >
+    <input
+      className="briskhome-input"
+      onChange={[Function]}
+    />
+  </label>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> Input renders with provided onFocus event handler 1`] = `
+<Component
+  onFocus={[Function]}
+>
+  <label
+    className="briskhome-label briskhome-label_input"
+  >
+    <input
+      className="briskhome-input"
+      onFocus={[Function]}
+    />
+  </label>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> Input renders with provided placeholder 1`] = `
+<Component
+  placeholder="Username"
+>
+  <label
+    className="briskhome-label briskhome-label_input"
+  >
+    <input
+      className="briskhome-input"
+      placeholder="Username"
+    />
+  </label>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> Input renders with provided type 1`] = `
+<Component
+  type="lorem"
+>
+  <label
+    className="briskhome-label briskhome-label_input"
+  >
+    <input
+      className="briskhome-input"
+      type="lorem"
+    />
+  </label>
+</Component>
+`;
+
+exports[`core.webapp -> ui -> Input renders with provided value 1`] = `
+<Component
+  value="lorem"
+>
+  <label
+    className="briskhome-label briskhome-label_input"
+  >
+    <input
+      className="briskhome-input"
+      value="lorem"
+    />
+  </label>
+</Component>
+`;

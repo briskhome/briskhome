@@ -1,0 +1,25 @@
+# Wizard settings
+
+type WizardProps = {
+  
+}
+
+type WizardSlide = {
+  title: ?string = null,
+  subtitle: ?string = null,
+  questions: WizardQuestion[]
+}
+
+type WizardQuestion = {
+  id: string,
+  title: ?string,
+  required: ?boolean = false,
+  default: ?string = null,
+  placeholder: ?string = null,
+  settings: WizardSetting[],
+}
+
+type WizardSetting = {
+  key: string,
+  value: string,
+}

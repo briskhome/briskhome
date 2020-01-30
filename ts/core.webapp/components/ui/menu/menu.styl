@@ -1,0 +1,99 @@
+.briskhome-menu
+  position relative
+  display inline-block
+  height 100%
+  outline none
+  border none
+  background none
+  color #999
+  cursor pointer
+
+  &__item
+    width 100px
+    padding 8px 16px
+    font-size 14px
+    cursor pointer
+
+    &:hover
+      background-color #fafafa
+
+    &_red
+      color #cf4b5d
+
+      &:hover
+        background-color #CF4B5D + 95%
+
+  &__separator
+    margin 4px 8px
+    border 1px solid #efefef
+
+  &__arrow
+    display inline-block
+    margin 8px
+    padding 3px
+    border solid #b9b9b9
+    border-width 0 2px 2px 0
+    vertical-align middle
+    cursor pointer
+    transform rotate(45deg)
+
+  &__content
+    position absolute
+    top 32px
+    right -12px
+    // margin-top 8px
+    // margin-left -126px
+    z-index 2
+    display none
+    border 1px solid #b9b9b9
+    border-radius 4px
+    background-color white
+    box-shadow 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+
+    &:after,
+    &:before
+      position absolute
+      right 10%
+      bottom 100%
+      width 0
+      height 0
+      border solid transparent
+      content ' '
+      pointer-events none
+
+    &:after
+      margin-right -1px
+      border-width 9px
+      border-color rgba(255, 255, 255, 0)
+      border-bottom-color #fff
+
+    &:before
+      margin-right -3px
+      border-width 11px
+      border-color rgba(185, 185, 185, 0)
+      border-bottom-color #b9b9b9
+
+    li+li
+      border-top 1px solid #eaeaea
+
+    li
+      box-sizing border-box
+      height 40px
+      padding 12px 20px
+      text-align left
+      white-space nowrap
+
+      &:hover
+        background-color #fafafa
+
+      > a
+        color black
+        text-decoration none
+        // font-size 16px
+        font-weight normal
+
+// &__trigger
+// height 100%
+// width 100%
+.dropdown--active .dropdown__content
+  display block

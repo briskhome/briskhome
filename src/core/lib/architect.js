@@ -11,13 +11,13 @@ class Architect extends events.EventEmitter {
   config: { [string]: any } = {};
   extensions: { [string]: any } = {};
 
-  static async create() {
+  static create = async () => {
     const app = new Architect();
     app.config = await Config.init();
     return app;
-  }
+  };
 
-  async load(type: string, options: { args: Array<any>, exec: boolean }) {
+  load = async (type: string, options: { args: Array<any>, exec: boolean }) => {
     log.debug({ type }, `Resolving extensions from config`);
     const extensions = await this.resolve(type);
     log.debug({ type }, `Resolved ${extensions.length} extensions`);
@@ -43,9 +43,9 @@ class Architect extends events.EventEmitter {
     }
 
     return this.extensions[type];
-  }
+  };
 
-  async resolve(type: string) {
+  resolve = async (type: string) => {
     const extensions = [...(type in this.config ? this.config[type] : [])];
     if (!extensions.length) return extensions;
 
@@ -113,20 +113,26 @@ class Architect extends events.EventEmitter {
     }
 
     return sorted;
-  }
+  };
 
-  async register(
+  register = async (
     extension: any,
     { args = [], exec = true }: { args: Array<any>, exec: boolean } = {},
-  ) {
+  ) => {
     const config = this.get('com.briskhome.module', 'core.config');
     const options = config ? config(extension.name) : {};
-    const imports = { app: this };
+    const imports = { core: { app: this } };
     if (extension.dependencies.length) {
       for (const name of extension.dependencies) {
-        imports[name] = this.extensions[extension.type][name];
+        if (name.startsWith('core.')) {
+          imports.core[name.substr(5)] = this.extensions[extension.type][name];
+        } else {
+          imports[name] = this.extensions[extension.type][name];
+        }
       }
     }
+
+    console.log({ config, imports, options, extension });
 
     try {
       let instance = require(extension.main);
@@ -137,7 +143,7 @@ class Architect extends events.EventEmitter {
         if (args.length) {
           instance = await instance(...args);
         } else {
-          instance = await instance(imports, options);
+          instance = await instance(imports, options || {});
         }
       }
       if (!this.extensions[extension.type]) {
@@ -152,11 +158,7 @@ class Architect extends events.EventEmitter {
         'Registered a new extension',
       );
     } catch (err) {
-      log.warn(
-        { extension: extension.name, type: extension.type, err },
-        `Failed to load extension`,
-      );
-
+      console.log({ err });
       const {
         name: id,
         type,
@@ -164,13 +166,24 @@ class Architect extends events.EventEmitter {
       } = extension;
       const msg = `Failed to load extension '${id}'. All dependencies will be skipped as well.`;
       const code = 'ERR_REGISTER_FAILED';
-      throw new ArchitectError(msg, code, { id, type, source, err: err });
+      const error = new ArchitectError(msg, code, {
+        id,
+        type,
+        source,
+        err,
+      });
+      log.warn(err);
+      log.warn(
+        { extension: extension.name, type: extension.type },
+        `Failed to load extension`,
+      );
+      throw error;
     }
-  }
+  };
 
-  get(type, name) {
+  get = (type, name) => {
     return idx(this.extensions, x => x[type][name]) || null;
-  }
+  };
 }
 
 export default Architect;

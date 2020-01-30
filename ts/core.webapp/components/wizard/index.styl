@@ -1,0 +1,81 @@
+.briskhome-wizard
+  position relative
+
+  &__footer
+    width 100%
+    margin 20px -20px 0
+    padding 20px
+
+    &-controls
+      display flex
+      margin-top 20px
+
+      &_left
+        justify-content flex-start
+
+      &_justify
+        justify-content space-between
+
+      &_right
+        justify-content flex-end
+
+  &__button
+    &-prev
+      color #999999 !important
+      font-weight 300 !important
+      font-size 14px !important
+      justify-self left
+
+    &_hidden
+      visibility hidden
+
+  &__stepper
+    display flex
+    justify-content space-between
+    margin 0 -20px 20px
+    padding 0 20px 20px
+
+    ../__step
+      &:not(:last-of-type)
+        position relative
+        display flex
+        width 100%
+
+        &:after
+          @media only screen and (min-width: 993px)
+            position absolute
+            top 50%
+            right 0
+            left 20px
+            display inline-block
+            width calc(100% - 40px)
+            height 1px
+            margin-left 16px
+            background-color #efefef
+            content ''
+
+      &>&-circle
+        display inline-block
+        width 15px
+        height 15px
+        padding 8px
+        border 1px solid #fafafa
+        border-radius 16px
+        background-color #fafafa
+        color #999
+        font-weight 300
+
+      &_active
+        &>^[-1]-circle
+          border 1px solid #F9D21C
+          color #F9D21C
+
+      &_complete
+        &>^[-1]-circle
+          border 1px solid #F9D21C
+          background-color #F9D21C
+          color white
+
+        &:after
+          @media only screen and (min-width: 993px)
+            background-color #F9D21C !important

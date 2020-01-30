@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core.webapp -> ui -> checkbox renders 1`] = `
+<label
+  class="briskhome-checkbox briskhome-checkbox_inline-block"
+>
+  <input
+    class="briskhome-checkbox__input"
+    name="example"
+    type="checkbox"
+  />
+  <span
+    class="briskhome-checkbox__content"
+  />
+</label>
+`;
+
+exports[`core.webapp -> ui -> checkbox renders checked 1`] = `
+<label
+  class="briskhome-checkbox briskhome-checkbox_inline-block briskhome-checkbox_checked"
+>
+  <input
+    class="briskhome-checkbox__input"
+    name="example"
+    type="checkbox"
+  />
+  <span
+    class="briskhome-checkbox__content"
+  />
+</label>
+`;
+
+exports[`core.webapp -> ui -> checkbox renders disabled 1`] = `
+<label
+  class="briskhome-checkbox briskhome-checkbox_inline-block briskhome-checkbox_checked briskhome-checkbox_disabled"
+>
+  <input
+    class="briskhome-checkbox__input"
+    name="example"
+    type="checkbox"
+  />
+  <span
+    class="briskhome-checkbox__content"
+  />
+</label>
+`;
+
+exports[`core.webapp -> ui -> checkbox renders with className 1`] = `
+<label
+  class="briskhome-checkbox briskhome-checkbox_inline-block example"
+>
+  <input
+    class="briskhome-checkbox__input example__input"
+    name=""
+    type="checkbox"
+  />
+  <span
+    class="briskhome-checkbox__content"
+  />
+</label>
+`;
+
+exports[`core.webapp -> ui -> checkbox renders with display 1`] = `
+<label
+  class="briskhome-checkbox briskhome-checkbox_block briskhome-checkbox_checked"
+>
+  <input
+    class="briskhome-checkbox__input"
+    name="example"
+    type="checkbox"
+  />
+  <span
+    class="briskhome-checkbox__content"
+  />
+</label>
+`;
